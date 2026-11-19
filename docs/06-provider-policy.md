@@ -19,3 +19,6 @@ WIPS는 문장 기반 특허 검색 및 MCP 연동을 공식 설명한다. 채�
 - [WIPS AI 활용 가이드](https://docs.channel.io/wips-lounge/ko/articles/wintelips-ai-guide-9de41012)
 - [WIPS MCP 안내](https://docs.channel.io/wips-lounge/ko/articles/wintelips-mcp-7f649324)
 - [MCP Python client transports](https://py.sdk.modelcontextprotocol.io/client/transports/)
+
+## 2026-11-19 후속 검증
+[동일 대화 실측 및 확인 요청 항목](17-dual-mcp-workflow.md): WIPS 베타 공지에서 윈텔립스 고객 무료/DB 호출 비용 없음/AI 토큰 별도 소진 확인. 정식 가격 및 별도 계약의 데이터 저장·벡터화·외부 전송·상업 이용은 미확인. 실제 연계는 서로 독립된 일반 주제의 순차 읽기, WIPS 반환을 NAS에 전달하지 않음. 참조 정책 17/17, 아직 서버 통합 미실행. 공급자 문의 미발송.
