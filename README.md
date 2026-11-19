@@ -1,15 +1,38 @@
 # Patent RAG Agent
 
-개인 학습용 특허·기술문헌 검색 및 분석 PoC. 사용자의 짧은 질문을 기술적 검색 질의로 확장하고, 복수 검색 결과를 비교하며, 허용된 자료만 자체 검색 인덱스로 적재한다.
+ChatGPT에서 짧은 질문으로 특허를 검색하고, 허가된 문헌을 NAS에 저장하여 재사용하는 개인 PoC.
+
+## 단순화한 목표 설계 (2026-11-19)
+
+```mermaid
+flowchart TD
+  U[연구자 / 학습자] --> C["ChatGPT (개인 플러그인)"]
+  C -->|특허 검색| W[WIPS MCP]
+  W --> C
+  C -->|자료 저장 및 검색| T["Secure MCP Tunnel (검증 예정)"]
+  subgraph NAS["NAS - 공유 RAG 인프라"]
+    T --> M[권한 제한 MCP 서버]
+    M --> E[로컬 임베딩]
+    M --> P[저장 권한 검사]
+    P --> E
+    E --> V[(PostgreSQL + pgvector)]
+    V --> A[특허 전용 DB 및 역할]
+    V --> B[기술사 전용 DB 및 역할]
+    O[기존 웹 UI / 운영 관리] --> M
+  end
+```
+
+- ChatGPT: 질의 확장·개인화·비교 및 분석. WIPS MCP: 외부 특허 검색 및 조회.
+- NAS MCP: 허가된 저장·조회·검색 및 중복 방지. 기존 기술사 RAG의 PostgreSQL/pgvector 엔진과 로컬 임베딩 자산 재사용을 우선 검토하되 DB와 역할은 분리한다.
+- 기존 웹 화면은 관리 및 시연에 활용한다. 별도 LLM 생성 API는 우선 필수 아님. Tunnel 인증용 Platform 키와 모델 API 과금은 구별한다.
+- 현재: WIPS 앱 호출 및 NAS 정적 시안 HTTPS 검증 완료. 자체 MCP의 ChatGPT 등록·쓰기·벡터검색 E2E와 공동 DB 운영은 미검증. WIPS 원문·임베딩 저장은 이용 권한 확보 전 차단.
 
 ## 시작점
-- [그림으로 보는 사업 설명서](docs/00-business-guide.md) — 비개발자·연구 담당자 우선
-- [전체 문서 목차](DOC_INDEX.md) — 모든 AI와 개발자의 진입점
-- [AI 작업 규칙](AGENTS.md)
+- [문서 목차](DOC_INDEX.md)
+- [아키텍처](docs/02-architecture.md)
 - [현재 상태](CURRENT_STATE.md) / [할 일](TASKS.md)
-
-공개 가능한 일반화된 설계와 합성 자료만 기록한다. 현재 설계 초안이며 실제 서비스·배포는 미검증이다.
+- [AI 작업 규칙](AGENTS.md)
 
 ## 화면 시안
 
-`preview/index.html`을 브라우저에서 열거나 `python preview/serve.py`로 로컬 18765 포트에서 실행한다. 가상 문헌과 브라우저 탭 메모리만 사용하며 외부 API/DB는 연결하지 않는다. 화면 확인 이후 실제 기능을 구현한다.
+`preview/index.html` 또는 `python preview/serve.py`. 가상 문헌을 사용하며 실제 API/DB 연동 없음. 사용자/관리자 설명서는 구현 완료 후 추가한다.
