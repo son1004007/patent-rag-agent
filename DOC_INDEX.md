@@ -17,6 +17,8 @@
 | [05 보안·배포](docs/05-deployment.md) | 운영자 — HTTPS·네트워크·복구 |
 | [06 연동 및 계약](docs/06-provider-policy.md) | 사업/개발자 — 비용·권한·MCP |
 | [07 테스트](docs/07-test-plan.md) | QA — 검증 기준 |
+| [21 기업용 ChatGPT 연동·방화벽·SSH 가이드](docs/21-enterprise-connectivity-firewall-ssh.md) | 기업 보안/네트워크/운영 담당자 — 제품 구분, 방화벽 5-tuple 신청표, SSH 관리 및 승인·검증 절차 |
+| [20 기존 플러그인 확인 및 통합 MCP 후보](docs/20-unified-mcp-candidate.md) | 개발자/운영자 — 기존 연결과 실제 특허 통합 후보 39/39 실측, 운영 전환 보류 |
 | [19 실제 특허 읽기 전용 MCP](docs/19-private-patent-reader-mcp.md) | 개발자/운영자 — 실제 특허 조회·검색·권한 제한 HTTP 실측 |
 | [18 실제 구매 특허 자료 적재](docs/18-private-patent-ingest.md) | 개발자/운영자 — 개인 NAS 비공개 적재·벡터 실측 |
 | [17 WIPS·NAS MCP 연계](docs/17-dual-mcp-workflow.md) | 개발자/사업 담당자 — 동일 대화 실측, 저장 정책 및 공급자 확인 항목 |
