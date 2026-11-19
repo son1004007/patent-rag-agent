@@ -24,3 +24,6 @@
 - 기존 synthetic MCP 및 개인 tunnel은 그대로 유지. 임시 reader 컨테이너는 정리했고 신규 외부 연결이나 상시 reader 서비스는 미설치. 실제 검색을 ChatGPT에서 사용하려면 별도 승인된 private channel/도구 등록 또는 재기동 보류 해제 후 검증된 서비스 통합 필요. 사용자별 OAuth·반복 요청 제한·외부 반환 권한/공급 계약 범위 별도 확인.
 - 실제 자료 다중 배치, 상세설명/전체 청구항, 실자료 dump 복원, hybrid/relevance 품질 검증 남음. 기술사 배포 차단 우회 및 기존 서비스 재기동 금지 유지.
 - [목표 서비스 흐름](../README.md)은 commit `cf119253b42f96158311d190712a01fe05daa39e`에서 추가. 실제 구현 범위와 목표는 구분.
+
+## 후속
+[기존 연결 및 통합 후보 39/39 시험](20-unified-mcp-candidate.md) 완료. 운영 전환 및 실제 ChatGPT 문헌 호출은 재기동 보류 조건으로 아직 NOT RUN.
