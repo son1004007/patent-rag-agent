@@ -29,9 +29,10 @@
 - [x] MVP-05 격리 rollback 96/96 및 실제 읽기/안전 차단 인수 4/5 시나리오 — 현재→이전→현재 HTTP·임시 SCRAM/ACL·교차 DB·운영 불변. [실측](docs/28-mvp05-rollback-acceptance.md).
 - [x] MVP-05 실제 신규 단건 운영 적재/재사용 인수 — [실측](docs/35-mvp03-actual-ingest-acceptance.md), 사전·사후 backup, 기존 행 보존, 중복 쓰기0, 실제 ChatGPT 조회 PASS. 최신 dump 격리 복원·실제 운영 rollback·재기동/다른 계정 검증 별도.
 - [x] MVP-06 실제 연구 질문 읽기 시험 및 최소 안내 — [사용자](docs/29-mvp06-user-guide.md), [관리자](docs/30-mvp06-operator-guide.md), [실측](docs/31-mvp06-user-trial.md) (3+3→5, 근거18, HOLD4/EXCLUDE1).
+- [ ] MVP-03 추가 사용자 요구(P0) — WIPS 검색 결과 자동 NAS 보관, 승인 자료 원문/벡터 증분 적재, 전체 원문 조회 및 PDF·도면 제공 경로 확인. [요구사항](docs/36-mvp-automatic-archive.md). 상시 연결 및 실제 운영 E2E 대기.
 - [ ] MVP-06 사용자 직접 결과 평가/피드백 — [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 대기.
 
-**다음 실행 규칙:** MVP-01~05 범위 한정 인수 PASS, 사용자 승인 단건 실제 운영 쓰기 및 반복 재사용/ChatGPT 조회 완료 ([실측](docs/35-mvp03-actual-ingest-acceptance.md)). MVP-06 사용자 직접 평가(#31) 대기. 상시 자동 쓰기 MCP/JS wiring 및 계약 범위 확대 미구현; 필요 시 사용자 평가·승인 후 진행. 추가 가상 시험 반복 및 P1/P2/P3 선행 금지. NAS/DB/relay/tunnel/기타 기존 서비스 재기동·자동 시작 및 기술사·기업 환경 변경은 별도 승인 전 금지. 신규 구매/대량 수집·재배포 권리 확대 금지.
+**다음 실행 규칙:** MVP-01~05 범위 한정 인수 PASS, 사용자 승인 단건 실제 운영 쓰기 및 반복 재사용/ChatGPT 조회 완료 ([실측](docs/35-mvp03-actual-ingest-acceptance.md)). MVP-06 사용자 직접 평가(#31) 대기. 사용자 최신 피드백에 따라 자동 NAS 보관/원문 조회를 P0 잔여 우선 작업으로 진행([요구사항](docs/36-mvp-automatic-archive.md)); 운영 writer 연결 및 계약 범위 확대 미구현, 권리 및 실행 경계 유지. 추가 가상 시험 반복 및 P1/P2/P3 선행 금지. NAS/DB/relay/tunnel/기타 기존 서비스 재기동·자동 시작 및 기술사·기업 환경 변경은 별도 승인 전 금지. 신규 구매/대량 수집·재배포 권리 확대 금지.
 
 ## P1 — MVP 사용 피드백 이후 품질 고도화 (BACKLOG)
 

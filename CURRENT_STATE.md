@@ -75,3 +75,5 @@
 - 사용자 구매 특허의 개인 NAS 내부 적재 지시 반영. 유료 구매의 구체적 계약 범위는 별도, 상업 이용·재배포·대량 수집으로 확대하지 않는다. 기존 재기동 금지 유지.
 
 - 사용자 Refresh·권한 추가 수행 확인. 기존 대화에서는 NAS RAG 3개 도구만 발견; 기존 get_document 실제 정상 및 PRIVATE 유지. 새 대화에서 신규 search_patents/get_patent 직접 검증 PASS. 동일 질의 재검색 순위 일치, 실제 상세 3/3, 근거 9개, 제한 및 미존재 처리 PASS. 실제 DB 재계수/쓰기/rollback NOT RUN. MVP-04 기본 비교 시험 PASS. 다음 MVP-03 쓰기 adapter 잔여 및 MVP-05 복원·인수. [기록](docs/24-mvp01-production-cutover.md).
+
+- 2026-11-19 사용자 최신 피드백: WIPS MCP 검색 결과 NAS 자동 저장 및 사람용 원문 보관/조회 요구. [P0 요구사항](docs/36-mvp-automatic-archive.md). 텍스트 원문 단건 저장 PASS, 자동 연결/전체 원문 조회/PDF·도면 파일 검증 미완료. 추가 실자료 저장·배포는 이번에 미실행.

@@ -17,6 +17,7 @@
 | [05 보안·배포](docs/05-deployment.md) | 운영자 — HTTPS·네트워크·복구 |
 | [06 연동 및 계약](docs/06-provider-policy.md) | 사업/개발자 — 비용·권한·MCP |
 | [07 테스트](docs/07-test-plan.md) | QA — 검증 기준 |
+| [36 검색 연동 자동 보관 및 원문 조회](docs/36-mvp-automatic-archive.md) | 사용자/개발자 — 검색 결과 자동 저장, 원문 보존, 권리·중복·조회 인수 조건 |
 | [35 MVP-03/05 실제 단건 운영 인수](docs/35-mvp03-actual-ingest-acceptance.md) | 운영자/연구자 — 실제 신규 적재·중복 방지·ChatGPT 원문 근거 조회 및 제한 |
 | [34 MVP-03 승인 NAS 로컬 실행 경로](docs/34-mvp03-local-transport.md) | 운영자 — 단건 stdin launcher, 코드·대상 pin, 교차 컨테이너 잠금 및 최종 적용 절차 |
 | [33 MVP-03 승인 적재 CLI 직렬화](docs/33-mvp03-writer-serialization.md) | 개발자/운영자 — 공용 inode 잠금, 경합 차단 및 격리 DB 회귀 |
