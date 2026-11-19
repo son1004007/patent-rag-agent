@@ -33,3 +33,6 @@ Gateway jobs: preflight job_01M7TVMKMK00VWM5VBKY9APV20; migration job_01M7TVS89Q
 실제 Gateway job_01M7TZHYV500Y9TRYESX30N170 succeeded: TRANSPORT_DEPLOYED_DEFAULT_DISABLED, TRANSPORT_POLICY_AND_RESULT_VALIDATION_PASS, EXISTING_REAL_METADATA_POLICY_DENIAL_PASS, ALL_EXISTING_DATA_AND_CONTAINERS_UNCHANGED, PRODUCTION_TRANSPORT_FAIL_CLOSED_PASS. 운영 NAS native Python compile 및 blob pin 확인, disabled/잘못된 정책 및 성공 결과 검증. 기존 실제 승인 보유 문헌의 로컬 서지정보만 메모리/pipe에서 packet 형태로 구성하여 운영 transport 실행: BLOCKED_POLICY 및 writes=0. 실제 WIPS 신규 조회/응답 전달이 아닌 로컬 보유 자료 projection이며 실제 서지정보·원문·개별 hash를 Gateway stdout이나 공개 repo에 출력하지 않음. 기존 원문 전체 행 fingerprint 및 기존 컨테이너 불변, archive four tables rows 0, NOLOGIN, writer secret 없음, 새 worker 0 확인. 기존 서비스 재기동 없음.
 
 이번에는 정책 미승인 차단 경로만 운영 실증했다. 새 transport의 허용 worker 분기/실제 쓰기 및 지속 승인 정책은 NOT RUN/미활성. 기존 CLI 허용 분기는 이전 격리 DB 시험에서 PASS했으나 새 transport 허용 분기 검증과 동일하지 않다. [#34](https://github.com/son1004007/ai-agent-workflow-playbook/issues/34) 확인 전 실제 writer 로그인 활성화, 상시 policy 생성 또는 신규 자료 적재 금지. 기본 transport 배치와 직접 ChatGPT WIPS 호출 자동 가로채기/상시 연동을 동일시하지 않는다. 다음 실행은 사용자 권리/호출 및 저장 한도 확인 이후 최소 권한 운영 인증과 정책·연동 및 실제 저장/reuse 검증. 추가 반복 합성 시험을 선행하지 않는다. 독립 AI 검토 NOT_RUN_OPTIONAL.
+
+## 100건 승인 후 운영 전환
+[실제 WIPS 83건 저장 및 중복0, 100건 상한, writer 활성, 최신 복원](39-mvp-archive-100-live-acceptance.md). 본 문서의 이전 NOLOGIN/0건은 전환 전 시점의 역사적 증거로 유지한다.

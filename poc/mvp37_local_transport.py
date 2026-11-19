@@ -100,8 +100,19 @@ def worker(root,policy,raw,expect):
           "--network","container:"+dbid,"--read-only","--cap-drop","ALL","--security-opt","no-new-privileges",
           "--user",str(os.geteuid())+":"+str(os.getegid()),"--memory","512m","--cpu-shares","128",
           "--tmpfs","/tmp:rw,exec,nosuid,nodev,size=250m","-e","HOME=/tmp","-e","PYTHONDONTWRITEBYTECODE=1"]
-    for n in CODE:argv+=bind(root/"code"/n,"/code/"+n)
-    for p,t in ((policy,"/auth/archive_policy.json"),(secret,"/auth/archive_writer_password"),(wheels,"/wheels")):argv+=bind(p,t)
+    worker_code=path_private(root/"worker-code",0o700,True)
+    if set(p.name for p in worker_code.iterdir())!=set(CODE):
+        raise ValueError("worker code scope")
+    for n,want in CODE.items():
+        source=path_private(worker_code/n,0o600)
+        content=source.read_bytes()
+        if hashlib.sha1(b"blob "+str(len(content)).encode()+bytes([0])+content).hexdigest()!=want:
+            raise ValueError("worker code pin")
+    argv+=bind(worker_code,"/code")
+    auth_dir=path_private(root/"auth",0o700,True)
+    if set(p.name for p in auth_dir.iterdir())!={"archive_policy.json","archive_writer_password"}:
+        raise ValueError("auth scope")
+    for p,t in ((auth_dir,"/auth"),(wheels,"/wheels")):argv+=bind(p,t)
     argv+=["--entrypoint","/bin/sh",WORKER_IMAGE,"-ec",START]
     try:
         r=subprocess.run(argv,input=raw,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL,timeout=120)

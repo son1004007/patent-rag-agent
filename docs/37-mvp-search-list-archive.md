@@ -62,3 +62,6 @@ flowchart TD
 
 ## 후속 운영 적용
 [운영 목록 스키마 및 복원 실측](38-mvp-archive-production-migration.md) 완료. 실제 운영 archive schema와 NOLOGIN 역할 적용, 실제 백업 복원 및 ChatGPT 기존 읽기 검증 PASS. 지속 보관 권리와 자동 쓰기 연결 잔여, 새 API rollback drill 실행 NOT RUN.
+
+## 100건 사용자 승인 및 운영 반영
+[실제 WIPS 83건 적재·재사용0·운영 복원 실측](39-mvp-archive-100-live-acceptance.md) 참조. 이전 50건 제한은 사용자 최신 지시로 100건으로 대체. 상시 모든 WIPS 호출 자동 감지는 미구현.
