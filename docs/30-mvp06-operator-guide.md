@@ -69,3 +69,6 @@ flowchart LR
 
 ## 로컬 전달 실행 경로
 [승인된 단건 NAS transport](34-mvp03-local-transport.md)에 실제 격리 check/apply/reuse 및 교차 컨테이너 잠금 검증과 운영 재개 절차 기록. 운영 배치 및 신규 자료는 #30 승인 대기.
+
+## 후속 운영 적용
+[운영 목록 스키마 및 복원 실측](38-mvp-archive-production-migration.md) 완료. 실제 운영 archive schema와 NOLOGIN 역할 적용, 실제 백업 복원 및 ChatGPT 기존 읽기 검증 PASS. 지속 보관 권리와 자동 쓰기 연결 잔여, 새 API rollback drill 실행 NOT RUN.

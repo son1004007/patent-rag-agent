@@ -59,3 +59,6 @@ flowchart TD
 ### 남은 적용 전 작업
 - 기존 운영 backup/rollback 스크립트는 archive role/테이블 검사 포함 버전으로 갱신 필요. 이번에는 격리 복원 호환성을 실증했을 뿐 기존 운영 백업 스크립트를 업데이트하거나 실제 운영 롤백하지 않았다.
 - [#34 상시 목록 보관 권리 및 한도](https://github.com/son1004007/ai-agent-workflow-playbook/issues/34) 대기. 기존 문헌 1건 승인을 지속 자동 수집 정책으로 확대하지 않는다. 운영 migration, 지속 승인 정책 및 전용 인증, ChatGPT 실제 자동 연결/운영 E2E 모두 미실행. 다음은 복구 도구 보완과 제한된 운영 연동 준비.
+
+## 후속 운영 적용
+[운영 목록 스키마 및 복원 실측](38-mvp-archive-production-migration.md) 완료. 실제 운영 archive schema와 NOLOGIN 역할 적용, 실제 백업 복원 및 ChatGPT 기존 읽기 검증 PASS. 지속 보관 권리와 자동 쓰기 연결 잔여, 새 API rollback drill 실행 NOT RUN.

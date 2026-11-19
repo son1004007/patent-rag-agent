@@ -58,3 +58,5 @@
 - 2026-11-20 [P0-1 검색 목록 저장 기반](docs/37-mvp-search-list-archive.md) 구현. wrapper 테스트 9/9, 실제 WIPS 읽기 1행 callback PASS, 저장 보류. Gateway 첫 시험 실행기 손실, 재시도 대기 취소, read-only 운영 preflight 6/10/417에 archive schema 0. 운영 저장 및 배포 미실행, #34 등록.
 
 - 2026-11-20 [P0-1 목록 저장 NAS 통합 재검증](docs/37-mvp-search-list-archive.md): 이전 executor 장애 해소, 모사 및 실제 운영 schema-only 격리 환경 각각 DB 10/10 + CLI 2/2. migration의 명시 CONNECT 및 권한 분리, 별도 새 DB 복원 fingerprint/ACL/원문 상태 PASS. 첫 강화 migration dollar quote 오류 수정 후 최종 exit0. 운영 전 행/컨테이너 불변 및 시험 cleanup. 기존 운영 복구 스크립트 갱신 및 #34/자동 연결 대기.
+
+- 2026-11-20 사용자 운영 우선 지시 AGENTS 반영. [P0-1 운영 schema 및 복구 실측](docs/38-mvp-archive-production-migration.md) PASS: 실제 4 tables/1 view, writer NOLOGIN, 5개 배치 코드 blob 일치. 실제 원문 상태 6건 중 5건 상세/전체청구항 evidence 보유, 트랜잭션 rollback 이후 영속 0행, 기존 원문 6/10/417 및 기존 ACL/index/컨테이너 불변. 전후 백업·실제 신규 dump 격리 복원, ChatGPT 3/3 조회 PASS. 새 API rollback drill 실행 NOT RUN. #34 권리와 실제 자동 저장 연결 잔여.

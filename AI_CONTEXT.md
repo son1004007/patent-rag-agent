@@ -44,3 +44,5 @@
 - P0-1 [목록 보관 기반](docs/37-mvp-search-list-archive.md) 작성, JS 9/9 및 실제 WIPS callback 1행(저장 보류). NAS 격리 DB 실행 미확인(EXECUTOR_LOST, 재시도 queued 취소), 다음 시험 재실행→복원 호환→정책·writer 및 실제 연결. 상시 자동 보관 권리 #34, 본문/벡터 쓰기 없음.
 
 - P0-1 [NAS DB/복원 재검증](docs/37-mvp-search-list-archive.md) PASS: 10 DB + 2 CLI, 최종 실제 운영 schema-only 기반 migration 및 별도 격리 복원 데이터/ACL 동일, 운영 불변. 다음 기존 backup/rollback 도구 보완 및 #34 권리 확인 후 실제 저장 경로 연결. 운영 migration/신규 원문/목록 쓰기 없음.
+
+- 2026-11-20 사용자 운영 우선 지시 AGENTS 반영. [P0-1 운영 schema 및 복구 실측](docs/38-mvp-archive-production-migration.md) PASS: 실제 4 tables/1 view, writer NOLOGIN, 5개 배치 코드 blob 일치. 실제 원문 상태 6건 중 5건 상세/전체청구항 evidence 보유, 트랜잭션 rollback 이후 영속 0행, 기존 원문 6/10/417 및 기존 ACL/index/컨테이너 불변. 전후 백업·실제 신규 dump 격리 복원, ChatGPT 3/3 조회 PASS. 새 API rollback drill 실행 NOT RUN. #34 권리와 실제 자동 저장 연결 잔여.

@@ -22,6 +22,20 @@ orig_states=$(states)
 sql(){ "$D" exec "$1" psql -X -qAt -v ON_ERROR_STOP=1 -h /tmp -p 55432 -U postgres -d "$2" -c "$3"; }
 fingerprint(){ sql "$1" patent_private_ingest_v1 "SELECT (SELECT count(*)||':'||md5(string_agg(md5(to_jsonb(d)::text),'|' ORDER BY id)) FROM private_docs.documents d)||'|'||(SELECT count(*)||':'||md5(string_agg(md5(to_jsonb(s)::text),'|' ORDER BY document_id,section)) FROM private_docs.section_sources s)||'|'||(SELECT count(*)||':'||md5(string_agg(md5(to_jsonb(c)::text),'|' ORDER BY document_id,section,start_offset)) FROM private_docs.chunks c)"; }
 demo(){ sql "$1" patent_demo "SELECT count(*)||':'||md5(string_agg(md5(to_jsonb(d)::text),'|' ORDER BY id)) FROM documents d"; }
+archive_state(){
+ db=patent_private_ingest_v1
+ present=$(sql "$1" "$db" "SELECT (to_regnamespace('patent_archive') IS NOT NULL)::int")
+ if [ "$present" = 0 ]; then echo absent; return; fi
+ test "$present" = 1
+ sql "$1" "$db" "SELECT (SELECT count(*)||':'||coalesce(md5(string_agg(md5(to_jsonb(t)::text),'|' ORDER BY identity)),'empty') FROM patent_archive.documents t)||'|'||(SELECT count(*)||':'||coalesce(md5(string_agg(md5(to_jsonb(t)::text),'|' ORDER BY identity,metadata_sha256)),'empty') FROM patent_archive.metadata_revisions t)||'|'||(SELECT count(*)||':'||coalesce(md5(string_agg(md5(to_jsonb(t)::text),'|' ORDER BY batch_sha256)),'empty') FROM patent_archive.search_pages t)||'|'||(SELECT count(*)||':'||coalesce(md5(string_agg(md5(to_jsonb(t)::text),'|' ORDER BY batch_sha256,rank)),'empty') FROM patent_archive.page_hits t); SELECT coalesce(string_agg(c.relname||':'||c.relkind::text||':'||c.relowner::regrole::text||':'||coalesce(c.relacl::text,''),'|' ORDER BY c.relname),'') FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='patent_archive' AND c.relkind IN ('r','v'); SELECT coalesce(nspacl::text,'') FROM pg_namespace WHERE nspname='patent_archive'; SELECT coalesce(string_agg(indexdef,'|' ORDER BY indexname),'') FROM pg_indexes WHERE schemaname='patent_archive'; SELECT coalesce((SELECT pg_get_viewdef('patent_archive.fulltext_status'::regclass,true)),''); SELECT count(*)||':'||coalesce(md5(string_agg(md5(to_jsonb(v)::text),'|' ORDER BY country,publication,kind)),'empty') FROM patent_archive.fulltext_status v;"
+}
+archive_acl_ok(){
+ db=patent_private_ingest_v1
+ if [ "$(sql "$1" "$db" "SELECT (to_regnamespace('patent_archive') IS NOT NULL)::int")" = 0 ]; then return; fi
+ test "$(sql "$1" "$db" "SELECT has_database_privilege('patent_archive_writer_v1',current_database(),'CONNECT') AND NOT EXISTS(SELECT 1 FROM pg_database d CROSS JOIN LATERAL aclexplode(coalesce(d.datacl,acldefault('d',d.datdba))) a WHERE d.datname=current_database() AND a.grantee=0 AND a.privilege_type='CONNECT') AND NOT has_schema_privilege('patent_archive_writer_v1','private_docs','USAGE') AND NOT has_schema_privilege('patent_ingest_reader_v1','patent_archive','USAGE') AND NOT has_schema_privilege('patent_ingest_writer_v1','patent_archive','USAGE') AND has_table_privilege('patent_archive_writer_v1','patent_archive.fulltext_status','SELECT') AND NOT has_table_privilege('patent_archive_writer_v1','patent_archive.fulltext_status','INSERT') AND NOT EXISTS(SELECT 1 FROM pg_tables t WHERE schemaname='patent_archive' AND (NOT has_table_privilege('patent_archive_writer_v1',format('%I.%I',schemaname,tablename),'SELECT') OR NOT has_table_privilege('patent_archive_writer_v1',format('%I.%I',schemaname,tablename),'INSERT') OR has_table_privilege('patent_archive_writer_v1',format('%I.%I',schemaname,tablename),'UPDATE') OR has_table_privilege('patent_archive_writer_v1',format('%I.%I',schemaname,tablename),'DELETE')))")" = t
+}
+
+orig_archive=$(archive_state "$DB"); archive_acl_ok "$DB"
 orig=$(fingerprint "$DB"); origdemo=$(demo "$DB")
 root=$(mktemp -d "$B/rollback-test.XXXXXX")
 restore=
@@ -70,10 +84,12 @@ for role,f in [('patent_app','db_password'),('patent_ingest_reader_v1','reader_p
     print("CREATE ROLE "+role+" LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS PASSWORD '"+pw+"';")
 print('ALTER ROLE patent_ingest_reader_v1 SET default_transaction_read_only=on;')
 PY
+if [ "$orig_archive" != absent ]; then sql "$restore" postgres 'CREATE ROLE patent_archive_writer_v1 NOLOGIN NOINHERIT NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS' >/dev/null; fi
 for f in "$root/demo.dump" "$archive"; do
  if ! "$D" exec -i "$restore" pg_restore --exit-on-error --create -h /tmp -p 55432 -U postgres -d postgres <"$f" >/dev/null 2>&1; then echo RESTORE_FAILED; exit 1; fi
 done
 test "$(fingerprint "$restore")" = "$orig"; test "$(demo "$restore")" = "$origdemo"
+test "$(archive_state "$restore")" = "$orig_archive"; archive_acl_ok "$restore"
 echo BOTH_DATABASE_CLONES_MATCH
 cat >"$root/code/drill.sh" <<'SH'
 #!/bin/sh
@@ -103,8 +119,10 @@ app=$("$D" run --pull never -d --rm --label "$LABEL" --network "container:$resto
 test "$("$D" inspect "$app" --format '{{len .HostConfig.PortBindings}} {{.HostConfig.ReadonlyRootfs}}')" = '0 true'
 "$D" exec "$app" sh /code/drill.sh
 test "$(fingerprint "$restore")" = "$orig"; test "$(demo "$restore")" = "$origdemo"
+test "$(archive_state "$restore")" = "$orig_archive"; archive_acl_ok "$restore"
 echo CLONE_DATA_UNCHANGED
 test "$(fingerprint "$DB")" = "$orig"; test "$(demo "$DB")" = "$origdemo"; test "$(states)" = "$orig_states"
+test "$(archive_state "$DB")" = "$orig_archive"; archive_acl_ok "$DB"
 echo PRODUCTION_DATA_AND_CONTAINER_STATES_UNCHANGED
 "$D" stop -t 5 "$app" >/dev/null; app=
 "$D" stop -t 5 "$restore" >/dev/null; restore=
