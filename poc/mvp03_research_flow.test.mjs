@@ -24,4 +24,5 @@ r=await research(q,groups,make([],[row(1),{...row(1),TIK:"altered"}]));check("co
 r=await research(q,groups,make([],[row(1)],true,{verified:false,documentsAdded:1,sectionsAdded:2}));check("unverified_write",r.write==="FAILED_OR_PARTIAL");
 a=make([],[row(1)]);a.searchLocal=async()=>({scope:"synthetic_candidates_only",results:[],catalog:[]});r=await research(q,groups,a);check("synthetic_scope_denied",r.write==="BLOCKED_SOURCE_FAILURE");
 r=await research(q,groups,make([],[row(1),row(2),row(3),row(4)]));check("provider_cap",r.write==="BLOCKED_SOURCE_FAILURE");
+r=await research(q,groups,make([],[row(1)],true,{staged:true,verified:false}));check("staged_is_not_committed",r.write==="STAGED_PENDING_VERIFICATION"&&r.writeCount===0);
 console.log("MVP03_POLICY_TEST_PASS",n);
