@@ -1,5 +1,8 @@
 # Private synthetic-only PoC. Render placeholders locally, do not commit populated config.
-# Ref: openai/tunnel-client v0.0.21 CLI and official configuration docs.
+# Ref: openai/tunnel-client v0.0.21 and official configuration docs.
+# The current staging deployment uses tunnel_loopback_adapter.py in the client container.
+# Its TCP listener is container-loopback only; the adapter forwards to the private Unix socket.
+# Mount the credential files individually, not the DB secrets directory.
 config_version: 1
 control_plane:
   base_url: "https://api.openai.com"
@@ -18,6 +21,5 @@ mcp:
   server_urls:
     - channel: main
       url: "http://127.0.0.1:8765/mcp"
-      unix_socket: "/PRIVATE_PATH/relay/mcp.sock"
   extra_headers:
     Authorization: "file:/PRIVATE_PATH/local-authorization-header"
