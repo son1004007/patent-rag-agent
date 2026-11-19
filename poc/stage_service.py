@@ -13,7 +13,8 @@ MODEL="intfloat/multilingual-e5-small@614241f622f53c4eeff9890bdc4f31cfecc418b3"
 FIXTURES={
     "DEMO-P1":"가상 문헌: 구리 피복 알루미늄 전선 도체의 경량화 및 전기 전도성.",
     "DEMO-P2":"가상 문헌: 해양 케이블의 염수 부식과 내식성 표면 처리.",
-    "DEMO-P3":"가상 문헌: 열가소성 절연 재료의 난연 성능과 화재 안전."
+    "DEMO-P3":"가상 문헌: 열가소성 절연 재료의 난연 성능과 화재 안전.",
+    "DEMO-P4":"가상 문헌: 태양광 발전 모듈의 봉지재 내습성과 광투과율."
 }
 opts=ort.SessionOptions()
 opts.intra_op_num_threads=2
