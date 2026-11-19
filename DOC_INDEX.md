@@ -17,6 +17,7 @@
 | [05 보안·배포](docs/05-deployment.md) | 운영자 — HTTPS·네트워크·복구 |
 | [06 연동 및 계약](docs/06-provider-policy.md) | 사업/개발자 — 비용·권한·MCP |
 | [07 테스트](docs/07-test-plan.md) | QA — 검증 기준 |
+| [11 MCP·E5·pgvector 통합 실측](docs/11-mcp-vector-integration.md) | 개발자 — 실제 임베딩과 DB의 종단간 합성 시험 |
 | [10 공동 pgvector 실측](docs/10-shared-vector-smoke.md) | 개발자 — 실제 DB 권한 분리·벡터 검색 시험 및 터널 조건 |
 | [09 MCP 계약 실측](docs/09-mcp-contract-smoke.md) | 개발자 — 합성 데이터 MCP 로컬 시험과 연결 잔여 조건 |
 | [08 설계 결정](docs/08-decisions.md) | AI — 결정과 가정 |
