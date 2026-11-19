@@ -19,7 +19,7 @@
 
 전역 registry 및 문서 목차 규칙 연결 확인. 설계 초안; 실제 실행으로 검증 예정.
 
-다음 (최신 사용자 결정): ChatGPT 중심 MCP 연결/쓰기/조회 실증 → 공유 pgvector 엔진의 격리된 특허 DB 검증 → WIPS 허용 자료 연동 → 화면 및 관리자 기능 개선 → 최종 간략 사용/관리자 설명서. 기존 웹 UI 유지. 독립 AI 검토 선택. Live API/DB/외부 공개 보안 및 계약 gate는 별도.
+다음 (최신 사용자 결정): 합성 전용 MCP 지속 실행/인증 검증 → Secure MCP Tunnel 및 ChatGPT 개인 등록/쓰기/조회 실증 → 공용 영속 DB 운영 검증 → WIPS 허용 자료 연동 → 화면 및 관리자 기능 개선 → 최종 간략 사용/관리자 설명서. 기존 웹 UI 유지. 독립 AI 검토 선택. Live API/DB/외부 공개 보안 및 계약 gate는 별도.
 
 배포 환경 제한: CPU CFS hard quota 및 pids limit 미지원, CPU shares와 128 MiB 메모리 제한 사용. 공식 Docker resource constraints 및 실제 runtime 결과 기준. 실제 장비 식별자/URL은 공개 repo에 기록하지 않음.
 
@@ -30,5 +30,6 @@
 | 합성 MCP 계약 시험 | PASS — NAS disposable ASGI, protocol 2025-11-25, save/get/substring/idempotency/denial; [실측](docs/09-mcp-contract-smoke.md) |
 | 독립 NAS MCP ChatGPT 등록/write E2E | NOT RUN |
 | 공동 pgvector SQL 시험 | PASS 18/18 — 합성 384D, 동일 클러스터 DB/role 분리, 실제 교차 접속 거부, DB 재기동; [실측](docs/10-shared-vector-smoke.md) |
-| 기술사와 특허 DB 엔진 공동 운영 | PLANNED — 기존 DB 미변경; MCP→DB 및 실임베딩 통합 NOT RUN |
+| MCP→E5→pgvector 통합 | PASS 24/24 — [실측](docs/11-mcp-vector-integration.md), 합성 자료·ASGI·일회성 DB |
+| 기술사와 특허 DB 엔진 공동 운영 | PLANNED — 기존 DB 미변경; 실제 영속/운영 공유 NOT RUN |
 | Secure MCP Tunnel | 준비 조건 확인 — 개인 조직의 tunnel ID와 제한 runtime key 미확인; 상시 연결 NOT RUN |
