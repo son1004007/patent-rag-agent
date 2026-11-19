@@ -1,6 +1,6 @@
 # Current State
 
-2026-11-19 / 개인 ChatGPT 특허 RAG MVP 우선; 통합 MCP 후보 39/39 PASS, 기존 서비스 재기동 보류
+2026-11-19 / MVP-02 로컬 PASS: 실제 4건·167청크, 통합 MCP 후보 39/39 PASS, 기존 서비스 재기동 보류
 
 | 영역 | 상태 |
 |---|---|
@@ -19,7 +19,7 @@
 
 전역 registry 및 문서 목차 규칙 연결 확인. 설계 초안; 실제 실행으로 검증 예정.
 
-다음 (최신 사용자 결정): [TASKS.md](TASKS.md)의 MVP-01~06을 우선한다. 통합 MCP 운영 전환/실제 ChatGPT 조회가 재기동 보류로 차단된 동안 MVP-02(상세 문헌 및 증분 적재) → MVP-03(자연어 질의와 수집 흐름) → MVP-04(기본 통합 및 근거 추천)의 비파괴 구현/격리 검증과 실제 자료 백업 복원을 진행한다. 전환 후 전체 E2E와 최소 사용 안내로 MVP 인수. 고급 검색·웹 UI/관리·공용 DB 전환·기업/SSH는 MVP 이후; 기업 별도 착수 요청 전 진행하지 않는다. 기존 보안·계약·기술사 배포 gate 및 재기동 금지는 유지.
+다음 (최신 사용자 결정): [TASKS.md](TASKS.md)의 MVP-01~06을 우선한다. 통합 MCP 운영 전환/실제 ChatGPT 조회가 재기동 보류로 차단된 동안 MVP-02 로컬 검증 완료 후 MVP-03(자연어 질의와 수집 흐름) → MVP-04(기본 통합 및 근거 추천)의 비파괴 구현/격리 검증과 실제 자료 백업 복원을 진행한다. 전환 후 전체 E2E와 최소 사용 안내로 MVP 인수. 고급 검색·웹 UI/관리·공용 DB 전환·기업/SSH는 MVP 이후; 기업 별도 착수 요청 전 진행하지 않는다. 기존 보안·계약·기술사 배포 gate 및 재기동 금지는 유지.
 
 배포 환경 제한: CPU CFS hard quota 및 pids limit 미지원, CPU shares와 128 MiB 메모리 제한 사용. 공식 Docker resource constraints 및 실제 runtime 결과 기준. 실제 장비 식별자/URL은 공개 repo에 기록하지 않음.
 
@@ -43,6 +43,8 @@
 
 | 통합 MCP 후보 | 로컬 HTTP PASS 39/39 (기존 16 + 실제 특허 23), 86.54ms 단일 질의; 현재 기존 개인 NAS RAG 연결 정상, 실제 특허 도구는 아직 미등록; [근거](docs/20-unified-mcp-candidate.md). 기존 운영 cutover/재기동 HOLD |
 | 기업용 ChatGPT 연결·SSH | [설계 및 방화벽 신청표 작성](docs/21-enterprise-connectivity-firewall-ssh.md) — 공식 문서 기반, 실제 기업 제품·테넌트·네트워크·운영 SSH 승인/검증 NOT RUN |
+
+| MVP-02 실제 특허 상세·증분 적재 | PASS — 기존 3건 상세/청구항 32개, 신규 1건 metadata, 누적 4건·6섹션·167청크/384D, 4개 배치 중복 0/충돌 차단, 원본과 StartedAt 불변, 최신 dump 448,812 bytes; [실측](docs/22-mvp02-incremental-patent-ingest.md). 자동 수집 및 실제 ChatGPT E2E 미완료 |
 
 ## 최신 운영 지시
 - 사용자 최신 결정: 아직 실제 재기동하지 않는다. NAS 및 기존 컨테이너 stop/restart 금지, 자동 시작 등록/실행은 승인 대기.
