@@ -1,6 +1,6 @@
 # 기업용 ChatGPT Business/Enterprise 연결 및 방화벽·SSH 운영 가이드
 
-- 상태: 2026-11-19 공식 문서 기반 설계/방화벽 신청 초안. 개인 NAS PoC의 E2E 근거는 [13](13-secure-tunnel-preflight.md), [14](14-chatgpt-plugin-e2e.md), [20](20-unified-mcp-candidate.md). 실제 기업 테넌트/방화벽/프록시/SSH 검증 및 변경 NOT RUN.
+- 상태: **MVP 이후 백로그 — 별도 착수 승인 필요.** 2026-11-19 공식 문서 기반 설계/방화벽 신청 초안. [최신 MVP 우선 실행 계획](../TASKS.md). 개인 NAS PoC의 E2E 근거는 [13](13-secure-tunnel-preflight.md), [14](14-chatgpt-plugin-e2e.md), [20](20-unified-mcp-candidate.md). 실제 기업 테넌트/방화벽/프록시/SSH 검증 및 변경 NOT RUN.
 - 대상: 기업 보안·네트워크·클라우드·시스템 운영자. 회사 실제 FQDN, IP, 계정, 내부 문서, 접속 비밀은 비공개 승인 문서에만 작성한다.
 - 이번 사용자 요청: 기업 ChatGPT에서 동일 RAG 구축, Src Name/Src Port/Dst Name/Dst Port/Protocol 방화벽 신청 규격, ChatGPT를 이용한 SSH 제어 가이드. 기업에서는 개인 키/터널/구매 문헌/계정을 재사용하지 않는다.
 
