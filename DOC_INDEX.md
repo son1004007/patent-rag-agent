@@ -17,6 +17,7 @@
 | [05 보안·배포](docs/05-deployment.md) | 운영자 — HTTPS·네트워크·복구 |
 | [06 연동 및 계약](docs/06-provider-policy.md) | 사업/개발자 — 비용·권한·MCP |
 | [07 테스트](docs/07-test-plan.md) | QA — 검증 기준 |
+| [19 실제 특허 읽기 전용 MCP](docs/19-private-patent-reader-mcp.md) | 개발자/운영자 — 실제 특허 조회·검색·권한 제한 HTTP 실측 |
 | [18 실제 구매 특허 자료 적재](docs/18-private-patent-ingest.md) | 개발자/운영자 — 개인 NAS 비공개 적재·벡터 실측 |
 | [17 WIPS·NAS MCP 연계](docs/17-dual-mcp-workflow.md) | 개발자/사업 담당자 — 동일 대화 실측, 저장 정책 및 공급자 확인 항목 |
 | [16 공용 DB 공동 운영 사전 검증](docs/16-shared-db-coexistence.md) | 개발자/운영자 — 도메인 분리·동시 검색·독립 복원 실측 |
