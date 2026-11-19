@@ -14,7 +14,8 @@
 - [ ] 사용자 화면 확인 및 피드백 반영 후 실제 기능 구현
 ## P0.6 — ChatGPT MCP 우선 검증 (최신 사용자 결정)
 - [x] README/아키텍처 단순화 및 기존 기술사 RAG DB/SDK 현황 확인
-- [ ] 합성 문서 MCP save/get/search, 중복 및 도메인 격리 검증
+- [x] 합성 문서 MCP save/get/부분문자열 search 및 중복/ID scope/conflict 검증 (ASGI 일회성; [실측](docs/09-mcp-contract-smoke.md))
+- [ ] 실제 pgvector 검색/저장 및 DB 도메인 격리 검증
 - [ ] Secure MCP Tunnel 연결 인증 및 ChatGPT 개인 플러그인 등록·쓰기·조회 E2E (계정 실측)
 - [ ] 공용 pgvector 엔진 별도 DB/role 운영·복원·부하 검증 (현재 기술사 배포 차단 우회 금지)
 - [ ] WIPS와 자체 MCP의 동일 대화 연동 (저장/전송 권리 확보 전 synthetic-only)
