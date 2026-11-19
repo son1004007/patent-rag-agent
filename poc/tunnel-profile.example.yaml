@@ -1,0 +1,23 @@
+# Private synthetic-only PoC. Render placeholders locally, do not commit populated config.
+# Ref: openai/tunnel-client v0.0.21 CLI and official configuration docs.
+config_version: 1
+control_plane:
+  base_url: "https://api.openai.com"
+  tunnel_id: "REPLACE_WITH_PERSONAL_TUNNEL_ID"
+  api_key: "file:/PRIVATE_PATH/tunnel-runtime-key"
+health:
+  listen_addr: "127.0.0.1:0"
+  url_file: "/PRIVATE_PATH/health-url"
+admin_ui:
+  open_browser: false
+log:
+  level: info
+  format: json
+mcp:
+  oauth_discovery: disabled
+  server_urls:
+    - channel: main
+      url: "http://127.0.0.1:8765/mcp"
+      unix_socket: "/PRIVATE_PATH/relay/mcp.sock"
+  extra_headers:
+    Authorization: "file:/PRIVATE_PATH/local-authorization-header"
