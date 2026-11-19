@@ -69,6 +69,7 @@ async function research(question,groups,adapters){
   try{
     const mode=enrich.length?"enrich":"new";
     const result=await adapters.ingestOne({mode,row:target});
+    if(result?.staged===true&&result?.verified!==true){trace.write="STAGED_PENDING_VERIFICATION";return trace;}
     if(result?.verified!==true||result?.documentsAdded!==(mode==="new"?1:0)||result.sectionsAdded!==2)throw Error("UNVERIFIED_WRITE");
     trace.write="PASS";trace.writeCount=1;
   }catch{trace.write="FAILED_OR_PARTIAL";}
