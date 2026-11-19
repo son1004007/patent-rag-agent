@@ -11,4 +11,4 @@
 | Deployment | HTTPS, 인증서·redirect, 외부 IP 차단(운영자 장비), DB 비공개, rollback |
 | Docs | 목차 누락, 상대 링크, Mermaid 렌더 확인 |
 
-각 실행을 PASS/FAIL/NOT RUN/BLOCKED로 기록. 독립 설계/최종 리뷰 및 finding 조정 별도. 지금은 모든 구현·배포 테스트 NOT RUN.
+각 실행을 PASS/FAIL/NOT RUN/BLOCKED로 기록. 독립 AI 검토는 선택이며 배포 차단 조건이 아니다. 사전 최소 기동/보안·복구 점검, 시범 배포 후 실제 기능·성능·사용성·접근 테스트 및 결함 수정 반복. 중대한 보안/계약 위험은 공개 전 해결한다. 지금은 모든 구현·배포 테스트 NOT RUN.
