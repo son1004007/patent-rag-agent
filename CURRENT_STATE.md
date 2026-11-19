@@ -85,3 +85,5 @@
 - 2026-11-20 P0-1 [재검증](docs/37-mvp-search-list-archive.md): 이전 Gateway 장애 해소, DB/CLI 12/12 PASS, 실제 운영 schema-only 복제·명시 CONNECT/역할 분리·신규 archive 데이터/ACL 별도 복원 PASS. 기존 운영 원문 fingerprint 및 실행 컨테이너 불변, 시험 정리 완료. 운영 backup/rollback 도구 갱신 및 권리 #34·운영 writer/ChatGPT 연결 잔여. 실제 운영 migration/적재/재시작 미실행.
 
 - 2026-11-20 사용자 운영 우선 지시 AGENTS 반영. [P0-1 운영 schema 및 복구 실측](docs/38-mvp-archive-production-migration.md) PASS: 실제 4 tables/1 view, writer NOLOGIN, 5개 배치 코드 blob 일치. 실제 원문 상태 6건 중 5건 상세/전체청구항 evidence 보유, 트랜잭션 rollback 이후 영속 0행, 기존 원문 6/10/417 및 기존 ACL/index/컨테이너 불변. 전후 백업·실제 신규 dump 격리 복원, ChatGPT 3/3 조회 PASS. 새 API rollback drill 실행 NOT RUN. #34 권리와 실제 자동 저장 연결 잔여.
+
+- 2026-11-20 P0-1 [운영자 로컬 전송 배치/차단 실측](docs/38-mvp-archive-production-migration.md): 운영 배치, 기본 정책 disabled, 기존 실제 승인 보유 서지자료의 local projection BLOCKED_POLICY. 정책/반환 검증, 원문 fingerprint·컨테이너 불변, archive rows 0, writer NOLOGIN/secret 없음/worker 0. 허용 분기·상시 policy·실제 WIPS 자동 연결 및 영속 목록 적재 미완료, #34 승인 권리·한도 확인 대기. 반복 시험 대신 사용자 조치 후 실제 연동.

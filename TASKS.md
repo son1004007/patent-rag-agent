@@ -32,7 +32,8 @@
 - [x] MVP-03 P0-1 검색 목록 자동 저장 기반 코드 작성 및 JS wrapper 9/9·실제 WIPS 읽기 callback 1/1 검증. [실측](docs/37-mvp-search-list-archive.md). 기존 실행기 장애는 재검증으로 해소.
 - [x] MVP-03 P0-1 실제 NAS 격리 DB/CLI 시험 12/12 및 운영 schema-only 기반 migration/별도 DB backup restore·ACL/데이터 일치 PASS. [실측](docs/37-mvp-search-list-archive.md). 운영 변경 없음.
 - [x] MVP-03 P0-1 운영 schema/NOLOGIN 역할 및 코드 배치, backup/rollback script archive 호환, 실제 운영 권한/트랜잭션/복원/ChatGPT 읽기 PASS. [실측](docs/38-mvp-archive-production-migration.md); 새 API rollback drill 실행 NOT RUN.
-- [ ] MVP-03 P0-1 목록 자동 저장 — 지속 승인 정책·전용 writer 인증/전송·ChatGPT 자동 연결, 실제 허용 목록 저장/중복0 E2E. 권리 범위 [중앙 #34](https://github.com/son1004007/ai-agent-workflow-playbook/issues/34). [구현/재개](docs/37-mvp-search-list-archive.md).
+- [x] MVP-03 P0-1 운영자 전용 목록 전송 경로 코드·NAS 배치 및 기본 비활성 차단 운영 실증. [실측](docs/38-mvp-archive-production-migration.md). 신규 transport 허용 worker 분기 미검증.
+- [ ] MVP-03 P0-1 목록 자동 저장 — 지속 승인 권리/한도 사용자 확인 후 활성 정책·전용 writer 인증·ChatGPT 검색-저장 연결·실제 허용 목록 저장/중복0 E2E (BLOCKED: #34). 권리 범위 [중앙 #34](https://github.com/son1004007/ai-agent-workflow-playbook/issues/34). [구현/재개](docs/37-mvp-search-list-archive.md).
 - [ ] MVP-03 추가 사용자 요구(P0) — WIPS 검색 결과 자동 NAS 보관, 승인 자료 원문/벡터 증분 적재, 전체 원문 조회 및 PDF·도면 제공 경로 확인. [요구사항](docs/36-mvp-automatic-archive.md). 상시 연결 및 실제 운영 E2E 대기. 원본 PDF 별도 수집은 KIPRIS Plus 국내 공보 API 우선 검증, EPO/WIPS 별도 경로 후속 검토. 텍스트 보관과 PDF 보관 상태 분리.
 - [ ] MVP-06 사용자 직접 결과 평가/피드백 — [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 대기.
 
