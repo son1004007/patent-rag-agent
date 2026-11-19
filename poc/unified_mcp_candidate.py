@@ -41,7 +41,7 @@ def embed(text,prefix):
     assert vec.shape==(384,) and np.isfinite(vec).all() and abs(np.linalg.norm(vec)-1)<1e-5
     return json.dumps(vec.tolist(),allow_nan=False,separators=(",",":"))
 
-def conn(db="patent_demo",user="patent_app",password=None):
+def synthetic_conn(db="patent_demo",user="patent_app",password=None):
     return psycopg.connect(host="127.0.0.1",port=55432,dbname=db,user=user,
         password=Path("/auth/synthetic_password").read_text().strip() if password is None else password,connect_timeout=4)
 
@@ -55,7 +55,7 @@ def save_document(document_id:str,text:str)->dict:
     """Store exactly one approved synthetic fixture, without overwriting."""
     if FIXTURES.get(document_id)!=text:raise ValueError("Only exact synthetic fixtures are allowed")
     v=embed(text,"passage: ")
-    with conn() as c:
+    with synthetic_conn() as c:
         cur=c.execute("INSERT INTO documents(id,body,model_id,embedding) VALUES(%s,%s,%s,%s::vector) ON CONFLICT(id) DO NOTHING RETURNING id",(document_id,text,MODEL,v))
         created=cur.fetchone() is not None
         stored=c.execute("SELECT body,model_id FROM documents WHERE id=%s",(document_id,)).fetchone()
@@ -65,7 +65,7 @@ def save_document(document_id:str,text:str)->dict:
 def get_document(document_id:str)->dict:
     """Read an approved fixture from the patent test database."""
     if document_id not in FIXTURES:return {"found":False}
-    with conn() as c:
+    with synthetic_conn() as c:
         row=c.execute("SELECT id,body,model_id FROM documents WHERE id=%s",(document_id,)).fetchone()
     return {"found":True,"id":row[0],"text":row[1],"model_id":row[2]} if row else {"found":False}
 @mcp.tool(annotations=read)
@@ -73,7 +73,7 @@ def search_documents(query:str,limit:int=3)->dict:
     """Return synthetic nearest neighbors; distance is not an accuracy probability."""
     if not 1<=len(query.strip())<=200 or not 1<=limit<=3:raise ValueError("Invalid query or limit")
     v=embed(query,"query: ")
-    with conn() as c:
+    with synthetic_conn() as c:
         rows=c.execute("SELECT id,body,embedding <=> %s::vector AS distance FROM documents WHERE model_id=%s ORDER BY distance,id LIMIT %s",(v,MODEL,limit)).fetchall()
     return {"results":[{"id":i,"text":b,"distance":float(d)} for i,b,d in rows],"scope":"synthetic_candidates_only"}
 
@@ -109,7 +109,7 @@ def search_patents(query:str,limit:int=3)->dict:
 def get_patent(document_id:str)->dict:
     """Fetch one locally stored patent reference and at most three bounded evidence excerpts."""
     if not ID.fullmatch(document_id):return {"found":False}
-    with conn() as c:
+    with reader_conn() as c:
         row=c.execute("SELECT id,publication,country,kind,title,source_sha256 FROM private_docs.readable_catalog WHERE id=%s",(document_id,)).fetchone()
         if not row:return {"found":False}
         chunks=c.execute("SELECT section,start_offset,end_offset,excerpt,content_sha256 FROM private_docs.readable_evidence WHERE document_id=%s ORDER BY CASE section WHEN 'abstract' THEN 0 WHEN 'representative_claim' THEN 1 ELSE 2 END,start_offset LIMIT 3",(document_id,)).fetchall()
