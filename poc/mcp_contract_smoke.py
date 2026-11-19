@@ -37,7 +37,7 @@ async def smoke():
     headers = {"accept": "application/json, text/event-stream",
                "content-type": "application/json"}
     async with app.router.lifespan_context(app):
-        async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://localhost", headers=headers) as client:
+        async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://127.0.0.1:8765", headers=headers) as client:
             async def rpc(method, params=None, id=1):
                 msg = {"jsonrpc": "2.0", "method": method}
                 if id is not None:
