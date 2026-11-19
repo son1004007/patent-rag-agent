@@ -40,3 +40,6 @@ flowchart TD
 
 ## 잔여 범위
 MVP-03은 구현·합성 검증 PASS, 운영 자동 적재와 실제 신규 자료 E2E 미완료. 운영자 확인된 신규 구매 문헌 1건 및 허용 범위, 제한된 로컬 transport와 직렬화가 준비돼야 실제 쓰기 시험 가능. 다음 비파괴 작업은 MVP-05 실제 자료 온라인 dump 격리 복원/권한/무결성 시험. 기존 NAS/DB/relay/tunnel 재기동 금지와 기술사·기업 작업 경계 유지.
+
+## 후속 실측 갱신
+[실제 DB 엔진 격리 시험](32-mvp03-isolated-backend-test.md) 17/17 PASS — 실제 LocalBackend 및 worker, 가상 자료 신설/재사용/누락 복구·권한 검증 완료. 최초 종료1 이후 최종 exit0, 운영 DB·기존 컨테이너 불변. 실제 운영 private transport 및 실제 신규 구매 특허 적재는 NOT RUN.

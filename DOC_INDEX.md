@@ -17,6 +17,7 @@
 | [05 보안·배포](docs/05-deployment.md) | 운영자 — HTTPS·네트워크·복구 |
 | [06 연동 및 계약](docs/06-provider-policy.md) | 사업/개발자 — 비용·권한·MCP |
 | [07 테스트](docs/07-test-plan.md) | QA — 검증 기준 |
+| [32 MVP-03 실제 DB 엔진 격리 적재 시험](docs/32-mvp03-isolated-backend-test.md) | 개발자/운영자 — 합성 자료 CLI, LocalBackend, 실제 E5·pgvector, 중복·부분복구 시험 |
 | [29 사용자 설명서](docs/29-mvp06-user-guide.md) | 사용자 — ChatGPT 시작, 검색 프롬프트, 결과 해석 및 장애 대응 |
 | [30 관리자 설명서](docs/30-mvp06-operator-guide.md) | 운영자 — 권한, 점검, 장애·백업·복구 및 승인된 적재 |
 | [31 MVP-06 실제 사용 및 평가](docs/31-mvp06-user-trial.md) | 사용자/개발자 — 실제 연구 질의 시험 및 사용자 평가 기준 |

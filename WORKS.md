@@ -41,4 +41,6 @@
 
 | MVP-06 실제 사용·설명서 | [사용자](docs/29-mvp06-user-guide.md) / [관리자](docs/30-mvp06-operator-guide.md) / [실측](docs/31-mvp06-user-trial.md) — 직전 대화 실제 새 질문 3+3→5, NAS 상세3/3, 근거18, HOLD4/EXCLUDE1. 문서/목차/진입점 갱신, 사용자 평가 [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 대기 및 신규 적재 [#30](https://github.com/son1004007/ai-agent-workflow-playbook/issues/30) 별도. 운영 변경 없음. |
 
+| MVP-03 실제 DB 엔진 격리 적재 | [실측](docs/32-mvp03-isolated-backend-test.md) — schema-only 복제, 가상 2건/4섹션/10청크/384D, CLI·LocalBackend·worker 17/17 PASS, 신규·재사용·부분 복구·충돌·ACL. 첫 외부 종료1(정확한 원인 미확인), 최종 exit0 및 운영 원본/전체 기존 컨테이너 불변, cleanup PASS. 실제 WIPS 구매자료 및 운영 쓰기/transport 미검증. |
+
 실제 자료는 사용자 구매 확인에 따른 개인 NAS 내부 소량 적재 범위로 분리한다. 공개 저장소 원문 보존 및 재배포는 하지 않는다. 기존 기술사 개발 볼륨과 시안 서비스 유지. 작업별 실행 증거를 확인한 뒤 결과를 갱신한다. 개인 터널 및 실제 ChatGPT 읽기 호출 PASS; 실제 자동 적재와 안전·복구 인수 잔여는 TASKS 참조.
