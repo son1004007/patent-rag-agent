@@ -26,5 +26,6 @@
 | MVP 우선 계획 재편 | 사용자 최신 지시에 따라 [TASKS.md](TASKS.md) P0 MVP-01~06 인수 기준/실행 순서 정립, P1 품질·UI, P2 운영·공용 DB, P3 기업·SSH backlog 분리. 기존 실측 증거·기업 가이드 및 권한/재기동 보류 유지. 계획 문서 변경만, 운영 배포 및 코드 변경 없음. |
 | MVP-02 상세 수집·증분 적재 | [실측](docs/22-mvp02-incremental-patent-ingest.md) — 실제 기존 3건 상세설명 61,407자/청구항32개, 3회 보강 후 신규 metadata 1건. 4건·167청크/384D, 4개 배치 중복0 및 변조 충돌 거부, 원본 fingerprint·StartedAt 불변, 최신 dump 448,812 bytes. 실제 ChatGPT 연결 및 dump 복원은 미완료. |
 | MVP-03 자연어 질의·검색/수집 흐름 | [실측](docs/23-mvp03-research-flow.md) — ChatGPT 용어 확장, 정책 21/21, 실제 NAS/WIPS 검색 3+3, 신규 한 건 상세설명 98,067자/청구항5개, 234청크 추가; 5건·401청크, 동일 질의 신규 문헌 NAS 2순위 및 보유 판정, 재검증 쓰기0. 기존 fingerprint·StartedAt 불변, 최신 dump 1,037,393 bytes. 기존 개인 플러그인 자동 통합 HOLD. |
+| MVP-01 통합 MCP 운영 전환 | [실측](docs/24-mvp01-production-cutover.md) — 사용자 승인 API만 재시작, 16+24+16=56/56 PASS, 실제 특허 검색 109.78ms, DB·기타 컨테이너 StartedAt·API 설정 불변. 기존 ChatGPT 직접 호출 정상; 새 search_patents/get_patent 도구 Refresh 및 직접 호출 대기. |
 
 실제 자료는 사용자 구매 확인에 따른 개인 NAS 내부 소량 적재 범위로 분리한다. 공개 저장소 원문 보존 및 재배포는 하지 않는다. 기존 기술사 개발 볼륨과 시안 서비스 유지. 작업별 실행 증거를 확인한 뒤 결과를 갱신한다. 개인 터널 및 실제 ChatGPT 도구 호출은 별도 검증이 필요하다.
