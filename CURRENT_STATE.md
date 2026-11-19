@@ -1,6 +1,6 @@
 # Current State
 
-2026-11-19 / 실제 특허 읽기 전용 MCP 로컬 HTTP 23/23 PASS, 기존 서비스 재기동 보류
+2026-11-19 / 기존 NAS RAG 연결 정상, 통합 MCP 후보 39/39 PASS; 기업 배포 가이드 작성, 기존 서비스 재기동 보류
 
 | 영역 | 상태 |
 |---|---|
@@ -19,7 +19,7 @@
 
 전역 registry 및 문서 목차 규칙 연결 확인. 설계 초안; 실제 실행으로 검증 예정.
 
-다음 (최신 사용자 결정): 공용 영속 DB 운영 전환은 기술사 배포 차단 해소 후; 실제 자료 읽기 전용 MCP의 승인된 ChatGPT 연결 및 다중 배치 검증 → 화면 및 관리자 기능 개선 → 최종 간략 사용/관리자 설명서. 기존 웹 UI 유지. 독립 AI 검토 선택. Live API/DB/외부 공개 보안 및 계약 gate는 별도.
+다음 (최신 사용자 결정): 공용 영속 DB 운영 전환은 기술사 배포 차단 해소 후; 통합 후보의 승인된 운영 전환 및 실제 ChatGPT tool refresh/조회, 다중 배치 검증 → 화면 및 관리자 기능 개선 → 최종 간략 사용/관리자 설명서. 기존 웹 UI 유지. 독립 AI 검토 선택. Live API/DB/외부 공개 보안 및 계약 gate는 별도.
 
 배포 환경 제한: CPU CFS hard quota 및 pids limit 미지원, CPU shares와 128 MiB 메모리 제한 사용. 공식 Docker resource constraints 및 실제 runtime 결과 기준. 실제 장비 식별자/URL은 공개 repo에 기록하지 않음.
 
@@ -40,6 +40,9 @@
 | 구매 특허 비공개 적재 | PASS — 사용자 구매·적재 지시, 실제 3건·10 chunks·384D·검색·중복 차단·별도 dump, 전용 DB; [실측](docs/18-private-patent-ingest.md). 기존 플러그인 실제 데이터 조회 및 전체 명세서/다중 배치 미검증 |
 
 | 실제 특허 읽기 전용 MCP | 로컬 HTTP PASS 23/23 — 실제 3건 검색·조회, 87.15ms 단일 질의, 별도 read-only role/view·교차 DB 거부, [실측](docs/19-private-patent-reader-mcp.md); ChatGPT 연결/상시 배포 NOT RUN |
+
+| 통합 MCP 후보 | 로컬 HTTP PASS 39/39 (기존 16 + 실제 특허 23), 86.54ms 단일 질의; 현재 기존 개인 NAS RAG 연결 정상, 실제 특허 도구는 아직 미등록; [근거](docs/20-unified-mcp-candidate.md). 기존 운영 cutover/재기동 HOLD |
+| 기업용 ChatGPT 연결·SSH | [설계 및 방화벽 신청표 작성](docs/21-enterprise-connectivity-firewall-ssh.md) — 공식 문서 기반, 실제 기업 제품·테넌트·네트워크·운영 SSH 승인/검증 NOT RUN |
 
 ## 최신 운영 지시
 - 사용자 최신 결정: 아직 실제 재기동하지 않는다. NAS 및 기존 컨테이너 stop/restart 금지, 자동 시작 등록/실행은 승인 대기.
