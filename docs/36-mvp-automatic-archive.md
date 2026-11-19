@@ -37,3 +37,28 @@ flowchart TD
 5. 본문 조회 기능 추가 및 PDF/도면 경로 검증. 전체 파일은 허용된 비공개 NAS 공간 및 접근 권한 유지, 원본과 파생 파일 구분, 원문/실제 식별자/인증정보 공개 GitHub 금지.
 
 설계 항목과 현재 실제 운영 상태는 구분한다. 이번 변경은 요구사항 기록만 수행, 추가 수집/원문·벡터 적재/운영 배포/재기동 없음. 독립 AI 검토 NOT RUN(owner-approved optional).
+
+## 2026-11-19 보완 — 원문 텍스트와 공식 원본 파일의 분리 수집
+
+사용자 확인 요청: 원본 파일은 별도 API 등의 경로에서 다운로드할 필요가 있는지 검토하고 GitHub에 정리한다.
+
+| 구분 | 확보 경로 | 현재 판정 |
+|---|---|---|
+| 발명의 명칭·요약·전체 청구항·상세설명 | 기존 WIPS MCP `get_patent_search_onlyengine`, `get_patent_spec_text` | 텍스트 실측 및 NAS 저장 PASS. 언어 및 번역 여부 구분 필요 |
+| 도면 | WIPS MCP `get_patent_section`의 draw/indv_draw | 도구 정의 확인; 실제 바이너리 다운로드 미검증 |
+| 공식 원본 PDF | 별도 공식 공보 다운로드 API 또는 계약상 허용된 공급자 파일 제공 경로 | 미연동. 현재 연결된 WIPS MCP 도구 목록에는 PDF 직접 다운로드 도구를 확인하지 못함. WIPS의 다른 API 전체에 PDF 기능이 없다는 뜻은 아님 |
+
+### 공식 후보 및 적용 순서
+
+- 국내: [KIPRIS Plus 특허·실용 공개·등록공보 API](https://plus.kipris.or.kr/portal/data/service/DBII_000000000000001/view.do). 공식 소개에서 공보 전문 및 대표도면의 다운로드 경로를 XML로 반환한다고 명시. KR 파일 수집의 우선 검증 후보.
+- 유럽: [EPO European Publication Server REST API](https://www.epo.org/en/searching-for-patents/data/web-services/publication-server). EP 공개·등록공보의 PDF/A, XML, HTML, TIFF 제공.
+- 해외 범위 확대 후보: [EPO OPS](https://www.epo.org/en/searching-for-patents/data/web-services/ops), [PDF 조회 안내](https://www.epo.org/en/service-support/faq/searching-patents/open-patent-services/search-queries-tips-and-tricks/what-do-0). 국가·문헌별 이미지 범위와 페이지 결합 여부 차이를 검증해야 한다. [OPS 이용조건](https://www.epo.org/en/service-support/ordering/terms-and-conditions/ops-terms-and-conditions) 확인 필요.
+- [WIPSCLIP 공식 서비스 안내](https://www.wipsclip.co.kr/service/serviceInfo/view.wips) 및 별도 계약 API/파일 제공 여부는 공급자 문의 대상으로 유지.
+
+### 설계 및 완료 조건
+1. WIPS 검색 결과를 문헌 ID(국가+공개/등록번호+종류코드; SKEY는 공급자 식별자)로 매칭한다. 같은 특허 패밀리의 다른 국가 문헌을 동일 원본으로 취급하지 않는다.
+2. 공식 제공자가 허용한 다운로드 경로를 통해 NAS에 원본 파일을 저장한다. 원본과 생성한 HTML/PDF 보기용 파생물은 구분한다. PDF의 문헌번호/종류 일치, 파일 형식, 크기, SHA-256, 취득 시각, 출처, 권리 정책 및 파일 경로를 DB에 기록한다.
+3. 본문 JSON/정규화 텍스트 및 pgvector는 기존 구조를 활용하고, PDF 파일 경로와 문헌 ID로 연결한다. 인증된 사람용 조회에서 원본 열람/다운로드를 제공하는 목표이며 기존 300자 근거 조회와 분리한다.
+4. 원본 미확보/실패 시 텍스트 보관 성공과 파일 보관 성공은 분리 표기. 중복 다운로드 방지, 저장 제한 및 권한 거부, 실제 국내 문헌 한 건의 원본 열람과 대응 검증 후 적용 범위를 확대한다.
+
+공식 안내 및 연결 도구 범위는 확인했으나 API 인증·요금·호출량·저장/재사용 권리·실제 파일 다운로드는 아직 검증하지 않았다. 이번 변경은 문서화이며 신규 API 호출/유료 구매/자료 수집/NAS 운영 변경은 하지 않았다.

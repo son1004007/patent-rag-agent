@@ -77,3 +77,5 @@
 - 사용자 Refresh·권한 추가 수행 확인. 기존 대화에서는 NAS RAG 3개 도구만 발견; 기존 get_document 실제 정상 및 PRIVATE 유지. 새 대화에서 신규 search_patents/get_patent 직접 검증 PASS. 동일 질의 재검색 순위 일치, 실제 상세 3/3, 근거 9개, 제한 및 미존재 처리 PASS. 실제 DB 재계수/쓰기/rollback NOT RUN. MVP-04 기본 비교 시험 PASS. 다음 MVP-03 쓰기 adapter 잔여 및 MVP-05 복원·인수. [기록](docs/24-mvp01-production-cutover.md).
 
 - 2026-11-19 사용자 최신 피드백: WIPS MCP 검색 결과 NAS 자동 저장 및 사람용 원문 보관/조회 요구. [P0 요구사항](docs/36-mvp-automatic-archive.md). 텍스트 원문 단건 저장 PASS, 자동 연결/전체 원문 조회/PDF·도면 파일 검증 미완료. 추가 실자료 저장·배포는 이번에 미실행.
+
+- 원본 PDF 확보 경로 보완: [공식 API 후보 및 파일 수집 설계](docs/36-mvp-automatic-archive.md) — KIPRIS Plus 국내 공보 API 우선, EPO 및 공급자 별도 경로 검토. WIPS MCP 텍스트 저장 PASS와 PDF 수집 미구현 분리. 공식 서비스 안내 확인, 실제 API 인증/다운로드/권리 검증 NOT RUN.
