@@ -15,5 +15,6 @@
 | Secure MCP Tunnel NAS 측 준비 | [실측](docs/13-secure-tunnel-preflight.md): 기존 HTTP 16/16 재검증, Unix socket 14/14 PASS, 공식 CLI v0.0.21 해시/기동 PASS. 개인 계정의 tunnel_id/제한 key 미확인으로 실제 연결 BLOCKED. |
 | 개인 터널 인증 준비 갱신 | 사용자 runtime key 생성/저장 보고 및 Gateway metadata 확인. [터널 생성 안내와 다음 단계](docs/13-secure-tunnel-preflight.md). 키 권한·유효성 및 실제 tunnel_id 미확인, 연결 NOT RUN. |
 | OpenAI 개인 터널 실연결 | [실측](docs/13-secure-tunnel-preflight.md) — 사용자 ID 및 saved key 적용, 최초 doctor TCP probe 실패 → container-local loopback adapter 적용, doctor PASS. OpenAI metadata/MCP session 및 polling PASS, health/ready 200, port publish 0. 실제 ChatGPT plugin 설치/호출 대기. |
+| ChatGPT 개인 NAS RAG E2E | [실측](docs/14-chatgpt-plugin-e2e.md): 직접 get/search/중복 및 변경거부, 새 합성 P4 최초 INSERT created=true, DB 실측 4건 및 384D, Top1 검색 일치. USER/PRIVATE 및 기존 5개 컨테이너 running, published0. WIPS 실자료 금지 유지. |
 
 실제 운영 데이터나 WIPS 원문 저장은 하지 않는다. 기존 기술사 개발 볼륨과 시안 서비스 유지. 작업별 실행 증거를 확인한 뒤 결과를 갱신한다. 개인 터널 및 실제 ChatGPT 도구 호출은 별도 검증이 필요하다.
