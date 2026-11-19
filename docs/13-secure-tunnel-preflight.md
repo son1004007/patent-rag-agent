@@ -1,7 +1,7 @@
 # Secure MCP Tunnel 연결 준비 — 2026-11-19
 
 ## 판정
-NAS 측 연결 경로 및 공식 클라이언트 준비 PASS. OpenAI 터널 등록/인증/실제 ChatGPT 호출은 BLOCKED — 계정의 tunnel_id와 제한 runtime key 필요.
+NAS 측 연결 경로 및 공식 클라이언트 준비 PASS. OpenAI 터널 등록/인증/실제 ChatGPT 호출은 BLOCKED — runtime key의 Gateway 저장 확인, 개인 tunnel_id 생성 및 key 권한/실제 인증 검증 필요.
 
 ```mermaid
 flowchart LR
@@ -30,3 +30,8 @@ flowchart LR
 
 ## 운영 경계
 [공식 Tunnel 안내](https://developers.openai.com/api/docs/guides/secure-mcp-tunnels), [클라이언트 설정](https://github.com/openai/tunnel-client/blob/master/docs/configuration.md) 기준. 현 stage의 DB, API, relay는 실행 중. NAS 전체 재부팅 및 자동 기동 미검증. 이전부터의 DB backup/restore 결과는 동일 클러스터 합성 시험. 롤백은 새 relay만 정지 후 socket 존재 확인(실행 중 소켓 unlink 금지); 기존 DB/API 및 preview 유지. WIPS 저장권/실제 공동 기술사 DB/운영 OAuth/부하 및 터널 연결 미검증.
+
+## 2026-11-19 사용자 인증 진행 갱신
+- 사용자가 API Keys에서 런타임 키 생성 및 Gateway 저장을 보고함. Gateway metadata 재조회: 목적 file, saved, personal scope, 만료 없음, 미사용. 비밀값 조회/출력/복사 없음. Tunnels Read+Use 설정과 연결 대상 조직, 유효성은 아직 실증하지 않음.
+- 현재 남은 사용자 단계: [Platform Tunnels](https://platform.openai.com/settings/organization/tunnels) → 개인 Platform 조직 선택(API key 생성 조직과 동일) → Create tunnel → Name(예: NAS RAG) / Description 입력 → 조직 연결은 본인 Platform 조직, ChatGPT workspace 선택지가 있으면 본인 Personal 컨텍스트만 연결 → Create → 생성된 Tunnel ID 확인. 타 조직/워크스페이스와 공유하지 않음. 개인 조직에는 별도 workspace 선택지가 없을 수 있음; 실제 화면 미조회. Create 버튼/메뉴 부재 시 조직 역할 Tunnels Read+Manage 및 계정 기능 확인. 키 권한은 Restricted Tunnels Read+Use로 점검. 참고: [공식 사용 가이드](https://github.com/openai/tunnel-client/blob/master/docs/end-user-guide.md), [공식 Secure MCP Tunnel](https://developers.openai.com/api/docs/guides/secure-mcp-tunnels).
+- 사용자에게는 비밀이 아닌 tunnel_id만 요청. 실제 tunnel ID 생성 이후 개인 컨텍스트 확인, 승인된 Gateway secret-file 쓰기(0600), doctor 및 polling, ChatGPT 등록/호출 검증. 이번에는 NAS 파일이나 권한, 네트워크 및 daemon을 변경하지 않음. 중앙 private Issue #24 OPEN.
