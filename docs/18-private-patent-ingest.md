@@ -14,3 +14,6 @@
 1. 별도 DB의 읽기 전용 MCP 연동 후보와 권한/응답 범위 검증, 기존 서버 무중단 조건 유지. (현재 ChatGPT NAS RAG에서 실제 자료 검색 불가)
 2. 상세설명/전체 청구항 수집 및 다중 배치 ingest, 중복·충돌/문서별 정책/취소·보존·백업 복구 검증.
 3. 계약 범위 확인 후 규모 확대. 실제 자료는 공개 GitHub/다른 사용자에게 제공하지 않는다.
+
+## 후속 검증
+[실제 특허 읽기 전용 MCP 로컬 HTTP 23/23 PASS](19-private-patent-reader-mcp.md). 실제 개인 ChatGPT 연결·상시 reader 배포는 미실행, 기존 synthetic plugin 유지.
