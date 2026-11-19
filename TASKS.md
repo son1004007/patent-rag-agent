@@ -22,7 +22,8 @@
 - [x] Secure MCP Tunnel NAS 측 준비 (공식 CLI v0.0.21 설치 및 Unix socket 14/14 PASS; [실측](docs/13-secure-tunnel-preflight.md))
 - [x] 사용자 runtime key 생성 및 Gateway saved metadata 확인 (값 미조회, 권한/유효성 미검증)
 - [x] 개인 tunnel_id 생성/확인, Gateway key 파일 안전 전달 및 실제 터널 인증/doctor/polling 검증 ([실측](docs/13-secure-tunnel-preflight.md))
-- [ ] ChatGPT 개인 플러그인 생성/설치 (사용자 조치, 중앙 Issue #24) → discovery 및 실제 write/get/vector search E2E; 합성 전용, 외부 공개 금지
+- [x] ChatGPT 개인 플러그인 생성/설치 및 실제 write/get/vector search E2E; 신규 INSERT, 중복/미승인 차단, USER/PRIVATE 확인 ([실측](docs/14-chatgpt-plugin-e2e.md)); 합성 전용, 외부 공개 금지
+- [ ] 신규 P4 포함 최신 백업·복원 및 NAS 전체 재기동 자동 시작 검증
 - [ ] 공용 pgvector 엔진 별도 DB/role 운영·복원·부하 검증 (현재 기술사 배포 차단 우회 금지)
 - [ ] WIPS와 자체 MCP의 동일 대화 연동 (저장/전송 권리 확보 전 synthetic-only)
 ## P1 — Mock MVP (MCP 실증 이후; 독립 웹 Agent 대체안)
