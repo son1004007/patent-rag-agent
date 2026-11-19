@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<title>Patent RAG · 연구 기술 탐색</title>
+<link rel="stylesheet" href="style.css"><script defer src="app.js"></script>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+<div class="brand"><div class="logomark" aria-hidden="true">P</div><div><b>Patent RAG</b><span>RESEARCH WORKSPACE</span></div></div>
+<div class="nav-label">WORKSPACE</div>
+<nav aria-label="메인 메뉴">
+<button class="nav active" data-view="search"><span class="nav-icon">⌕</span> 기술 탐색</button>
+<button class="nav" data-view="library"><span class="nav-icon">▤</span> 자료 보관소 <span id="navCount" class="nav-count">0</span></button>
+<button class="nav" data-view="compare"><span class="nav-icon">▥</span> 후보 비교 <span id="compareCount" class="nav-count">0</span></button>
+<button class="nav" data-view="profile"><span class="nav-icon">⚙</span> 연구 설정</button>
+</nav>
+<div class="nav-label second">MANAGEMENT</div>
+<nav aria-label="관리 메뉴"><button class="nav" data-view="admin"><span class="nav-icon">◫</span> 운영 현황</button></nav>
+<div class="side-foot"><span class="dot"></span> 화면 검토용 MVP<br><small>합성 데이터 · 외부 호출 없음</small></div>
+</aside>
+<main class="main">
+<header class="topbar"><div class="breadcrumb">연구 워크스페이스 <span>/</span> <strong id="crumb">기술 탐색</strong></div><div class="top-right"><span class="status-pill"><i></i> 화면 시안</span><span class="avatar" aria-label="예시 사용자">R</span></div></header>
+<div class="content">
+<div class="demo-notice"><strong>화면 검토용</strong><span>가상 문헌으로 사용 흐름을 체험할 수 있습니다. 실제 특허 검색·AI 분석·서버 저장은 아직 연결하지 않았습니다. 연구 기밀은 입력하지 마세요.</span></div>
+<section id="view-search" class="view">
+<div class="page-heading"><div><p class="eyebrow">DISCOVER</p><h1>어떤 기술을 찾고 계신가요?</h1><p>짧은 연구 질문에서 관련 특허 후보와 검토 근거까지 한 번에 확인합니다.</p></div><div class="heading-mark" aria-hidden="true">⌕</div></div>
+<section class="panel search-panel">
+<form id="searchForm"><label class="field-title" for="query">연구 질문</label><textarea id="query" rows="3" maxlength="300" required placeholder="예: 전선용 구리 대체 도체 소재"></textarea>
+<div class="examples"><span>예시 질문</span><button type="button" data-sample="전선용 구리 대체 도체 소재">구리 대체 소재</button><button type="button" data-sample="해양용 내식 케이블 소재">내식 케이블</button><button type="button" data-sample="도체 제조 공정 가공성 개선">제조 공정 개선</button></div>
+<div class="options"><label>연구 분야<select id="domain"><option value="power">전력 케이블</option><option value="vehicle">자동차 전장</option><option value="marine">해양 소재</option><option value="process">생산 공정</option><option value="general">일반 기술</option></select></label><label>검색 방식<select id="mode"><option value="personalized">개인화 통합 검색</option><option value="combined">통합 검색</option><option value="original">원문 검색</option><option value="expanded">확장 검색</option></select></label><label>검색 범위<select id="country"><option value="KR">국내 특허 (예시)</option></select></label></div>
+<div class="actions"><label class="check"><input id="autoSave" type="checkbox" checked> 신규 자료 자동 저장 (시뮬레이션)</label><button class="primary" type="submit">기술 탐색 <span aria-hidden="true">→</span></button></div>
+</form></section>
+<div class="metrics"><article><span>검색 후보</span><strong id="metricResults">—</strong><small>가상 문헌</small></article><article><span>신규 자동 저장</span><strong id="metricNew">—</strong><small>현재 브라우저 탭</small></article><article><span>내부 자료</span><strong id="metricLibrary">0</strong><small>시뮬레이션 보관소</small></article><article><span>외부 API 호출</span><strong>0</strong><small>실제 연동 비활성</small></article></div>
+<section id="searchPlan" class="panel plan-panel" hidden><div class="section-line"><div><h2>검색 전략</h2><p>질문에서 검색 조건까지의 흐름 (예시)</p></div><span class="tag neutral">시뮬레이션</span></div><div class="steps"><div><b>01</b><span>질문 이해</span><small>원문 유지</small></div><span class="arrow">→</span><div><b>02</b><span>질의 확장</span><small>연구 조건 반영</small></div><span class="arrow">→</span><div><b>03</b><span>문헌 통합</span><small>중복 제거</small></div><span class="arrow">→</span><div><b>04</b><span>후보 재정렬</span><small>근거 중심</small></div></div><details><summary id="expandSummary">자동 확장 질의 보기</summary><p id="expanded" class="expanded"></p></details></section>
+<section class="result-section"><div class="section-line"><div><h2>후보 기술 및 특허 근거</h2><p id="resultSummary">예시 질문으로 화면을 체험해 보세요.</p></div><button id="compareGo" class="outline">선택한 후보 비교</button></div><div id="results" class="result-list"><div class="empty"><strong>첫 번째 연구 질문을 입력해 보세요.</strong><p>후보 기술, 관련성 판단 근거, 검토 항목이 표시됩니다.</p></div></div></section>
+</section>
+<section id="view-library" class="view" hidden><div class="page-heading"><div><p class="eyebrow">LIBRARY</p><h1>자료 보관소</h1><p>검색 과정에서 자동으로 보관되는 신규 문헌을 확인합니다.</p></div></div><div class="panel"><div class="section-line"><div><h2>내부 자료 <span id="libraryCount"></span></h2><p>현재 탭의 가상 자료만 표시됩니다. 새로고침하면 초기화됩니다.</p></div><button class="outline" data-jump="search">기술 탐색</button></div><div id="libraryList"></div></div></section>
+<section id="view-compare" class="view" hidden><div class="page-heading"><div><p class="eyebrow">COMPARE</p><h1>후보 기술 비교</h1><p>문헌에 기재된 내용과 연구자가 확인할 사항을 구분하여 비교합니다.</p></div></div><section class="panel"><div class="section-line"><div><h2>선택 후보</h2><p>검색 결과에서 최대 3개 후보를 선택할 수 있습니다.</p></div><button class="outline" data-jump="search">후보 추가</button></div><div id="comparison"></div></section></section>
+<section id="view-profile" class="view" hidden><div class="page-heading"><div><p class="eyebrow">PREFERENCES</p><h1>연구 설정</h1><p>연구 분야의 우선 평가 항목을 설정합니다.</p></div></div><div class="panel"><h2>기본 연구 분야</h2><div id="profiles" class="profile-grid"></div><p class="muted">화면 시안에서는 현재 탭에만 반영됩니다. 실제 사용자 계정과 프로필 저장 기능은 구현 예정입니다.</p><button class="primary" id="applyProfile">선택한 분야 적용</button><p id="profileStatus" role="status"></p></div></section>
+<section id="view-admin" class="view" hidden><div class="page-heading"><div><p class="eyebrow">OPERATIONS</p><h1>운영 현황</h1><p>연동 상태, 사용량 및 데이터 저장 정책을 한 곳에서 확인하는 관리자 화면 예시입니다.</p></div></div><div class="metrics"><article><span>세션 검색 횟수</span><strong id="adminSearches">0</strong><small>화면 시뮬레이션</small></article><article><span>가상 보관 문헌</span><strong id="adminLibrary">0</strong><small>현재 탭</small></article><article><span>외부 호출</span><strong>0</strong><small>WIPS / GPT</small></article><article><span>추정 사용료</span><strong>—</strong><small>실측 전</small></article></div><section class="panel"><h2>연동 및 데이터 정책</h2><div class="table-wrap"><table><thead><tr><th>구성 요소</th><th>상태</th><th>비고</th></tr></thead><tbody><tr><td>WIPS MCP</td><td><span class="tag neutral">미연동</span></td><td>독립 서비스 인증 확인 필요</td></tr><tr><td>GPT 검색어 확장</td><td><span class="tag neutral">미연동</span></td><td>가상 질의 템플릿만 제공</td></tr><tr><td>PostgreSQL / pgvector</td><td><span class="tag neutral">미연동</span></td><td>브라우저 메모리로 저장 흐름 시연</td></tr><tr><td>외부 원문 저장</td><td><span class="tag warning">차단</span></td><td>재사용 권한 확인 전 기본 금지</td></tr><tr><td>개별 사용자 인증</td><td><span class="tag neutral">구현 예정</span></td><td>현재는 정적 화면 검토용</td></tr></tbody></table></div></section></section>
+<footer>Patent RAG · MVP 화면 시안 v0.1 <span>실제 특허 및 성능을 검증한 결과가 아닙니다.</span></footer>
+</div></main></div>
+<dialog id="detail"><div class="dialog-head"><h2 id="detailTitle"></h2><button class="outline" id="detailClose">닫기</button></div><div id="detailBody"></div></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+</body></html>
