@@ -55,3 +55,5 @@
 - 최신 4건 온라인 dump 및 별도 빈 클러스터 복원·ACL·인덱스·384D PASS; 기존 컨테이너 StartedAt 불변. 순차 시작 --check PASS 및 ChatGPT P4 조회 정상. [실측](docs/15-online-backup-startup-plan.md).
 
 - 사용자 구매 특허의 개인 NAS 내부 적재 지시 반영. 유료 구매의 구체적 계약 범위는 별도, 상업 이용·재배포·대량 수집으로 확대하지 않는다. 기존 재기동 금지 유지.
+
+- 사용자 Refresh·권한 추가 수행 확인. 기존 대화에서는 NAS RAG 3개 도구만 발견; 기존 get_document 실제 정상 및 PRIVATE 유지. 새 대화의 신규 search_patents/get_patent 직접 검증 대기. [기록](docs/24-mvp01-production-cutover.md).
