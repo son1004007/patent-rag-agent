@@ -53,13 +53,17 @@ flowchart TD
 
 이 도식은 **목표 흐름**이다. 현재 실제 특허 3건의 개인 NAS 비공개 적재/로컬 벡터 검색 및 두 MCP의 개별 호출을 검증했으며, 실제 특허 읽기 전용 MCP 및 기존 플러그인 통합 후보 NAS 로컬 HTTP 검증 완료(39/39); ChatGPT 실제 문헌 연결, 자동 다중 배치, Hybrid RAG/재정렬, 비교·추천의 통합 검증은 [현재 상태](CURRENT_STATE.md)에서 확인한다. 공급자 자료를 공개 저장소에 올리거나 다른 사용자에게 제공하지 않는다.
 
+## 현재 개발 우선순위 — 개인용 MVP
+
+개인 ChatGPT에서 연구 질문을 입력하고, 저장 특허 검색과 WIPS 추가 검색, 허용 문헌 증분 적재, 출처를 표시한 후보 비교·추천 및 재사용까지 검증한다. MVP에서는 ChatGPT를 사용자 인터페이스로 사용한다. 고급 Hybrid RAG/Reranking, 별도 웹 Agent·관리자 화면, 공용 DB 운영 전환, 자동화된 운영 확장 및 기업 구축은 MVP 이후 순차 추가한다. 기존 재기동 보류 및 권한 경계는 유지한다. 상세 실행 순서와 인수 기준: [TASKS.md — MVP 우선 실행 계획](TASKS.md).
+
 ## 시작점
 - [문서 목차](DOC_INDEX.md)
 - [아키텍처](docs/02-architecture.md)
 - [현재 상태](CURRENT_STATE.md) / [할 일](TASKS.md)
 - [AI 작업 규칙](AGENTS.md)
 
-## 기업용 구축 및 운영
+## 기업용 구축 및 운영 (MVP 이후, 백로그)
 
 - [기업용 ChatGPT Business/Enterprise·Azure OpenAI 구분 및 방화벽 신청표·SSH 운영 가이드](docs/21-enterprise-connectivity-firewall-ssh.md)
 - 기업망의 MCP는 Secure MCP Tunnel outbound HTTPS 우선. 운영 제어는 RAG와 분리한 관리 전용 MCP/내부 SSH로 설계한다. 회사 실제 네트워크·계정값은 사내 승인 문서에서 확인하고 기업 배포 전 별도 검증한다.
