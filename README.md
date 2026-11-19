@@ -25,7 +25,7 @@ flowchart TD
 - ChatGPT: 질의 확장·개인화·비교 및 분석. WIPS MCP: 외부 특허 검색 및 조회.
 - NAS MCP: 허가된 저장·조회·검색 및 중복 방지. 기존 기술사 RAG의 PostgreSQL/pgvector 엔진과 로컬 임베딩 자산 재사용을 우선 검토하되 DB와 역할은 분리한다.
 - 기존 웹 화면은 관리 및 시연에 활용한다. 별도 LLM 생성 API는 우선 필수 아님. Tunnel 인증용 Platform 키와 모델 API 과금은 구별한다.
-- 현재: ChatGPT 개인 MCP의 신규 문서 저장·조회·벡터 검색 E2E PASS. 공유 DB 격리/동시 검색/복원 사전 시험 PASS. 실제 특허 5건의 개인 NAS 비공개 저장·임베딩 검증 완료(4건 상세설명/전체 청구항 보강, 총 401청크). 실제 기술사 영속 DB 공동 운영은 미전환이며 자료의 확장 사용 및 재배포는 별도 검토. 상세: [현재 상태](CURRENT_STATE.md), [공동 운영 실측](docs/16-shared-db-coexistence.md).
+- 현재: ChatGPT 개인 MCP의 합성 fixture 저장·조회·벡터 검색과 실제 특허 읽기 E2E PASS. 실제 신규 특허 자동 적재는 승인 및 운영 연결 대기. 공유 DB 격리/동시 검색/복원 사전 시험 PASS. 실제 특허 5건의 개인 NAS 비공개 저장·임베딩 검증 완료(4건 상세설명/전체 청구항 보강, 총 401청크). 실제 기술사 영속 DB 공동 운영은 미전환이며 자료의 확장 사용 및 재배포는 별도 검토. 상세: [현재 상태](CURRENT_STATE.md), [공동 운영 실측](docs/16-shared-db-coexistence.md).
 
 ## 목표 서비스 흐름 — 연구 질문에서 후보 기술 추천까지
 
@@ -58,6 +58,9 @@ flowchart TD
 개인 ChatGPT에서 연구 질문을 입력하고, 저장 특허 검색과 WIPS 추가 검색, 허용 문헌 증분 적재, 출처를 표시한 후보 비교·추천 및 재사용까지 검증한다. MVP에서는 ChatGPT를 사용자 인터페이스로 사용한다. 고급 Hybrid RAG/Reranking, 별도 웹 Agent·관리자 화면, 공용 DB 운영 전환, 자동화된 운영 확장 및 기업 구축은 MVP 이후 순차 추가한다. 기존 재기동 보류 및 권한 경계는 유지한다. 상세 실행 순서와 인수 기준: [TASKS.md — MVP 우선 실행 계획](TASKS.md).
 
 ## 시작점
+- [사용자 설명서 — ChatGPT에서 바로 검색하기](docs/29-mvp06-user-guide.md)
+- [관리자 설명서 — 운영·장애·복구](docs/30-mvp06-operator-guide.md)
+- [실제 사용 시험 및 사용자 인수](docs/31-mvp06-user-trial.md)
 - [문서 목차](DOC_INDEX.md)
 - [아키텍처](docs/02-architecture.md)
 - [현재 상태](CURRENT_STATE.md) / [할 일](TASKS.md)
@@ -70,4 +73,4 @@ flowchart TD
 
 ## 화면 시안
 
-`preview/index.html` 또는 `python preview/serve.py`. 가상 문헌을 사용하며 실제 API/DB 연동 없음. 사용자/관리자 설명서는 구현 완료 후 추가한다.
+`preview/index.html` 또는 `python preview/serve.py`. 가상 문헌을 사용하며 실제 API/DB 연동 없음. 위 개인 MVP 사용자/관리자 설명서는 ChatGPT 경로 기준이며 이 웹 시안의 실제 기능 연동 설명서는 후속 범위다.

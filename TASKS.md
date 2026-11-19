@@ -13,7 +13,7 @@
 | MVP-03 | 자연어 연구 질문 → 검색 계획 → NAS/WIPS 호출 | 한정 실제 흐름/재사용 PASS, adapter 구현·합성 PASS(29 JS + 23 Python); 실제 운영 자동 연계·신규 쓰기 미완료 ([adapter](docs/26-mvp03-approved-ingest-adapter.md)) ([실측](docs/23-mvp03-research-flow.md)) | ChatGPT가 질문에 따라 검색어 확장, 검색 범위 결정, 두 소스 구분, 권한 내 신규 자료만 수집 및 적재 재사용; 자유로운 대량 수집 없이 제한된 on-demand batch |
 | MVP-04 | 기본 검색·중복 제거·근거 기반 후보 비교/추천 | PASS — 참조 모듈 및 실제 두 소스 한정 시험, 27/27; 6→5, HOLD 3/EXCLUDE 2/후보 0 ([실측](docs/25-mvp04-candidate-comparison.md)) | NAS 벡터 결과와 WIPS 키워드 검색을 출처별로 수집 후 문헌번호/종류 단위 중복 제거; 근거 위치·문헌 출처·불확실성 표시, 무관하거나 근거 부족 시 추천 보류. 고급 Hybrid/RRF·reranker는 P1 |
 | MVP-05 | 최소 안전·복구·종단간 인수 시험 | 실제 복원 PASS, 격리 rollback 96/96 및 읽기/안전 차단 4/5 PASS; 실제 신규 쓰기 BLOCKED [#30](https://github.com/son1004007/ai-agent-workflow-playbook/issues/30) ([rollback/인수](docs/28-mvp05-rollback-acceptance.md)) ([실측](docs/27-mvp05-private-backup-restore.md)) | 실제 자료별 백업 복원/ACL/무결성, 인증/권한/실패 시 차단, 회귀 및 rollback, 최소 5개 질의(정상·반복 재사용·신규 적재·근거 부족·실패/거부)의 기대 결과/실측 기록, 개인 ChatGPT의 실제 end-to-end 증거 |
-| MVP-06 | 최소 사용자 확인 및 사용법 | 미완료 | ChatGPT에서 실제 연구 질문 한 건으로 사용자가 결과 평가 가능; 짧은 사용법·제약·운영/복구 런북 제공 |
+| MVP-06 | 최소 사용자 확인 및 사용법 | 설명서 작성·실제 읽기 시험 PASS; 사용자 직접 평가 대기 [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) ([실측](docs/31-mvp06-user-trial.md)) | ChatGPT에서 실제 연구 질문 한 건으로 사용자가 결과 평가 가능; 짧은 사용법·제약·운영/복구 런북 제공 |
 
 - [x] MVP-01 승인된 기존 API만 재시작 및 통합 MCP 운영 배포, 회귀 56/56, DB 및 기타 서비스 불변 ([실측](docs/24-mvp01-production-cutover.md)).
 - [x] MVP-01 사용자 Refresh·권한 추가 및 새 채팅 신규 search_patents/get_patent 실제 읽기 E2E PASS — 실제 3건 검색/조회, 9개 근거, 반복·미존재·기존 읽기 회귀 ([실측](docs/24-mvp01-production-cutover.md)). 실제 rollback 검증은 아래 MVP-05 잔여 항목.
@@ -25,9 +25,10 @@
 - [x] MVP-05 실제 자료 온라인 dump 독립 격리 복원 — 데이터 5/8/401, fingerprint·ACL·HNSW·384D·Top3 일치, 운영 상태 불변 및 cleanup PASS; ChatGPT 실제 읽기 회귀 PASS. [실측](docs/27-mvp05-private-backup-restore.md).
 - [x] MVP-05 격리 rollback 96/96 및 실제 읽기/안전 차단 인수 4/5 시나리오 — 현재→이전→현재 HTTP·임시 SCRAM/ACL·교차 DB·운영 불변. [실측](docs/28-mvp05-rollback-acceptance.md).
 - [ ] MVP-05 실제 신규 쓰기/재사용 인수 및 운영 transport — BLOCKED [#30](https://github.com/son1004007/ai-agent-workflow-playbook/issues/30); 실제 운영 rollback·재기동 및 다른 계정 검증은 별도 승인 경계.
-- [ ] MVP-06 개인 ChatGPT 실제 사용 확인 및 최소 사용법/복구 가이드.
+- [x] MVP-06 실제 연구 질문 읽기 시험 및 최소 안내 — [사용자](docs/29-mvp06-user-guide.md), [관리자](docs/30-mvp06-operator-guide.md), [실측](docs/31-mvp06-user-trial.md) (3+3→5, 근거18, HOLD4/EXCLUDE1).
+- [ ] MVP-06 사용자 직접 결과 평가/피드백 — [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 대기.
 
-**다음 실행 규칙:** 사용자 승인으로 MVP-01 API만 재시작·운영 전환 완료. NAS/DB/기타 컨테이너 재기동/자동 시작은 계속 금지. 개인 플러그인 Refresh 및 신규 읽기 도구 E2E PASS, MVP-02 로컬 및 MVP-03 한정 실제 흐름/재사용 시험 완료. MVP-04 기본 결과 통합/비교 참조 구현·한정 실제 시험 PASS. MVP-03 승인된 쓰기 adapter 구현·합성 PASS, 실제 신규 쓰기/transport는 권리·운영 승인과 직렬화 조건 유지. MVP-05 실제 온라인 백업·격리 복원 PASS; 격리 rollback 및 읽기/안전 차단 인수 4/5 PASS. 다음 비파괴 작업은 MVP-06 최소 사용 안내 준비/사용자 확인이며, 실제 신규 쓰기 인수는 중앙 #30 해소 후 이어간다. 인수 기준 충족 전 P1/P2/P3를 선행하지 않는다. 합성/로컬 성공을 실제 ChatGPT E2E 성공으로 표시하지 않는다. 구매 자료의 개인 내부 적재 지시 범위를 유지하고, 실제 외부 반환/LLM 처리·계약상 대량 수집 등 확대는 필요한 확인과 승인 후 수행한다. 필요한 권리 확인은 MVP에서 해당 기능의 gate로 유지하고, 광범위한 기업 계약 검토는 뒤로 보낸다.
+**다음 실행 규칙:** 사용자 승인으로 MVP-01 API만 재시작·운영 전환 완료. NAS/DB/기타 컨테이너 재기동/자동 시작은 계속 금지. 개인 플러그인 Refresh 및 신규 읽기 도구 E2E PASS, MVP-02 로컬 및 MVP-03 한정 실제 흐름/재사용 시험 완료. MVP-04 기본 결과 통합/비교 참조 구현·한정 실제 시험 PASS. MVP-03 승인된 쓰기 adapter 구현·합성 PASS, 실제 신규 쓰기/transport는 권리·운영 승인과 직렬화 조건 유지. MVP-05 실제 온라인 백업·격리 복원 PASS; 격리 rollback 및 읽기/안전 차단 인수 4/5 PASS. MVP-06 설명서와 실제 읽기 시험 PASS. 사용자 직접 평가(#31) 및 실제 신규 쓰기 인수(#30)가 남음. 신규 쓰기는 권리 및 운영 승인 후 재개. 인수 기준 충족 전 P1/P2/P3를 선행하지 않는다. 합성/로컬 성공을 실제 ChatGPT E2E 성공으로 표시하지 않는다. 구매 자료의 개인 내부 적재 지시 범위를 유지하고, 실제 외부 반환/LLM 처리·계약상 대량 수집 등 확대는 필요한 확인과 승인 후 수행한다. 필요한 권리 확인은 MVP에서 해당 기능의 gate로 유지하고, 광범위한 기업 계약 검토는 뒤로 보낸다.
 
 ## P1 — MVP 사용 피드백 이후 품질 고도화 (BACKLOG)
 

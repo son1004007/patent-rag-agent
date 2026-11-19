@@ -17,6 +17,9 @@
 | [05 보안·배포](docs/05-deployment.md) | 운영자 — HTTPS·네트워크·복구 |
 | [06 연동 및 계약](docs/06-provider-policy.md) | 사업/개발자 — 비용·권한·MCP |
 | [07 테스트](docs/07-test-plan.md) | QA — 검증 기준 |
+| [29 사용자 설명서](docs/29-mvp06-user-guide.md) | 사용자 — ChatGPT 시작, 검색 프롬프트, 결과 해석 및 장애 대응 |
+| [30 관리자 설명서](docs/30-mvp06-operator-guide.md) | 운영자 — 권한, 점검, 장애·백업·복구 및 승인된 적재 |
+| [31 MVP-06 실제 사용 및 평가](docs/31-mvp06-user-trial.md) | 사용자/개발자 — 실제 연구 질의 시험 및 사용자 평가 기준 |
 | [28 MVP-05 격리 rollback·인수 시험](docs/28-mvp05-rollback-acceptance.md) | 운영자/연구자 — 현재→이전→현재 실제 HTTP 시험 및 5개 인수 시나리오 |
 | [27 MVP-05 실제 특허 DB 백업·복원](docs/27-mvp05-private-backup-restore.md) | 운영자 — 실제 격리 복원·ACL·벡터·무결성 및 남은 인수 조건 |
 | [26 MVP-03 승인된 적재 어댑터](docs/26-mvp03-approved-ingest-adapter.md) | 개발자/운영자 — 단건 승인 패킷, 로컬 worker 연결, 테스트 및 쓰기 gate |
