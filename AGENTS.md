@@ -12,3 +12,6 @@
 
 ## 보안 및 구현
 공개 repo에는 일반화된 개인 PoC 설계·합성 fixture만 허용한다. 고객 소스·연구 내용·내부 네트워크·credential은 기록하지 않는다. 외부 저장/embedding/LLM 전송/공유는 허가 확인 전 기본 금지. IP 제어는 운영자의 외부 네트워크 장비 책임; NAS에서는 HTTPS와 인증, 서비스 격리 유지. 운영 승인·실행 증거 없는 완료 주장은 금지. 전역 독립 설계 및 최종 리뷰 규칙을 적용한다. 공용 저장소를 기존 trusted runner에 임의 연결하지 않는다.
+
+## AI 모델 선택
+2026-11-19 사용자 결정: AGY/Gemini 사용 금지. ChatGPT/Codex 중심으로 진행한다. 독립 검토는 허용된 별도 fresh-context reviewer 또는 사람 검토로 수행하며 미실행 시 REVIEW_DEBT를 기록하여 main 병합/배포를 보류한다. 사용자 재승인 없는 AGY/Gemini 자동 호출 금지.
