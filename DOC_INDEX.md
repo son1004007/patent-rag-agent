@@ -17,6 +17,7 @@
 | [05 보안·배포](docs/05-deployment.md) | 운영자 — HTTPS·네트워크·복구 |
 | [06 연동 및 계약](docs/06-provider-policy.md) | 사업/개발자 — 비용·권한·MCP |
 | [07 테스트](docs/07-test-plan.md) | QA — 검증 기준 |
+| [17 WIPS·NAS MCP 연계](docs/17-dual-mcp-workflow.md) | 개발자/사업 담당자 — 동일 대화 실측, 저장 정책 및 공급자 확인 항목 |
 | [16 공용 DB 공동 운영 사전 검증](docs/16-shared-db-coexistence.md) | 개발자/운영자 — 도메인 분리·동시 검색·독립 복원 실측 |
 | [15 온라인 백업·순차 기동 준비](docs/15-online-backup-startup-plan.md) | 운영자 — 최신 복원 실측, 무중단 기동 점검 및 실제 재기동 보류 |
 | [14 ChatGPT 개인 플러그인 E2E](docs/14-chatgpt-plugin-e2e.md) | 개발자/운영자 — ChatGPT 실제 신규 저장·조회·벡터 검색 실측 |
