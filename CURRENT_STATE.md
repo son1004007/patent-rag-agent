@@ -1,6 +1,6 @@
 # Current State
 
-2026-11-19 / 합성 전용 영속 MCP 시범 서비스
+2026-11-19 / 개인 Secure MCP Tunnel NAS 측 연결 준비
 
 | 영역 | 상태 |
 |---|---|
@@ -33,4 +33,5 @@
 | MCP→E5→pgvector 통합 | PASS 24/24 — [실측](docs/11-mcp-vector-integration.md), 합성 자료·ASGI·일회성 DB |
 | 합성 전용 영속 MCP 시범 서비스 | RUNNING — [실측](docs/12-persistent-mcp-stage.md), 실제 HTTP 32/32 (초기/재시작 각16), dump 복원·재기동 fingerprint PASS, 외부 포트 0, NAS 재부팅 자동 시작 NOT RUN |
 | 기술사와 특허 DB 엔진 공동 운영 | PLANNED — 기존 DB 미변경; 실제 영속/운영 공유 NOT RUN |
-| Secure MCP Tunnel | 준비 조건 확인 — 개인 조직의 tunnel ID와 제한 runtime key 미확인; 상시 연결 NOT RUN |
+| Secure MCP Tunnel NAS 측 | PASS — 공식 CLI v0.0.21 SHA/기동, Unix 소켓 14/14, 기존 HTTP 16/16, relay 실행·외부 포트 0; [실측](docs/13-secure-tunnel-preflight.md) |
+| OpenAI 터널 인증 및 ChatGPT 연결 | BLOCKED — 개인 tunnel_id·제한 runtime key 사용자 설정 필요 (중앙 Issue #24); doctor/polling/플러그인 호출 NOT RUN |
