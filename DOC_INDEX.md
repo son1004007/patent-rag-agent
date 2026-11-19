@@ -7,6 +7,7 @@
 | [DOC_INDEX](DOC_INDEX.md) | 모든 사용자 — 전체 탐색 |
 | [AI_CONTEXT](AI_CONTEXT.md) | AI — 목적·제약 |
 | [CURRENT_STATE](CURRENT_STATE.md) | AI/개발자 — 검증 현황 |
+| [WORKS](WORKS.md) | 모든 AI/개발자 — 작업 진행 기록 및 실측 근거 |
 | [TASKS](TASKS.md) | 개발자 — 작업 순서·게이트 |
 | [00 사업 설명서](docs/00-business-guide.md) | 연구/사업 담당자 — 그림 중심 업무 흐름, 활용 예 |
 | [01 요구사항](docs/01-requirements.md) | 담당자/개발자 — 범위·인수 기준 |
