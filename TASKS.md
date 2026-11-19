@@ -16,7 +16,7 @@
 | MVP-06 | 최소 사용자 확인 및 사용법 | 미완료 | ChatGPT에서 실제 연구 질문 한 건으로 사용자가 결과 평가 가능; 짧은 사용법·제약·운영/복구 런북 제공 |
 
 - [x] MVP-01 승인된 기존 API만 재시작 및 통합 MCP 운영 배포, 회귀 56/56, DB 및 기타 서비스 불변 ([실측](docs/24-mvp01-production-cutover.md)).
-- [ ] MVP-01 사용자: 기존 NAS RAG 연결 Refresh로 신규 2개 읽기 도구 활성 확인, 새 채팅 실제 search_patents/get_patent E2E. 실패 시 기존 서비스 유지 및 복구 검증.
+- [ ] MVP-01 사용자 Refresh·권한 추가 수행 보고 완료; 기존 대화는 기존 3개 도구만 노출. 새 채팅에서 신규 search_patents/get_patent 실제 E2E 필요. 실패 시 기존 서비스 유지 및 복구 검증.
 - [x] MVP-02 기존 3건 상세설명/전체 청구항 32개 보강, 신규 문헌 1건, 4개 배치 적재·중복/충돌·출처·벡터 확인 ([실측](docs/22-mvp02-incremental-patent-ingest.md)). 신규 1건 상세 수집·자동 흐름은 MVP-03 이후.
 - [x] MVP-03 연구 목적 분석·질의 확장·제한된 WIPS/NAS 오케스트레이션과 실제 신규 1건 상세 적재·동일 질의 재사용 검증, 정책 21/21 ([실측](docs/23-mvp03-research-flow.md)).
 - [ ] MVP-03 운영 자동 연계 및 승인된 저장 경로 검증 — MVP-01/MVP-05와 함께 완료 (현재 ChatGPT tool adapter 수동 연결, 운영 배포 완료, 실제 플러그인 갱신·신규 호출 및 쓰기 adapter 미완료).
