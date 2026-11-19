@@ -28,7 +28,9 @@
 - [ ] HOLD — 실제 NAS 재기동 및 자동 시작 검증 (위 사용자 승인 조건과 동일)
 - [x] 공용 pgvector 엔진 별도 DB/role·개별 복원·동시 부하 사전 시험 (24/24, 400/400; [실측](docs/16-shared-db-coexistence.md); 합성/격리)
 - [ ] 실제 공용 영속 DB 운영 전환 및 migration/인증 회귀 — 기술사 배포 차단 정식 해소 및 승인 후; 재기동 금지 유지
-- [ ] WIPS와 자체 MCP의 동일 대화 연동 (저장/전송 권리 확보 전 synthetic-only)
+- [x] WIPS와 자체 MCP 동일 대화 순차 읽기 연계, 기존 합성 save/idempotency 및 mock 정책 17/17 ([실측](docs/17-dual-mcp-workflow.md))
+- [ ] 권리 승인된 자료 전용 ingest/provenance/chunk/embedding 및 권리 게이트 통합 검증 (기존 서비스 재기동 HOLD)
+- [ ] WIPS 실제 자료 저장/전송/벡터화/상업 이용 범위 및 정식 요금·동시성 서면 확인 — 승인 전 차단
 ## P1 — Mock MVP (MCP 실증 이후; 독립 웹 Agent 대체안)
 - [ ] FastAPI/UI, 계정·profile, 합성 데이터
 - [ ] 원문과 300자 확장 생성, 검색 계획 검증, mock provider
