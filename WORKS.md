@@ -24,5 +24,6 @@
 | 기존 연결 재확인 및 통합 MCP 후보 | [실측](docs/20-unified-mcp-candidate.md) — 기존 개인 플러그인 정상/합성 범위 확인, 실제 특허 도구 포함 후보 최초 DB 참조 오류 수정 후 39/39, 86.54ms, 기존 StartedAt 불변; 운영 전환 HOLD. |
 | 기업 환경 추가 요구 | [기업용 방화벽·SSH 가이드](docs/21-enterprise-connectivity-firewall-ssh.md) — ChatGPT Business/Enterprise와 Azure 자체 앱 구분, outbound 443 우선, 5-tuple 방화벽 신청, 별도 운영용 MCP/내부 SSH 및 Gateway 대안. 공식 문서 조사 및 설계만, 실제 회사 변경 없음. |
 | MVP 우선 계획 재편 | 사용자 최신 지시에 따라 [TASKS.md](TASKS.md) P0 MVP-01~06 인수 기준/실행 순서 정립, P1 품질·UI, P2 운영·공용 DB, P3 기업·SSH backlog 분리. 기존 실측 증거·기업 가이드 및 권한/재기동 보류 유지. 계획 문서 변경만, 운영 배포 및 코드 변경 없음. |
+| MVP-02 상세 수집·증분 적재 | [실측](docs/22-mvp02-incremental-patent-ingest.md) — 실제 기존 3건 상세설명 61,407자/청구항32개, 3회 보강 후 신규 metadata 1건. 4건·167청크/384D, 4개 배치 중복0 및 변조 충돌 거부, 원본 fingerprint·StartedAt 불변, 최신 dump 448,812 bytes. 실제 ChatGPT 연결 및 dump 복원은 미완료. |
 
 실제 자료는 사용자 구매 확인에 따른 개인 NAS 내부 소량 적재 범위로 분리한다. 공개 저장소 원문 보존 및 재배포는 하지 않는다. 기존 기술사 개발 볼륨과 시안 서비스 유지. 작업별 실행 증거를 확인한 뒤 결과를 갱신한다. 개인 터널 및 실제 ChatGPT 도구 호출은 별도 검증이 필요하다.
