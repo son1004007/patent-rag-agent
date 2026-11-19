@@ -25,3 +25,7 @@
 
 ## 다음 범위
 MVP-01 신규 도구 ChatGPT end-to-end(갱신 후); MVP-03 자동 적재 adapter는 별도(이번 배포는 실제 특허 읽기 전용); MVP-04 근거 기반 결과 통합; MVP-05 실제 dump 독립 복원/인수 및 rollback 확인; MVP-06 사용법. 구매 특허 개인 사용 범위 유지, 실제 자료 공개/대량 수집/기업 배포 금지. NAS/DB/다른 서비스 재기동과 자동 시작 등록은 계속 HOLD.
+
+## 사용자 Refresh 수행 후 확인
+- 사용자 확인: 권한 추가 부여 및 Refresh 수행. 현재 기존 대화에서 도구 발견 재확인 결과 기존 3개만 노출. 실제 get_document(DEMO-P4) found=true, 개인 플러그인 USER/PRIVATE 유지. 서버 재배포/권한 설정 변경 없음.
+- OpenAI [공식 Refresh metadata 절차](https://developers.openai.com/plugins/deploy/connect-chatgpt)에 따라 신규 대화에서 @NAS RAG 선택 후 신규 search_patents 및 get_patent 호출 진행 필요. 사용자 설정에서의 새 도구 목록은 직접 확인하지 못했으며 Refresh 실패로 단정하지 않음. MVP-01 운영 배포 PASS 유지, 새로운 대화 직접 E2E 대기.
