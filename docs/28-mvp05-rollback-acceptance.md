@@ -30,3 +30,6 @@ flowchart LR
 ## 남은 인수 및 운영
 - 실제 신규 쓰기 gate는 사용자/운영자의 권리·승인 범위 확인에 의존하며 중앙 #30으로 추적. 사용자 확인 전 권한 확대/자료 구매 또는 적재 금지. 이 작업 외에는 사용법·복구 안내 준비 및 별도 승인된 비파괴 검증을 계속할 수 있다.
 - 실제 운영 rollback/재기동은 별도 사용자 승인 전 HOLD; 이번은 격리 리허설이며 운영 환경 rollback 성공으로 표시하지 않는다. 기존 운영 인증 및 DB 복원 증거는 [24](24-mvp01-production-cutover.md), [27](27-mvp05-private-backup-restore.md) 참조. 외부 독립 AI 검토 NOT RUN(owner-approved optional). 다음 MVP-06 최소 사용자/운영 설명서 및 사용자 실제 연구 질의 확인 준비, 승인 후 MVP-03/05 실제 신규 쓰기 인수.
+
+## 후속 인수 갱신
+[실제 신규 적재/재사용 운영 검증](35-mvp03-actual-ingest-acceptance.md) PASS. 기존 읽기·안전 차단 4/5와 신규 적재 1개 합계 범위 한정 5/5. 운영 전후 백업 목록·SHA256 PASS, 최신 dump 복원·실제 운영 rollback은 NOT RUN.

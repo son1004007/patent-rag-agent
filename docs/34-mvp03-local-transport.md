@@ -42,3 +42,6 @@ SCHEMA_ONLY_RESTORE_PASS, CROSS_CONTAINER_LOCK_PASS, LOCAL_TRANSPORT_CHECK_PASS,
 3. 운영자 로컬 환경에서 `PATENT_INGEST_ROOT`, `PATENT_MODEL_ROOT`, `PATENT_WHEEL_ROOT`, `PATENT_DB_CONTAINER_ID`를 승인된 대상으로 설정하고 `python3 mvp03_local_transport.py --check < approved-packet.json` 실행. 검증 후 명시적으로 승인된 `--apply` 실행한다. 실제 구매 자료를 외부 도구/공개 로그로 전달하지 않는다. 별도 운영 변경 및 writer 실행 승인이 필요하다.
 4. 실제 운영 DB 및 approved reader 재조회·반복 재사용, 무결성, 기존 서비스 불변 검증을 완료해야 MVP-03/05 완료로 표시한다. 실제 ChatGPT 직접 신규 쓰기 호출을 성공한 것으로 간주하지 않는다. 사용자 실제 검색 평가 [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 별도.
 5. 구현 범위와 격리 시험은 준비됨. 신규 문헌 권리 및 사용자 평가 대기 상태에서 추가 가상 시험을 반복하거나 P1/P2/P3로 선행하지 않는다. 사용자 조치 후 위 운영 적용/인수 재개.
+
+## 후속 실제 운영 인수
+사용자 명시 단건 승인 후 실제 WIPS 자료 check/apply/reuse 및 ChatGPT 실제 조회 PASS. [실측](35-mvp03-actual-ingest-acceptance.md). 별도 상시 자동 write 연결은 미구현; 신규 권리 확대 금지.

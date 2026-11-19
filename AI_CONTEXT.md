@@ -34,3 +34,5 @@
 - MVP-03 [writer 직렬화](docs/33-mvp03-writer-serialization.md) 구현 및 NAS native 35/35·실제 격리 DB 18/18 PASS. 운영 공용 lock 배치/legacy writer 배제 및 실제 신규 쓰기·transport #30, 사용자 평가 #31 대기. 기존 서비스 변경 없음.
 
 - MVP-03 [로컬 단건 transport](docs/34-mvp03-local-transport.md) 구현·실제 NAS 격리 E2E PASS. 교차 컨테이너 lock, 승인 check/신규/재사용/코드 pin 차단. 운영 배치 및 구매 권리 #30/사용자 평가 #31 대기. 추가 가상 시험 반복/후속 고도화 선행 금지; 승인 후 운영 인수.
+
+- 사용자 승인 실제 WIPS 신규 1건의 NAS 운영 transport 적재·중복 0·ChatGPT 신규 조회 PASS [실측](docs/35-mvp03-actual-ingest-acceptance.md): 운영 6/10/417, 384D, 기존 전 행·컨테이너 불변. 별도 구매 증빙 독립 검증/상시 자동 쓰기 MCP·JS wiring/운영 rollback NOT RUN. 단건 승인 파일과 duplicate secret/packet 정리 완료. 사용자 평가 #31 대기.
