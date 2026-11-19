@@ -21,5 +21,7 @@
 | WIPS·NAS MCP 동일 대화 연계 | [실측](docs/17-dual-mcp-workflow.md) — WIPS 식별정보 3건, 독립 주제 NAS P4 Top1, 기존 합성 save created=false; 정책/실패 분기 mock 17/17 PASS. 실제 WIPS 데이터 NAS 전송·저장 없음. 공식 베타 무료/AI 사용량 별도 및 권리 확인 항목 기록, 재기동 없음. |
 | 실제 구매 특허 자료 비공개 적재 | [실측](docs/18-private-patent-ingest.md) — 실제 3건·10청크·384D, DB 검색·중복 차단·dump 성공. 전용 private DB, 기존 4건/StartedAt 유지. 공개 repo 실자료 없음, 기존 플러그인 실자료 노출 없음. |
 | README 목표 흐름 및 실제 특허 reader MCP | [실측](docs/19-private-patent-reader-mcp.md) — README Mermaid 목표 흐름 추가, 실제 특허 3건 distinct 검색·개별 조회 및 권한 HTTP 23/23, 87.15ms 단일 질의, 별도 role/view, 임시 worker 정리·기존 StartedAt 불변. ChatGPT 실자료 연결 미검증. |
+| 기존 연결 재확인 및 통합 MCP 후보 | [실측](docs/20-unified-mcp-candidate.md) — 기존 개인 플러그인 정상/합성 범위 확인, 실제 특허 도구 포함 후보 최초 DB 참조 오류 수정 후 39/39, 86.54ms, 기존 StartedAt 불변; 운영 전환 HOLD. |
+| 기업 환경 추가 요구 | [기업용 방화벽·SSH 가이드](docs/21-enterprise-connectivity-firewall-ssh.md) — ChatGPT Business/Enterprise와 Azure 자체 앱 구분, outbound 443 우선, 5-tuple 방화벽 신청, 별도 운영용 MCP/내부 SSH 및 Gateway 대안. 공식 문서 조사 및 설계만, 실제 회사 변경 없음. |
 
 실제 자료는 사용자 구매 확인에 따른 개인 NAS 내부 소량 적재 범위로 분리한다. 공개 저장소 원문 보존 및 재배포는 하지 않는다. 기존 기술사 개발 볼륨과 시안 서비스 유지. 작업별 실행 증거를 확인한 뒤 결과를 갱신한다. 개인 터널 및 실제 ChatGPT 도구 호출은 별도 검증이 필요하다.
