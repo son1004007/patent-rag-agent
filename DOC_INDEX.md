@@ -17,6 +17,7 @@
 | [05 보안·배포](docs/05-deployment.md) | 운영자 — HTTPS·네트워크·복구 |
 | [06 연동 및 계약](docs/06-provider-policy.md) | 사업/개발자 — 비용·권한·MCP |
 | [07 테스트](docs/07-test-plan.md) | QA — 검증 기준 |
+| [23 MVP-03 자연어 연구 질의·검색/수집 흐름](docs/23-mvp03-research-flow.md) | 개발자/운영자 — 질의 계획·범위/권한 정책·실제 소량 연계 시험 |
 | [22 MVP-02 실제 상세 수집·증분 적재](docs/22-mvp02-incremental-patent-ingest.md) | 개발자/운영자 — 4건·167청크 실제 적재, 중복/충돌/원본 보존 검증 |
 | [21 기업용 ChatGPT 연동·방화벽·SSH 가이드](docs/21-enterprise-connectivity-firewall-ssh.md) | 기업 보안/네트워크/운영 담당자 — 제품 구분, 방화벽 5-tuple 신청표, SSH 관리 및 승인·검증 절차 |
 | [20 기존 플러그인 확인 및 통합 MCP 후보](docs/20-unified-mcp-candidate.md) | 개발자/운영자 — 기존 연결과 실제 특허 통합 후보 39/39 실측, 운영 전환 보류 |
