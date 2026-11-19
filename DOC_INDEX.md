@@ -16,6 +16,7 @@
 | [05 보안·배포](docs/05-deployment.md) | 운영자 — HTTPS·네트워크·복구 |
 | [06 연동 및 계약](docs/06-provider-policy.md) | 사업/개발자 — 비용·권한·MCP |
 | [07 테스트](docs/07-test-plan.md) | QA — 검증 기준 |
+| [09 MCP 계약 실측](docs/09-mcp-contract-smoke.md) | 개발자 — 합성 데이터 MCP 로컬 시험과 연결 잔여 조건 |
 | [08 설계 결정](docs/08-decisions.md) | AI — 결정과 가정 |
 
 새 AI는 AGENTS → 이 목차 → AI_CONTEXT → CURRENT_STATE → TASKS 순으로 읽고 필요한 상세 문서만 탐색한다. 모든 신규 문서에 링크를 추가한다.
