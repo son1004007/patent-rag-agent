@@ -63,3 +63,6 @@ flowchart LR
 
 ## 후속 적재 시험
 [실제 DB 엔진 격리 적재 시험](32-mvp03-isolated-backend-test.md) 17/17 PASS. 이는 합성 DB 시험으로, 신규 구매 자료 승인 및 운영 연결 완료가 아니다.
+
+## 후속 직렬화 검증
+[승인 CLI writer lock](33-mvp03-writer-serialization.md) 53/53 PASS. 운영 시 로컬 공용 inode /locks/ingest.lock 사전 설치 및 모든 writer의 지원 CLI 사용 조건 확인. 잠금 실패 시 자동 우회 및 재시도 금지. 운영 배포 및 실제 신규 승인 대기.

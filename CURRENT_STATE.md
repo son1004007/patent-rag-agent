@@ -1,6 +1,6 @@
 # Current State
 
-2026-11-19 / MVP-01 통합 MCP 운영 배포 56/56 PASS; 새 ChatGPT 실제 특허 읽기 및 MVP-04 양 소스 기본 통합/비교 PASS; MVP-03 적재 어댑터 구현·합성 및 실제 DB 엔진 격리 시험 17/17 PASS; MVP-05 실제 DB 백업·격리 복원 및 격리 rollback 96/96 PASS; DB 5건·8섹션·401청크; MVP-06 실제 읽기 시험 PASS 및 설명서 작성, 사용자 평가 대기
+2026-11-19 / MVP-01 통합 MCP 운영 배포 56/56 PASS; 새 ChatGPT 실제 특허 읽기 및 MVP-04 양 소스 기본 통합/비교 PASS; MVP-03 적재 어댑터 구현·합성 및 실제 DB 엔진 격리 시험 17/17 PASS, writer 직렬화 및 회귀 53/53 PASS; MVP-05 실제 DB 백업·격리 복원 및 격리 rollback 96/96 PASS; DB 5건·8섹션·401청크; MVP-06 실제 읽기 시험 PASS 및 설명서 작성, 사용자 평가 대기
 
 | 영역 | 상태 |
 |---|---|
@@ -52,7 +52,7 @@
 
 | MVP-04 기본 통합·근거 비교 | PASS (참조 구현·한정 실제 양 소스) — 27/27 합성, NAS 3 + WIPS 3 → 중복 1/unique 5, HOLD 3·EXCLUDE 2·검토 후보 0, 근거 18개. 중간 WIPS 검증 실패 후 실제 재호출 PASS; 상시 자동 실행/물성 검증/DB 변경 NOT RUN. [실측](docs/25-mvp04-candidate-comparison.md) |
 
-| MVP-03 승인된 단건 적재 adapter | CODE + SYNTHETIC PASS — NAS Python 23/23, JS 정책/연계 29/29; 실제 운영 reader DB 5건/401청크/4건 상세/384D 일치. 실제 LocalBackend/신규 쓰기/transport NOT RUN, 문헌별 권리·운영 승인 및 직렬화 유지. [실측](docs/26-mvp03-approved-ingest-adapter.md) |
+| MVP-03 승인된 단건 적재 adapter | CODE + SYNTHETIC PASS — NAS Python 23/23, JS 정책/연계 29/29; 실제 운영 reader DB 5건/401청크/4건 상세/384D 일치. 격리 LocalBackend PASS, 실제 운영 신규 쓰기/transport NOT RUN, 문헌별 권리·운영 승인 및 직렬화 유지. [실측](docs/26-mvp03-approved-ingest-adapter.md) |
 
 | MVP-05 실제 DB 백업·복원 | PASS — 1,037,393 bytes/0600, 격리 복원 5건·8섹션·401청크·384D, 전체 row fingerprint/ACL/HNSW/Top3 일치, SET ROLE 원본 테이블 거부, 운영 상태 불변·임시 정리·SHA256 검증. 이후 ChatGPT 실제 조회 3/3 PASS. 전체 인수/rollback/신규 적재 NOT RUN. [실측](docs/27-mvp05-private-backup-restore.md) |
 
@@ -61,6 +61,8 @@
 | MVP-06 사용자·관리자 안내 | 문서 작성 및 실제 연구 질문 읽기 시험 PASS — 3+3→5, 근거18, HOLD4/EXCLUDE1/후보0. 사용자 직접 평가 대기 [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31); 실제 신규 쓰기 [#30](https://github.com/son1004007/ai-agent-workflow-playbook/issues/30). [사용자](docs/29-mvp06-user-guide.md) / [관리자](docs/30-mvp06-operator-guide.md) / [실측](docs/31-mvp06-user-trial.md) |
 
 | MVP-03 실제 DB 엔진 격리 적재 | PASS 17/17, 가상 2건·4섹션·10청크·384D, 신규·무쓰기·부분 복구·충돌·ACL, 운영 전체 fingerprint 및 컨테이너 불변. [실측](docs/32-mvp03-isolated-backend-test.md). 실제 신규 특허/운영 transport 및 사용자 평가 대기. |
+
+| MVP-03 승인 CLI writer 직렬화 | PASS 53/53 (native 35, 격리 DB 18), 공유 inode lock·경합 차단·FD 승계. 운영 DB fingerprint 및 기존 컨테이너 불변. 운영 배포/legacy writer 배제/교차 컨테이너 검증·신규 승인/사용자 평가 대기. [실측](docs/33-mvp03-writer-serialization.md) |
 
 ## 최신 운영 지시
 - 사용자 최신 결정: 특허 MCP API만 재시작·배포 승인 및 완료. NAS/DB/relay/tunnel/다른 컨테이너 stop/restart 금지 유지, 자동 시작 등록/실행 승인 대기.

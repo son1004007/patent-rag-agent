@@ -43,4 +43,6 @@
 
 | MVP-03 실제 DB 엔진 격리 적재 | [실측](docs/32-mvp03-isolated-backend-test.md) — schema-only 복제, 가상 2건/4섹션/10청크/384D, CLI·LocalBackend·worker 17/17 PASS, 신규·재사용·부분 복구·충돌·ACL. 첫 외부 종료1(정확한 원인 미확인), 최종 exit0 및 운영 원본/전체 기존 컨테이너 불변, cleanup PASS. 실제 WIPS 구매자료 및 운영 쓰기/transport 미검증. |
 
+| MVP-03 writer 직렬화 | [실측](docs/33-mvp03-writer-serialization.md) — native 35 + 실제 격리 DB 18 = 53/53 PASS; 경쟁 CLI DB 쓰기0, 합성 2/4/10/384D, 운영 fingerprint 및 모든 기존 컨테이너 불변, cleanup PASS. 운영 배포/신규 문헌 승인/transport 미실행. |
+
 실제 자료는 사용자 구매 확인에 따른 개인 NAS 내부 소량 적재 범위로 분리한다. 공개 저장소 원문 보존 및 재배포는 하지 않는다. 기존 기술사 개발 볼륨과 시안 서비스 유지. 작업별 실행 증거를 확인한 뒤 결과를 갱신한다. 개인 터널 및 실제 ChatGPT 읽기 호출 PASS; 실제 자동 적재와 안전·복구 인수 잔여는 TASKS 참조.

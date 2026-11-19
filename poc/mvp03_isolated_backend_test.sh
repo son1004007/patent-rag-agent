@@ -25,7 +25,8 @@ initial=$(states $existing); target_initial=$(states $target); original=$(source
 clone=; app=
 cleanup(){ if [ -n "$app" ]; then "$D" stop -t 5 "$app" >/dev/null 2>&1 || true; fi; if [ -n "$clone" ]; then "$D" stop -t 5 "$clone" >/dev/null 2>&1 || true; fi; }
 trap cleanup EXIT
-mkdir "$ROOT/auth"
+mkdir "$ROOT/auth" "$ROOT/locks"
+: > "$ROOT/locks/ingest.lock"
 PYTHONPATH="$ROOT/code" python3 - "$ROOT/auth" <<'PY'
 import pathlib,sys,secrets,json
 from test_mvp03_ingest_adapter import fixture,approve
@@ -48,7 +49,7 @@ print('ALTER ROLE patent_ingest_reader_v1 SET default_transaction_read_only=on;'
 PY
 if ! "$D" exec -i "$clone" pg_restore --exit-on-error --create -h /tmp -p 55432 -U postgres -d postgres <"$ROOT/schema.dump" >/dev/null 2>&1; then echo SCHEMA_RESTORE_FAILED; exit 1; fi
 echo SCHEMA_ONLY_RESTORE_PASS
-app=$("$D" run --pull never -d --rm --label "$LABEL" --network "container:$clone" --read-only --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --memory 3g --cpu-shares 128 --tmpfs /tmp:rw,exec,nosuid,nodev,size=450m -e HOME=/tmp -e OPENBLAS_NUM_THREADS=1 -e TOKENIZERS_PARALLELISM=false -e PYTHONDONTWRITEBYTECODE=1 -v "$ROOT/code:/code:ro" -v "$ROOT/auth:/auth:ro" -v "$M:/model:ro" -v "$W:/wheels:ro" "$ai" sh -ec 'while [ ! -e /tmp/finish ]; do sleep 1; done')
+app=$("$D" run --pull never -d --rm --label "$LABEL" --network "container:$clone" --read-only --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --memory 3g --cpu-shares 128 --tmpfs /tmp:rw,exec,nosuid,nodev,size=450m -e HOME=/tmp -e OPENBLAS_NUM_THREADS=1 -e TOKENIZERS_PARALLELISM=false -e PYTHONDONTWRITEBYTECODE=1 -v "$ROOT/code:/code:ro" -v "$ROOT/auth:/auth:ro" -v "$ROOT/locks:/locks:ro" -v "$M:/model:ro" -v "$W:/wheels:ro" "$ai" sh -ec 'while [ ! -e /tmp/finish ]; do sleep 1; done')
 test "$("$D" inspect "$app" --format '{{len .HostConfig.PortBindings}} {{.HostConfig.ReadonlyRootfs}}')" = '0 true'
 "$D" exec "$app" sh -ec 'python -m pip install --disable-pip-version-check --no-index --no-cache-dir --find-links=/wheels --target /tmp/deps mcp==1.30.0 httpx==0.28.1 "psycopg[binary]==3.3.9" onnxruntime==1.20.1 numpy==1.26.4 tokenizers==0.21.4 uvicorn==0.54.0 >/tmp/pip.log 2>&1; PYTHONPATH=/tmp/deps python /code/test_mvp03_real_backend.py'
 test "$(source_fp)" = "$original" || { echo SOURCE_FINGERPRINT_CHANGED; exit 1; }

@@ -35,3 +35,6 @@ flowchart LR
 
 ## 남은 조건
 실제 운영 LocalBackend 신규 쓰기·private transport, 운영자 직렬화, 사용자 권리·개별 승인 확인 및 재조회 인수는 [#30](https://github.com/son1004007/ai-agent-workflow-playbook/issues/30) 해소 후. [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 사용자 평가 별도. 이번 가상 적재 시험은 실제 구매 데이터 운영 쓰기 인수 대체 불가. 기존 read-only MCP 역할 보호 및 P1/P2/P3 선행 금지. 독립 AI 리뷰 NOT RUN(owner-approved optional).
+
+## 후속 회귀
+[writer 직렬화 추가](33-mvp03-writer-serialization.md) 후 기존 격리 DB 시험 17개와 경합 CLI 거부 1개, native 35개 모두 PASS. 기존 17개는 변경 전 이력.

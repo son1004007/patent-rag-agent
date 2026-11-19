@@ -30,3 +30,5 @@
 - MVP-06 [사용자 설명서](docs/29-mvp06-user-guide.md)/[관리자 설명서](docs/30-mvp06-operator-guide.md) 작성, [새 실제 연구 질문 시험](docs/31-mvp06-user-trial.md) PASS(3+3→5, 근거18, HOLD4/EXCLUDE1). 사용자 평가 [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 대기; 실제 신규 적재 [#30](https://github.com/son1004007/ai-agent-workflow-playbook/issues/30) 유지. 변경은 문서만.
 
 - MVP-03 실제 DB 엔진 기반 합성 격리 적재 17/17 PASS — 2건/4섹션/10청크/384D, CLI/LocalBackend/worker 실제 실행, 운영 fingerprint/기존 컨테이너 불변. [실측](docs/32-mvp03-isolated-backend-test.md). 신규 구매 운영 쓰기/transport는 #30, 사용자 평가 #31 대기.
+
+- MVP-03 [writer 직렬화](docs/33-mvp03-writer-serialization.md) 구현 및 NAS native 35/35·실제 격리 DB 18/18 PASS. 운영 공용 lock 배치/legacy writer 배제 및 실제 신규 쓰기·transport #30, 사용자 평가 #31 대기. 기존 서비스 변경 없음.

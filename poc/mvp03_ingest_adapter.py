@@ -2,6 +2,7 @@
 Approval is provisioned by a trusted local operator, not accepted from a model.
 Raw packet/approval must remain in a private local boundary.
 """
+import fcntl
 import hashlib
 import json
 import os
@@ -10,12 +11,52 @@ import stat
 import subprocess
 import sys
 from pathlib import Path
+from contextlib import contextmanager
 
 from private_patent_ingest import MODEL, POLICY, validate, digest
 from private_patent_increment import sections, norm_num, canonical
 
 CAP = 900000
 APPROVAL = Path("/auth/ingest_approval.json")
+LOCK_PATH = Path("/locks/ingest.lock")
+
+
+class IngestBusy(RuntimeError):
+    pass
+
+
+@contextmanager
+def writer_lock(path=LOCK_PATH):
+    """One owner-provisioned inode, shared RO bind mount, local Linux filesystem.
+    Never create, truncate, replace or unlink it. No implicit lock release while
+    a subprocess still holds the inherited file description.
+    """
+    path = Path(path)
+    dfd = os.open(str(path.parent), os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    try:
+        ds = os.fstat(dfd)
+        if ds.st_uid != os.geteuid() or stat.S_IMODE(ds.st_mode) != 0o700:
+            raise PermissionError("lock directory permissions")
+        fd = os.open(path.name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=dfd)
+        try:
+            s = os.fstat(fd)
+            if (not stat.S_ISREG(s.st_mode) or s.st_uid != os.geteuid()
+                    or stat.S_IMODE(s.st_mode) != 0o600 or s.st_nlink != 1):
+                raise PermissionError("lock file permissions")
+            try:
+                fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except BlockingIOError as exc:
+                raise IngestBusy("writer already active") from exc
+            # Fail closed if the operator-provisioned inode changed before acquisition.
+            current = os.stat(path.name, dir_fd=dfd, follow_symlinks=False)
+            if (current.st_dev, current.st_ino) != (s.st_dev, s.st_ino):
+                raise PermissionError("lock identity changed")
+            yield fd
+        finally:
+            # Do not LOCK_UN: a surviving worker may still hold this description.
+            os.close(fd)
+    finally:
+        os.close(dfd)
 
 
 def prepare(packet, approval):
@@ -79,8 +120,12 @@ def execute(packet, approval, backend, dry_run=False):
 
 class LocalBackend:
     """Uses existing scoped writer only; snapshots explicitly read-only.
-    Operator must serialize *all* local writers; not a concurrent ingest service.
+    The supported CLI holds the shared writer lock. Direct calls are for
+    isolated tests only; operators must exclude legacy/direct writer entrypoints.
     """
+    def __init__(self, lock_fd=None):
+        self.lock_fd = lock_fd
+
     def snapshot(self, plan):
         import psycopg
         password = Path("/auth/writer_password").read_text().strip()
@@ -130,7 +175,8 @@ class LocalBackend:
         if len(data) > CAP:
             raise ValueError("worker cap")
         p = subprocess.run([sys.executable, str(Path(__file__).resolve().with_name("private_patent_increment.py"))],
-                           input=data, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=600, check=False)
+                           input=data, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=600, check=False,
+                           pass_fds=() if self.lock_fd is None else (self.lock_fd,))
         if p.returncode != 0 or not p.stdout.rstrip().endswith(b"INCREMENTAL_INGEST_PASS"):
             raise RuntimeError("worker failed")
         # Never forward worker stdout/stderr; independently re-read persisted state.
@@ -156,7 +202,9 @@ def main():
     raw = sys.stdin.buffer.read(CAP + 1)
     if len(raw) > CAP:
         raise ValueError("input cap")
-    result = execute(json.loads(raw), read_approval(), LocalBackend(), dry_run=sys.argv[1] == "--check")
+    packet = json.loads(raw)
+    with writer_lock() as fd:
+        result = execute(packet, read_approval(), LocalBackend(fd), dry_run=sys.argv[1] == "--check")
     print(json.dumps(result), flush=True)
     return 0 if result["status"] in ("DRY_RUN", "PASS", "REUSED_VERIFIED") else 1
 

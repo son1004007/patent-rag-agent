@@ -3,7 +3,7 @@ No provider request or production authorization. Test approval is fixture-scoped
 """
 import copy, json, os, subprocess, sys
 from pathlib import Path
-from mvp03_ingest_adapter import execute, LocalBackend, canonical, prepare
+from mvp03_ingest_adapter import execute, LocalBackend, canonical, prepare, writer_lock
 from test_mvp03_ingest_adapter import fixture, approve
 import psycopg
 
@@ -31,6 +31,9 @@ def main():
     f=fixture()
     # Fixed test approval generated offline for only this exact synthetic fixture.
     check("empty_disposable_database",counts()==(0,0,0))
+    with writer_lock():
+        busy_code,busy=cli(f,"--apply")
+        check("concurrent_cli_blocked",busy_code!=0 and busy=={"status":"BLOCKED","error_type":"IngestBusy"} and counts()==(0,0,0))
     code,res=cli(f,"--check")
     check("cli_dry_run_zero_writes",code==0 and res["status"]=="DRY_RUN" and res["writes"]==0 and counts()==(0,0,0))
     altered=copy.deepcopy(f);altered["row"]["TIK"]+=" tampered"

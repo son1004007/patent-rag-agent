@@ -29,7 +29,7 @@ flowchart TD
 1. 공급자 권리와 구매/개인 내부 사용 범위가 확인된 **한 문헌**에 한해 operator가 상세 수집 및 저장을 승인한다. 단순 검색 결과·모델 답변은 구매/적재 승인 근거가 아니다.
 2. trusted transport는 파일/데이터 stdin으로 packet을 기존 개인 NAS 일회성 worker 격리 경계에 전달한다. 공개 저장소·로그·GitHub Actions 입력·일반 출력에 특허 본문/식별자/개별 hash/credential 금지. 고정 기존 writer 역할 및 기존 모델/worker만 사용한다.
 3. 운영자가 별도 보관하는 /auth/ingest_approval.json을 read-only로 마운트한다. 0600 일반 파일, symlink 거부. 필드: policy=owner-attested-paid-material-private-v1, packet_sha256=canonical(packet)의 SHA-256(소문자 hex), mode=new 또는 enrich. 실제 승인 해시는 공개 기록하지 않는다. 모델이 작성/제공한 승인 파일은 허용하지 않는다. 운영자가 승인한 자료와 일치하는 정확한 패킷만 적용. 인증 파일과 worker는 별도 격리 경계에서 접근하고 MCP reader에 writer 권한을 부여하지 않는다. 같은 승인 재실행은 데이터 동일성 검증 후 no-op.
-4. 기존 worker 실행 전용 환경에서 코드/승인 파일/secret을 제한적으로 마운트하고, 운영자가 모든 writer 실행을 직렬화하며 단건씩 실행한다. 이 어댑터 자체는 다중 프로세스 공통 lock/DB advisory lock을 구현하지 않았다. 동시 자동 실행·외부 writable endpoint 금지. 실제 적용 전 운영 직렬화, 파일 ACL, backup, 공급자 범위 및 기존 데이터 보존을 다시 검사한다.
+4. 기존 worker 실행 전용 환경에서 코드/승인 파일/secret을 제한적으로 마운트하고, 운영자가 모든 writer 실행을 직렬화하며 단건씩 실행한다. 후속 구현에서 지원 CLI에 공유 고정 inode advisory lock을 추가했다. [직렬화 실측 및 운영 적용 조건](33-mvp03-writer-serialization.md). 모든 legacy/direct writer 배제 및 동일 read-only lock mount 필요; 운영 적용 미실행. 동시 자동 실행·외부 writable endpoint 금지. 실제 적용 전 운영 직렬화, 파일 ACL, backup, 공급자 범위 및 기존 데이터 보존을 다시 검사한다.
 5. 먼저 `python mvp03_ingest_adapter.py --check < approved-packet.json` (DB 읽기 전용, 쓰기 0), 이후 별도 승인된 apply에서 `python mvp03_ingest_adapter.py --apply < approved-packet.json`. 원본/승인 파일은 private context에서만 사용. 결과 PASS/REUSED_VERIFIED와 DB 별도 검사, ChatGPT 검색 재사용을 확인한다. 실패/부분 상태는 원인 확인 및 같은 승인된 입력으로 수동 재개. 승인 후보의 실제 운영 테스트 및 transport wiring은 미완료.
 
 ## 실측
