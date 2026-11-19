@@ -18,12 +18,14 @@
 - [x] 실제 pgvector SQL 검색/저장 및 DB 도메인 격리 시험 (합성 384D, 18/18 PASS; [실측](docs/10-shared-vector-smoke.md))
 - [x] MCP→pgvector 통합 및 로컬 E5 실제 임베딩 검증 (24/24 PASS; [실측](docs/11-mcp-vector-integration.md); 합성 ASGI/임시 DB)
 - [x] 합성 전용 지속 실행 MCP 서버 및 실제 HTTP·인증·영속 저장/복원 검사 (초기/재시작 각16/16 PASS; [실측](docs/12-persistent-mcp-stage.md))
-- [ ] NAS/daemon 재부팅 자동 시작 순서 및 운영 복구 검증 (현재 시범 DB/API 실행 중, 수동 순차 시작)
+- [ ] HOLD — NAS/daemon 및 기존 컨테이너 실제 재기동·자동 시작 등록/실증 (사용자 별도 승인 필요; 순차 기동 스크립트 --check PASS)
 - [x] Secure MCP Tunnel NAS 측 준비 (공식 CLI v0.0.21 설치 및 Unix socket 14/14 PASS; [실측](docs/13-secure-tunnel-preflight.md))
 - [x] 사용자 runtime key 생성 및 Gateway saved metadata 확인 (값 미조회, 권한/유효성 미검증)
 - [x] 개인 tunnel_id 생성/확인, Gateway key 파일 안전 전달 및 실제 터널 인증/doctor/polling 검증 ([실측](docs/13-secure-tunnel-preflight.md))
 - [x] ChatGPT 개인 플러그인 생성/설치 및 실제 write/get/vector search E2E; 신규 INSERT, 중복/미승인 차단, USER/PRIVATE 확인 ([실측](docs/14-chatgpt-plugin-e2e.md)); 합성 전용, 외부 공개 금지
-- [ ] 신규 P4 포함 최신 백업·복원 및 NAS 전체 재기동 자동 시작 검증
+- [x] 신규 P4 포함 최신 온라인 백업 및 별도 클러스터 복원/ACL/index 검증 ([실측](docs/15-online-backup-startup-plan.md)); 기존 전 서비스 재기동 없음
+- [x] 순차 기동 스크립트 작성 및 read-only --check PASS
+- [ ] HOLD — 실제 NAS 재기동 및 자동 시작 검증 (위 사용자 승인 조건과 동일)
 - [ ] 공용 pgvector 엔진 별도 DB/role 운영·복원·부하 검증 (현재 기술사 배포 차단 우회 금지)
 - [ ] WIPS와 자체 MCP의 동일 대화 연동 (저장/전송 권리 확보 전 synthetic-only)
 ## P1 — Mock MVP (MCP 실증 이후; 독립 웹 Agent 대체안)
