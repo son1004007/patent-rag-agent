@@ -17,13 +17,25 @@ def read_private(path,cap):
         return raw
 
 def authorize_from_policy(p):
-    if not isinstance(p,dict) or set(p)!={"policy","purpose","approved_batches","max_rows"} or p["policy"]!=POLICY or p["purpose"]!="metadata_only":
+    if not isinstance(p,dict) or p.get("policy")!=POLICY or p.get("purpose")!="metadata_only":
         raise ValueError("policy")
+    # User-confirmed metadata-only automatic collection, first page only,
+    # max 100 distinct returned WIPS rows per search; no auto-pagination.
+    if set(p)=={"policy","purpose","mode","max_rows"}:
+        if p["mode"]!="owner-approved-autosave-100-v1" or type(p["max_rows"]) is not int or p["max_rows"]!=100:
+            raise ValueError("autosave scope")
+        return lambda scope:(scope["policy"]==POLICY and scope["purpose"]=="metadata_only"
+            and scope["page"]==1 and scope["rows"]<=100)
+    # Legacy exact-packet approval is still supported for targeted operations.
+    if set(p)!={"policy","purpose","approved_batches","max_rows"}:
+        raise ValueError("policy fields")
     batches=p["approved_batches"]
     if not isinstance(batches,list) or not 1<=len(batches)<=100 or any(not isinstance(x,str) or len(x)!=64 or any(c not in "0123456789abcdef" for c in x) for x in batches):
         raise ValueError("batch approval")
-    if type(p["max_rows"]) is not int or not 1<=p["max_rows"]<=MAX_ROWS:raise ValueError("row cap")
-    return lambda scope:scope["policy"]==POLICY and scope["purpose"]=="metadata_only" and scope["batch_sha256"] in batches and scope["rows"]<=p["max_rows"]
+    if type(p["max_rows"]) is not int or not 1<=p["max_rows"]<=MAX_ROWS:
+        raise ValueError("row cap")
+    return lambda scope:(scope["policy"]==POLICY and scope["purpose"]=="metadata_only"
+        and scope["batch_sha256"] in batches and scope["rows"]<=p["max_rows"])
 
 def main():
     if sys.argv[1:]!=["--archive"]:raise ValueError("mode")
@@ -32,7 +44,7 @@ def main():
     packet=json.loads(raw)
     batch,clean,hits=prepare(packet)
     authorize=authorize_from_policy(json.loads(read_private("/auth/archive_policy.json",16000)))
-    scope={"policy":POLICY,"purpose":"metadata_only","batch_sha256":batch,"identities":tuple(sorted({k for _,k,_,_ in hits})),"rows":len(hits)}
+    scope={"policy":POLICY,"purpose":"metadata_only","batch_sha256":batch,"identities":tuple(sorted({k for _,k,_,_ in hits})),"page":clean["page"],"rows":len(hits)}
     if authorize(scope) is not True:
         print('{"status":"BLOCKED_POLICY","verified":false,"saved":0}')
         return 1

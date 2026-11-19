@@ -11,7 +11,7 @@ import unicodedata
 from datetime import datetime
 from collections.abc import Mapping
 
-MAX_ROWS = 50
+MAX_ROWS = 100
 MAX_BYTES = 512000
 POLICY = "owner-approved-wips-metadata-local-v1"
 FIELDS = ("SKEY", "XN_D", "CC", "KC_D", "TIK", "APSTH", "XD")
@@ -83,7 +83,7 @@ def archive_page(conn, packet, authorize):
     # It cannot be a caller-supplied boolean and must not grant collection rights.
     scope={"policy":POLICY,"purpose":"metadata_only","batch_sha256":batch,
            "identities":tuple(sorted({k for _,k,_,_ in hits})),
-           "rows":len(hits)}
+           "page":clean["page"],"rows":len(hits)}
     if not callable(authorize) or authorize(scope) is not True:
         return {"status":"BLOCKED_POLICY","verified":False,"saved":0}
     with conn.transaction():

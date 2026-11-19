@@ -1,8 +1,8 @@
 // Search-page wrapper for an explicitly configured, trusted metadata archive.
 // Not a listener on the third-party plugin. No automatic paging or fulltext.
 const fields="SKEY,XN_D,CC,KC_D,TIK,APSTH,XD";
-async function searchAndArchive({query,page=1,page_size=10},adapters){
-  if(typeof query!=="string"||!query.trim()||query.length>2000||!Number.isInteger(page)||page<1||page>10000||!Number.isInteger(page_size)||page_size<1||page_size>50)throw Error("INVALID_REQUEST");
+async function searchAndArchive({query,page=1,page_size=100},adapters){
+  if(typeof query!=="string"||!query.trim()||query.length>2000||!Number.isInteger(page)||page<1||page>10000||!Number.isInteger(page_size)||page_size<1||page_size>100)throw Error("INVALID_REQUEST");
   if(await adapters.allowSearch({provider:"WIPS",query})!==true)return {search:"BLOCKED_POLICY",archive:"NOT_RUN"};
   let response;
   try{response=await adapters.searchWips({query,pgrow:page_size,pgnum:page,outitem:fields});}catch{return {search:"FAILED",archive:"NOT_RUN"};}

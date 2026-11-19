@@ -75,4 +75,21 @@ class Test(unittest.TestCase):
         self.assertEqual(archive_page(self.c,p,auth)["status"],"PASS")
         self.assertEqual(archive_page(self.c,p,auth)["status"],"REUSED_VERIFIED")
         with self.assertRaises(ValueError):authorize_from_policy({"policy":POLICY,"purpose":"metadata_only","approved_batches":["*"],"max_rows":1})
+    def test_11_autosave_100_first_page_only(self):
+        policy={"policy":POLICY,"purpose":"metadata_only","mode":"owner-approved-autosave-100-v1","max_rows":100}
+        auth=authorize_from_policy(policy)
+        p=packet([row(n) for n in range(2000,2100)],total=102,query="first 100",page=1,size=100)
+        prepared=prepare(p)
+        self.assertEqual(len(prepared[2]),100)
+        out=archive_page(self.c,p,auth)
+        self.assertEqual((out["saved"],out["returned_count"]),(100,100))
+        self.assertEqual(archive_page(self.c,p,auth)["status"],"REUSED_VERIFIED")
+        with self.assertRaises(ValueError):prepare(packet([row(n) for n in range(3000,3101)],total=101,query="invalid 101",size=101))
+        self.assertEqual(archive_page(self.c,packet([row(1999)],total=102,query="next",page=2,size=1),auth)["status"],"BLOCKED_POLICY")
+        for invalid in (
+            dict(policy,max_rows=101),
+            dict(policy,mode="anything"),
+            dict(policy,max_rows=True),
+            dict(policy,other=True)):
+            with self.assertRaises(ValueError):authorize_from_policy(invalid)
 if __name__=="__main__": unittest.main(verbosity=2)

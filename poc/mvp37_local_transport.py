@@ -17,8 +17,8 @@ from pathlib import Path
 DOCKER="/usr/local/bin/docker"
 DB_IMAGE="sha256:b0108689bf51bd54d3129130967d4adf7ba58b395a9ff6653aa598b5fe7d7ba3"
 WORKER_IMAGE="sha256:183e5ad42322fea6f731433ae7f6be7498812b31d2eaf05537ffed838dd1ba7c"
-CODE={"mvp37_archive.py":"bc84c3d3c449853008739367ac0125e907cbc74a",
-      "mvp37_archive_cli.py":"70ae5d429452ded0615e1f778e54878385cc0e82"}
+CODE={"mvp37_archive.py":"b4698a23fdc1d606cba6276c4c3b51ae6d0d1108",
+      "mvp37_archive_cli.py":"10bac60cd9d04d92e22839a9530df54229d34322"}
 CAP=600000
 BLOCKED={"status":"BLOCKED_POLICY","verified":False,"saved":0}
 FAILED={"status":"FAILED_OR_UNCONFIRMED","verified":False}
@@ -120,7 +120,7 @@ def run(raw,root):
     prepare,policy_id,authorize_from_policy,read_private=load_modules(root)
     batch,clean,hits=prepare(json.loads(raw))
     scope={"policy":policy_id,"purpose":"metadata_only","batch_sha256":batch,
-           "identities":tuple(sorted({k for _,k,_,_ in hits})),"rows":len(hits)}
+           "identities":tuple(sorted({k for _,k,_,_ in hits})),"page":clean["page"],"rows":len(hits)}
     auth=path_private(root/"auth",0o700,True)
     p=path_private(auth/"archive_policy.json",0o600)
     authorize=parse_policy(json.loads(read_private(p,16000)),authorize_from_policy)

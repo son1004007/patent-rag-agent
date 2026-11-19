@@ -17,7 +17,7 @@ a=await searchAndArchive(q,{...base,archivePage:async()=>({status:"BLOCKED_POLIC
 a=await searchAndArchive(q,{...base,archivePage:async()=>({...verified,saved:2})});tests.push(ok(a.archive==="FAILED_OR_UNCONFIRMED","false success denied"));
 a=await searchAndArchive(q,{...base,archivePage:async()=>({...verified,status:"REUSED_VERIFIED",saved:0,reused:1})});tests.push(ok(a.archive==="REUSED_VERIFIED"&&a.storage.saved===0,"reuse"));
 a=await searchAndArchive(q,{...base,archivePage:async()=>({...verified,fulltext_missing:0})});tests.push(ok(a.archive==="FAILED_OR_UNCONFIRMED","state counts checked"));
-let bad=false;try{await searchAndArchive({...q,page_size:51},base)}catch{bad=true}
+let bad=false;try{await searchAndArchive({...q,page_size:101},base)}catch{bad=true}
 tests.push(ok(bad,"cap"));
 return tests;
 })();
