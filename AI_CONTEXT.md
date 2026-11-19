@@ -18,3 +18,5 @@
 - 최신 사용자 결정(2026-11-19): 개인 ChatGPT 기반 MVP 우선. [TASKS.md](TASKS.md)의 MVP-01~06 실행 순서를 따른다. 고급 검색·웹 관리·공용 DB·기업/SSH는 MVP 이후 backlog, 기업 배포 별도 착수 필요. 기존 NAS/컨테이너 재기동 금지 유지. 실제 특허는 사용자 구매·개인 내부 적재 지시 범위에서 3건 실증 완료, 공급자 계약상 범위 확대 및 외부 반환 확인은 별도 gate. 이전 문구는 계획 당시 기록이며 최신 상태는 CURRENT_STATE/TASKS 우선.
 
 - 최신 사용자 승인: 특허 MCP API만 재시작/배포. 실제 운영 56/56 PASS, 기존 ChatGPT 합성 검색 정상, 새 2개 읽기 도구 Refresh 및 새 ChatGPT 대화 실제 검색/조회 PASS(3/3), 실제 rollback/쓰기 adapter 미완료. 다른 컨테이너/DB/NAS 재기동 금지. [실측](docs/24-mvp01-production-cutover.md).
+
+- MVP-04 기본 통합·근거 비교 참조 모듈 및 실제 두 소스 한정 시험 PASS: 27/27 합성, 6→5, 추천 근거 부족 시 HOLD, 무관 EXCLUDE, 유사도와 검증된 성능 구분. [실측](docs/25-mvp04-candidate-comparison.md). 별도 상시 자동 실행/쓰기 adapter 및 복원 미완료. 다음 MVP-03 잔여와 MVP-05.
