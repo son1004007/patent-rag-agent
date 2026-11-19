@@ -27,5 +27,6 @@
 |---|---|
 | 개인 WIPS MCP 플러그인 존재 | CONFIRMED — 개인 플러그인 목록 확인 (기존 성공 호출 이력) |
 | 기술사 RAG 개발 pgvector volume/SDK cache | CONFIRMED — NAS 읽기 전용 inventory, 상시 RAG 컨테이너 없음 |
+| 합성 MCP 계약 시험 | PASS — NAS disposable ASGI, protocol 2025-11-25, save/get/substring/idempotency/denial; [실측](docs/09-mcp-contract-smoke.md) |
 | 독립 NAS MCP ChatGPT 등록/write E2E | NOT RUN |
 | 기술사와 특허 DB 엔진 공동 사용 | PLANNED — 도메인 DB/role 분리, 기존 DB 미변경 |
