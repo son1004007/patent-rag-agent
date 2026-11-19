@@ -20,3 +20,5 @@
 - 최신 사용자 승인: 특허 MCP API만 재시작/배포. 실제 운영 56/56 PASS, 기존 ChatGPT 합성 검색 정상, 새 2개 읽기 도구 Refresh 및 새 ChatGPT 대화 실제 검색/조회 PASS(3/3), 실제 rollback/쓰기 adapter 미완료. 다른 컨테이너/DB/NAS 재기동 금지. [실측](docs/24-mvp01-production-cutover.md).
 
 - MVP-04 기본 통합·근거 비교 참조 모듈 및 실제 두 소스 한정 시험 PASS: 27/27 합성, 6→5, 추천 근거 부족 시 HOLD, 무관 EXCLUDE, 유사도와 검증된 성능 구분. [실측](docs/25-mvp04-candidate-comparison.md). 별도 상시 자동 실행/쓰기 adapter 및 복원 미완료. 다음 MVP-03 잔여와 MVP-05.
+
+- MVP-03 승인된 단건 적재 adapter 구현·합성 PASS(29 JS, 23 NAS Python), 기존 운영 reader DB 5건/401청크/4건 상세/384D 재확인. 실제 구매 신규 후보/권리 및 operator 승인된 private transport/직렬화가 준비된 뒤 실제 E2E 진행; MCP writer 권한 확대 금지. [실측](docs/26-mvp03-approved-ingest-adapter.md). 다음 비파괴 MVP-05 실제 자료 격리 복원.

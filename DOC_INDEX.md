@@ -17,6 +17,7 @@
 | [05 보안·배포](docs/05-deployment.md) | 운영자 — HTTPS·네트워크·복구 |
 | [06 연동 및 계약](docs/06-provider-policy.md) | 사업/개발자 — 비용·권한·MCP |
 | [07 테스트](docs/07-test-plan.md) | QA — 검증 기준 |
+| [26 MVP-03 승인된 적재 어댑터](docs/26-mvp03-approved-ingest-adapter.md) | 개발자/운영자 — 단건 승인 패킷, 로컬 worker 연결, 테스트 및 쓰기 gate |
 | [25 MVP-04 기본 통합·근거 비교](docs/25-mvp04-candidate-comparison.md) | 개발자/연구자 — 문헌 키 중복 제거, 근거 판정, 실제 양 소스 E2E 및 제한 |
 | [24 MVP-01 통합 MCP 운영 전환](docs/24-mvp01-production-cutover.md) | 운영자/사용자 — API만 재시작, 56개 검증, Refresh 절차 및 새 ChatGPT 실제 특허 읽기 E2E 결과 |
 | [23 MVP-03 자연어 연구 질의·검색/수집 흐름](docs/23-mvp03-research-flow.md) | 개발자/운영자 — 질의 계획·범위/권한 정책·실제 소량 연계 시험 |

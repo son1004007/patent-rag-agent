@@ -41,3 +41,6 @@ flowchart TD
 ## 남은 범위
 - 실제 ChatGPT 플러그인에 통합된 read/write 도구는 아직 미배포(MVP-01 HOLD). 이번은 ChatGPT가 도구 adapter를 직접 연결한 한정된 실제 시험 + 참조 모듈 검증. 상시 자동 실행/사용자 임의 질의의 완전 E2E를 완료로 표시하지 않는다. 실제 ChatGPT에서 통합 검색·적재가 가능한 승인된 도구 연결 및 자동 adapter는 후속 운영 전환/인수 단계에서 검증한다. 동일 질문 재사용 로컬/실제 공급자 시험 PASS. 다음은 MVP-04 기본 검색 통합 및 근거 기반 비교·추천 검증.
 - 공급 계약 확장/대량 수집·외부 공개 금지, 기존 재기동 금지 유지. 운영 서비스, 기술사 데이터 및 기업 환경 변경 없음.
+
+## 후속 갱신 (2026-11-19)
+MVP-01 실제 ChatGPT 읽기 PASS, MVP-04 기본 통합 PASS. [승인 단건 적재 adapter](26-mvp03-approved-ingest-adapter.md)에서 makeIngestOne과 Python worker wrapper를 구현, 29/29 JS 및 23/23 NAS 합성 PASS. 실제 운영 transport/신규 쓰기는 NOT RUN. 기존 본문은 당시 이력으로 보존한다.

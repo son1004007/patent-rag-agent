@@ -76,9 +76,43 @@ async function research(question,groups,adapters){
     const mode=enrich.length?"enrich":"new";
     const result=await adapters.ingestOne({mode,row:target});
     if(result?.staged===true&&result?.verified!==true){trace.write="STAGED_PENDING_VERIFICATION";return trace;}
-    if(result?.verified!==true||result?.documentsAdded!==(mode==="new"?1:0)||result.sectionsAdded!==2)throw Error("UNVERIFIED_WRITE");
+    if(result?.status==="BLOCKED_POLICY"||result?.status==="BLOCKED_PREFLIGHT"){trace.write=result.status;return trace;}
+    if(result?.status==="REUSED_VERIFIED"&&result.verified===true&&result.writes===0){trace.write="REUSED_VERIFIED";return trace;}
+    if(result?.verified!==true||!Number.isInteger(result.documentsAdded)||result.documentsAdded<0||result.documentsAdded>(mode==="new"?1:0)||![1,2].includes(result.sectionsAdded))throw Error("UNVERIFIED_WRITE");
     trace.write="PASS";trace.writeCount=1;
   }catch{trace.write="FAILED_OR_PARTIAL";}
   return trace;
 }
-export {planQuestion,idKey,parseWips,parseLocal,research};
+// A trusted operator supplies the authorization and private NAS transport.
+// No new MCP writer, credential, approval minting, or automatic retries.
+function makeIngestOne(adapters){
+  if(!adapters||typeof adapters.allowCollection!=="function"||typeof adapters.getSpec!=="function"||typeof adapters.submitApprovedPacket!=="function")throw Error("BAD_ADAPTERS");
+  return async function ingestOne({mode,row}){
+    if(!["new","enrich"].includes(mode))throw Error("BAD_MODE");
+    const checked=parseWips({success:true,data:{row_list:[row]}});
+    const [key,clean]=[...checked.entries()][0];
+    const scope=Object.freeze({provider:"WIPS",purpose:"owner_private_local",mode,identity:key,skey:clean.SKEY,count:1});
+    let allowed=false;
+    try{allowed=await adapters.allowCollection(scope)===true;}catch{}
+    if(!allowed)return {status:"BLOCKED_POLICY",verified:false};
+    const sections=[];
+    for(const section of ["dtl_desc","all_claim"]){
+      const r=await adapters.getSpec({skey:clean.SKEY,section,lang_cd:"KR"});
+      const d=r?.data;
+      if(r?.success!==true||r.section!==section||d?.ctry!==clean.CC||typeof d.doc_num!=="string"||idKey(d.ctry,d.doc_num,clean.KC_D)!==key||!["KR","US","JP","CN"].includes(d.lang_cd))throw Error("SPEC_IDENTITY_OR_STATUS");
+      if(section==="dtl_desc"&&(!Array.isArray(d.dtl_desc_list)||!d.dtl_desc_list.length||!d.dtl_desc_list.every(x=>String(x.skey)===clean.SKEY&&x.lang_cd===d.lang_cd)))throw Error("SPEC_SKEY");
+      if(section==="all_claim"&&(!Array.isArray(d.cl_list)||!d.cl_list.length||!d.cl_list.every(x=>x.lang_cd===d.lang_cd)))throw Error("SPEC_CLAIMS");
+      sections.push({skey:clean.SKEY,response:r});
+    }
+    if(sections[0].response.data.lang_cd!==sections[1].response.data.lang_cd)throw Error("SPEC_LANGUAGE");
+    // Only this trusted adapter may provide an operator-approved private transport.
+    // Python revalidates the entire packet, cap, approval digest and persisted content.
+    const result=await adapters.submitApprovedPacket({mode,packet:{row:clean,sections}});
+    if(result?.status==="BLOCKED_POLICY"||result?.status==="BLOCKED_PREFLIGHT"||result?.status==="FAILED_OR_PARTIAL")return {status:result.status,verified:false};
+    if(result?.status==="REUSED_VERIFIED"&&result.verified===true&&result.writes===0)return {status:"REUSED_VERIFIED",verified:true,writes:0};
+    if(result?.status==="PASS"&&result.verified===true&&Number.isInteger(result.documentsAdded)&&result.documentsAdded>=0&&result.documentsAdded<=(mode==="new"?1:0)&&[1,2].includes(result.sectionsAdded)&&[1,2].includes(result.writes))return {status:"PASS",verified:true,documentsAdded:result.documentsAdded,sectionsAdded:result.sectionsAdded};
+    throw Error("UNVERIFIED_LOCAL_RESULT");
+  };
+}
+
+export {planQuestion,idKey,parseWips,parseLocal,research,makeIngestOne};

@@ -10,7 +10,7 @@
 |---|---|---|---|
 | MVP-01 | 기존 NAS RAG 통합 MCP 전환 및 개인 ChatGPT 도구 갱신 | 운영 배포 PASS 56/56, 개인 플러그인 신규 읽기 E2E PASS; 실제 rollback NOT RUN (MVP-05 잔여) ([실측](docs/24-mvp01-production-cutover.md)) | 기존 플러그인을 유지하면서 실제 search_patents/get_patent 호출 성공, 기존 읽기 기능 회귀; 실제 rollback은 MVP-05 안전/복구 gate에서 별도 검증 |
 | MVP-02 | 실제 문헌 상세 조회 및 증분 적재 | 로컬 PASS — 기존 3건 보강·신규 1건, 167청크/384D, 4배치 중복/충돌 검증 ([실측](docs/22-mvp02-incremental-patent-ingest.md)) | 기존 3건의 허용된 요약·청구항·상세설명 보강 또는 권리 명시 시험 자료, 2개 이상 소량 배치 신규/중복/충돌 검증, 문헌/섹션별 provenance와 건수/벡터 검증 |
-| MVP-03 | 자연어 연구 질문 → 검색 계획 → NAS/WIPS 호출 | 한정 실제 흐름/재사용 PASS, 정책 21/21; 플러그인 운영 자동 연계 미완료 ([실측](docs/23-mvp03-research-flow.md)) | ChatGPT가 질문에 따라 검색어 확장, 검색 범위 결정, 두 소스 구분, 권한 내 신규 자료만 수집 및 적재 재사용; 자유로운 대량 수집 없이 제한된 on-demand batch |
+| MVP-03 | 자연어 연구 질문 → 검색 계획 → NAS/WIPS 호출 | 한정 실제 흐름/재사용 PASS, adapter 구현·합성 PASS(29 JS + 23 Python); 실제 운영 자동 연계·신규 쓰기 미완료 ([adapter](docs/26-mvp03-approved-ingest-adapter.md)) ([실측](docs/23-mvp03-research-flow.md)) | ChatGPT가 질문에 따라 검색어 확장, 검색 범위 결정, 두 소스 구분, 권한 내 신규 자료만 수집 및 적재 재사용; 자유로운 대량 수집 없이 제한된 on-demand batch |
 | MVP-04 | 기본 검색·중복 제거·근거 기반 후보 비교/추천 | PASS — 참조 모듈 및 실제 두 소스 한정 시험, 27/27; 6→5, HOLD 3/EXCLUDE 2/후보 0 ([실측](docs/25-mvp04-candidate-comparison.md)) | NAS 벡터 결과와 WIPS 키워드 검색을 출처별로 수집 후 문헌번호/종류 단위 중복 제거; 근거 위치·문헌 출처·불확실성 표시, 무관하거나 근거 부족 시 추천 보류. 고급 Hybrid/RRF·reranker는 P1 |
 | MVP-05 | 최소 안전·복구·종단간 인수 시험 | 합성 백업 복원 PASS, 실제 자료 dump만 생성 | 실제 자료별 백업 복원/ACL/무결성, 인증/권한/실패 시 차단, 회귀 및 rollback, 최소 5개 질의(정상·반복 재사용·신규 적재·근거 부족·실패/거부)의 기대 결과/실측 기록, 개인 ChatGPT의 실제 end-to-end 증거 |
 | MVP-06 | 최소 사용자 확인 및 사용법 | 미완료 | ChatGPT에서 실제 연구 질문 한 건으로 사용자가 결과 평가 가능; 짧은 사용법·제약·운영/복구 런북 제공 |
@@ -19,12 +19,13 @@
 - [x] MVP-01 사용자 Refresh·권한 추가 및 새 채팅 신규 search_patents/get_patent 실제 읽기 E2E PASS — 실제 3건 검색/조회, 9개 근거, 반복·미존재·기존 읽기 회귀 ([실측](docs/24-mvp01-production-cutover.md)). 실제 rollback 검증은 아래 MVP-05 잔여 항목.
 - [x] MVP-02 기존 3건 상세설명/전체 청구항 32개 보강, 신규 문헌 1건, 4개 배치 적재·중복/충돌·출처·벡터 확인 ([실측](docs/22-mvp02-incremental-patent-ingest.md)). 신규 1건 상세 수집·자동 흐름은 MVP-03 이후.
 - [x] MVP-03 연구 목적 분석·질의 확장·제한된 WIPS/NAS 오케스트레이션과 실제 신규 1건 상세 적재·동일 질의 재사용 검증, 정책 21/21 ([실측](docs/23-mvp03-research-flow.md)).
-- [ ] MVP-03 운영 자동 연계 및 승인된 저장 경로 검증 — MVP-01/MVP-05와 함께 완료 (현재 ChatGPT tool adapter 수동 연결, 운영 배포 및 신규 읽기 호출 PASS, 승인된 실제 쓰기 adapter 미완료).
+- [x] MVP-03 운영 승인 기반 단건 adapter 구현/합성 검증 — JS 29/29, NAS native Python 23/23, 문헌별 허용/중복/실패·부분 재개/사후 검증. [실측](docs/26-mvp03-approved-ingest-adapter.md).
+- [ ] MVP-03 실제 승인된 private transport 연결 및 신규 문헌 1건 실제 쓰기/재사용 E2E — 공급자·구매/개인 내부 권리 및 운영 승인 확인, 기존 writer 격리·직렬화. 실제 LocalBackend/운영 write NOT RUN. 기존 MCP reader 및 synthetic writer 권한은 그대로 유지.
 - [x] MVP-04 기본 결과 통합·중복 제거·근거 표시 및 후보 비교/추천 보류 — 합성 27/27, 실제 NAS 3+WIPS 3 통합 5건·근거 18개·HOLD 3·EXCLUDE 2, 실제 물성 근거 부족 추천 0. [실측](docs/25-mvp04-candidate-comparison.md). 상시 자동 연계와 전체 인수는 MVP-03/MVP-05.
 - [ ] MVP-05 최소 보안·복원·인수/E2E 검증 — 실제 자료 dump 독립 복원, 실제 rollback(필요 승인·격리 환경), 인증/권한 및 잔여 쓰기 경로 검증. 이번 ChatGPT 읽기 E2E에서 미실행.
 - [ ] MVP-06 개인 ChatGPT 실제 사용 확인 및 최소 사용법/복구 가이드.
 
-**다음 실행 규칙:** 사용자 승인으로 MVP-01 API만 재시작·운영 전환 완료. NAS/DB/기타 컨테이너 재기동/자동 시작은 계속 금지. 개인 플러그인 Refresh 및 신규 읽기 도구 E2E PASS, MVP-02 로컬 및 MVP-03 한정 실제 흐름/재사용 시험 완료. MVP-04 기본 결과 통합/비교 참조 구현·한정 실제 시험 PASS. 다음 MVP-03 승인된 쓰기 adapter 잔여 검증, MVP-05 온라인 백업·격리 복원 및 전체 E2E를 진행한다. 인수 기준 충족 전 P1/P2/P3를 선행하지 않는다. 합성/로컬 성공을 실제 ChatGPT E2E 성공으로 표시하지 않는다. 구매 자료의 개인 내부 적재 지시 범위를 유지하고, 실제 외부 반환/LLM 처리·계약상 대량 수집 등 확대는 필요한 확인과 승인 후 수행한다. 필요한 권리 확인은 MVP에서 해당 기능의 gate로 유지하고, 광범위한 기업 계약 검토는 뒤로 보낸다.
+**다음 실행 규칙:** 사용자 승인으로 MVP-01 API만 재시작·운영 전환 완료. NAS/DB/기타 컨테이너 재기동/자동 시작은 계속 금지. 개인 플러그인 Refresh 및 신규 읽기 도구 E2E PASS, MVP-02 로컬 및 MVP-03 한정 실제 흐름/재사용 시험 완료. MVP-04 기본 결과 통합/비교 참조 구현·한정 실제 시험 PASS. MVP-03 승인된 쓰기 adapter 구현·합성 PASS, 실제 신규 쓰기/transport는 권리·운영 승인과 직렬화 조건 유지. 다음 비파괴 작업은 MVP-05 온라인 백업·격리 복원 및 전체 E2E이며, 허용된 실제 신규 쓰기 시험은 별도 확인 후 이어간다. 인수 기준 충족 전 P1/P2/P3를 선행하지 않는다. 합성/로컬 성공을 실제 ChatGPT E2E 성공으로 표시하지 않는다. 구매 자료의 개인 내부 적재 지시 범위를 유지하고, 실제 외부 반환/LLM 처리·계약상 대량 수집 등 확대는 필요한 확인과 승인 후 수행한다. 필요한 권리 확인은 MVP에서 해당 기능의 gate로 유지하고, 광범위한 기업 계약 검토는 뒤로 보낸다.
 
 ## P1 — MVP 사용 피드백 이후 품질 고도화 (BACKLOG)
 

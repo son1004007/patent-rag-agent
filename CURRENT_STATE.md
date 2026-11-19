@@ -1,6 +1,6 @@
 # Current State
 
-2026-11-19 / MVP-01 통합 MCP 운영 배포 56/56 PASS; 새 ChatGPT 실제 특허 읽기 및 MVP-04 양 소스 기본 통합/비교 PASS; 직전 DB 실측 5건·401청크
+2026-11-19 / MVP-01 통합 MCP 운영 배포 56/56 PASS; 새 ChatGPT 실제 특허 읽기 및 MVP-04 양 소스 기본 통합/비교 PASS; MVP-03 적재 어댑터 구현·합성 PASS; 현재 DB 읽기 실측 5건·401청크
 
 | 영역 | 상태 |
 |---|---|
@@ -19,7 +19,7 @@
 
 전역 registry 및 문서 목차 규칙 연결 확인. 설계 초안; 실제 실행으로 검증 예정.
 
-다음 (최신 사용자 결정): [TASKS.md](TASKS.md)의 MVP-01~06을 우선한다. 통합 MCP 운영 전환 완료(승인받은 API만 재시작), 신규 도구 Refresh 및 실제 ChatGPT 조회 PASS 이후 MVP-02 로컬 및 MVP-03 한정 실제 흐름/재사용 검증 완료 후 MVP-04 기본 통합/근거 비교 참조 구현 및 실제 양 소스 한정 시험 PASS. 다음 MVP-03 승인된 자동 적재 adapter 잔여 검증 및 MVP-05 실제 자료 백업 복원을 진행한다. 전환 후 전체 E2E와 최소 사용 안내로 MVP 인수. 고급 검색·웹 UI/관리·공용 DB 전환·기업/SSH는 MVP 이후; 기업 별도 착수 요청 전 진행하지 않는다. 기존 보안·계약·기술사 배포 gate 및 재기동 금지는 유지.
+다음 (최신 사용자 결정): [TASKS.md](TASKS.md)의 MVP-01~06을 우선한다. 통합 MCP 운영 전환 완료(승인받은 API만 재시작), 신규 도구 Refresh 및 실제 ChatGPT 조회 PASS 이후 MVP-02 로컬 및 MVP-03 한정 실제 흐름/재사용 검증 완료 후 MVP-04 기본 통합/근거 비교 참조 구현 및 실제 양 소스 한정 시험 PASS. MVP-03 승인된 자동 적재 adapter 코드 및 합성 검증 PASS; 실제 신규 적재 및 private transport 미완료. 다음 MVP-05 실제 자료 백업 복원을 진행한다. 전환 후 전체 E2E와 최소 사용 안내로 MVP 인수. 고급 검색·웹 UI/관리·공용 DB 전환·기업/SSH는 MVP 이후; 기업 별도 착수 요청 전 진행하지 않는다. 기존 보안·계약·기술사 배포 gate 및 재기동 금지는 유지.
 
 배포 환경 제한: CPU CFS hard quota 및 pids limit 미지원, CPU shares와 128 MiB 메모리 제한 사용. 공식 Docker resource constraints 및 실제 runtime 결과 기준. 실제 장비 식별자/URL은 공개 repo에 기록하지 않음.
 
@@ -51,6 +51,8 @@
 | MVP-01 통합 MCP 운영 전환 | PASS — API 단독 재시작, 로컬 HTTP 16+24 및 Unix relay 16=56/56, 실제 특허 검색 109.78ms, DB fingerprint/기타 StartedAt/기존 API ID·HostConfig 불변. 기존 ChatGPT 합성 조회/검색 정상, 신규 2개 도구 Refresh 및 새 대화 실제 검색/조회 PASS(3/3); 실제 rollback NOT RUN. [실측 및 Refresh 절차](docs/24-mvp01-production-cutover.md) |
 
 | MVP-04 기본 통합·근거 비교 | PASS (참조 구현·한정 실제 양 소스) — 27/27 합성, NAS 3 + WIPS 3 → 중복 1/unique 5, HOLD 3·EXCLUDE 2·검토 후보 0, 근거 18개. 중간 WIPS 검증 실패 후 실제 재호출 PASS; 상시 자동 실행/물성 검증/DB 변경 NOT RUN. [실측](docs/25-mvp04-candidate-comparison.md) |
+
+| MVP-03 승인된 단건 적재 adapter | CODE + SYNTHETIC PASS — NAS Python 23/23, JS 정책/연계 29/29; 실제 운영 reader DB 5건/401청크/4건 상세/384D 일치. 실제 LocalBackend/신규 쓰기/transport NOT RUN, 문헌별 권리·운영 승인 및 직렬화 유지. [실측](docs/26-mvp03-approved-ingest-adapter.md) |
 
 ## 최신 운영 지시
 - 사용자 최신 결정: 특허 MCP API만 재시작·배포 승인 및 완료. NAS/DB/relay/tunnel/다른 컨테이너 stop/restart 금지 유지, 자동 시작 등록/실행 승인 대기.
