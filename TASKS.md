@@ -31,7 +31,8 @@
 - [x] WIPS와 자체 MCP 동일 대화 순차 읽기 연계, 기존 합성 save/idempotency 및 mock 정책 17/17 ([실측](docs/17-dual-mcp-workflow.md))
 - [x] 사용자 구매 특허 소량 실제 비공개 적재/provenance/chunk/embedding, 3건/10청크/384D 및 중복·권한 시험 ([실측](docs/18-private-patent-ingest.md))
 - [x] README 목표 서비스 흐름 추가 및 실제 특허 읽기 전용 MCP 로컬 HTTP·권한 23/23 검증 ([실측](docs/19-private-patent-reader-mcp.md)); 기존 서비스 유지
-- [ ] 실제 특허 읽기 전용 MCP의 승인된 ChatGPT 개인 연결 및 실제 조회 (현재 synthetic plugin 유지, 재기동 HOLD)
+- [x] 기존 NAS RAG/wipsclip 개인 플러그인 연결 재확인 및 통합 MCP 후보 39/39 로컬 시험 ([실측](docs/20-unified-mcp-candidate.md))
+- [ ] 실제 특허 읽기 전용 MCP의 승인된 기존 플러그인 운영 전환, tool refresh·실제 조회 (중복 등록 금지, 재기동 HOLD)
 - [ ] 다중 배치 적재·상세 명세서/전체 청구항 및 실자료 복원 검증 (재기동 HOLD)
 - [ ] 구매 자료의 계약상 확장 범위·상업 이용·재배포·대량 동기화 및 정식 요금·동시성 확인 — 소량 개인 내부 적재만 사용자 명시 승인
 ## P1 — Mock MVP (MCP 실증 이후; 독립 웹 Agent 대체안)
@@ -53,3 +54,11 @@
 ## P4 — 구현 완료 후 문서
 - [ ] 실제 화면 기반 간결한 사용자 설명서
 - [ ] 관리자 설명서: 시스템 설계, 데이터·권한, 운영·복구 흐름
+
+## P5 — 기업용 ChatGPT 연결 및 운영 제어 (사용자 추가 요청 2026-11-19)
+- [x] 공식 문서 확인 및 [기업용 방화벽 5-tuple 신청표·SSH 운영 가이드](docs/21-enterprise-connectivity-firewall-ssh.md) 작성
+- [ ] 회사 실제 제품(Workspace ChatGPT Business/Enterprise vs Azure OpenAI 자체 서비스), 계약·데이터·인증/조직 권한 확인
+- [ ] 회사 실제 FQDN/IP/port/NAT/proxy/IdP로 방화벽 신청서 확정 및 승인
+- [ ] 회사 전용 tunnel/MCP/DB 구축, OAuth 및 네트워크·권한·기업 RAG E2E 시험
+- [ ] 운영 전용 관리 MCP + 내부 SSH 최소권한 구현·승인/감사/차단 시험; 외부 Gateway는 별도 공급사 승인 시 대안
+- [ ] 기업 환경 배포·인수 및 운영 설명서. 현재 회사 서버·방화벽 변경 NOT RUN, 개인 NAS 재기동 HOLD 유지.
