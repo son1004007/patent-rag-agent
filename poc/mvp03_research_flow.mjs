@@ -54,6 +54,10 @@ async function research(question,groups,adapters){
   let catalog=null,rows=null;
   try{const r=await adapters.searchLocal({query:plan.nasQuery,limit:3});catalog=parseLocal(r);trace.nas="PASS";trace.localCount=r.results.length;}catch{trace.nas="FAILED";}
   // Public, independently authored term groups only. No NAS result content in WIPS.
+  // A trusted operator adapter must explicitly approve external search before any call.
+  let externalAllowed=false;
+  try{externalAllowed=typeof adapters.allowExternalSearch==="function"&&await adapters.allowExternalSearch(Object.freeze({provider:"WIPS",query:plan.wipsQuery,purpose:"public_research_terms"}))===true;}catch{}
+  if(!externalAllowed){trace.wips="BLOCKED_POLICY";trace.write="BLOCKED_POLICY";return trace;}
   try{rows=parseWips(await adapters.searchWips({query:plan.wipsQuery,pgrow:3,pgnum:1,outitem:FIELDS.join(",")}));trace.wips="PASS";trace.wipsCount=rows.size;}catch{trace.wips="FAILED";}
   if(!catalog||!rows){trace.write="BLOCKED_SOURCE_FAILURE";return trace;}
   const news=[],enrich=[];
@@ -65,7 +69,9 @@ async function research(question,groups,adapters){
   // At most ONE write target per run. Prefer completing an existing partial record.
   const target=enrich[0]??news[0];
   if(!target){trace.write="NOT_NEEDED";return trace;}
-  if(typeof adapters.allowLocalWrite!=="function"||await adapters.allowLocalWrite(Object.freeze({provider:"WIPS",purpose:"owner_private_local",count:1}))!==true){trace.write="BLOCKED_POLICY";return trace;}
+  let allowed=false;
+  try{allowed=typeof adapters.allowLocalWrite==="function"&&await adapters.allowLocalWrite(Object.freeze({provider:"WIPS",purpose:"owner_private_local",count:1}))===true;}catch{}
+  if(!allowed){trace.write="BLOCKED_POLICY";return trace;}
   try{
     const mode=enrich.length?"enrich":"new";
     const result=await adapters.ingestOne({mode,row:target});
