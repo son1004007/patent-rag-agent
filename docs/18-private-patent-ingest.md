@@ -17,3 +17,6 @@
 
 ## 후속 검증
 [실제 특허 읽기 전용 MCP 로컬 HTTP 23/23 PASS](19-private-patent-reader-mcp.md). 실제 개인 ChatGPT 연결·상시 reader 배포는 미실행, 기존 synthetic plugin 유지.
+
+## MVP-02 후속
+[상세 수집·증분 적재 실측](22-mvp02-incremental-patent-ingest.md) — 기존 3건 상세/전체 청구항 보강, 신규 metadata 1건, 최종 4건·167청크/384D. 4배치/중복·충돌 PASS. 기존 서비스 유지. 전체 자동 흐름과 실제 개인 ChatGPT 조회는 아직 미검증.
