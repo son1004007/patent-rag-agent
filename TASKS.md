@@ -26,7 +26,8 @@
 - [x] 신규 P4 포함 최신 온라인 백업 및 별도 클러스터 복원/ACL/index 검증 ([실측](docs/15-online-backup-startup-plan.md)); 기존 전 서비스 재기동 없음
 - [x] 순차 기동 스크립트 작성 및 read-only --check PASS
 - [ ] HOLD — 실제 NAS 재기동 및 자동 시작 검증 (위 사용자 승인 조건과 동일)
-- [ ] 공용 pgvector 엔진 별도 DB/role 운영·복원·부하 검증 (현재 기술사 배포 차단 우회 금지)
+- [x] 공용 pgvector 엔진 별도 DB/role·개별 복원·동시 부하 사전 시험 (24/24, 400/400; [실측](docs/16-shared-db-coexistence.md); 합성/격리)
+- [ ] 실제 공용 영속 DB 운영 전환 및 migration/인증 회귀 — 기술사 배포 차단 정식 해소 및 승인 후; 재기동 금지 유지
 - [ ] WIPS와 자체 MCP의 동일 대화 연동 (저장/전송 권리 확보 전 synthetic-only)
 ## P1 — Mock MVP (MCP 실증 이후; 독립 웹 Agent 대체안)
 - [ ] FastAPI/UI, 계정·profile, 합성 데이터
