@@ -11,6 +11,7 @@ test -d "$B/backups"
 test -z "$("$D" ps -aq --filter "label=$LABEL")"
 test "$("$D" inspect "$DB" --format '{{.State.Running}} {{.HostConfig.NetworkMode}}')" = 'true none'
 before=$("$D" ps -q)
+before_states=$(for id in $before;do "$D" inspect "$id" --format '{{.Id}} {{.State.StartedAt}}';done)
 started=$("$D" inspect "$DB" --format '{{.State.StartedAt}}')
 sql(){ "$D" exec "$1" psql -X -qAt -v ON_ERROR_STOP=1 -h /tmp -p 55432 -U postgres -d "$2" -c "$3"; }
 fingerprint(){ sql "$1" "$2" "SELECT count(*)||'|'||min(vector_dims(embedding))||'|'||md5(string_agg(md5(json_build_array(id,body,model_id,embedding::text)::text),'|' ORDER BY id)) FROM documents"; }
@@ -36,12 +37,13 @@ sql "$restore" postgres 'CREATE ROLE patent_app NOLOGIN NOSUPERUSER NOCREATEDB N
 # Restore original database privileges via --create. Destination is the isolated test cluster.
 "$D" exec -i "$restore" pg_restore --exit-on-error --create -h /tmp -p 55432 -U postgres -d postgres <"$dump"
 test "$(fingerprint "$restore" patent_demo)" = "$original"
-test "$(sql "$restore" patent_demo "SELECT has_table_privilege('patent_app','documents','SELECT') AND has_table_privilege('patent_app','documents','INSERT') AND NOT has_table_privilege('patent_app','documents','UPDATE') AND NOT has_table_privilege('patent_app','documents','DELETE') AND NOT has_database_privilege('public','patent_demo','CONNECT')")" = t
+test "$(sql "$restore" patent_demo "SELECT has_table_privilege('patent_app','documents','SELECT') AND has_table_privilege('patent_app','documents','INSERT') AND NOT has_table_privilege('patent_app','documents','UPDATE') AND NOT has_table_privilege('patent_app','documents','DELETE') AND NOT EXISTS (SELECT 1 FROM pg_database d CROSS JOIN LATERAL aclexplode(coalesce(d.datacl,acldefault('d',d.datdba))) a WHERE d.datname='patent_demo' AND a.grantee=0 AND a.privilege_type='CONNECT')")" = t
 test "$(sql "$restore" patent_demo "SELECT count(*) FROM pg_indexes WHERE tablename='documents' AND indexdef LIKE '%USING hnsw%'")" = 1
 test "$(sql "$restore" patent_demo "SELECT vector_dims(embedding) FROM documents WHERE id='DEMO-P4'")" = 384
 test "$(fingerprint "$DB" patent_demo)" = "$original"
 test "$("$D" inspect "$DB" --format '{{.State.StartedAt}}')" = "$started"
 for id in $before;do test "$("$D" inspect "$id" --format '{{.State.Running}}')" = true;done
+ test "$(for id in $before;do "$D" inspect "$id" --format '{{.Id}} {{.State.StartedAt}}';done)" = "$before_states"
 "$D" stop -t 5 "$restore" >/dev/null
 restore=
 echo FRESH_CLUSTER_RESTORE_FINGERPRINT_ACL_INDEX_PASS
