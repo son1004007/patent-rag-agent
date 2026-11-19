@@ -21,7 +21,8 @@
 - [ ] NAS/daemon 재부팅 자동 시작 순서 및 운영 복구 검증 (현재 시범 DB/API 실행 중, 수동 순차 시작)
 - [x] Secure MCP Tunnel NAS 측 준비 (공식 CLI v0.0.21 설치 및 Unix socket 14/14 PASS; [실측](docs/13-secure-tunnel-preflight.md))
 - [x] 사용자 runtime key 생성 및 Gateway saved metadata 확인 (값 미조회, 권한/유효성 미검증)
-- [ ] 개인 tunnel_id 생성/확인 (중앙 Issue #24; 사용자 조치 필요) → 최소권한 key 실인증, doctor/polling 및 ChatGPT 개인 플러그인 등록·쓰기·조회 E2E
+- [x] 개인 tunnel_id 생성/확인, Gateway key 파일 안전 전달 및 실제 터널 인증/doctor/polling 검증 ([실측](docs/13-secure-tunnel-preflight.md))
+- [ ] ChatGPT 개인 플러그인 생성/설치 (사용자 조치, 중앙 Issue #24) → discovery 및 실제 write/get/vector search E2E; 합성 전용, 외부 공개 금지
 - [ ] 공용 pgvector 엔진 별도 DB/role 운영·복원·부하 검증 (현재 기술사 배포 차단 우회 금지)
 - [ ] WIPS와 자체 MCP의 동일 대화 연동 (저장/전송 권리 확보 전 synthetic-only)
 ## P1 — Mock MVP (MCP 실증 이후; 독립 웹 Agent 대체안)
