@@ -1,6 +1,6 @@
 # Current State
 
-2026-11-19 / 공유 DB 공동 운영 사전 시험 PASS, 실제 재기동 보류
+2026-11-19 / WIPS·NAS MCP 읽기 연계 PASS, 실제 재기동 보류
 
 | 영역 | 상태 |
 |---|---|
@@ -19,7 +19,7 @@
 
 전역 registry 및 문서 목차 규칙 연결 확인. 설계 초안; 실제 실행으로 검증 예정.
 
-다음 (최신 사용자 결정): 공용 영속 DB 운영 전환은 기술사 배포 차단 해소 후; 독립적으로 WIPS/NAS MCP 합성 연계 및 허용 자료 연동 검증 → 화면 및 관리자 기능 개선 → 최종 간략 사용/관리자 설명서. 기존 웹 UI 유지. 독립 AI 검토 선택. Live API/DB/외부 공개 보안 및 계약 gate는 별도.
+다음 (최신 사용자 결정): 공용 영속 DB 운영 전환은 기술사 배포 차단 해소 후; 독립적으로 권리 명시 자료 전용 ingest 구현·격리 검증 → 화면 및 관리자 기능 개선 → 최종 간략 사용/관리자 설명서. 기존 웹 UI 유지. 독립 AI 검토 선택. Live API/DB/외부 공개 보안 및 계약 gate는 별도.
 
 배포 환경 제한: CPU CFS hard quota 및 pids limit 미지원, CPU shares와 128 MiB 메모리 제한 사용. 공식 Docker resource constraints 및 실제 runtime 결과 기준. 실제 장비 식별자/URL은 공개 repo에 기록하지 않음.
 
@@ -35,7 +35,8 @@
 | 기술사와 특허 DB 엔진 공동 운영 | 사전 시험 PASS 24/24, 동시 검색 400/400, 평균 SQL 2.130/2.210ms, 개별 복원 및 ACL 검증 — [실측](docs/16-shared-db-coexistence.md). 실제 영속 DB 통합 NOT RUN(기술사 배포 차단 유지); 기존 DB 미변경 |
 | Secure MCP Tunnel NAS 측 | PASS — 공식 CLI v0.0.21 SHA/기동, Unix 소켓 14/14, 기존 HTTP 16/16, relay 실행·외부 포트 0; [실측](docs/13-secure-tunnel-preflight.md) |
 | OpenAI Secure MCP Tunnel | CONNECTED — [실측](docs/13-secure-tunnel-preflight.md), secret 0600, doctor PASS, OpenAI metadata fetched, MCP session initialized, /healthz /readyz 200, active polling success, 외부 port publish 0 |
-| ChatGPT 개인 플러그인 등록/쓰기·조회 | PASS — USER/PRIVATE, 실제 ChatGPT 신규 P4 저장 created=true; DB 4건, 384D, Top1 일치; [실측](docs/14-chatgpt-plugin-e2e.md). WIPS 연계 및 실제 원문 미검증 |
+| ChatGPT 개인 플러그인 등록/쓰기·조회 | PASS — USER/PRIVATE, 실제 ChatGPT 신규 P4 저장 created=true; DB 4건, 384D, Top1 일치; [실측](docs/14-chatgpt-plugin-e2e.md). WIPS 실제 원문 적재 미검증 |
+| WIPS/NAS MCP 동일 대화 연계 | PASS — 실제 WIPS 식별정보 3건, 독립 주제 NAS 검색 P4 Top1, 기존 fixture 중복 차단; 참조 정책 17/17 mock PASS, live ingest/통합 ranking NOT RUN. [실측](docs/17-dual-mcp-workflow.md) |
 
 ## 최신 운영 지시
 - 사용자 최신 결정: 아직 실제 재기동하지 않는다. NAS 및 기존 컨테이너 stop/restart 금지, 자동 시작 등록/실행은 승인 대기.
