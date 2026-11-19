@@ -29,4 +29,6 @@
 | 기술사 RAG 개발 pgvector volume/SDK cache | CONFIRMED — NAS 읽기 전용 inventory, 상시 RAG 컨테이너 없음 |
 | 합성 MCP 계약 시험 | PASS — NAS disposable ASGI, protocol 2025-11-25, save/get/substring/idempotency/denial; [실측](docs/09-mcp-contract-smoke.md) |
 | 독립 NAS MCP ChatGPT 등록/write E2E | NOT RUN |
-| 기술사와 특허 DB 엔진 공동 사용 | PLANNED — 도메인 DB/role 분리, 기존 DB 미변경 |
+| 공동 pgvector SQL 시험 | PASS 18/18 — 합성 384D, 동일 클러스터 DB/role 분리, 실제 교차 접속 거부, DB 재기동; [실측](docs/10-shared-vector-smoke.md) |
+| 기술사와 특허 DB 엔진 공동 운영 | PLANNED — 기존 DB 미변경; MCP→DB 및 실임베딩 통합 NOT RUN |
+| Secure MCP Tunnel | 준비 조건 확인 — 개인 조직의 tunnel ID와 제한 runtime key 미확인; 상시 연결 NOT RUN |
