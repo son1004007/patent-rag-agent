@@ -19,6 +19,13 @@
 
 전역 registry 및 문서 목차 규칙 연결 확인. 설계 초안; 실제 실행으로 검증 예정.
 
-다음: 정적 MVP 사용자 확인 → 화면 개선 → 실제 기능 구현 → 최종 간략 사용/관리자 설명서. 독립 AI 검토 선택. Live API/DB/외부 공개 보안 및 계약 gate는 별도.
+다음 (최신 사용자 결정): ChatGPT 중심 MCP 연결/쓰기/조회 실증 → 공유 pgvector 엔진의 격리된 특허 DB 검증 → WIPS 허용 자료 연동 → 화면 및 관리자 기능 개선 → 최종 간략 사용/관리자 설명서. 기존 웹 UI 유지. 독립 AI 검토 선택. Live API/DB/외부 공개 보안 및 계약 gate는 별도.
 
 배포 환경 제한: CPU CFS hard quota 및 pids limit 미지원, CPU shares와 128 MiB 메모리 제한 사용. 공식 Docker resource constraints 및 실제 runtime 결과 기준. 실제 장비 식별자/URL은 공개 repo에 기록하지 않음.
+
+| 추가 검증 항목 | 상태 |
+|---|---|
+| 개인 WIPS MCP 플러그인 존재 | CONFIRMED — 개인 플러그인 목록 확인 (기존 성공 호출 이력) |
+| 기술사 RAG 개발 pgvector volume/SDK cache | CONFIRMED — NAS 읽기 전용 inventory, 상시 RAG 컨테이너 없음 |
+| 독립 NAS MCP ChatGPT 등록/write E2E | NOT RUN |
+| 기술사와 특허 DB 엔진 공동 사용 | PLANNED — 도메인 DB/role 분리, 기존 DB 미변경 |
