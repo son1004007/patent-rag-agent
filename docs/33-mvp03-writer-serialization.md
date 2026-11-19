@@ -38,3 +38,6 @@ Gateway job `job_01M7SJBSQV0076SP1WTD2D9BXN` 종료 0. Python compile, 셸 문�
 - advisory lock이므로 직접 worker·별도 DB writer·LocalBackend 직접 import는 잠금을 우회할 수 있다. 지원 CLI만 허용하고 운영에서 legacy/direct 경로를 배제해야 한다. DB atomicity/권한을 대체하지 않는다.
 - 실제 구매 문헌 권리·운영 승인, private transport 및 백업 확인 후 check→apply→재조회. 두 CLI 호출 사이 lock은 해제되며 apply가 재검증. BUSY/부분 실패 시 자동 우회·무한 retry 금지.
 - [승인 절차](26-mvp03-approved-ingest-adapter.md), [중앙 #30](https://github.com/son1004007/ai-agent-workflow-playbook/issues/30), [사용자 평가 #31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31). 독립 AI 검토 NOT RUN(owner-approved optional).
+
+## 후속 교차 컨테이너 실측
+[로컬 transport](34-mvp03-local-transport.md) 시험에서 동일 로컬 lock 디렉터리를 RO mount한 서로 다른 두 시험 컨테이너 간 lock 경합 차단 PASS. 실제 운영 mount 배치는 별도 승인 대기.

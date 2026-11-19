@@ -17,6 +17,7 @@
 | [05 보안·배포](docs/05-deployment.md) | 운영자 — HTTPS·네트워크·복구 |
 | [06 연동 및 계약](docs/06-provider-policy.md) | 사업/개발자 — 비용·권한·MCP |
 | [07 테스트](docs/07-test-plan.md) | QA — 검증 기준 |
+| [34 MVP-03 승인 NAS 로컬 실행 경로](docs/34-mvp03-local-transport.md) | 운영자 — 단건 stdin launcher, 코드·대상 pin, 교차 컨테이너 잠금 및 최종 적용 절차 |
 | [33 MVP-03 승인 적재 CLI 직렬화](docs/33-mvp03-writer-serialization.md) | 개발자/운영자 — 공용 inode 잠금, 경합 차단 및 격리 DB 회귀 |
 | [32 MVP-03 실제 DB 엔진 격리 적재 시험](docs/32-mvp03-isolated-backend-test.md) | 개발자/운영자 — 합성 자료 CLI, LocalBackend, 실제 E5·pgvector, 중복·부분복구 시험 |
 | [29 사용자 설명서](docs/29-mvp06-user-guide.md) | 사용자 — ChatGPT 시작, 검색 프롬프트, 결과 해석 및 장애 대응 |

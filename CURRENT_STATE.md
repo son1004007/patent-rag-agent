@@ -1,6 +1,6 @@
 # Current State
 
-2026-11-19 / MVP-01 통합 MCP 운영 배포 56/56 PASS; 새 ChatGPT 실제 특허 읽기 및 MVP-04 양 소스 기본 통합/비교 PASS; MVP-03 적재 어댑터 구현·합성 및 실제 DB 엔진 격리 시험 17/17 PASS, writer 직렬화 및 회귀 53/53 PASS; MVP-05 실제 DB 백업·격리 복원 및 격리 rollback 96/96 PASS; DB 5건·8섹션·401청크; MVP-06 실제 읽기 시험 PASS 및 설명서 작성, 사용자 평가 대기
+2026-11-19 / MVP-01 통합 MCP 운영 배포 56/56 PASS; 새 ChatGPT 실제 특허 읽기 및 MVP-04 양 소스 기본 통합/비교 PASS; MVP-03 적재 어댑터 구현·합성 및 실제 DB 엔진 격리 시험 17/17 PASS, writer 직렬화 및 회귀 53/53 PASS, 로컬 transport 격리 E2E PASS; MVP-05 실제 DB 백업·격리 복원 및 격리 rollback 96/96 PASS; DB 5건·8섹션·401청크; MVP-06 실제 읽기 시험 PASS 및 설명서 작성, 사용자 평가 대기
 
 | 영역 | 상태 |
 |---|---|
@@ -19,7 +19,7 @@
 
 전역 registry 및 문서 목차 규칙 연결 확인. 설계 초안; 실제 실행으로 검증 예정.
 
-다음 (최신 사용자 결정): [TASKS.md](TASKS.md)의 MVP-01~06을 우선한다. 통합 MCP 운영 전환 완료(승인받은 API만 재시작), 신규 도구 Refresh 및 실제 ChatGPT 조회 PASS 이후 MVP-02 로컬 및 MVP-03 한정 실제 흐름/재사용 검증 완료 후 MVP-04 기본 통합/근거 비교 참조 구현 및 실제 양 소스 한정 시험 PASS. MVP-03 승인된 자동 적재 adapter 코드·합성 및 실제 빈 격리 DB LocalBackend 17/17 PASS;  실제 신규 적재 및 private transport 미완료. MVP-05 실제 자료 온라인 backup/격리 복원 PASS. 격리 rollback 96/96 및 읽기/안전 차단 인수 4/5 시나리오 PASS; 실제 신규 쓰기 BLOCKED ([중앙 #30](https://github.com/son1004007/ai-agent-workflow-playbook/issues/30)). MVP-06 사용자·관리자 설명서 작성 및 새 연구 질의 실제 읽기 시험 PASS. 사용자 직접 평가 [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 및 실제 신규 쓰기 [#30](https://github.com/son1004007/ai-agent-workflow-playbook/issues/30) 대기. 전환 후 전체 E2E와 최소 사용 안내로 MVP 인수. 고급 검색·웹 UI/관리·공용 DB 전환·기업/SSH는 MVP 이후; 기업 별도 착수 요청 전 진행하지 않는다. 기존 보안·계약·기술사 배포 gate 및 재기동 금지는 유지.
+다음 (최신 사용자 결정): [TASKS.md](TASKS.md)의 MVP-01~06을 우선한다. 통합 MCP 운영 전환 완료(승인받은 API만 재시작), 신규 도구 Refresh 및 실제 ChatGPT 조회 PASS 이후 MVP-02 로컬 및 MVP-03 한정 실제 흐름/재사용 검증 완료 후 MVP-04 기본 통합/근거 비교 참조 구현 및 실제 양 소스 한정 시험 PASS. MVP-03 승인된 자동 적재 adapter 코드·합성 및 실제 빈 격리 DB LocalBackend 17/17 PASS;  실제 신규 적재 및 운영 private transport 배치 미완료(로컬 launcher 구현·격리 E2E PASS). MVP-05 실제 자료 온라인 backup/격리 복원 PASS. 격리 rollback 96/96 및 읽기/안전 차단 인수 4/5 시나리오 PASS; 실제 신규 쓰기 BLOCKED ([중앙 #30](https://github.com/son1004007/ai-agent-workflow-playbook/issues/30)). MVP-06 사용자·관리자 설명서 작성 및 새 연구 질의 실제 읽기 시험 PASS. 사용자 직접 평가 [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 및 실제 신규 쓰기 [#30](https://github.com/son1004007/ai-agent-workflow-playbook/issues/30) 대기. 전환 후 전체 E2E와 최소 사용 안내로 MVP 인수. 고급 검색·웹 UI/관리·공용 DB 전환·기업/SSH는 MVP 이후; 기업 별도 착수 요청 전 진행하지 않는다. 기존 보안·계약·기술사 배포 gate 및 재기동 금지는 유지.
 
 배포 환경 제한: CPU CFS hard quota 및 pids limit 미지원, CPU shares와 128 MiB 메모리 제한 사용. 공식 Docker resource constraints 및 실제 runtime 결과 기준. 실제 장비 식별자/URL은 공개 repo에 기록하지 않음.
 
@@ -63,6 +63,8 @@
 | MVP-03 실제 DB 엔진 격리 적재 | PASS 17/17, 가상 2건·4섹션·10청크·384D, 신규·무쓰기·부분 복구·충돌·ACL, 운영 전체 fingerprint 및 컨테이너 불변. [실측](docs/32-mvp03-isolated-backend-test.md). 실제 신규 특허/운영 transport 및 사용자 평가 대기. |
 
 | MVP-03 승인 CLI writer 직렬화 | PASS 53/53 (native 35, 격리 DB 18), 공유 inode lock·경합 차단·FD 승계. 운영 DB fingerprint 및 기존 컨테이너 불변. 운영 배포/legacy writer 배제/교차 컨테이너 검증·신규 승인/사용자 평가 대기. [실측](docs/33-mvp03-writer-serialization.md) |
+
+| MVP-03 NAS 로컬 단건 transport | 코드 및 실제 격리 E2E PASS — check/신규/1·2·5·384D/재사용 쓰기0/코드 pin 차단/교차 컨테이너 lock, 운영 fingerprint·모든 기존 실행 컨테이너 불변. [실측](docs/34-mvp03-local-transport.md). 실제 운영 배치/구매 승인 #30 및 사용자 평가 #31 대기. |
 
 ## 최신 운영 지시
 - 사용자 최신 결정: 특허 MCP API만 재시작·배포 승인 및 완료. NAS/DB/relay/tunnel/다른 컨테이너 stop/restart 금지 유지, 자동 시작 등록/실행 승인 대기.

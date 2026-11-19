@@ -43,3 +43,6 @@ MVP-03은 구현·합성 검증 PASS, 운영 자동 적재와 실제 신규 자�
 
 ## 후속 실측 갱신
 [실제 DB 엔진 격리 시험](32-mvp03-isolated-backend-test.md) 17/17 PASS — 실제 LocalBackend 및 worker, 가상 자료 신설/재사용/누락 복구·권한 검증 완료. 최초 종료1 이후 최종 exit0, 운영 DB·기존 컨테이너 불변. 실제 운영 private transport 및 실제 신규 구매 특허 적재는 NOT RUN.
+
+## 후속 로컬 transport
+[단건 NAS 로컬 실행 경로](34-mvp03-local-transport.md) 구현 및 격리 E2E PASS. 실제 운영 적용/승인된 신규 구매 자료 및 JS·ChatGPT 운영 연결은 미실행. 승인 전 신규 자료 요청/쓰기 금지.

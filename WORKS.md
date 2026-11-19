@@ -45,4 +45,6 @@
 
 | MVP-03 writer 직렬화 | [실측](docs/33-mvp03-writer-serialization.md) — native 35 + 실제 격리 DB 18 = 53/53 PASS; 경쟁 CLI DB 쓰기0, 합성 2/4/10/384D, 운영 fingerprint 및 모든 기존 컨테이너 불변, cleanup PASS. 운영 배포/신규 문헌 승인/transport 미실행. |
 
+| MVP-03 로컬 transport | [실측](docs/34-mvp03-local-transport.md) — 실제 격리 E2E: 교차 컨테이너 lock/check/신규 1·2·5·384D/재실행 쓰기0/코드 pin 차단, 운영 fingerprint 및 모든 기존 컨테이너 불변, cleanup PASS. 실제 구매·운영 배치/ChatGPT 쓰기 미실행. |
+
 실제 자료는 사용자 구매 확인에 따른 개인 NAS 내부 소량 적재 범위로 분리한다. 공개 저장소 원문 보존 및 재배포는 하지 않는다. 기존 기술사 개발 볼륨과 시안 서비스 유지. 작업별 실행 증거를 확인한 뒤 결과를 갱신한다. 개인 터널 및 실제 ChatGPT 읽기 호출 PASS; 실제 자동 적재와 안전·복구 인수 잔여는 TASKS 참조.

@@ -22,6 +22,7 @@
 - [x] MVP-03 운영 승인 기반 단건 adapter 구현/합성 검증 — JS 29/29, NAS native Python 23/23, 문헌별 허용/중복/실패·부분 재개/사후 검증. [실측](docs/26-mvp03-approved-ingest-adapter.md).
 - [x] MVP-03 실제 PostgreSQL·pgvector·E5 기반 합성 단건 적재 시험 17/17 — CLI 승인/변조 차단·신규·중복·부분 복구/충돌/ACL, 운영 원본/컨테이너 불변. [실측](docs/32-mvp03-isolated-backend-test.md).
 - [x] MVP-03 승인 CLI 단건 writer 직렬화 구현 및 실제 NAS native/격리 DB 검증 53/53. [실측](docs/33-mvp03-writer-serialization.md). 운영 공용 lock mount/legacy writer 배제 및 실제 신규 적재는 별도.
+- [x] MVP-03 단건 NAS 로컬 stdin transport 및 교차 컨테이너 lock 구현·격리 E2E PASS. [실측](docs/34-mvp03-local-transport.md). 실제 운영 배치/승인 및 ChatGPT 신규 쓰기 연결은 미실행.
 - [ ] MVP-03 실제 승인된 private transport 연결 및 신규 문헌 1건 실제 쓰기/재사용 E2E — 공급자·구매/개인 내부 권리 및 운영 승인 확인, 기존 writer 격리·직렬화. 실제 빈 격리 DB LocalBackend 17/17 PASS ([실측](docs/32-mvp03-isolated-backend-test.md)), 운영 write/transport NOT RUN. 기존 MCP reader 및 synthetic writer 권한은 그대로 유지.
 - [x] MVP-04 기본 결과 통합·중복 제거·근거 표시 및 후보 비교/추천 보류 — 합성 27/27, 실제 NAS 3+WIPS 3 통합 5건·근거 18개·HOLD 3·EXCLUDE 2, 실제 물성 근거 부족 추천 0. [실측](docs/25-mvp04-candidate-comparison.md). 상시 자동 연계와 전체 인수는 MVP-03/MVP-05.
 - [x] MVP-05 실제 자료 온라인 dump 독립 격리 복원 — 데이터 5/8/401, fingerprint·ACL·HNSW·384D·Top3 일치, 운영 상태 불변 및 cleanup PASS; ChatGPT 실제 읽기 회귀 PASS. [실측](docs/27-mvp05-private-backup-restore.md).
@@ -30,7 +31,7 @@
 - [x] MVP-06 실제 연구 질문 읽기 시험 및 최소 안내 — [사용자](docs/29-mvp06-user-guide.md), [관리자](docs/30-mvp06-operator-guide.md), [실측](docs/31-mvp06-user-trial.md) (3+3→5, 근거18, HOLD4/EXCLUDE1).
 - [ ] MVP-06 사용자 직접 결과 평가/피드백 — [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 대기.
 
-**다음 실행 규칙:** 사용자 승인으로 MVP-01 API만 재시작·운영 전환 완료. NAS/DB/기타 컨테이너 재기동/자동 시작은 계속 금지. 개인 플러그인 Refresh 및 신규 읽기 도구 E2E PASS, MVP-02 로컬 및 MVP-03 한정 실제 흐름/재사용 시험 완료. MVP-04 기본 결과 통합/비교 참조 구현·한정 실제 시험 PASS. MVP-03 승인된 쓰기 adapter 구현·합성 PASS, 실제 신규 쓰기/transport는 권리·운영 승인과 직렬화 조건 유지. MVP-05 실제 온라인 백업·격리 복원 PASS; 격리 rollback 및 읽기/안전 차단 인수 4/5 PASS. MVP-06 설명서와 실제 읽기 시험 PASS. 실제 DB 엔진 격리 LocalBackend 적재 17/17 및 writer 잠금 추가 후 회귀 53/53 PASS. 사용자 직접 평가(#31) 및 실제 신규 쓰기 인수(#30)가 남음. 신규 쓰기는 권리 및 운영 승인 후 재개. 인수 기준 충족 전 P1/P2/P3를 선행하지 않는다. 합성/로컬 성공을 실제 ChatGPT E2E 성공으로 표시하지 않는다. 구매 자료의 개인 내부 적재 지시 범위를 유지하고, 실제 외부 반환/LLM 처리·계약상 대량 수집 등 확대는 필요한 확인과 승인 후 수행한다. 필요한 권리 확인은 MVP에서 해당 기능의 gate로 유지하고, 광범위한 기업 계약 검토는 뒤로 보낸다.
+**다음 실행 규칙:** 사용자 승인으로 MVP-01 API만 재시작·운영 전환 완료. NAS/DB/기타 컨테이너 재기동/자동 시작은 계속 금지. 개인 플러그인 Refresh 및 신규 읽기 도구 E2E PASS, MVP-02 로컬 및 MVP-03 한정 실제 흐름/재사용 시험 완료. MVP-04 기본 결과 통합/비교 참조 구현·한정 실제 시험 PASS. MVP-03 승인된 쓰기 adapter 구현·합성 PASS, 실제 신규 쓰기/transport는 권리·운영 승인과 직렬화 조건 유지. MVP-05 실제 온라인 백업·격리 복원 PASS; 격리 rollback 및 읽기/안전 차단 인수 4/5 PASS. MVP-06 설명서와 실제 읽기 시험 PASS. 실제 DB 엔진 격리 LocalBackend 적재 17/17 및 writer 잠금 추가 후 회귀 53/53 PASS. 로컬 launcher 격리 E2E PASS. 사용자 직접 평가(#31) 및 실제 신규 쓰기 인수(#30)가 남음. 추가 가상 시험 반복/P1 선행 없이 승인된 운영 적용 및 인수 대기. 신규 쓰기는 권리 및 운영 승인 후 재개. 인수 기준 충족 전 P1/P2/P3를 선행하지 않는다. 합성/로컬 성공을 실제 ChatGPT E2E 성공으로 표시하지 않는다. 구매 자료의 개인 내부 적재 지시 범위를 유지하고, 실제 외부 반환/LLM 처리·계약상 대량 수집 등 확대는 필요한 확인과 승인 후 수행한다. 필요한 권리 확인은 MVP에서 해당 기능의 gate로 유지하고, 광범위한 기업 계약 검토는 뒤로 보낸다.
 
 ## P1 — MVP 사용 피드백 이후 품질 고도화 (BACKLOG)
 
