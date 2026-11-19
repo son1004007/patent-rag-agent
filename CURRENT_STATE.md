@@ -79,3 +79,5 @@
 - 2026-11-19 사용자 최신 피드백: WIPS MCP 검색 결과 NAS 자동 저장 및 사람용 원문 보관/조회 요구. [P0 요구사항](docs/36-mvp-automatic-archive.md). 텍스트 원문 단건 저장 PASS, 자동 연결/전체 원문 조회/PDF·도면 파일 검증 미완료. 추가 실자료 저장·배포는 이번에 미실행.
 
 - 원본 PDF 확보 경로 보완: [공식 API 후보 및 파일 수집 설계](docs/36-mvp-automatic-archive.md) — KIPRIS Plus 국내 공보 API 우선, EPO 및 공급자 별도 경로 검토. WIPS MCP 텍스트 저장 PASS와 PDF 수집 미구현 분리. 공식 서비스 안내 확인, 실제 API 인증/다운로드/권리 검증 NOT RUN.
+
+- 2026-11-20 P0-1 검색 목록 자동 저장 착수: [구현/검증](docs/37-mvp-search-list-archive.md), JS 9/9·실제 WIPS 기존 승인 문헌 1행 callback PASS(저장 보류). DB 통합 시험 EXECUTOR_LOST/재시도 queued 취소; 운영 preflight 6/10/417, 신규 schema 0, 시험 컨테이너 0. 실제 저장/운영 배포 자동 연결 미실행. 권리 범위 [#34](https://github.com/son1004007/ai-agent-workflow-playbook/issues/34) 대기.

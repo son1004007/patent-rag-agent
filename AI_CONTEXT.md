@@ -40,3 +40,5 @@
 - 최신 사용자 요구: WIPS 검색 시 NAS 자동 저장 및 원문 보존/조회. [P0 요구사항](docs/36-mvp-automatic-archive.md). 기존 단건 운영 PASS와 상시 자동 보관 미구현 분리; 권리와 접근 경계 유지. 다음 작업 자동 보관 연결 및 원문 읽기 경로.
 
 - 원본 PDF는 WIPS MCP 텍스트와 별도 보관 경로로 설계. [공식 API 후보](docs/36-mvp-automatic-archive.md): KIPRIS Plus 국내 공보 우선, EP Publication Server/OPS 및 WIPS 별도 계약 검토. PDF 원본 파일과 파생 텍스트/벡터를 문헌 ID로 연결; 실제 API·권리·다운로드 미검증.
+
+- P0-1 [목록 보관 기반](docs/37-mvp-search-list-archive.md) 작성, JS 9/9 및 실제 WIPS callback 1행(저장 보류). NAS 격리 DB 실행 미확인(EXECUTOR_LOST, 재시도 queued 취소), 다음 시험 재실행→복원 호환→정책·writer 및 실제 연결. 상시 자동 보관 권리 #34, 본문/벡터 쓰기 없음.

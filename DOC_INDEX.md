@@ -17,6 +17,7 @@
 | [05 보안·배포](docs/05-deployment.md) | 운영자 — HTTPS·네트워크·복구 |
 | [06 연동 및 계약](docs/06-provider-policy.md) | 사업/개발자 — 비용·권한·MCP |
 | [07 테스트](docs/07-test-plan.md) | QA — 검증 기준 |
+| [37 검색 목록 자동 보관 기반](docs/37-mvp-search-list-archive.md) | 개발자/운영자 — 별도 목록 schema, wrapper, 승인 경계, 실제 연계 및 DB 시험 상태 |
 | [36 검색 연동 자동 보관 및 원문 조회](docs/36-mvp-automatic-archive.md) | 사용자/개발자 — 검색 결과 자동 저장, 원문 보존, 공식 PDF 수집 API 후보, 권리·중복·조회 인수 조건 |
 | [35 MVP-03/05 실제 단건 운영 인수](docs/35-mvp03-actual-ingest-acceptance.md) | 운영자/연구자 — 실제 신규 적재·중복 방지·ChatGPT 원문 근거 조회 및 제한 |
 | [34 MVP-03 승인 NAS 로컬 실행 경로](docs/34-mvp03-local-transport.md) | 운영자 — 단건 stdin launcher, 코드·대상 pin, 교차 컨테이너 잠금 및 최종 적용 절차 |
