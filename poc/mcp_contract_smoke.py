@@ -1,5 +1,6 @@
 """Disposable MCP contract smoke. Synthetic data only; no DB/network persistence."""
 import asyncio
+import json
 import httpx
 from mcp.server.fastmcp import FastMCP
 from mcp.types import ToolAnnotations
@@ -59,17 +60,19 @@ async def smoke():
             assert annotations["save_document"]["readOnlyHint"] is False and annotations["get_document"]["readOnlyHint"] is True
             async def call(name, args):
                 return await rpc("tools/call", {"name":name,"arguments":args})
+            def payload(result):
+                return result.get("structuredContent") or json.loads(result["content"][0]["text"])
             ref = {"document_id":"DEMO-001","text":"합성 예시: 전선 도체 소재"}
             first=await call("save_document",ref)
-            assert not first.get("isError") and first["structuredContent"]["created"] is True
+            assert not first.get("isError") and payload(first)["created"] is True
             again=await call("save_document",ref)
-            assert not again.get("isError") and again["structuredContent"]["created"] is False
+            assert not again.get("isError") and payload(again)["created"] is False
             got=await call("get_document",{"document_id":"DEMO-001"})
-            assert got["structuredContent"]["text"]==ref["text"]
+            assert payload(got)["text"]==ref["text"]
             found=await call("search_documents",{"query":"도체"})
             assert "DEMO-001" in str(found) and not found.get("isError")
             missing=await call("get_document",{"document_id":"IMPE-001"})
-            assert missing["structuredContent"]["found"] is False
+            assert payload(missing)["found"] is False
             blocked=await call("save_document",{"document_id":"IMPE-001","text":"fixture"})
             assert blocked["isError"] is True
             conflict=await call("save_document",{"document_id":"DEMO-001","text":"changed"})
