@@ -37,3 +37,6 @@ flowchart LR
 ## 한계 및 후속
 - Top3는 동일한 저장 embedding을 질의로 사용한 SQL 비교로, 신규 모델 추론·복원본 MCP 전체 배포 검증은 아님. 실제 운영 역할 암호/SCRAM 재인증, 다른 계정 거부, 교차 DB 실제 접속 및 writer UPDATE/DELETE 시도는 이번에는 NOT RUN(ACL/SET ROLE 검증과 구분). 운영 DB 실제 덮어쓰기 또는 rollback 재배포, NAS 재기동, 자동 백업/자동 기동, 외부 장치의 disaster recovery는 NOT RUN. 별도 승인 및 격리 경계 유지.
 - 실제 신규 구매 특허 자동 적재 및 운영 private transport 연결은 [MVP-03 adapter](26-mvp03-approved-ingest-adapter.md)의 권리/운영 승인 및 직렬화 조건 충족 후 실시. MVP-05 전체 인수 5개 시나리오 및 rollback 리허설은 남음. 다음 작업은 운영 변경 없는 격리 rollback 리허설과 인수 시나리오 정리·검증. 독립 AI 검토 NOT RUN(owner-approved optional).
+
+## 후속 갱신
+[격리 rollback 및 인수 시험](28-mvp05-rollback-acceptance.md) PASS 96/96, 읽기/안전 차단 4/5. 실제 신규 쓰기 gate [중앙 #30](https://github.com/son1004007/ai-agent-workflow-playbook/issues/30); 운영 rollback NOT RUN.

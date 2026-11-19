@@ -37,4 +37,6 @@
 
 | MVP-05 실제 특허 DB 복원 | [실측](docs/27-mvp05-private-backup-restore.md) — 최종 job succeeded exit0, 1,037,393 bytes, 5/8/401 및 전체 fingerprint/ACL/HNSW/Top3/384D 일치. 원본·기존 컨테이너 불변, cleanup·SHA256 PASS, 이후 실제 ChatGPT 읽기 3/3. 앞선 cleanup 종료1 두 건 기록, 신규 쓰기/운영 rollback 및 전체 인수 미완료. |
 
+| MVP-05 격리 rollback·인수 | [실측](docs/28-mvp05-rollback-acceptance.md) — 실제 이전/현재 코드 정본 4/4 확인, 복제 DB 2개·HTTP 현재40/이전16/현재40=96/96, 임시 SCRAM/ACL/교차 DB 거부, 복제 및 운영 원본·기존 컨테이너 불변, 정리 성공. 실제 읽기/안전 차단 4/5, 실제 신규 쓰기 BLOCKED [#30](https://github.com/son1004007/ai-agent-workflow-playbook/issues/30). 실제 운영 rollback NOT RUN. |
+
 실제 자료는 사용자 구매 확인에 따른 개인 NAS 내부 소량 적재 범위로 분리한다. 공개 저장소 원문 보존 및 재배포는 하지 않는다. 기존 기술사 개발 볼륨과 시안 서비스 유지. 작업별 실행 증거를 확인한 뒤 결과를 갱신한다. 개인 터널 및 실제 ChatGPT 읽기 호출 PASS; 실제 자동 적재와 안전·복구 인수 잔여는 TASKS 참조.

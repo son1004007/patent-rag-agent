@@ -47,3 +47,6 @@ MVP-01 신규 도구 ChatGPT end-to-end(갱신 후); MVP-03 자동 적재 adapte
 - 이번 시험은 읽기 호출만 수행. save_document 재호출, WIPS 신규 조회/실제 적재, DB 직접 재계수/fingerprint, 비인가 다른 계정/교차 DB 시험, 지연 측정, 실제 rollback 및 실제 dump 복원은 NOT RUN. 직전 운영 배포의 56/56 및 기존 권한 시험은 기존 증거이며 새 E2E 결과와 구분한다. 서버/DB/터널/컨테이너 설정 변경·재기동 요청 없음. 외부 독립 AI 리뷰 NOT RUN (owner-approved optional).
 - 공개 저장소에는 실제 특허번호/제목/ID·원문·개별 해시·접속 정보 미기록. 일반 공개 연구 질의 및 집계 검증만 기록. 개인 ChatGPT에서 허용된 읽기 시험에 한정; 공급 계약 범위 확대·재배포·외부 공개 승인 아님. 중앙 공개 범위 Issue #22는 현행 그대로 유지.
 - MVP-01 신규 도구 Refresh/실제 ChatGPT 읽기 E2E gate 해소. 기존 API 배포/읽기 회귀 성공, 실제 rollback 검증은 MVP-05 잔여 안전/복구 gate로 명시(운영 재시작 승인 제한 유지). 다음은 MVP-04 근거 통합/비교·추천 및 MVP-03 승인된 쓰기 adapter 잔여 검증, MVP-05 실제 복원/인수.
+
+## 후속 갱신
+[격리 rollback 리허설](28-mvp05-rollback-acceptance.md)에서 실제 보존 이전 코드 및 현재 코드의 격리 HTTP 현재40→이전16→현재40 PASS. 운영 rollback은 여전히 NOT RUN, 별도 승인 경계 유지.
