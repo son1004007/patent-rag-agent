@@ -1,7 +1,7 @@
 # Secure MCP Tunnel 연결 준비 — 2026-11-19
 
 ## 판정
-NAS 측 연결, OpenAI 터널 실인증 및 polling PASS. ChatGPT 개인 플러그인 설치와 실제 tool call은 사용자 등록 대기. 아래 초기 준비 기록은 시간순 이력이다.
+NAS 측 연결, OpenAI 터널 실인증 및 polling PASS. 사용자 설치 및 ChatGPT 실제 신규 저장·조회·검색까지 PASS — [후속 실측](14-chatgpt-plugin-e2e.md). 아래 초기 준비 기록은 시간순 이력이다.
 
 ```mermaid
 flowchart LR
@@ -43,3 +43,5 @@ flowchart LR
 - 재검사 `job_01M7S3H1MN00FETNENMCVXZ108` succeeded: doctor RESULT ok/exit0, 미인증 probe 401은 정상 도달로 판정. 실제 tunnel-client 시작 `job_01M7S3JB9000GW7TXWEE5VCZS1` succeeded: OpenAI tunnel metadata fetched (사용자가 지정한 이름), 실제 MCP session initialized protocol 2025-11-25, /readyz 200. 별도 outbound bridge container, nonroot, read-only root, cap-drop ALL, no-new-privileges, memory256MiB, isolated read-only binary/socket/config/개별 credential mount, Docker socket/DB 암호/기술사 DB 미마운트, 외부 port publish=0. 개인 합성 PoC에 한해 정적 MCP bearer를 터널 클라이언트에서 로컬 upstream에 전달. 사용자별 OAuth 미구현.
 - Health `job_01M7S3KHVZ0053BA9BMF9A9DKC` /healthz /readyz HTTP200; 초기 polling timestamp 0. 짧은 polling 관측 `job_01M7S3MH7E00V3SXCRJ8N9960K` deadline으로 FAIL(30초 long poll 완료 전 관측). 후속 `job_01M7S3P4NT006YFJTDPJYCGKHV` succeeded: health/ready/metrics 200, poll cycles 4, last successful timestamp >0, completed poll latency count3, error 없음(출력 범위 내). **OpenAI 제어면 연결 및 polling 실증 PASS.** ChatGPT 플러그인의 discovery/save/get/search E2E는 아직 NOT RUN.
 - 다음 사용자 조치: ChatGPT 웹 Plugins → + → Add custom MCP server → Connection Tunnel → 본인 personal tunnel 선택 또는 ID 붙여넣기 → Authentication: No authentication (합성 전용 개인 터널의 로컬 upstream bearer는 유지; 사용자별 OAuth 대체 아님) → 위험 안내 확인 → Create as a plugin → 개인 설치. 터널이 개인 조직/컨텍스트에만 연결된 경우에 한함; 공유·외부 공개 금지. 실제 tool discovery 및 read/write 검증 후 완료 판정. 사용자 승인/설치는 직접 수행해야 하며 이번 계정 UI는 미검증. [공식 절차](https://developers.openai.com/api/docs/guides/custom-mcp-server), [터널 문서](https://developers.openai.com/api/docs/guides/secure-mcp-tunnels). 중앙 private Issue #24는 plugin E2E 대기로 OPEN 유지. 자동 기동/daemon reboot 미검증. 이 단계에 모델 API 호출이나 WIPS 자료 저장은 없음.
+
+- 후속 확정: 사용자 개인 등록 완료 및 USER/PRIVATE 확인. 실제 ChatGPT 호출과 신규 INSERT/384D/검색 검증은 [14 E2E](14-chatgpt-plugin-e2e.md) 참조. 기존 대기 문구는 과거 기록이며 중앙 #24 완료 조건 충족.
