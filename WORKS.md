@@ -14,5 +14,6 @@
 | 합성 전용 영속 MCP 시범 서비스 | [서비스](poc/stage_service.py) / [HTTP 시험](poc/stage_http_test.py) / [배포기](poc/stage_deploy.sh), commit `05c5145960e72721b49d7ba4d8e940c6cdd28455`; [최종 실측](docs/12-persistent-mcp-stage.md) — 최초/재시작 HTTP 16/16씩 (32/32), backup/restore 및 재시작 fingerprint PASS; 사설 격리 DB/API 2개 RUNNING, 외부 포트 0. |
 | Secure MCP Tunnel NAS 측 준비 | [실측](docs/13-secure-tunnel-preflight.md): 기존 HTTP 16/16 재검증, Unix socket 14/14 PASS, 공식 CLI v0.0.21 해시/기동 PASS. 개인 계정의 tunnel_id/제한 key 미확인으로 실제 연결 BLOCKED. |
 | 개인 터널 인증 준비 갱신 | 사용자 runtime key 생성/저장 보고 및 Gateway metadata 확인. [터널 생성 안내와 다음 단계](docs/13-secure-tunnel-preflight.md). 키 권한·유효성 및 실제 tunnel_id 미확인, 연결 NOT RUN. |
+| OpenAI 개인 터널 실연결 | [실측](docs/13-secure-tunnel-preflight.md) — 사용자 ID 및 saved key 적용, 최초 doctor TCP probe 실패 → container-local loopback adapter 적용, doctor PASS. OpenAI metadata/MCP session 및 polling PASS, health/ready 200, port publish 0. 실제 ChatGPT plugin 설치/호출 대기. |
 
 실제 운영 데이터나 WIPS 원문 저장은 하지 않는다. 기존 기술사 개발 볼륨과 시안 서비스 유지. 작업별 실행 증거를 확인한 뒤 결과를 갱신한다. 개인 터널 및 실제 ChatGPT 도구 호출은 별도 검증이 필요하다.
