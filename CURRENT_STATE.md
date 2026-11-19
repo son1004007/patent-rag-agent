@@ -81,3 +81,5 @@
 - 원본 PDF 확보 경로 보완: [공식 API 후보 및 파일 수집 설계](docs/36-mvp-automatic-archive.md) — KIPRIS Plus 국내 공보 API 우선, EPO 및 공급자 별도 경로 검토. WIPS MCP 텍스트 저장 PASS와 PDF 수집 미구현 분리. 공식 서비스 안내 확인, 실제 API 인증/다운로드/권리 검증 NOT RUN.
 
 - 2026-11-20 P0-1 검색 목록 자동 저장 착수: [구현/검증](docs/37-mvp-search-list-archive.md), JS 9/9·실제 WIPS 기존 승인 문헌 1행 callback PASS(저장 보류). DB 통합 시험 EXECUTOR_LOST/재시도 queued 취소; 운영 preflight 6/10/417, 신규 schema 0, 시험 컨테이너 0. 실제 저장/운영 배포 자동 연결 미실행. 권리 범위 [#34](https://github.com/son1004007/ai-agent-workflow-playbook/issues/34) 대기.
+
+- 2026-11-20 P0-1 [재검증](docs/37-mvp-search-list-archive.md): 이전 Gateway 장애 해소, DB/CLI 12/12 PASS, 실제 운영 schema-only 복제·명시 CONNECT/역할 분리·신규 archive 데이터/ACL 별도 복원 PASS. 기존 운영 원문 fingerprint 및 실행 컨테이너 불변, 시험 정리 완료. 운영 backup/rollback 도구 갱신 및 권리 #34·운영 writer/ChatGPT 연결 잔여. 실제 운영 migration/적재/재시작 미실행.

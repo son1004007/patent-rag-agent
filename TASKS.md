@@ -29,8 +29,9 @@
 - [x] MVP-05 격리 rollback 96/96 및 실제 읽기/안전 차단 인수 4/5 시나리오 — 현재→이전→현재 HTTP·임시 SCRAM/ACL·교차 DB·운영 불변. [실측](docs/28-mvp05-rollback-acceptance.md).
 - [x] MVP-05 실제 신규 단건 운영 적재/재사용 인수 — [실측](docs/35-mvp03-actual-ingest-acceptance.md), 사전·사후 backup, 기존 행 보존, 중복 쓰기0, 실제 ChatGPT 조회 PASS. 최신 dump 격리 복원·실제 운영 rollback·재기동/다른 계정 검증 별도.
 - [x] MVP-06 실제 연구 질문 읽기 시험 및 최소 안내 — [사용자](docs/29-mvp06-user-guide.md), [관리자](docs/30-mvp06-operator-guide.md), [실측](docs/31-mvp06-user-trial.md) (3+3→5, 근거18, HOLD4/EXCLUDE1).
-- [x] MVP-03 P0-1 검색 목록 자동 저장 기반 코드 작성 및 JS wrapper 9/9·실제 WIPS 읽기 callback 1/1 검증. [실측](docs/37-mvp-search-list-archive.md). DB 통합 시험은 Gateway 실행기 장애로 미확인.
-- [ ] MVP-03 P0-1 목록 자동 저장 — 격리 DB/CLI 시험 재실행, 기존 backup/restore 호환, 전용 writer·운영 정책 및 ChatGPT 자동 연결, 실제 허용 목록 저장/중복0 E2E. 권리 범위 [중앙 #34](https://github.com/son1004007/ai-agent-workflow-playbook/issues/34). [구현/재개](docs/37-mvp-search-list-archive.md).
+- [x] MVP-03 P0-1 검색 목록 자동 저장 기반 코드 작성 및 JS wrapper 9/9·실제 WIPS 읽기 callback 1/1 검증. [실측](docs/37-mvp-search-list-archive.md). 기존 실행기 장애는 재검증으로 해소.
+- [x] MVP-03 P0-1 실제 NAS 격리 DB/CLI 시험 12/12 및 운영 schema-only 기반 migration/별도 DB backup restore·ACL/데이터 일치 PASS. [실측](docs/37-mvp-search-list-archive.md). 운영 변경 없음.
+- [ ] MVP-03 P0-1 목록 자동 저장 — 기존 운영 backup/rollback 스크립트에 archive role·데이터 검사 추가, 전용 writer·운영 정책 및 ChatGPT 자동 연결, 실제 허용 목록 저장/중복0 E2E. 권리 범위 [중앙 #34](https://github.com/son1004007/ai-agent-workflow-playbook/issues/34). [구현/재개](docs/37-mvp-search-list-archive.md).
 - [ ] MVP-03 추가 사용자 요구(P0) — WIPS 검색 결과 자동 NAS 보관, 승인 자료 원문/벡터 증분 적재, 전체 원문 조회 및 PDF·도면 제공 경로 확인. [요구사항](docs/36-mvp-automatic-archive.md). 상시 연결 및 실제 운영 E2E 대기. 원본 PDF 별도 수집은 KIPRIS Plus 국내 공보 API 우선 검증, EPO/WIPS 별도 경로 후속 검토. 텍스트 보관과 PDF 보관 상태 분리.
 - [ ] MVP-06 사용자 직접 결과 평가/피드백 — [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 대기.
 

@@ -42,3 +42,5 @@
 - 원본 PDF는 WIPS MCP 텍스트와 별도 보관 경로로 설계. [공식 API 후보](docs/36-mvp-automatic-archive.md): KIPRIS Plus 국내 공보 우선, EP Publication Server/OPS 및 WIPS 별도 계약 검토. PDF 원본 파일과 파생 텍스트/벡터를 문헌 ID로 연결; 실제 API·권리·다운로드 미검증.
 
 - P0-1 [목록 보관 기반](docs/37-mvp-search-list-archive.md) 작성, JS 9/9 및 실제 WIPS callback 1행(저장 보류). NAS 격리 DB 실행 미확인(EXECUTOR_LOST, 재시도 queued 취소), 다음 시험 재실행→복원 호환→정책·writer 및 실제 연결. 상시 자동 보관 권리 #34, 본문/벡터 쓰기 없음.
+
+- P0-1 [NAS DB/복원 재검증](docs/37-mvp-search-list-archive.md) PASS: 10 DB + 2 CLI, 최종 실제 운영 schema-only 기반 migration 및 별도 격리 복원 데이터/ACL 동일, 운영 불변. 다음 기존 backup/rollback 도구 보완 및 #34 권리 확인 후 실제 저장 경로 연결. 운영 migration/신규 원문/목록 쓰기 없음.

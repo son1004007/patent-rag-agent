@@ -1,7 +1,14 @@
 -- Separate archive schema; apply only as approved DB administrator after backup.
 -- Roles are deliberately NOLOGIN until scoped deployment/credential provisioning.
 BEGIN;
+SET LOCAL lock_timeout='2s';
+SET LOCAL statement_timeout='15s';
+DO $$ BEGIN
+ IF current_database()<>'patent_private_ingest_v1' THEN RAISE EXCEPTION 'wrong database'; END IF;
+ IF EXISTS(SELECT 1 FROM pg_database d CROSS JOIN LATERAL aclexplode(coalesce(d.datacl,acldefault('d',d.datdba))) a WHERE d.datname=current_database() AND a.grantee=0 AND a.privilege_type='CONNECT') THEN RAISE EXCEPTION 'PUBLIC CONNECT must already be revoked'; END IF;
+END $$;
 CREATE ROLE patent_archive_writer_v1 NOLOGIN NOINHERIT NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;
+GRANT CONNECT ON DATABASE patent_private_ingest_v1 TO patent_archive_writer_v1;
 CREATE SCHEMA patent_archive;
 REVOKE ALL ON SCHEMA patent_archive FROM PUBLIC;
 CREATE TABLE patent_archive.documents(

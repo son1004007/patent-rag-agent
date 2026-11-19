@@ -28,6 +28,7 @@ python3 -c 'import secrets,sys;open(sys.argv[1],"w").write(secrets.token_hex(32)
 clone=$("$D" run --pull never -d --rm --label "$LABEL" --network none --read-only --cap-drop ALL --security-opt no-new-privileges --user postgres --memory 512m --cpu-shares 128 --tmpfs /tmp:rw,exec,nosuid,nodev,size=256m,mode=1777 --entrypoint bash "$di" -ec 'umask 077; export PGDATA=/tmp/test-pgdata; od -An -N24 -tx1 /dev/urandom | tr -d " \n" >/tmp/pw; initdb -D "$PGDATA" --username=postgres --auth-local=peer --auth-host=scram-sha-256 --pwfile=/tmp/pw --no-locale --encoding=UTF8 >/dev/null; rm /tmp/pw; exec postgres -D "$PGDATA" -h 127.0.0.1 -k /tmp -p 55432 -c shared_buffers=32MB -c max_connections=12')
 n=0; until "$D" exec "$clone" pg_isready -q -h /tmp -p 55432; do n=$((n+1)); [ "$n" -lt 40 ] || exit 1; sleep 1; done
 "$D" exec "$clone" createdb -h /tmp -p 55432 -U postgres patent_private_ingest_v1
+"$D" exec "$clone" psql -X -q -v ON_ERROR_STOP=1 -h /tmp -p 55432 -U postgres -d postgres -c "REVOKE CONNECT ON DATABASE patent_private_ingest_v1 FROM PUBLIC"
 sql(){ "$D" exec -i "$clone" psql -X -q -v ON_ERROR_STOP=1 -h /tmp -p 55432 -U postgres -d patent_private_ingest_v1 "$@"; }
 # Mirror only the production reader-view column contract with synthetic fixtures.
 sql <<'SQL'

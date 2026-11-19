@@ -56,3 +56,5 @@
 - [자동 보관 요구사항](docs/36-mvp-automatic-archive.md)에 원본 PDF 별도 수집 경로/공식 자료 링크, 문헌 매칭 및 검증 조건 추가. 문서만 변경. 실제 API/파일 수집 또는 운영 변경 없음.
 
 - 2026-11-20 [P0-1 검색 목록 저장 기반](docs/37-mvp-search-list-archive.md) 구현. wrapper 테스트 9/9, 실제 WIPS 읽기 1행 callback PASS, 저장 보류. Gateway 첫 시험 실행기 손실, 재시도 대기 취소, read-only 운영 preflight 6/10/417에 archive schema 0. 운영 저장 및 배포 미실행, #34 등록.
+
+- 2026-11-20 [P0-1 목록 저장 NAS 통합 재검증](docs/37-mvp-search-list-archive.md): 이전 executor 장애 해소, 모사 및 실제 운영 schema-only 격리 환경 각각 DB 10/10 + CLI 2/2. migration의 명시 CONNECT 및 권한 분리, 별도 새 DB 복원 fingerprint/ACL/원문 상태 PASS. 첫 강화 migration dollar quote 오류 수정 후 최종 exit0. 운영 전 행/컨테이너 불변 및 시험 cleanup. 기존 운영 복구 스크립트 갱신 및 #34/자동 연결 대기.
