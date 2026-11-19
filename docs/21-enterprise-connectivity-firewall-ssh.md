@@ -93,7 +93,7 @@ SSH 운영 계정은 non-root 전용 계정, 키 인증, 대상별 최소 권한
 |---|---|---|---:|---|---|
 | ChatGPT 승인된 MCP 연결 실행 주체 | Any (ephemeral) | trygateway.sh | 443 | TCP/HTTPS | 서비스 경로, 회사망 인바운드 아님 |
 | CORP_ADMIN_PC | Any (ephemeral) | trygateway.sh | 443 | TCP/HTTPS | 계정/서버/권한 승인 UI |
-| GATEWAY_APPROVED_REGION_EGRESS_IPS | Any (ephemeral) | CORP_APPROVED_SSH_INGRESS (DMZ 관리 접점) | 22 (합의한 SSH port) | TCP/SSH | 외부 인바운드, 회사 승인 시만. Gauge 지역 조회 결과의 정확한 공급자 IP/CIDR 또는 전용 static IP 사용 |
+| GATEWAY_APPROVED_REGION_EGRESS_IPS | Any (ephemeral) | CORP_APPROVED_SSH_INGRESS (DMZ 관리 접점) | 22 (합의한 SSH port) | TCP/SSH | 외부 인바운드, 회사 승인 시만. Gateway 지역 조회 결과의 정확한 공급자 IP/CIDR 또는 전용 static IP 사용 |
 | CORP_APPROVED_SSH_INGRESS | Any (ephemeral) | CORP_SSH_TARGET | 22 (설정값) | TCP/SSH | 승인된 내부 브로커/점프 설계가 실제 지원되고 명시 승인된 경우만 |
 
 문서화 절차: Gateway 사이트에서 기업 계정/팀 구성 → 회사 관리 대상 등록(name, hostname, port, non-root SSH username, region) → 서비스가 발급한 해당 서버 전용 공개키 등록 방식 우선 → host key 검증 및 지역 egress IP 확인(`list_regions`/`inspect_region`, [공식 Docs](https://trygateway.sh/docs/)) → 네트워크팀 정확한 source IP로 방화벽 승인 → ChatGPT 회사 workspace에서 관리자 승인 Gateway 플러그인 연결(지원 여부 확인) → 연결 대상/권한/승인 정책 검토 → 읽기 전용 상태 조회 및 거부 시험 → 감사 기록을 확인한 후 제한된 관리 작업. 공유 IP는 바뀔 수 있으므로 공급자 최신 목록 및 전용 IP 옵션을 확인한다. 실제 IP, SSH 도메인, 키 및 기업 장비 식별자는 사내 문서에만 저장. 이용자 승인 기능이나 외부 브로커의 감사 로그만으로 기업 자체 감사·승인 정책을 대체하지 않는다. Azure VM의 경우 Azure Bastion을 별도 승인된 관리자 경로로 사용할 수 있으나 ChatGPT가 Bastion에 자동 SSH할 수 있다는 의미는 아니다 ([Azure Bastion SSH](https://learn.microsoft.com/en-us/azure/bastion/bastion-connect-vm-ssh-linux)).
