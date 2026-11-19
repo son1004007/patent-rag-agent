@@ -22,3 +22,5 @@
 - MVP-04 기본 통합·근거 비교 참조 모듈 및 실제 두 소스 한정 시험 PASS: 27/27 합성, 6→5, 추천 근거 부족 시 HOLD, 무관 EXCLUDE, 유사도와 검증된 성능 구분. [실측](docs/25-mvp04-candidate-comparison.md). 별도 상시 자동 실행/쓰기 adapter 및 복원 미완료. 다음 MVP-03 잔여와 MVP-05.
 
 - MVP-03 승인된 단건 적재 adapter 구현·합성 PASS(29 JS, 23 NAS Python), 기존 운영 reader DB 5건/401청크/4건 상세/384D 재확인. 실제 구매 신규 후보/권리 및 operator 승인된 private transport/직렬화가 준비된 뒤 실제 E2E 진행; MCP writer 권한 확대 금지. [실측](docs/26-mvp03-approved-ingest-adapter.md). 다음 비파괴 MVP-05 실제 자료 격리 복원.
+
+- MVP-05 실제 특허 온라인 backup/격리 복원 PASS, 5건/8섹션/401청크, fingerprint·ACL·HNSW·384D·Top3, 원본/기존 컨테이너 불변 및 최종 SHA256. [실측](docs/27-mvp05-private-backup-restore.md). 다음 격리 rollback 및 인수 시나리오, 권리 확인 후 실제 신규 쓰기. 운영 재기동/rollback 별도 승인.

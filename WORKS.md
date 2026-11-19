@@ -35,4 +35,6 @@
 
 | MVP-03 승인된 적재 adapter | [실측](docs/26-mvp03-approved-ingest-adapter.md) — JS 수집/전송 연결 및 NAS native Python 일회성 worker wrapper 구현. 29/29 JS + 23/23 Python synthetic PASS, 실제 운영 DB 읽기 5건/401청크/4건 상세/384D. 실제 transport/LocalBackend/신규 쓰기 및 복원 NOT RUN. 기존 MCP read-only 경계 유지. |
 
+| MVP-05 실제 특허 DB 복원 | [실측](docs/27-mvp05-private-backup-restore.md) — 최종 job succeeded exit0, 1,037,393 bytes, 5/8/401 및 전체 fingerprint/ACL/HNSW/Top3/384D 일치. 원본·기존 컨테이너 불변, cleanup·SHA256 PASS, 이후 실제 ChatGPT 읽기 3/3. 앞선 cleanup 종료1 두 건 기록, 신규 쓰기/운영 rollback 및 전체 인수 미완료. |
+
 실제 자료는 사용자 구매 확인에 따른 개인 NAS 내부 소량 적재 범위로 분리한다. 공개 저장소 원문 보존 및 재배포는 하지 않는다. 기존 기술사 개발 볼륨과 시안 서비스 유지. 작업별 실행 증거를 확인한 뒤 결과를 갱신한다. 개인 터널 및 실제 ChatGPT 읽기 호출 PASS; 실제 자동 적재와 안전·복구 인수 잔여는 TASKS 참조.
