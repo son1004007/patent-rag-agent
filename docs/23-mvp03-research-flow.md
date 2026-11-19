@@ -34,8 +34,8 @@ flowchart TD
 - ChatGPT가 테스트용 공개 일반 연구 질문 "태양광 모듈의 투명 봉지재에서 습기 침투를 줄이고 내구성을 높이는 소재를 찾아줘" 및 용어 그룹을 직접 선정. 실제 WIPS 검색식: `(태양광 태양전지).ti,ab. AND (봉지재 봉지 밀봉재).ti,ab.`. 기밀이나 실제 NAS 문서의 내용에 기초해 외부 질의를 만들지 않음.
 - `job_01M7SAH4GK00WPT67F8QXDMY28` succeeded: 실제 로컬 E5/pgvector 검색 후보 3건, 카탈로그 4건, 기존 컨테이너 StartedAt 불변, 임시 worker 종료.
 - 실제 WIPS 3건 검색, 카탈로그와 비교 결과 미보유 3건. 오케스트레이션 모듈이 한 건만 선택하여 실제 상세 설명 98,067자, 전체 청구항 5개를 조회, 개인 NAS 권한 제한 임시 파일로 전달. 저장 검증 전 trace는 FAIL/검증대기였음; 이후 staged 상태 분리 및 외부 검색 경계 명시 패치(최종 mock 시험 21/21). 실제 외부 조회는 기존 사용자 승인 범위 개인 일반 연구질의에 한정. 실제 문헌 식별자/본문/개인 장비 주소/키는 공개 repo에 기록하지 않음.
-- `job_01M7SARVWG00KF38SA0YCWJQ08` 진행 중 확인: metadata 1건 및 청크3개 신규 적재, 중복0, 충돌 거부, 누적 5건/6섹션/170청크. 상세 섹션 결과/최종 fingerprint/백업은 terminal status 확인 후 별도 기록한다.
+- `job_01M7SARVWG00KF38SA0YCWJQ08` terminal succeeded. metadata 신규 1건/3청크; 상세설명·전체 청구항 2개 섹션/231청크 추가. 두 배치 각각 재적재 0, 변조 충돌 거부, 384D 및 검색 후보 3개 확인. 최종 5건·8섹션·401청크(신규 1건 청크234개), 기존 4건 원본/청크 fingerprint 불변, 기존 서비스 StartedAt 불변, 임시 container 및 적재 입력 삭제, 최신 개인 DB 논리 dump 1,037,393 bytes. 실제 dump 독립 복원은 MVP-05 미완료. MVP03_SELECTED_DOCUMENT_VERIFIED_AND_EXISTING_SERVICES_UNCHANGED.
 
 ## 남은 범위
-- 실제 ChatGPT 플러그인에 통합된 read/write 도구는 아직 미배포(MVP-01 HOLD). 이번은 ChatGPT가 도구 adapter를 직접 연결한 한정된 실제 시험 + 참조 모듈 검증. 상시 자동 실행/사용자 임의 질의의 완전 E2E를 완료로 표시하지 않는다. 동일 질문 재사용과 상세 적재 최종 확인 이후 MVP-04 기본 검색 통합 및 근거 기반 비교·추천 검증.
+- 실제 ChatGPT 플러그인에 통합된 read/write 도구는 아직 미배포(MVP-01 HOLD). 이번은 ChatGPT가 도구 adapter를 직접 연결한 한정된 실제 시험 + 참조 모듈 검증. 상시 자동 실행/사용자 임의 질의의 완전 E2E를 완료로 표시하지 않는다. 동일 질문 재사용 검증 이후 MVP-04 기본 검색 통합 및 근거 기반 비교·추천 검증.
 - 공급 계약 확장/대량 수집·외부 공개 금지, 기존 재기동 금지 유지. 운영 서비스, 기술사 데이터 및 기업 환경 변경 없음.
