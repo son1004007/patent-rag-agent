@@ -12,7 +12,13 @@
 - [x] 사설 HTTPS 경로 연결 및 별도 기기 TLS/HTML/CSS/JS HTTP 200 검증
 - [ ] 실제 브라우저 UI 동작 확인
 - [ ] 사용자 화면 확인 및 피드백 반영 후 실제 기능 구현
-## P1 — Mock MVP
+## P0.6 — ChatGPT MCP 우선 검증 (최신 사용자 결정)
+- [x] README/아키텍처 단순화 및 기존 기술사 RAG DB/SDK 현황 확인
+- [ ] 합성 문서 MCP save/get/search, 중복 및 도메인 격리 검증
+- [ ] Secure MCP Tunnel 연결 인증 및 ChatGPT 개인 플러그인 등록·쓰기·조회 E2E (계정 실측)
+- [ ] 공용 pgvector 엔진 별도 DB/role 운영·복원·부하 검증 (현재 기술사 배포 차단 우회 금지)
+- [ ] WIPS와 자체 MCP의 동일 대화 연동 (저장/전송 권리 확보 전 synthetic-only)
+## P1 — Mock MVP (MCP 실증 이후; 독립 웹 Agent 대체안)
 - [ ] FastAPI/UI, 계정·profile, 합성 데이터
 - [ ] 원문과 300자 확장 생성, 검색 계획 검증, mock provider
 - [ ] 결과 합치기/중복 제거/RRF/재정렬 및 근거 표시
