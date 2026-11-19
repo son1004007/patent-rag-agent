@@ -30,7 +30,9 @@
 - [ ] 실제 공용 영속 DB 운영 전환 및 migration/인증 회귀 — 기술사 배포 차단 정식 해소 및 승인 후; 재기동 금지 유지
 - [x] WIPS와 자체 MCP 동일 대화 순차 읽기 연계, 기존 합성 save/idempotency 및 mock 정책 17/17 ([실측](docs/17-dual-mcp-workflow.md))
 - [x] 사용자 구매 특허 소량 실제 비공개 적재/provenance/chunk/embedding, 3건/10청크/384D 및 중복·권한 시험 ([실측](docs/18-private-patent-ingest.md))
-- [ ] 실제 특허 DB 읽기 전용 MCP 연결·다중 배치 적재·상세 명세서/전체 청구항 및 복원 검증 (재기동 HOLD)
+- [x] README 목표 서비스 흐름 추가 및 실제 특허 읽기 전용 MCP 로컬 HTTP·권한 23/23 검증 ([실측](docs/19-private-patent-reader-mcp.md)); 기존 서비스 유지
+- [ ] 실제 특허 읽기 전용 MCP의 승인된 ChatGPT 개인 연결 및 실제 조회 (현재 synthetic plugin 유지, 재기동 HOLD)
+- [ ] 다중 배치 적재·상세 명세서/전체 청구항 및 실자료 복원 검증 (재기동 HOLD)
 - [ ] 구매 자료의 계약상 확장 범위·상업 이용·재배포·대량 동기화 및 정식 요금·동시성 확인 — 소량 개인 내부 적재만 사용자 명시 승인
 ## P1 — Mock MVP (MCP 실증 이후; 독립 웹 Agent 대체안)
 - [ ] FastAPI/UI, 계정·profile, 합성 데이터
