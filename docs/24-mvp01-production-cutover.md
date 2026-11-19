@@ -1,7 +1,7 @@
 # MVP-01 — 통합 MCP 운영 전환 및 개인 플러그인 갱신 (2026-11-19)
 
 ## 판정
-**운영 MCP 배포 PASS, 56/56 회귀 테스트 통과. 개인 ChatGPT 신규 도구 갱신 및 실제 호출 대기.**
+**운영 MCP 배포 PASS, 56/56 회귀 테스트 통과. 새 ChatGPT 대화 신규 도구 읽기 E2E PASS (하단 최신 기록). 실제 rollback NOT RUN.**
 사용자가 2026-11-19 기존 MCP 서비스만 재시작하여 배포하도록 명시 승인하였다. NAS 전체, DB, relay, tunnel, 다른 컨테이너의 재시작 및 자동 기동 변경 금지는 유지한다. 이번에는 기존 API 컨테이너만 재시작했다.
 
 ## 실측 근거
@@ -29,3 +29,21 @@ MVP-01 신규 도구 ChatGPT end-to-end(갱신 후); MVP-03 자동 적재 adapte
 ## 사용자 Refresh 수행 후 확인
 - 사용자 확인: 권한 추가 부여 및 Refresh 수행. 현재 기존 대화에서 도구 발견 재확인 결과 기존 3개만 노출. 실제 get_document(DEMO-P4) found=true, 개인 플러그인 USER/PRIVATE 유지. 서버 재배포/권한 설정 변경 없음.
 - OpenAI [공식 Refresh metadata 절차](https://developers.openai.com/plugins/deploy/connect-chatgpt)에 따라 신규 대화에서 @NAS RAG 선택 후 신규 search_patents 및 get_patent 호출 진행 필요. 사용자 설정에서의 새 도구 목록은 직접 확인하지 못했으며 Refresh 실패로 단정하지 않음. MVP-01 운영 배포 PASS 유지, 새로운 대화 직접 E2E 대기.
+
+## 새 ChatGPT 대화 직접 E2E — 2026-11-19 16:50 KST 이후
+
+**실제 구매 특허 읽기 PASS.** 사용자 Refresh 및 권한 부여 후 새 대화에서 NAS RAG 5개 도구 발견, 신규 search_patents/get_patent 모두 직접 호출 성공. Gateway 대리 호출이나 mock 결과가 아니다.
+
+| 검증 | 실측 |
+|---|---|
+| search_patents(query=태양광 모듈 봉지재의 내습성과 광투과율, limit=3) | PASS — 서로 다른 실제 문헌 3건, scope=private_purchased_patents_local_only, ranking=exact_cosine_best_chunk_per_document |
+| 동일 질의 재호출 | PASS — 동일 문헌 3건 및 순위 일치, 유한한 코사인 거리 오름차순 |
+| get_patent(검색 결과 ID 각각) | PASS — 3/3 found=true, 두 차례 조회; ID·문헌번호·국가·종류·제목·provider·source SHA-256 일치 |
+| 근거와 provenance | PASS — 검색 3개 및 조회 9개 근거(각 문헌 최대 3개), 각 300자 이하 및 offset 범위/64자리 SHA-256 형식 확인; abstract/representative_claim/title 또는 detailed_description |
+| 없는 문헌 조회 | PASS — 미존재 형식 유효 ID에 found=false |
+| 기존 get_document(DEMO-P4) 및 search_documents(limit=3) | PASS — fixture 조회 및 synthetic_candidates_only 3건 |
+
+- 실제 근거에 HTML/XML 태그가 일부 섞이며 대표 청구항의 300자 절단이 관찰됨. 원문 보존과 별도로 표시용 텍스트 정규화 및 근거 선택 개선을 MVP-04에서 검토. 순위는 유사도이며 정확도·법적 유효성·내습성/투과율 성능 입증 아님. 해시 값의 검색/조회 일치 및 형식만 확인했으며 원본 재해싱은 NOT RUN.
+- 이번 시험은 읽기 호출만 수행. save_document 재호출, WIPS 신규 조회/실제 적재, DB 직접 재계수/fingerprint, 비인가 다른 계정/교차 DB 시험, 지연 측정, 실제 rollback 및 실제 dump 복원은 NOT RUN. 직전 운영 배포의 56/56 및 기존 권한 시험은 기존 증거이며 새 E2E 결과와 구분한다. 서버/DB/터널/컨테이너 설정 변경·재기동 요청 없음. 외부 독립 AI 리뷰 NOT RUN (owner-approved optional).
+- 공개 저장소에는 실제 특허번호/제목/ID·원문·개별 해시·접속 정보 미기록. 일반 공개 연구 질의 및 집계 검증만 기록. 개인 ChatGPT에서 허용된 읽기 시험에 한정; 공급 계약 범위 확대·재배포·외부 공개 승인 아님. 중앙 공개 범위 Issue #22는 현행 그대로 유지.
+- MVP-01 신규 도구 Refresh/실제 ChatGPT 읽기 E2E gate 해소. 기존 API 배포/읽기 회귀 성공, 실제 rollback 검증은 MVP-05 잔여 안전/복구 gate로 명시(운영 재시작 승인 제한 유지). 다음은 MVP-04 근거 통합/비교·추천 및 MVP-03 승인된 쓰기 adapter 잔여 검증, MVP-05 실제 복원/인수.

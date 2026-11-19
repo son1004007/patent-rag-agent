@@ -29,4 +29,6 @@
 | MVP-01 통합 MCP 운영 전환 | [실측](docs/24-mvp01-production-cutover.md) — 사용자 승인 API만 재시작, 16+24+16=56/56 PASS, 실제 특허 검색 109.78ms, DB·기타 컨테이너 StartedAt·API 설정 불변. 기존 ChatGPT 직접 호출 정상; 새 search_patents/get_patent 도구 Refresh 및 직접 호출 대기. |
 | 사용자 플러그인 Refresh 확인 | 사용자 권한 추가·Refresh 수행 보고, 기존 채팅에서 기존 3개 도구 노출 및 DEMO-P4 직접 조회 정상, PRIVATE 유지. 새 채팅 신규 도구 E2E 대기. [기록](docs/24-mvp01-production-cutover.md). |
 
-실제 자료는 사용자 구매 확인에 따른 개인 NAS 내부 소량 적재 범위로 분리한다. 공개 저장소 원문 보존 및 재배포는 하지 않는다. 기존 기술사 개발 볼륨과 시안 서비스 유지. 작업별 실행 증거를 확인한 뒤 결과를 갱신한다. 개인 터널 및 실제 ChatGPT 도구 호출은 별도 검증이 필요하다.
+| 새 ChatGPT 대화 실제 특허 MCP 읽기 E2E | [실측](docs/24-mvp01-production-cutover.md) — 5개 도구 발견, 신규 검색 3건/반복 순위 일치, 상세 3/3·근거 9개·300자 상한, 미존재 found=false, 기존 합성 조회/검색 PASS. 읽기만 수행, 실제 rollback/쓰기/복원 NOT RUN. 실제 자료 식별자/원문 공개 기록 없음. |
+
+실제 자료는 사용자 구매 확인에 따른 개인 NAS 내부 소량 적재 범위로 분리한다. 공개 저장소 원문 보존 및 재배포는 하지 않는다. 기존 기술사 개발 볼륨과 시안 서비스 유지. 작업별 실행 증거를 확인한 뒤 결과를 갱신한다. 개인 터널 및 실제 ChatGPT 읽기 호출 PASS; 실제 자동 적재와 안전·복구 인수 잔여는 TASKS 참조.
