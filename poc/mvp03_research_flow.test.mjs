@@ -7,7 +7,7 @@ const wips=(rows)=>({success:true,data:{row_list:rows}});
 const q="태양광 모듈의 습기 침투 저감 소재";
 const groups=[["태양광","태양전지"],["봉지재","밀봉재"],["내습성","방습"]];
 let calls=[];
-const make=(c,r,allow=true,write={verified:true,documentsAdded:0,sectionsAdded:2})=>({searchLocal:async x=>{calls.push(["local",x]);return local(c)},searchWips:async x=>{calls.push(["wips",x]);return wips(r)},allowLocalWrite:async()=>allow,ingestOne:async x=>{calls.push(["write",x]);return write}});
+const make=(c,r,allow=true,write={verified:true,documentsAdded:0,sectionsAdded:2})=>({searchLocal:async x=>{calls.push(["local",x]);return local(c)},searchWips:async x=>{calls.push(["wips",x]);return wips(r)},allowExternalSearch:async()=>true,allowLocalWrite:async()=>allow,ingestOne:async x=>{calls.push(["write",x]);return write}});
 let n=0;function check(name,ok){assert.ok(ok,name);n++;console.log("PASS",name);}
 check("query_compile",planQuestion(q,groups).wipsQuery==="(태양광 태양전지).ti,ab. AND (봉지재 밀봉재).ti,ab. AND (내습성 방습).ti,ab.");
 for(const [name,bad] of [["operator",[["태양광"],["OR"]]],["injection",[["태양광"],["x).SKEY."]]],["unbounded",[["a","b","c","d","e"],["f"]]],["empty",[["a"],[]]]]){assert.throws(()=>planQuestion(q,bad));check(name,true)}
@@ -25,4 +25,6 @@ r=await research(q,groups,make([],[row(1)],true,{verified:false,documentsAdded:1
 a=make([],[row(1)]);a.searchLocal=async()=>({scope:"synthetic_candidates_only",results:[],catalog:[]});r=await research(q,groups,a);check("synthetic_scope_denied",r.write==="BLOCKED_SOURCE_FAILURE");
 r=await research(q,groups,make([],[row(1),row(2),row(3),row(4)]));check("provider_cap",r.write==="BLOCKED_SOURCE_FAILURE");
 r=await research(q,groups,make([],[row(1)],true,{staged:true,verified:false}));check("staged_is_not_committed",r.write==="STAGED_PENDING_VERIFICATION"&&r.writeCount===0);
+calls=[];a=make([existing(1)],[row(2)]);a.allowExternalSearch=async()=>false;r=await research(q,groups,a);check("external_denied_local_only",r.nas==="PASS"&&r.wips==="BLOCKED_POLICY"&&r.write==="BLOCKED_POLICY"&&calls.length===1);
+calls=[];a=make([],[row(2)]);a.allowLocalWrite=async()=>{throw Error("policy unavailable")};r=await research(q,groups,a);check("policy_failure_closed",r.write==="BLOCKED_POLICY"&&calls.length===2);
 console.log("MVP03_POLICY_TEST_PASS",n);
