@@ -58,3 +58,8 @@
 - 2026-11-20 **최신 WIPS 검색·서지 저장 A안 운영 진입:** [MVP41 Code Mode Gateway runbook](docs/42-mvp41-code-mode-gateway-archive.md) → [P0-1 설계·계획](docs/mvp-implementation/INDEX.md). 현재 ChatGPT WIPS MCP + owner Gateway stdin adapter를 하나의 코드모드 실행에서 합성하여 실제 첫 페이지83건 조회·기존 보관 재사용 83건/새 저장0 PASS, 계약17/17, 기존 원문 불변. WIPS 키를 NAS로 옮기지 않음. B안(단일 backend MCP의 WIPS 직접 호출) 미검증, 독립 WIPS 조회의 무조건 자동 보관 미구현. 서지 검색당 첫100만. WIPS MyFolder 후속 작업은 **사용자 요청 전 HOLD**, 재제안/추적 중지.
 
 - 2026-11-20 신규 **우선 개발은 기능 추가가 아니라 MVP 실효성 검증**: [evaluation/INDEX](docs/evaluation/INDEX.md), [DECISION-01](docs/44-mvp-evaluation-decision-criteria.md), [EVAL-01 검색 근거 비교](docs/45-search-quality-comparison-plan.md), [EVAL-02 반복 재사용](docs/46-reuse-value-verification-plan.md) 순서. 각 문서는 실행 가능한 **계획**이며 실제 테스트·데이터셋·라벨링은 NOT RUN. WIPS/NAS corpus 불일치/기존 metadata83 vs text6/vector417, 인간 검증·실제 WIPS 호출 vs DB 중복/가정 절감 분리. 10문항/판정 초기 임계값은 의사결정 제안 기준; 사용자 #31 평가 없이는 MVP 사업 가치/인수 완료 주장 금지. MyFolder HOLD.
+
+
+## 2026-11-20 AI 자율 평가 전환
+
+개인 특허 EVAL-01/02는 최신 사용자 명시 지시에 따라 ChatGPT가 관련성 및 근거를 직접 판정한다. 사람/사용자 관련성 라벨은 필수 게이트가 아니며 중앙 #31은 불필요한 사용자 액션으로 갱신 예정이다. AI 평가는 반드시 `AI_REVIEWED`로 표기하며 독립 전문가 확인/원문 전체 법적 감정은 하지 않았다고 구분. 최신 진행: [EVAL-01 query rewrite](docs/evaluation/2026-11-20-eval01-targeted-query-rewrite.md), [EVAL-02 warm replay](docs/evaluation/2026-11-20-eval02-warm-nas-replay.md). EVAL-02 NAS 읽기20회+상세 감사8회, WIPS0; 직접 근거 있는 4/10만 과거 자료 재사용 가능. EVAL-02 금액·지연·COLD 절감은 미측정.

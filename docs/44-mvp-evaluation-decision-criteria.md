@@ -86,3 +86,9 @@ flowchart TD
 상세 진입점: [평가 계획 인덱스](evaluation/INDEX.md). 작업 상태와 판정 결과는 [TASKS](../TASKS.md)/[CURRENT_STATE](../CURRENT_STATE.md)가 정본. 사용자가 직접 결과를 평가하기 전 [중앙 #31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 완료 금지.
 
 **권한/개인정보:** MyFolder는 사용자 지시로 HOLD. 공개 GitHub에는 특허 제목·SKEY·검색어·실제 문헌/근거 본문·사용자 비공개 질문/DB 연결·credential 저장 금지. 계약 불명확 원문/추가 외부 전송/과금 자동 수행 금지. 평가 계획 작성만으로 운영 WIPS 추가 검색/본인 원문 수집/새 서버 배포 승인 발생하지 않는다.
+
+## 최신 사용자 결정 — AI 평가로 내부 PoC 판단(2026-11-20)
+
+이 문서의 '사람 라벨 필수'와 중앙 사용자 평가 #31은 2026-11-20 현재 사용자의 **'사람 검증 안해. 니가 다해.'** 지시로 대체한다. **ChatGPT의 직접 요약/청구항/기존 NAS 근거 검토 + 실제 MCP 읽기 실측**을 내부 PoC 결정을 위한 자료로 사용하며 `AI_REVIEWED`와 `HUMAN_GOLD_NOT_RUN`을 분리 기록한다. 권리 유효/법률 검토, 고객 정보의 외부 전송, 신규 원문 수집, 배포 승인 등 보안·계약상 필수 사람 승인은 이 선택으로 면제되지 않는다.
+
+[새로운 WIPS AI 질의 개선](evaluation/2026-11-20-eval01-targeted-query-rewrite.md)과 [EVAL-02 NAS warm 리플레이](evaluation/2026-11-20-eval02-warm-nas-replay.md)를 근거로 **기존6문헌의 역사적 재사용 한정 `AI_REVIEWED_LIMITED_GO`**, 관련 없는 분야 자동 추천 **HOLD**, NAS 본문 확대·실제 절감률/지연ROI **INCONCLUSIVE** 판정. 이는 기존 ≥50% 절감 게이트를 충족했다는 주장이 아님. 질문·문헌·AI 자체 판정이라는 표본 제한과 WIPS AI 단문/장문 사후 튜닝 편향을 기록한다.

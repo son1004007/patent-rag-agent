@@ -115,3 +115,8 @@
 
 
 - 2026-11-20 **WIPS AI 300자 이상 설명 A/B 실측**: [결과](docs/evaluation/2026-11-20-eval01-wips-ai-300char-ab.md). `get_patent_ai_search(KR,3)` 10문항 짧은 설명23~29자 / 장문413~520자 20검색 PASS, `get_patent_by_skey` 60/60. GPT-6 잠정 관련성 기준 짧은 입력6/30(20%), 장문8/30(26.7%); 무관 실용신안13→0. 장문 개선3/악화2/변화없음5, 300자 절대성능·정량 보장 없음. 이전 국가혼합 WIPS 키워드 3.3%와 직접 비교 금지. 고객 자료/원문 적재·서비스 변경 없음. `AI_PROVISIONAL`, 인간 gold `NOT_RUN`, 공식 EVAL-01 `INCONCLUSIVE` 유지.
+
+
+- 2026-11-20 **EVAL 사용자 채점 필수 폐지**: 사용자 '사람 검증 안해. 니가 다해'를 최신 지시로 수용, AI 자체 0/1/2 채점·근거 검토로 P0 의사결정 지원. 실제 독립 human-gold/원문 전체/법적 감정 없이 확인했다고 주장하지 않으며 기밀·권한·신규 데이터 제한 존속.
+- [EVAL-01 실패 문항 재작성](docs/evaluation/2026-11-20-eval01-targeted-query-rewrite.md): KR-only WIPS AI 300자+ Q04/Q05/Q06/Q08 A/B 8검색 PASS, 요청 Top3 24슬롯. AI 2점 직접 관련 기존 1/12→A 5/12(사후 튜닝, 일반화 금지), Q05 0. 합성 코드/DB 변경 없음.
+- [EVAL-02 반복 확인](docs/evaluation/2026-11-20-eval02-warm-nas-replay.md): 동일10문항 NAS search 2 wave =20/20, 문헌순위·청크순위10/10 stable, 근거60/60; 추가 NAS search4 + get_patent4, 출처/내용 일치4/4; WIPS0. AI 직접 근거로 Q01~04만 재사용4/10(현재 IN4/5, OUT0/5), Q05+OUT5 HOLD. **`AI_REVIEWED_LIMITED_GO`(과거 문헌 재열람 한정)**, 실제 COLD/WIPS 대비 latency/금액 절감 ROI **INCONCLUSIVE**. [판정 코드](poc/eval02_reuse_policy.mjs) 합성 16테스트 로컬 Node PASS, 운영 자동 라우팅 미구현. 공용 NAS/DB 서비스 변경·신규 저장 없음.

@@ -100,3 +100,10 @@
 
 - 사용자 300자 기술설명 반영. KR-only AI 유사특허 MCP(`get_patent_ai_search`) 10문항×짧은23~29자/긴413~520자, 각 top3 총60 후보 및 WIPS 상세 `get_patent_by_skey` 60회 읽기. [비식별 집계/채점·한계](docs/evaluation/2026-11-20-eval01-wips-ai-300char-ab.md).
 - AI 잠정 2점 직접관련 단문6/30, 장문8/30, 무관 U13→0. 장문이 항상 이기지는 않음(개선3·악화2·동일5). 이번 평가는 설명 길이뿐 아니라 구체성도 변했고 KR 단일 국가이므로 과거 다국가 검색의 인과 비교는 금지. 사용자 독립 검증 및 원문/특허법적 최종 판단 NOT_RUN, 운영 NAS/DB·서비스 변경 없음.
+
+
+## 2026-11-20 EVAL AI 자율 검토 / 검색식 보완 / NAS warm 검증
+
+- 최신 사용자 결정: 별도 사람 채점 불필요. ChatGPT가 직접 핵심 기술·청구항을 리뷰. 정책 근거 [AGENTS](AGENTS.md) 업데이트. 초기 300자 WIPS AI 비교의 Q04/Q05/Q06/Q08 각각 A/B 장문 8회(24후보) 실측, [분석](docs/evaluation/2026-11-20-eval01-targeted-query-rewrite.md) 기록. Q05 두 필수 조건은 여전히 0, 검색 문맥/중의성 문제 확인.
+- [EVAL-02 NAS 10문항 동일 검색×2](docs/evaluation/2026-11-20-eval02-warm-nas-replay.md): 순서+청크 10/10 동일, 60 발췌, 추가 근거4/4, NAS reader28회/WIPS0회, AI 근거4/10 재사용, 6/10 근거 부족으로 HOLD. 최초 provider cold 대비 비용·end-to-end 지연은 미측정.
+- [순수 판정기](poc/eval02_reuse_policy.mjs) + [합성 테스트](poc/eval02_reuse_policy.test.mjs) Node v22.16.0 **16 PASS**. 기존 로컬 서비스/운영 DB·원문/PDF/벡터를 수정하지 않음. 코드의 실제 운영 워크플로 자동 연결은 NOT IMPLEMENTED.

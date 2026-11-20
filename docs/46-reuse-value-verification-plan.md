@@ -122,3 +122,9 @@
 ## 보충: 감도 및 실제 호출 검증(중복 EV 설계 흡수)
 
 보조 진단에서 절감률 0/10/20/30%의 감도표를 작성할 수 있지만, **정식 채택 게이트는 DECISION-01의 반복 효율 조건(50%)**이며 임의로 20%로 낮추지 않는다. `ANSWERABLE_CACHE_HIT`은 원문6건 중 질문의 필수 속성과 근거가 실제 존재하며 최신성 재조회가 불필요한 경우만 인정한다. 단순 서지83건 `METADATA_ONLY`, `FULLTEXT_MISS`, `FRESHNESS_REQUIRED`, `PROVIDER_FAIL` 분리. 실제 호출 절감과 WIPS를 호출했을 것이라는 반사실적 추정(causal counterfactual)은 서로 다른 수치로 표기한다.
+
+## 8. 실제 warm 결과 및 최신 AI 자체 평가 규칙 (2026-11-20)
+
+[10문항×2 NAS warm 실측](evaluation/2026-11-20-eval02-warm-nas-replay.md) 수행: 20 search + 4 search + 4 get_patent = NAS 28 reader 호출, WIPS 검색/상세 **0회**; 동일 문헌/청크 순위 10/10, 근거 60/60, 직접 근거 충족 Q01~Q04 4/10만 재사용, Q05·OUT5는 근거 부족 HOLD. [합성 코드](../poc/eval02_reuse_policy.mjs), [16건 Node 테스트](../poc/eval02_reuse_policy.test.mjs). 워크플로 자동 라우팅·실제 동일 조건 COLD/WIPS 대비 절감률과 요금·완료시간은 미검증.
+
+사용자는 사람 검증 단계를 요구하지 않으며 **ChatGPT가 문헌·근거를 직접 평가**한다. 이 계획의 '사람/사용자 라벨 필수'·'사용자 #31 필수 인수' 문구는 최신 결정을 적용하여 내부 평가 필수 게이트에서 제외한다. `AI_REVIEWED_LIMITED_GO`로 **기존 구매·보관 문헌의 과거 기술 재활용만** 유지한다. `WIPS_CALLS_ACTUAL=0`은 warm 경로의 실제 수치이지 과거 WIPS baseline 대비 50% 비용 절감 실증이 아니다. 외부 제공자 권리·예산·비공개 데이터·기업 환경 접근과 MyFolder HOLD는 그대로 유지한다.

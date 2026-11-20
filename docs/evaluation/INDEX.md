@@ -2,7 +2,7 @@
 
 - 인덱스 ID: PATENT-EVALUATION-INDEX
 - 기준일: 2026-11-20 / 목적: 다른 ChatGPT·Codex·개발자가 **MVP 이후 무슨 기능을 만들지** 동일 판단 기준에서 진행.
-- **실제 상태:** 검색·비교·선택 문헌 로컬 벡터화 등 **MVP 기본 기능 실증 완료**. EVAL-01의 10문항 WIPS/NAS 검색·근거 반환 **실측 완료**. 사용자 관련성 라벨·정식 정확도 지표·EVAL-02 반복 절감은 **NOT RUN**. 사용자 실사용 인수 [중앙 #31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 대기.
+- **실제 상태:** 검색·비교·선택 문헌 로컬 벡터화 등 **MVP 기본 기능 실증 완료**. EVAL-01의 10문항 WIPS/NAS 검색·근거 반환 **실측 완료**. 사용자 별도 채점은 2026-11-20 최신 지시로 **불필요**. AI 직접 관련성 채점과 [EVAL-02 NAS warm 리플레이](2026-11-20-eval02-warm-nas-replay.md)는 실측, COLD 대비 비용/지연 ROI는 **NOT MEASURED**. 사용자 실사용 인수 [중앙 #31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 대기.
 - 신규 문서는 **결정/실행 계획**이지 실행 결과 기록이 아니다. 결과는 기존 [CURRENT_STATE](../../CURRENT_STATE.md), [TASKS](../../TASKS.md), [WORKS](../../WORKS.md)가 정본.
 - **읽기 순서:** [전역 Control](https://github.com/son1004007/ai-agent-workflow-playbook/blob/main/CONTROL.md) → [repository AGENTS](../../AGENTS.md) → [CURRENT_STATE](../../CURRENT_STATE.md)/[TASKS](../../TASKS.md) → **이 인덱스** → 판단 기준 → EVAL-01 실행 계획 → EVAL-02 실행 계획 → 기존 도구/코드/실측.
 
@@ -11,7 +11,7 @@
 | ID | 우선순위 | 파일 | 현재 상태 / 목표 |
 |---|---|---|---|
 | DECISION-01 | **P0 의사결정 기준** | [MVP 유지·MCP/API·NAS 선택 기준](../44-mvp-evaluation-decision-criteria.md) | **문서 작성 완료**, 실측 판정 전. 관련성·근거 정확도 우선, 추가 후보, 호출비용/시간·복잡도·공보 PDF 필요성 순서 |
-| EVAL-01 | **P0 1순위** | [검색 정확도·근거 비교 실행 계획](../45-search-quality-comparison-plan.md) / [10문항 검색 실측](2026-11-20-eval01-live-retrieval-baseline.md) | **검색 실측10/10 PASS · [AI 예비 채점10/10](2026-11-20-eval01-ai-provisional-score.md) · 공식 gold-label 0/10, 최종 INCONCLUSIVE**. WIPS 단독 / NAS 단독 / 양쪽 통합, 실제 연구질문 10개 목표(1차5+추가5), 사람 검증 라벨과 중복 후보 |
+| EVAL-01 | **P0 1순위** | [검색 정확도·근거 비교 실행 계획](../45-search-quality-comparison-plan.md) / [10문항 검색 실측](2026-11-20-eval01-live-retrieval-baseline.md) | **검색 실측10/10 PASS · [AI 예비 채점10/10](2026-11-20-eval01-ai-provisional-score.md) · 공식 gold-label 0/10, AI 예비 품질 확인(독립 human-gold 없음), 최종 범용 정확도는 INCONCLUSIVE**. WIPS 단독 / NAS 단독 / 양쪽 통합, 실제 연구질문 10개 목표(1차5+추가5), 사람 검증 라벨과 중복 후보 |
 | EVAL-02 | **P0 2순위** | [저장 자료 재사용 가치 검증 실행 계획](../46-reuse-value-verification-plan.md) | **PLAN READY / NOT RUN**. 같은 질문 cold vs warm-NAS, 실제 WIPS 호출·시간/근거 차이, 반복 WIPS 호출 절감 추정과 실측 구분 |
 
 **전제 설명:** [MVP 완료 범위·API vs MCP 비교](../43-mvp-milestone-mcp-api-tradeoff.md), [기존 양 소스 후보 비교](../25-mvp04-candidate-comparison.md), [실제 본문 적재](../35-mvp03-actual-ingest-acceptance.md), [서지83건](../39-mvp-archive-100-live-acceptance.md), [실사용 시험](../31-mvp06-user-trial.md). P0-1~P0-5의 미구현 기능별 원래 상세 설계는 [기존 구현 인덱스](../mvp-implementation/INDEX.md)에서 찾는다.
@@ -66,3 +66,10 @@ flowchart TD
 ## 8. WIPS AI 유사검색 300자 이상 입력 A/B 실측(2026-11-20)
 
 [단문23~29자 vs 장문413~520자 동일 WIPS AI 검색·10문항 60개 상세 조회](2026-11-20-eval01-wips-ai-300char-ab.md): 직접 관련 잠정 6/30→8/30, 무관 실용신안13/30→0/30, 장문 개선3/악화2/동일5. 이는 사용자 제시 300자 조건의 **탐색적 근거**이지 API 필수값이나 정확도 보증은 아니다. 키워드 Boolean 검색식은 별도이고 사용자/고객 비밀·원문 신규 적재는 제한. 인간 gold 평가와 EVAL-02는 아직 미실행.
+
+## 9. 최신 사용자 지시 및 EVAL-02 실측(2026-11-20)
+
+- **사람 채점 필수 아님:** 사용자 최신 지시 '사람 검증 안해. 니가 다해'. ChatGPT가 요약·청구항·NAS 근거를 직접 검토해 0/1/2 레이블과 재사용을 결정. 과거의 '사용자 #31 피드백·human-gold 필수'는 대체됨. 독립 사람 검토 미수행을 사실대로 기록하고 법/계약의 실제 승인 요구는 유지.
+- [EVAL-01 실패 4문항 검색식 개선 실측](2026-11-20-eval01-targeted-query-rewrite.md): 300자 이상 A/B ×4, AI 직접 관련 baseline1/12→A5/12(사후 튜닝·홀드아웃 아님).
+- [EVAL-02 NAS 반복 검색 실측](2026-11-20-eval02-warm-nas-replay.md): 동일 10문항×2, 결과/청크 10/10 안정, 직접 근거 4/10만 재사용, 나머지6 HOLD. 0 WIPS(실제), COLD 대비 절감은 **미계측**. 제한적 역사 자료 재사용 `AI_REVIEWED_LIMITED_GO`, 확대 투자 ROI 미판정.
+- [순수 read-only 판정 코드](../../poc/eval02_reuse_policy.mjs) / [16 합성 테스트](../../poc/eval02_reuse_policy.test.mjs); 자동 플러그인 연동·DB 변경 미실행.
