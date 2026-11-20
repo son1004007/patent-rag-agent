@@ -1,6 +1,6 @@
 # Patent RAG Agent
 
-> **다른 채팅·AI가 이어서 구현할 때:** [P0 작업별 상세 설계서·실행 계획서 (P0-1~P0-5)](docs/mvp-implementation/INDEX.md) → [전체 문서 목차](DOC_INDEX.md) → [최신 작업 목록](TASKS.md). 설계 문서상의 신규 모듈은 실제 구현 완료가 아닙니다.
+> **다른 채팅·AI가 이어서 구현할 때:** [MVP41 실제 WIPS 검색→NAS 저장 통합 사용법](docs/42-mvp41-code-mode-gateway-archive.md) · [P0 작업별 상세 설계서·실행 계획서 (P0-1~P0-5)](docs/mvp-implementation/INDEX.md) → [전체 문서 목차](DOC_INDEX.md) → [최신 작업 목록](TASKS.md). 설계 문서상의 신규 모듈은 실제 구현 완료가 아닙니다.
 
 ChatGPT에서 짧은 질문으로 특허를 검색하고, 허가된 문헌을 NAS에 저장하여 재사용하는 개인 PoC.
 

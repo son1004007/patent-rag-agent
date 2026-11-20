@@ -46,3 +46,6 @@ WIPS 검색 반환 서지정보를 개인 NAS에 지속 보관하는 것을 사�
 
 ## 2026-11-20 P0 작업별 상세 설계·실행 문서 진입 규칙
 특허 MCP·공보 PDF·본문/벡터·전체 원문·MVP 인수 관련 구현을 시작할 때는 최신 TASKS/CURRENT_STATE를 확인하고 **[P0-1~P0-5 설계/계획 인덱스](docs/mvp-implementation/INDEX.md)**에서 **해당 작업의 설계서와 실행 계획서를 둘 다 읽는다**. 실제 코드와 운영 환경은 별도 최신 Source of Truth로 확인한다. 명세에 제안된 신규 파일/권한/공급자 API는 아직 생성·실증되었다고 가정하지 않는다. 각 설계의 사전 위험과 Stop/Go/수용 테스트를 구현 전에 확인하되 사용자 최신 '작은 변경 → 최소 점검 → 운영 반영 → 실제 테스트' 원칙을 유지한다. 문서화만으로 코드·운영 검증 완료를 주장하지 않는다.
+
+## 2026-11-20 최신 P0-1 실제 WIPS 검색→NAS 저장 작업 규칙
+사용자가 이 특허 RAG 맥락에서 WIPS 특허 검색·서지 자동 저장을 요청하면 [MVP41 ChatGPT Code Mode→NAS 안전한 단일 실행 경로](docs/42-mvp41-code-mode-gateway-archive.md)와 [P0-1 설계·계획](docs/mvp-implementation/INDEX.md)을 확인한다. 현재 WIPS plugin + Gateway 승인 owner-local stdin wrapper로 WIPS 첫 페이지 최대100건을 검색해 NAS 보관하고, 검색 성공과 보관 verified 결과를 별도로 확인한다. 임의의 독립 WIPS MCP 호출을 자동 가로채는 플랫폼 hook은 미구현. WIPS 키/원문/공보 PDF/벡터 수집·새 외부 서버/리더 권한 확대 금지, 예상 실패 시 우회나 조용한 새 provider 검색 재시도 금지. 신규 WIPS/MyFolder 관련 개발은 별도 사용자 재요청 전 진행하지 않는다.

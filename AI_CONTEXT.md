@@ -54,3 +54,5 @@
 - WIPS 기능·구현 상태를 질문받으면 우선 [WIPS MCP 28개 도구·응답 카탈로그](docs/40-wips-mcp-capability-catalog.md)를 확인한다. 도구 정의/실제 호출/운영 구현 구분 필수. WIPS 공보 PDF 다운로드 직접 도구 없음(현재 연결 한정); 도면은 경로 반환·실제 이미지 다운로드 미검증; 청크와 384차원 E5 임베딩은 NAS 로컬. 83건 서지와 기존 6문헌·10섹션·417청크/PDF0건을 서로 혼동하지 않는다. P0 순서: 통합 검색·서지 자동 연결→공보 PDF 경로 검증→승인된 본문/벡터 증분 적재→전체 원문·PDF 열람→실사용 인수.
 
 - 2026-11-20: 다른 채팅/AI가 P0 구현을 시작할 때 [작업별 상세 설계·실행 계획서 인덱스](docs/mvp-implementation/INDEX.md) 필수 탐색. P0-1(통합 검색→서지 자동보관), P0-2(공식 공보 PDF), P0-3(승인 본문·벡터), P0-4(전체 원문/공보 보기), P0-5(인수) 각각 design+plan 링크. 문서는 설계·진입점이며 현재 운영 실증 아닌 신규 코드/서비스 내용은 제안안. 기존 서지83/원문6·10/벡터417/PDF0과 기존 보안·권리 제한 유지.
+
+- 2026-11-20 **최신 WIPS 검색·서지 저장 A안 운영 진입:** [MVP41 Code Mode Gateway runbook](docs/42-mvp41-code-mode-gateway-archive.md) → [P0-1 설계·계획](docs/mvp-implementation/INDEX.md). 현재 ChatGPT WIPS MCP + owner Gateway stdin adapter를 하나의 코드모드 실행에서 합성하여 실제 첫 페이지83건 조회·기존 보관 재사용 83건/새 저장0 PASS, 계약17/17, 기존 원문 불변. WIPS 키를 NAS로 옮기지 않음. B안(단일 backend MCP의 WIPS 직접 호출) 미검증, 독립 WIPS 조회의 무조건 자동 보관 미구현. 서지 검색당 첫100만. WIPS MyFolder 후속 작업은 **사용자 요청 전 HOLD**, 재제안/추적 중지.

@@ -114,3 +114,6 @@ NAS writer에 WIPS 호출 credential 또는 ChatGPT reader token을 넣지 않�
 
 ## 보충: 별도 WIPS MyFolder MCP는 자동 저장 브리지가 아님 (2026-11-20)
 [별도 서비스 조사](../41-wips-myfolder-mcp-assessment.md): 윈텔립스 MyFolder에 **이미 저장된** 특허의 폴더명/건수·SKEY를 읽는 기능으로 안내됨. 공개된 `myfolder_list_folders`/`myfolder_get_folder_skeys`는 별도 인증·MyFolder 사용권이 필요한 **읽기 전용 도구**이며 직접 계정 호출은 NOT RUN. 웹 MyFolder 폴더 저장/편집 기능을 MCP 쓰기 기능으로 추정하지 않는다. **P0-1 신규 검색→NAS 자동 적재를 해결하지 않으므로 Gate A와 A/B안 그대로 유지**, MyFolder SKEY import는 P1 선택 경로. 현재 설치된 개인 플러그인 목록에 별도 MyFolder 없음.
+
+## 2026-11-20 실제 A안 개발·운영 결과
+[구현 코드/호출·실제 NAS 검증](../42-mvp41-code-mode-gateway-archive.md). WIPS MCP가 ChatGPT에 이미 인증되어 있는 환경에서는 **Code Mode 한 실행 안에서 WIPS 조회→Gateway owner private stdin wrapper→기존 local archive writer**를 호출할 수 있음을 검증했다. 별도 provider key 복사나 새 API listener/기존 서비스 재시작이 필요 없었다. WIPS 83건/100 요청, REUSED_VERIFIED(saved0,reused83) 두 번, 신규 검색 호출은 1회, 계약 테스트 17/17. B안/독립 WIPS 플러그인 무조건 hook은 별도 검증 전이므로 완료 선언 금지. stdin 60KB 제한 넘으면 fail-closed, 데이터 자르기·무단 재검색 금지.

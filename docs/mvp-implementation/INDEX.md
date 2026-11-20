@@ -31,6 +31,8 @@ flowchart TD
 - **개별 단계 병렬 가능:** P0-2의 공급자 API/파일 경로 조사는 P0-3의 선택 문헌 텍스트 parser와 독립. **P0-4 전체 텍스트 뷰어는 PDF가 없어도 우선 구현할 수 있지만, PDF 보기 PASS는 P0-2에 의존.**
 - **다음에 착수할 실제 작업:** P0-1. [계획](P0-1-plan.md)의 Gate A(백엔드에서 WIPS MCP 인증 호출 가능 여부) 판정부터 수행. 지원이 없으면 ChatGPT 순차 오케스트레이션을 정식화하고 한계 명시.
 
+> **P0-1 A안 실제 운영 검증 (2026-11-20):** [ChatGPT Code Mode WIPS 검색→NAS Gateway 저장·기존83건 재사용 인수](../42-mvp41-code-mode-gateway-archive.md). 이는 신규 백엔드 MCP 도구 등록이나 임의 WIPS 호출 자동 후킹을 뜻하지 않는다. 실제 구현 상태는 CURRENT_STATE/TASKS가 정본이다.
+
 ## 2. 현재 운영 근거 (새 설계 문서와 혼동 금지)
 
 | 기존 검증 대상 | 현재 실제 상태 / 근거 |

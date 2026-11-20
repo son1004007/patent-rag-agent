@@ -57,3 +57,6 @@
 - [ ] 기존 WIPS 검색 MCP(`wipsclip`), 별도 WIPS MyFolder MCP, NAS RAG의 호출권한/툴을 **서로 다른 서비스**로 식별한다. [조사](../41-wips-myfolder-mcp-assessment.md)
 - [ ] 별도 MyFolder가 설치되더라도 `myfolder_get_folder_skeys`가 **서버의 새 검색 결과를 NAS DB에 쓰는 도구가 아님**을 확인한다.
 - [ ] P0-1은 MyFolder 없는 상태에서도 구현 가능해야 한다. MyFolder 도구 연결·별도 인증은 사용자 결정에 따른 P1 선택 범위로 유지한다.
+
+## MVP41 A안 실운영 검증 반영 (2026-11-20)
+[실제 코드·NAS 실행 결과](../42-mvp41-code-mode-gateway-archive.md): WIPS 검색→Code Mode→Gateway owner stdin wrapper→archive 재사용 인수 PASS. 계약 Node17/17, WIPS 83건/100한도, NAS 저장 2회 REUSED_VERIFIED(각 신규0, 재사용83), 운영 DB/기존 원문 불변 확인. 새 문헌 INSERT는 이 경로에서 NOT RUN(기존 archive83 최초 INSERT는 과거 PASS). **남은 체크:** 새로운 채팅에서 동일 워크플로 선택/실증, 독립 WIPS 호출 자동 hook을 지원할지 결정; 서버측 B안은 외부 WIPS 자격증명/호출권 확인 후 개별 구현. P0-2 등 다음 기능을 위해 기존 NAS 권한·재시작 범위 확대 금지.
