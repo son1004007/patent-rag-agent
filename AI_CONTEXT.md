@@ -72,3 +72,5 @@
 
 
 - 2026-11-20 **EVAL-03 요청형 NAS RAG→WIPS fallback 실제 연결**: [실측](docs/evaluation/2026-11-20-eval03-on-demand-nas-wips-router.md), [라우터](poc/eval03_patent_router.mjs). 기존 ChatGPT 두 MCP를 Code Mode에서 순차 합성, Q01 NAS 근거 충족 search2/detail3 WIPS0, Q06 NAS 직접관련 부족 search2/detail3 WIPS1 top3. V8 합성/계약 16+29+14=59 PASS. **벡터 top3 부재는 전체 DB에 특허가 없다는 증명이 아니며**, 정확한 문헌번호 존재 확인 API/서버 상시 routing 미구현. 원문/DB/권한/서비스 변경 없음.
+
+- 2026-11-21 **EVAL-03 화면 P0-1 WIPS 후보 표시**: [구현 및 테스트](docs/evaluation/2026-11-21-eval03-p0-1-wips-search-result-display.md). fallback top3 결과의 문헌번호·명칭·요약·대표청구항을 길이 제한/누락·절단 표기와 함께 반환. 공급자 SKEY·NAS 원문/ID 미노출. 기존 AI 근거 분기 불변, 95% 유사도 기준 미적용. V8 합성 총 70 PASS, Node CI/신규 코드 운영 서비스 배포 미실행.

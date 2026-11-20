@@ -157,3 +157,5 @@
 
 - [x] **EVAL-03 ChatGPT 요청형 NAS RAG→WIPS MCP 분기 실제 연결** — [코드](poc/eval03_patent_router.mjs), [Q01/Q06 실측](docs/evaluation/2026-11-20-eval03-on-demand-nas-wips-router.md), [14 테스트](poc/eval03_patent_router.test.mjs). NAS 직접 관련 근거 충분 Q01→NAS-only/WIPS0; NAS 근거 부족 Q06→WIPS1 top3. 합성 계약 총59 PASS V8. 기존 두 MCP를 ChatGPT에서 명시적 실행·읽기 전용으로 연결한 것이며 상시 자동 플러그인/서버 새 도구 등록은 아님.
 - [ ] **EVAL-03 보유 여부 정확 판별** — 조회 대상이 문헌번호·종류로 특정된 경우 NAS 전체 존재 여부를 확인할 최소권한 read-only lookup 제공 여부/안전한 대안 검토. 현재 `search_patents`는 상위3 근접 문헌만 반환하므로 `INSUFFICIENT_DIRECT_EVIDENCE`를 `NOT_IN_DATABASE`로 표현하지 않는다. 인증·계약·운영 재기동 승인 없이 새 도구 강제 배포 금지.
+
+- [x] **EVAL-03 화면 P0-1 — WIPS 검색 결과 표시**: [검증](docs/evaluation/2026-11-21-eval03-p0-1-wips-search-result-display.md). WIPS top3 문헌번호·명칭·요약·대표청구항 표시, 누락/절단 상태 및 미승인 필드 분리. 기존 서지 NAS 자동 저장 P0-1과 구별. Code Mode V8 70 PASS, 95% 미적용, NAS 운영 불변.

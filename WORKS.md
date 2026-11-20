@@ -142,3 +142,9 @@
 - 실제 Q01 NAS 검색2/상세3, AI 인용 근거 만족, WIPS0 → NAS 경로 PASS.
 - 실제 Q06 NAS 검색2/상세3, 근거 부족, WIPS1/3건 → WIPS 경로 PASS.
 - 제한: exact 문헌번호 보유확인 미구현, 라우터 결과는 WIPS 원문 객체가 아닌 건수/분기 메타데이터만 출력, 운영 상시 라우터 등록되지 않음. 실서비스 장애 유발 시험 없음. 코드·서비스·DB·95% 기준 변경 없음.
+
+## 2026-11-21 EVAL-03 화면 P0-1 코드 작업
+
+- 검색 결과 WIPS fallback top3 문헌번호·명칭·요약·대표청구항을 사용자 출력 구조에 투영. 비공개 SKEY 및 공급자 raw JSON 제외. WIPS 실제 응답 필드 7개 형태 확인(내용 미공개).
+- AI 근거 기반 라우팅 정책 유지, V8 합성 정책16 + NAS adapter29 + router 25 = **70 PASS**. Node CI/신규 구현 2소스 라이브 재검증/운영 서버 배포 별도 미실행. 기존 설정·95% 기준·DB 불변.
+- [기록](docs/evaluation/2026-11-21-eval03-p0-1-wips-search-result-display.md).

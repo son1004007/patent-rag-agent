@@ -14,6 +14,8 @@ function unwrap(x){
   if(typeof x?.text==='string')return JSON.parse(x.text);
   return x;
 }
+// Bounded display projection. Do not return raw WIPS provider reply or SKEY.
+const DISPLAY_LIMITS={title:240,abstract:1500,representativeClaim:1500};
 function validWips(obj){
   const d=obj?.data;
   return obj?.success===true && d && typeof d==='object' &&
@@ -22,7 +24,35 @@ function validWips(obj){
     d.total_count>=d.row_list.length &&
     d.row_list.every(r=>r&&typeof r==='object'&&
       typeof r.SKEY==='string'&&/^[0-9]{5,30}$/.test(r.SKEY)&&
-      typeof r.TIK==='string'&&r.TIK.trim().length>0);
+      typeof r.CC==='string'&&/^[A-Z]{2,3}$/.test(r.CC)&&
+      typeof r.XN_D==='string'&&r.XN_D.trim().length>0&&r.XN_D.length<=80&&
+      typeof r.KC_D==='string'&&/^[A-Za-z0-9]{1,6}$/.test(r.KC_D)&&
+      typeof r.TIK==='string'&&r.TIK.trim().length>0&&r.TIK.length<=20000&&
+      ['ABK','CLK'].every(k=>r[k]==null||
+        (typeof r[k]==='string'&&r[k].length<=20000)));
+}
+function displayText(value,limit){
+  if(value==null||value==='')return {text:null,truncated:false};
+  // Treat external response as data, never executable markup/instructions.
+  const plain=value.replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi,' ')
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi,' ')
+    .replace(/<[^>]*>/g,' ').replace(/[\u0000-\u001f\u007f]/g,' ')
+    .replace(/\s+/g,' ').trim();
+  const chars=[...plain];
+  return {text:chars.length?chars.slice(0,limit).join(''):null,
+    truncated:chars.length>limit};
+}
+function displayPatents(rows){
+  return rows.map((r,i)=>{
+    const t=displayText(r.TIK,DISPLAY_LIMITS.title);
+    const a=displayText(r.ABK,DISPLAY_LIMITS.abstract);
+    const c=displayText(r.CLK,DISPLAY_LIMITS.representativeClaim);
+    if(!t.text)throw Error('INVALID_WIPS_TITLE');
+    return {rank:i+1,publicationNumber:r.XN_D.trim(),country:r.CC,
+      documentKind:r.KC_D,title:t.text,abstract:a.text,
+      representativeClaim:c.text,
+      truncated:{title:t.truncated,abstract:a.truncated,representativeClaim:c.truncated}};
+  });
 }
 function safeResult(source,decision,local,calls,extra={}){
   return {source,decision,localDecision:local?.decision??null,
@@ -55,9 +85,13 @@ export async function runPatentRouter({
     w=unwrap(await searchWips({query:wipsQuery,pgrow:3,pgnum:1,outitem:WIPS_FIELDS}));
     if(!validWips(w))return safeResult('HOLD',ROUTE.ERROR,local,calls);
   }catch{return safeResult('HOLD',ROUTE.ERROR,local,calls);}
-  const count=w.data.row_list.length;
+  let patents;
+  try{patents=displayPatents(w.data.row_list);}
+  catch{return safeResult('HOLD',ROUTE.ERROR,local,calls);}
+  const count=patents.length;
   return safeResult('WIPS_MCP',count?ROUTE.REMOTE:ROUTE.EMPTY,local,calls,
-    {returnedCount:count,totalCount:w.data.total_count,
-      limitations:['NAS_TOP3_UNVERIFIED_ABSENCE','WIPS_SEARCH_NOT_FULLTEXT_OR_LEGAL_OPINION']});
+    {returnedCount:count,totalCount:w.data.total_count,patents,
+      limitations:['NAS_TOP3_UNVERIFIED_ABSENCE','WIPS_SEARCH_NOT_FULLTEXT_OR_LEGAL_OPINION',
+        'DISPLAY_TEXT_NOT_FULL_SPECIFICATION']});
 }
 export {ROUTE};

@@ -132,3 +132,5 @@
 
 
 - 2026-11-20 **EVAL-03 ChatGPT Code Mode 단일 요청 NAS→WIPS 조건부 연결 실측**: [Code Mode 도구 주입식 라우터](poc/eval03_patent_router.mjs) 및 [Q01/Q06 live 결과](docs/evaluation/2026-11-20-eval03-on-demand-nas-wips-router.md). 실제 Q01 NAS AI 인용 근거 확인 시 NAS search2 + get3, WIPS0 / 실제 Q06 NAS 직접 근거 부족 시 NAS search2+get3 후 WIPS Boolean search1, top3 반환. V8 합성 계약 총59 PASS(정책16·어댑터29·라우터14), Node CI/운영 상시 라우터 도구 등록·고객 시스템 배포 NOT RUN. 보유 여부의 완전한 정확 일치는 문헌번호 전체조회 MCP 부재로 미완료. 모든 환경·권리·DB/벡터·서비스 변경 없음.
+
+- 2026-11-21 **EVAL-03 화면 P0-1 WIPS 후보 표시**: [구현 및 테스트](docs/evaluation/2026-11-21-eval03-p0-1-wips-search-result-display.md). fallback top3 결과의 문헌번호·명칭·요약·대표청구항을 길이 제한/누락·절단 표기와 함께 반환. 공급자 SKEY·NAS 원문/ID 미노출. 기존 AI 근거 분기 불변, 95% 유사도 기준 미적용. V8 합성 총 70 PASS, Node CI/신규 코드 운영 서비스 배포 미실행.

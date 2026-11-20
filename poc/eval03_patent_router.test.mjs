@@ -82,4 +82,75 @@ await check('remote query is independent of NAS private query',async()=>{
     reviewNas:async()=>null,searchWips:async p=>{passed=p;return goodWips}}));
   return passed?.query==='(solar).ti,ab.'&&!JSON.stringify(passed).includes('Private query');
 });
+
+await check('WIPS visible 4 fields and patent identity',async()=>{
+ const r=await runPatentRouter(args({reviewNas:async()=>null})),p=r.patents?.[0];
+ return r.decision===ROUTE.REMOTE&&p?.publicationNumber==='2026-00003'&&
+ p.title==='Synthetic example'&&p.abstract==='Public test abstract'&&p.representativeClaim==='Public test claim'&&
+ p.country==='KR'&&p.documentKind==='A'&&p.rank===1&&Object.values(p.truncated).every(x=>!x);
+});
+await check('Unicode truncation is codepoint safe and explicit',async()=>{
+ const r=await runPatentRouter(args({reviewNas:async()=>null,
+ searchWips:async()=>({success:true,data:{total_count:1,row_list:[{
+ ...goodWips.data.row_list[0],TIK:'🙂'.repeat(300),ABK:'가'.repeat(1800),CLK:'청구'.repeat(900)}]}})}));
+ const p=r.patents[0];return [...p.title].length===240&&[...p.abstract].length===1500&&
+ [...p.representativeClaim].length===1500&&Object.values(p.truncated).every(Boolean);
+});
+await check('Missing summary and claim are null',async()=>{
+ const r=await runPatentRouter(args({reviewNas:async()=>null,
+ searchWips:async()=>({success:true,data:{total_count:1,row_list:[{
+ ...goodWips.data.row_list[0],ABK:null,CLK:''}]}})}));
+ return r.patents?.[0].abstract===null&&r.patents?.[0].representativeClaim===null;
+});
+await check('Script tag and style HTML are removed',async()=>{
+ const r=await runPatentRouter(args({reviewNas:async()=>null,
+ searchWips:async()=>({success:true,data:{total_count:1,row_list:[{
+ ...goodWips.data.row_list[0],TIK:'<b>Example</b> patent',
+ ABK:'Text<script>alert(secret)</script> details',
+ CLK:'<p>Claim</p><style>body{display:none}</style> content'}]}})}));
+ return r.patents?.[0].title==='Example patent'&&r.patents?.[0].abstract==='Text details'&&
+ r.patents?.[0].representativeClaim==='Claim content';
+});
+await check('No SKEY NAS id or extra provider payload leaves router',async()=>{
+ const r=await runPatentRouter(args({reviewNas:async()=>null,
+ searchWips:async()=>({success:true,data:{total_count:1,row_list:[{
+ ...goodWips.data.row_list[0],SECRET:'token_never_echo',RAW_PAYLOAD:'hidden'}]}})}));
+ const j=JSON.stringify(r);return j.includes('Public test abstract')&&!j.includes('1234567890123')&&
+ !j.includes('token_never_echo')&&!j.includes('hidden')&&!j.includes('PAT-');
+});
+await check('Missing publication number fails closed',async()=>{
+ const r=await runPatentRouter(args({reviewNas:async()=>null,
+ searchWips:async()=>({success:true,data:{total_count:1,row_list:[{
+ ...goodWips.data.row_list[0],XN_D:''}]}})}));
+ return r.decision===ROUTE.ERROR&&!('patents' in r);
+});
+await check('Malformed abstract fails closed',async()=>{
+ const r=await runPatentRouter(args({reviewNas:async()=>null,
+ searchWips:async()=>({success:true,data:{total_count:1,row_list:[{
+ ...goodWips.data.row_list[0],ABK:{unsafe:'object'}}]}})}));
+ return r.decision===ROUTE.ERROR&&!('patents' in r);
+});
+await check('Three WIPS rows remain in original order',async()=>{
+ const rows=[1,2,3].map(n=>({...goodWips.data.row_list[0],XN_D:'2026-0000'+n,
+ SKEY:String(1234567890120+n)}));
+ const r=await runPatentRouter(args({reviewNas:async()=>null,
+ searchWips:async()=>({success:true,data:{total_count:50,row_list:rows}})}));
+ return r.patents?.length===3&&r.returnedCount===3&&r.totalCount===50&&
+ r.patents.map(p=>p.publicationNumber).join(',')==='2026-00001,2026-00002,2026-00003';
+});
+await check('NAS verified path does not carry WIPS patents',async()=>{
+ const r=await runPatentRouter(args());
+ return r.decision===ROUTE.LOCAL&&r.calls.wips===0&&!('patents' in r);
+});
+await check('Empty WIPS result has an empty patents list',async()=>{
+ const r=await runPatentRouter(args({reviewNas:async()=>null,
+ searchWips:async()=>({success:true,data:{total_count:0,row_list:[]}})}));
+ return r.decision===ROUTE.EMPTY&&Array.isArray(r.patents)&&r.patents.length===0;
+});
+await check('Text wrapper provider response is accepted',async()=>{
+ const r=await runPatentRouter(args({reviewNas:async()=>null,
+ searchWips:async()=>({text:JSON.stringify(goodWips)})}));
+ return r.decision===ROUTE.REMOTE&&r.patents?.[0].title==='Synthetic example';
+});
+
 console.log('EVAL03_ROUTER_PASS',n);
