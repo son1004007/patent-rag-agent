@@ -159,3 +159,5 @@
 - [ ] **EVAL-03 보유 여부 정확 판별** — 조회 대상이 문헌번호·종류로 특정된 경우 NAS 전체 존재 여부를 확인할 최소권한 read-only lookup 제공 여부/안전한 대안 검토. 현재 `search_patents`는 상위3 근접 문헌만 반환하므로 `INSUFFICIENT_DIRECT_EVIDENCE`를 `NOT_IN_DATABASE`로 표현하지 않는다. 인증·계약·운영 재기동 승인 없이 새 도구 강제 배포 금지.
 
 - [x] **EVAL-03 화면 P0-1 — WIPS 검색 결과 표시**: [검증](docs/evaluation/2026-11-21-eval03-p0-1-wips-search-result-display.md). WIPS top3 문헌번호·명칭·요약·대표청구항 표시, 누락/절단 상태 및 미승인 필드 분리. 기존 서지 NAS 자동 저장 P0-1과 구별. Code Mode V8 70 PASS, 95% 미적용, NAS 운영 불변.
+
+- [x] **화면 P0-1 수정 라우터 실제 연결 재검증** — Q01 NAS-only(WIPS0), Q06 WIPS fallback 1회/특허3건 4필드/절단 메타데이터 실제 반환 PASS. [기록](docs/evaluation/2026-11-21-eval03-p0-1-wips-search-result-display.md). 전역 MCP 배포 및 PDF·원문/벡터 자동 적재는 별도.

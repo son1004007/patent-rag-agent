@@ -148,3 +148,5 @@
 - 검색 결과 WIPS fallback top3 문헌번호·명칭·요약·대표청구항을 사용자 출력 구조에 투영. 비공개 SKEY 및 공급자 raw JSON 제외. WIPS 실제 응답 필드 7개 형태 확인(내용 미공개).
 - AI 근거 기반 라우팅 정책 유지, V8 합성 정책16 + NAS adapter29 + router 25 = **70 PASS**. Node CI/신규 구현 2소스 라이브 재검증/운영 서버 배포 별도 미실행. 기존 설정·95% 기준·DB 불변.
 - [기록](docs/evaluation/2026-11-21-eval03-p0-1-wips-search-result-display.md).
+
+- **실제 후속 두 분기 연동**: 수정 Code Mode 소스·현 NAS_RAG/WIPS 실도구로 Q01 로컬 검색2·상세3·WIPS0, Q06 로컬 검색2·상세3·WIPS1 및 후보3건 네 필드·절단 메타데이터 반환 PASS. 공급자 원문/내부 식별자 로그 공개 안 함. Code Mode 요청시만 동작하며 별도 운영 서버 배포 아님.
