@@ -81,3 +81,7 @@ flowchart TD
 ## 11. EVAL-02 전10문항 NAS 실제 판정 및 다중 근거 보강 (2026-11-20)
 
 [10문항 read-only 검색/AI 근거 판단 결과](2026-11-20-eval02-full10-feature-grounding.md) / [라이브 어댑터](../../poc/eval02_live_read_adapter.mjs) / [계약 테스트](../../poc/eval02_live_read_adapter.test.mjs). 기존4+새6문항 합계 **재사용 Q01~Q04 4/10, Q05~Q10 근거부족 HOLD 6/10**. 새6문항 실제 Code Mode adapter NAS search12+get18/WIPS0, Q01 다중섹션 3필수 속성 인용 실제 PASS. 기존 정책16+adapter29 = Code Mode V8 **45 PASS**. **운영 NAS MCP 자동 라우팅·Node CI NOT RUN**, COLD 대비 실제 비용/시간 미측정, human-gold는 사용자 지시로 필수 아님. 결과·유료/권리·데이터는 비공개 경계 유지.
+
+## 12. EVAL-03 ChatGPT 요청형 두 MCP 실제 분기 연결 (2026-11-20)
+
+[라이브 NAS 우선/근거 없을 때 WIPS 보완 검색](2026-11-20-eval03-on-demand-nas-wips-router.md) / [Code Mode 라우터](../../poc/eval03_patent_router.mjs) / [14 테스트](../../poc/eval03_patent_router.test.mjs). Q01 NAS 근거 승인→WIPS0, Q06 NAS 근거 보류→WIPS1 top3. 기존 정책16+gate29+router14=V8 **59 PASS**. NAS 오류는 '없음'으로 처리하지 않음. **전체 문헌 DB 정확 보유 여부 확인이나 상시 서버 라우터 자동 설치가 아닌 현재 ChatGPT on-demand 명시 경로 검증**. 신규 쓰기·원문/공보·권한·운영 서비스 변경 없음.

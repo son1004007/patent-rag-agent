@@ -129,3 +129,6 @@
 
 
 - 2026-11-20 **WIPS MCP 최신 읽기 재확인**: [외부 설명용 익명 실측](docs/evaluation/2026-11-20-wips-mcp-read-smoke.md) — 현재 연결된 개인 ChatGPT WIPS MCP `get_patent_search_onlyengine` Boolean top2 2/2(제목·요약·대표청구항), `get_patent_ai_search` 388자 일반 기술 설명 KR top2 2/2, `get_patent_by_skey` 상세1/1 모두 `success=true`. **실제 고객사 계정/환경·서비스 통합 확인 NOT RUN**. 영속 저장/원문/PDF/DB·서비스/권한 변경 없음. 개인 PoC와 고객 프로젝트 완료 상태 혼동 금지.
+
+
+- 2026-11-20 **EVAL-03 ChatGPT Code Mode 단일 요청 NAS→WIPS 조건부 연결 실측**: [Code Mode 도구 주입식 라우터](poc/eval03_patent_router.mjs) 및 [Q01/Q06 live 결과](docs/evaluation/2026-11-20-eval03-on-demand-nas-wips-router.md). 실제 Q01 NAS AI 인용 근거 확인 시 NAS search2 + get3, WIPS0 / 실제 Q06 NAS 직접 근거 부족 시 NAS search2+get3 후 WIPS Boolean search1, top3 반환. V8 합성 계약 총59 PASS(정책16·어댑터29·라우터14), Node CI/운영 상시 라우터 도구 등록·고객 시스템 배포 NOT RUN. 보유 여부의 완전한 정확 일치는 문헌번호 전체조회 MCP 부재로 미완료. 모든 환경·권리·DB/벡터·서비스 변경 없음.

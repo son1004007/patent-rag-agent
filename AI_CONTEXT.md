@@ -69,3 +69,6 @@
 
 
 - 2026-11-20 EVAL-02 **10문항 실제 NAS 어댑터 판정 완료(기존4+신규6)**: [총괄](docs/evaluation/2026-11-20-eval02-full10-feature-grounding.md). Q01~Q04 REUSE, Q05~Q10 HOLD, 추가6문항 실도구 adapter 검색12+상세18/WIPS0, Q01 다중섹션(봉지/끝단/수분) 인용 검증3 PASS. 기존 정책16+신규어댑터29 = Code Mode V8 합성45 PASS. 자동 운영 도구배포는 NOT_RUN, WIPS 대비 비용·지연 ROI 미측정.
+
+
+- 2026-11-20 **EVAL-03 요청형 NAS RAG→WIPS fallback 실제 연결**: [실측](docs/evaluation/2026-11-20-eval03-on-demand-nas-wips-router.md), [라우터](poc/eval03_patent_router.mjs). 기존 ChatGPT 두 MCP를 Code Mode에서 순차 합성, Q01 NAS 근거 충족 search2/detail3 WIPS0, Q06 NAS 직접관련 부족 search2/detail3 WIPS1 top3. V8 합성/계약 16+29+14=59 PASS. **벡터 top3 부재는 전체 DB에 특허가 없다는 증명이 아니며**, 정확한 문헌번호 존재 확인 API/서버 상시 routing 미구현. 원문/DB/권한/서비스 변경 없음.

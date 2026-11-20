@@ -127,3 +127,10 @@
 
 - [실제 3개 MCP 읽기 확인](docs/evaluation/2026-11-20-wips-mcp-read-smoke.md): 검색식2건 PASS, 388자 KR AI 검색2건 PASS, WIPS 반환 문헌 상세 제목/요약/청구항 1건 PASS. 호출 수3, 오류0. 실제 원 응답·문헌ID/초록/청구항·고객 정보는 공개 git에 보관하지 않음.
 - 기술상 결론: **개인 환경에서 WIPS MCP 기본 검색·조회 사용 가능**. 고객 계정 권한/망/서비스 백엔드 연동, 공급사 PDF 원본·신규 영속 저장 및 상용 운영 인수 미확인. 별도 NAS RAG 실증을 고객사 연동 완료로 주장하지 않는다.
+
+
+## 2026-11-20 EVAL-03 두 MCP Code Mode 분기 실연결
+
+- [새 read-only router](poc/eval03_patent_router.mjs), [합성 검증](poc/eval03_patent_router.test.mjs): 기존 EVAL02 search2/detailTop3/citation 검증을 local 근거 게이트로 사용한 후, 확실한 관련 근거 없으면 외부 WIPS 검색을 한 번 실행. 기술적 판단/출처 검증 없이는 무조건 NAS가 반환하는 NN을 보유 특허라고 간주하지 않음.
+- 실제 Q01: NAS search2/detail3 결과 관련성·인용 검증 PASS, `SERVED_FROM_NAS_RAG`, WIPS0. 실제 Q06: NAS search2/detail3 직접근거 부족, `SERVED_FROM_WIPS_MCP`, WIPS Boolean search1 top3 PASS. 사용자/고객 내부 질의·실문헌 식별자/발췌·WIPS 원응답 미기록.
+- **Code Mode V8 정책16+게이트29+라우터14=59/59 PASS**. Node CI/임의 채팅 상시 자동 라우터·서버 MCP 신규 도구·NAS 또는 WIPS 권한/서비스/DB 변경 **NOT RUN**. 정확 문헌번호 보유 조회 미구현, WIPS 비용/법적 상태/원문 PDF 별도.

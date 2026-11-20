@@ -65,3 +65,6 @@ WIPS 일반 키워드/Boolean 검색식(`get_patent_search_onlyengine`)과 AI �
 
 ## 2026-11-20 최신 EVAL-02 전체 10문항 AI 근거 재사용 완료
 [10문항 실경로 결과](docs/evaluation/2026-11-20-eval02-full10-feature-grounding.md): 기존4문항+새6문항의 실제 NAS read-only 검증으로 AI 관련 재사용 Q01~Q04 **4/10**, 필수 근거 미충족 Q05~Q10 **6/10 HOLD**. 기존 대표청구항만의 제한으로 Q01 false HOLD를 낸 것을 해결하기 위해 [live adapter](poc/eval02_live_read_adapter.mjs)에서 `requiredFeatures` 및 청구항/요약 **다중 인용 출처 필드**를 검증한다. 실제 Q01 3요구조건 재확인 PASS, 기존 테스트16+adapter29=**V8 격리계약45 PASS**. 모든 신규 코드/예비 평가의 자동 NAS 운영 서비스/플러그인 적용은 아직 미구현, 외부 human-gold는 사용자 최신 결정으로 필수 아님. 비용·권리·원문 재적재 관련 보안 조건 유지.
+
+## 2026-11-20 EVAL-03 ChatGPT 내 NAS 우선/WIPS 보완 라우터
+[실제 두 경로 인수](docs/evaluation/2026-11-20-eval03-on-demand-nas-wips-router.md) 및 [Code Mode 라우터](poc/eval03_patent_router.mjs). Q01은 NAS 재사용(검색2·상세3/WIPS0), Q06은 NAS 직접 근거 부족 시 WIPS 검색(검색2·상세3/WIPS1). 기존 16+29+새14=**V8 계약59 PASS**. WIPS 키 이동·서비스 권한·원문/PDF/벡터/서지 쓰기·재시작 없이 기존 두 MCP를 ChatGPT에서 명시적 조합. NAS 벡터 top3는 **정확한 전체 문헌 보유 여부 증거 아님**; `INSUFFICIENT_DIRECT_EVIDENCE`에서만 WIPS 전환, 읽기 오류/불안정/인용 불일치는 HOLD. 서버 상시 단일 MCP 자동 등록은 **NOT RUN/NOT IMPLEMENTED**. 사용자에게 다른 채팅 전역 동작이나 고객사 연동 완료라고 주장하지 않는다.

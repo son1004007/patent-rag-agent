@@ -153,3 +153,7 @@
 
 
 - [x] **WIPS MCP 외부 현황 설명에 필요한 읽기 경로 3종 최신 확인** — [실측](docs/evaluation/2026-11-20-wips-mcp-read-smoke.md), 검색식2/2·AI 자연어388자 top2 2/2·상세조회1/1 `success=true`. 개인 연결 테스트 기준이며 고객 조직 환경 연동·실제 서비스 설치/권한·PDF/전체 기능 검증은 NOT RUN. 고객 전달 시 '기본 기능 시험 PASS, 실제 적용 별도 검증'으로 범위 제한.
+
+
+- [x] **EVAL-03 ChatGPT 요청형 NAS RAG→WIPS MCP 분기 실제 연결** — [코드](poc/eval03_patent_router.mjs), [Q01/Q06 실측](docs/evaluation/2026-11-20-eval03-on-demand-nas-wips-router.md), [14 테스트](poc/eval03_patent_router.test.mjs). NAS 직접 관련 근거 충분 Q01→NAS-only/WIPS0; NAS 근거 부족 Q06→WIPS1 top3. 합성 계약 총59 PASS V8. 기존 두 MCP를 ChatGPT에서 명시적 실행·읽기 전용으로 연결한 것이며 상시 자동 플러그인/서버 새 도구 등록은 아님.
+- [ ] **EVAL-03 보유 여부 정확 판별** — 조회 대상이 문헌번호·종류로 특정된 경우 NAS 전체 존재 여부를 확인할 최소권한 read-only lookup 제공 여부/안전한 대안 검토. 현재 `search_patents`는 상위3 근접 문헌만 반환하므로 `INSUFFICIENT_DIRECT_EVIDENCE`를 `NOT_IN_DATABASE`로 표현하지 않는다. 인증·계약·운영 재기동 승인 없이 새 도구 강제 배포 금지.
