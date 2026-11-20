@@ -40,3 +40,14 @@ ChatGPT Code Mode에서 **이미 연결된** `NAS_RAG.search_patents` + `NAS_RAG
 - **다음 P0:** 정확한 문헌번호 보유 판정 방식 정의(현 NAS reader는 publication exact lookup 불가), 출처·언어·신선도 판정 강화.
 - **선택:** 항상 작동하는 단일 서비스 MCP 도구(`lookup_patent`) 등록을 원하면 NAS의 공식 서버측 WIPS 인증·사용 범위·재시작/복구 기준을 먼저 별도 검증. 이미 ChatGPT가 가진 WIPS 인증을 NAS 서버에 자동 위임할 수 있다고 가정하지 않는다.
 - 이번 시점의 상태는 `MCP_ON_DEMAND_CONNECTED`이며 `GLOBAL_AUTO_FALLBACK_NOT_INSTALLED`이다.
+
+## 5. 사용자 요청 재검증 — 2026-11-20 (기존 코드 그대로)
+
+- 사용자가 95% 유사도 기준 **변경하지 말고 현재 AI 근거 분기를 확인**하도록 요청. `eval03_patent_router.mjs` 또는 운영 설정 **수정 안 함**.
+- 최신 GitHub 원본 소스의 Code Mode V8 합성/계약 테스트: **16/16 + 29/29 + 14/14 = 59/59 PASS**. Node CI가 아닌 격리 V8 실행임을 명시.
+- 실제 MCP 도구 재연결 Q01: NAS search2+get3, 자체 인용 근거 검토와 3개 필수 특성 검증, `AI_REVIEWED_REUSABLE` → **NAS 반환, WIPS0 PASS**.
+- 실제 MCP 도구 재연결 Q06: NAS search2+get3, 상위 문헌은 태양광 봉지재로 배터리 전해질 질의에 직접 부합하지 않음 → `INSUFFICIENT_DIRECT_EVIDENCE` → **WIPS 검색1, 3건 반환 확인 PASS**.
+- 읽기/무결성 실패·허위 인용·freshness·WIPS 오류는 synthetic 계약 테스트에서 HOLD/실패 확인, **이번 재검증에서 실제 서비스 장애를 주입하지 않음**.
+- **정확성 한계:** 관련성 판단은 ChatGPT가 실측 제목/요약/청구항을 확인해 콜백으로 제공한 AI 자체 판정이며 별도의 독립 gold-label 아님. 문헌번호 exact existence 검색 미구현. NAS retrieval 상위3 근거 부족을 전체 NAS 미보유로 해석하면 안 됨.
+- **API 결과 한계:** `runPatentRouter` 반환은 출처·판정·호출수 및 WIPS 결과 건수 **메타데이터만 포함**. WIPS에서 조회한 특허 원문/후보 객체는 라우터 반환값에서 전달되지 않으므로 ChatGPT가 원결과를 별도 보유해 출력하지 않는 한 단일 함수만으로 결과 목록/내용을 사용자에게 보여주는 기능은 아직 완결되지 않음.
+- **운영 범위:** 기존 두 MCP를 현재 ChatGPT Code Mode에서 명시적 호출할 때만 동작. 글로벌 자동 도구 등록/서버측 상시 실행 NOT RUN. 모든 NAS DB/컨테이너/원문/벡터·권한·WIPS 설정 및 95% 임계값 변경 없음.

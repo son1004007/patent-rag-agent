@@ -134,3 +134,11 @@
 - [새 read-only router](poc/eval03_patent_router.mjs), [합성 검증](poc/eval03_patent_router.test.mjs): 기존 EVAL02 search2/detailTop3/citation 검증을 local 근거 게이트로 사용한 후, 확실한 관련 근거 없으면 외부 WIPS 검색을 한 번 실행. 기술적 판단/출처 검증 없이는 무조건 NAS가 반환하는 NN을 보유 특허라고 간주하지 않음.
 - 실제 Q01: NAS search2/detail3 결과 관련성·인용 검증 PASS, `SERVED_FROM_NAS_RAG`, WIPS0. 실제 Q06: NAS search2/detail3 직접근거 부족, `SERVED_FROM_WIPS_MCP`, WIPS Boolean search1 top3 PASS. 사용자/고객 내부 질의·실문헌 식별자/발췌·WIPS 원응답 미기록.
 - **Code Mode V8 정책16+게이트29+라우터14=59/59 PASS**. Node CI/임의 채팅 상시 자동 라우터·서버 MCP 신규 도구·NAS 또는 WIPS 권한/서비스/DB 변경 **NOT RUN**. 정확 문헌번호 보유 조회 미구현, WIPS 비용/법적 상태/원문 PDF 별도.
+
+## 2026-11-20 EVAL-03 사용자 요청 재검증 (읽기 전용)
+
+- 현재 라우터 코드를 변경하지 않고 실제 연결된 `NAS_RAG.search_patents/get_patent` 및 `wipsclip.get_patent_search_onlyengine`로 두 분기를 재검증.
+- 기존 정책16·어댑터29·라우터14 = Code Mode V8 **59/59 PASS**.
+- 실제 Q01 NAS 검색2/상세3, AI 인용 근거 만족, WIPS0 → NAS 경로 PASS.
+- 실제 Q06 NAS 검색2/상세3, 근거 부족, WIPS1/3건 → WIPS 경로 PASS.
+- 제한: exact 문헌번호 보유확인 미구현, 라우터 결과는 WIPS 원문 객체가 아닌 건수/분기 메타데이터만 출력, 운영 상시 라우터 등록되지 않음. 실서비스 장애 유발 시험 없음. 코드·서비스·DB·95% 기준 변경 없음.
