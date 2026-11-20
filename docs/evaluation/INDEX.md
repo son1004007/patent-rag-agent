@@ -73,3 +73,7 @@ flowchart TD
 - [EVAL-01 실패 4문항 검색식 개선 실측](2026-11-20-eval01-targeted-query-rewrite.md): 300자 이상 A/B ×4, AI 직접 관련 baseline1/12→A5/12(사후 튜닝·홀드아웃 아님).
 - [EVAL-02 NAS 반복 검색 실측](2026-11-20-eval02-warm-nas-replay.md): 동일 10문항×2, 결과/청크 10/10 안정, 직접 근거 4/10만 재사용, 나머지6 HOLD. 0 WIPS(실제), COLD 대비 절감은 **미계측**. 제한적 역사 자료 재사용 `AI_REVIEWED_LIMITED_GO`, 확대 투자 ROI 미판정.
 - [순수 read-only 판정 코드](../../poc/eval02_reuse_policy.mjs) / [16 합성 테스트](../../poc/eval02_reuse_policy.test.mjs); 자동 플러그인 연동·DB 변경 미실행.
+
+## 10. 실제 NAS Code Mode 어댑터 E2E (2026-11-20)
+
+[실측 보고](2026-11-20-eval02-live-read-adapter-acceptance.md) / [read-only 어댑터](../../poc/eval02_live_read_adapter.mjs) / [계약 테스트](../../poc/eval02_live_read_adapter.test.mjs): 동일 질문 검색2→상위3개 상세→AI 근거 callback→excerpt/hash/section 실제 대조→재사용/HOLD. 4문항(실제 Q01/Q04 REUSE·Q05/Q08 HOLD), freshness query0, Code Mode V8 합성39 PASS. **NAS 운영 MCP 서버 배포·전역 플러그인 자동 후킹 및 실제 비용·지연 차이 NOT RUN**. 사용자 별도 human-gold는 최신 지시대로 요구하지 않는다.

@@ -120,3 +120,6 @@
 - 2026-11-20 **EVAL 사용자 채점 필수 폐지**: 사용자 '사람 검증 안해. 니가 다해'를 최신 지시로 수용, AI 자체 0/1/2 채점·근거 검토로 P0 의사결정 지원. 실제 독립 human-gold/원문 전체/법적 감정 없이 확인했다고 주장하지 않으며 기밀·권한·신규 데이터 제한 존속.
 - [EVAL-01 실패 문항 재작성](docs/evaluation/2026-11-20-eval01-targeted-query-rewrite.md): KR-only WIPS AI 300자+ Q04/Q05/Q06/Q08 A/B 8검색 PASS, 요청 Top3 24슬롯. AI 2점 직접 관련 기존 1/12→A 5/12(사후 튜닝, 일반화 금지), Q05 0. 합성 코드/DB 변경 없음.
 - [EVAL-02 반복 확인](docs/evaluation/2026-11-20-eval02-warm-nas-replay.md): 동일10문항 NAS search 2 wave =20/20, 문헌순위·청크순위10/10 stable, 근거60/60; 추가 NAS search4 + get_patent4, 출처/내용 일치4/4; WIPS0. AI 직접 근거로 Q01~04만 재사용4/10(현재 IN4/5, OUT0/5), Q05+OUT5 HOLD. **`AI_REVIEWED_LIMITED_GO`(과거 문헌 재열람 한정)**, 실제 COLD/WIPS 대비 latency/금액 절감 ROI **INCONCLUSIVE**. [판정 코드](poc/eval02_reuse_policy.mjs) 합성 16테스트 로컬 Node PASS, 운영 자동 라우팅 미구현. 공용 NAS/DB 서비스 변경·신규 저장 없음.
+
+
+- 2026-11-20 **EVAL-02 실제 NAS reader 연결 + AI 근거 인용 게이트 E2E**: [인수 결과](docs/evaluation/2026-11-20-eval02-live-read-adapter-acceptance.md), [코드](poc/eval02_live_read_adapter.mjs). 4문항 실제 read-only `search`+ `get_patent` 사용, Q01/Q04 REUSABLE, Q05/Q08 HOLD, freshness 지정 때 NAS/WIPS 0, 기존 Q01 최초 엄격 reviewer로 false HOLD 발생 후 요약+청구항 병행검증으로 정상 판정. 응답 확보 5 실호출에 NAS 검색10·상세15, WIPS0 (실패/진단 호출 제외). 기존 정책16 + 새 어댑터23 **Code Mode V8 합성 테스트39 PASS**; **운영 NAS MCP 서버 배포/자동 후킹·Node CI NOT RUN**. 보유 문헌/DB/서비스/권한 변화 없이 범위 한정 Code Mode 접속에서만 성공.

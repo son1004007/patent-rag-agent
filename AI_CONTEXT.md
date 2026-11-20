@@ -63,3 +63,6 @@
 ## 2026-11-20 AI 자율 평가 전환
 
 개인 특허 EVAL-01/02는 최신 사용자 명시 지시에 따라 ChatGPT가 관련성 및 근거를 직접 판정한다. 사람/사용자 관련성 라벨은 필수 게이트가 아니며 중앙 #31은 불필요한 사용자 액션으로 갱신 예정이다. AI 평가는 반드시 `AI_REVIEWED`로 표기하며 독립 전문가 확인/원문 전체 법적 감정은 하지 않았다고 구분. 최신 진행: [EVAL-01 query rewrite](docs/evaluation/2026-11-20-eval01-targeted-query-rewrite.md), [EVAL-02 warm replay](docs/evaluation/2026-11-20-eval02-warm-nas-replay.md). EVAL-02 NAS 읽기20회+상세 감사8회, WIPS0; 직접 근거 있는 4/10만 과거 자료 재사용 가능. EVAL-02 금액·지연·COLD 절감은 미측정.
+
+
+- 2026-11-20 **EVAL-02 읽기 전용 통합 경로 구현/실행**: [`poc/eval02_live_read_adapter.mjs`](poc/eval02_live_read_adapter.mjs) → [실측](docs/evaluation/2026-11-20-eval02-live-read-adapter-acceptance.md). 실제 연결 NAS search2+detail3의 4 선별질문에서 AI 근거 Q01/Q04 REUSE, Q05/Q08 HOLD, freshness query0. Code Mode V8 합성 16+23=39 PASS. 기존 NAS MCP 서버/툴 자동 등록·배포는 NOT RUN. Code Mode는 ChatGPT가 별도 호출해야 실행됨. ROI 미측정.

@@ -139,6 +139,10 @@
 ## 2026-11-20 최신 후속 우선순위 — 사용자 인간 채점 제외
 
 1. **P0 완료(범위 한정)**: [WIPS AI 300자+ 실패 문항 검색안 A/B](docs/evaluation/2026-11-20-eval01-targeted-query-rewrite.md), [NAS 읽기 전용 warm 반복 실측](docs/evaluation/2026-11-20-eval02-warm-nas-replay.md), [합성 안전 평가 코드](poc/eval02_reuse_policy.mjs). 실제 검색 도구 검증·로컬 합성 테스트 완료.
-2. **P0 다음**: AI 판정 입력을 임시 메모리에만 유지하는 승인된 읽기-only 흐름에 `poc/eval02_reuse_policy.mjs` 연결하고, IN-SCOPE 기존 문헌 재사용 vs OUT-SCOPE HOLD가 실제로 제어되는지 검증한다. **현재 운영 플러그인 자동 라우팅은 미구현**. 사용자 검토 요청하지 않음.
-3. **P1 선택**: 표본 질문·검색 조건 동등화 후 통제된 COLD/WIPS 대비 실제 provider 호출·지연·비용 측정. 수치가 확인되지 않으면 ROI `INCONCLUSIVE` 유지. 새 유료/권리/서버 작업 자동 승인 아님.
-4. **HOLD**: MyFolder 개발/83건 일괄 원문·벡터/PDF 적재, 무승인 기업 자료 전송·서비스 재시작, 근거 없는 범용 RAG 추천. 사용자 직접 평가 #31은 최신 지시로 취소하지만 기존 별도 신규 적재 보안 권한 #30은 유지.
+2. **P0 이번 작업 완료(범위 한정)**: [라이브 읽기-only 어댑터](poc/eval02_live_read_adapter.mjs)를 실제 연결 NAS `search_patents`/`get_patent`에 적용해 [4문항 및 freshness E2E](docs/evaluation/2026-11-20-eval02-live-read-adapter-acceptance.md) 확인. Q01/Q04 REUSE, Q05/Q08 HOLD, `freshnessRequired`는 호출0. 기존16+신규23 = Code Mode V8 39 PASS. **운영 플러그인 전역 자동 라우팅 미구현·운영 NAS 서버 변경 없음**. 사용자 검토 요청하지 않음.
+3. **P0 다음**: 전체 10문항에 read-only 어댑터를 적용하고 근거 section 누락·false HOLD 위험을 분석해 판정기 보강. 안전성 필요 시 명시적 제한 적용, 추가 쓰기·권한 확대 금지.
+4. **P1 선택**: 표본 질문·검색 조건 동등화 후 통제된 COLD/WIPS 대비 실제 provider 호출·지연·비용 측정. 수치가 확인되지 않으면 ROI `INCONCLUSIVE` 유지. 새 유료/권리/서버 작업 자동 승인 아님.
+5. **HOLD**: MyFolder 개발/83건 일괄 원문·벡터/PDF 적재, 무승인 기업 자료 전송·서비스 재시작, 근거 없는 범용 RAG 추천. 사용자 직접 평가 #31은 최신 지시로 취소하지만 기존 별도 신규 적재 보안 권한 #30은 유지.
+
+
+- [x] **EVAL-02 NAS 실제 read-only 통합/근거 인용 게이트(선별4문항)** — 기존 구조검증 판정기와 NAS 검색2회·상세(Top3)·AI 리뷰 콜백 연결, 같은 source/문헌/청크 quote 일치 필수, 근거없으면 HOLD; 실제 Q01/Q04 ACCEPT, Q05/Q08 HOLD, freshness 0 호출. [코드](poc/eval02_live_read_adapter.mjs), [결과](docs/evaluation/2026-11-20-eval02-live-read-adapter-acceptance.md). V8 합성39 PASS, Node CI·NAS 서비스 배포 NOT RUN.

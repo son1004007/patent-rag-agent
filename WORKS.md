@@ -107,3 +107,10 @@
 - 최신 사용자 결정: 별도 사람 채점 불필요. ChatGPT가 직접 핵심 기술·청구항을 리뷰. 정책 근거 [AGENTS](AGENTS.md) 업데이트. 초기 300자 WIPS AI 비교의 Q04/Q05/Q06/Q08 각각 A/B 장문 8회(24후보) 실측, [분석](docs/evaluation/2026-11-20-eval01-targeted-query-rewrite.md) 기록. Q05 두 필수 조건은 여전히 0, 검색 문맥/중의성 문제 확인.
 - [EVAL-02 NAS 10문항 동일 검색×2](docs/evaluation/2026-11-20-eval02-warm-nas-replay.md): 순서+청크 10/10 동일, 60 발췌, 추가 근거4/4, NAS reader28회/WIPS0회, AI 근거4/10 재사용, 6/10 근거 부족으로 HOLD. 최초 provider cold 대비 비용·end-to-end 지연은 미측정.
 - [순수 판정기](poc/eval02_reuse_policy.mjs) + [합성 테스트](poc/eval02_reuse_policy.test.mjs) Node v22.16.0 **16 PASS**. 기존 로컬 서비스/운영 DB·원문/PDF/벡터를 수정하지 않음. 코드의 실제 운영 워크플로 자동 연결은 NOT IMPLEMENTED.
+
+
+## 2026-11-20 EVAL-02 실제 NAS Code Mode 연동 E2E
+
+- GitHub에 [fail-closed read-only 어댑터](poc/eval02_live_read_adapter.mjs), [23 테스트](poc/eval02_live_read_adapter.test.mjs) 작성. 기존 16+새23 합성 시나리오 Code Mode V8 **39/39 PASS**(Node CI NOT RUN).
+- 연결된 실제 `NAS_RAG.search_patents`+ `get_patent` 도구로 [선별 4문항 라이브](docs/evaluation/2026-11-20-eval02-live-read-adapter-acceptance.md) 실행. Q01/Q04는 청구항·요약 일부와 실제 chunk quote 일치한 AI 직접 관련 재사용, Q05/Q08은 보류. 최신성 요구=provider 호출0으로 차단. 5건 완료 실행 분모 search10/get15/WIPS0. 첫 Q01 false HOLD→요약+청구항 근거 검토 보정 후 성공. provider 오류/불일치 시 fail closed.
+- GitHub 문서만 추가, 기존 NAS API·컨테이너·권한·DB·WIPS 영속 자료/원문/벡터·PDF 변경 및 자동 플러그인 등록 **없음**. EVAL-02 실제 비용/시간 ROI, 10개 전 문항 live adapter 자동 라우팅은 미검증.

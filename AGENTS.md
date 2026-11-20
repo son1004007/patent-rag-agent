@@ -59,3 +59,6 @@ WIPS 일반 키워드/Boolean 검색식(`get_patent_search_onlyengine`)과 AI �
 
 ## 2026-11-20 최신 사용자 결정 — AI만으로 EVAL-01/02 품질 채점
 사용자는 **'사람 검증 안해. 니가 다해.'**라고 명시했다. 개인 특허 RAG PoC의 검색 후보 관련성0/1/2, 요약/대표청구항·기존 NAS 근거 확인, 검색 질의 정밀화, 반복 재사용 여부 평가는 **ChatGPT가 직접 실행·자체 검증하고 기록한다. 사용자/전문가 gold-label 수집을 필수 선행 작업으로 만들거나 사용자에게 반복 채점을 요구하지 않는다.** 앞선 평가 계획의 '사람 라벨 필수'·중앙 #31 사용자 피드백 게이트와 충돌하면 이 최신 결정을 우선한다. 다만 자체 AI 평가임을 `AI_REVIEWED`로 명시하고 독립 사람 평가/전체 원문 대조/법적 확증을 수행했다고 주장하지 않는다. 실측 없는 금전·지연·정확도 우위 주장도 금지. 기존 제공자 계약/기밀/신규 수집·DB/권한·재시작·MyFolder HOLD 경계를 변경하지 않는다. 최신 결과: [실패 문항 재작성](docs/evaluation/2026-11-20-eval01-targeted-query-rewrite.md) → [EVAL-02 10문항×2 NAS 리플레이](docs/evaluation/2026-11-20-eval02-warm-nas-replay.md). 제한적 재사용 `AI_REVIEWED_LIMITED_GO`, 통제 COLD ROI `INCONCLUSIVE`.
+
+## 2026-11-20 최신 EVAL-02 NAS 읽기-only 재사용 판정 적용
+[실제 Code Mode 검증](docs/evaluation/2026-11-20-eval02-live-read-adapter-acceptance.md): [`poc/eval02_live_read_adapter.mjs`](poc/eval02_live_read_adapter.mjs)이 기존 `eval02_reuse_policy.mjs`를 연결해 동일 질문 search2 → 상위 최대3 상세 근거 → ChatGPT AI review callback → 출처/인용 실제 일치 확인 뒤 REUSABLE/HOLD를 반환한다. 사용자 별도 채점 불필요. Q01/Q04 REUSE, Q05/Q08 HOLD, 최신성 플래그는 읽기0으로 차단; 합성39 PASS(Code Mode V8). 이 코드는 **이미 연결된 NAS 도구를 ChatGPT Code Mode에서 명시적으로 조합한 것**으로 NAS MCP 서비스 자동 배포·전역 플러그인 자동실행이 아니다. 고객 원문을 별도 AI에 넘기거나 WIPS·운영 DB 새 쓰기·재시작·권한 변경은 금지.
