@@ -89,3 +89,5 @@
 - 2026-11-20 P0-1 [운영자 로컬 전송 배치/차단 실측](docs/38-mvp-archive-production-migration.md): 운영 배치, 기본 정책 disabled, 기존 실제 승인 보유 서지자료의 local projection BLOCKED_POLICY. 정책/반환 검증, 원문 fingerprint·컨테이너 불변, archive rows 0, writer NOLOGIN/secret 없음/worker 0. 허용 분기·상시 policy·실제 WIPS 자동 연결 및 영속 목록 적재 미완료, #34 승인 권리·한도 확인 대기. 반복 시험 대신 사용자 조치 후 실제 연동.
 
 - 2026-11-20 사용자 명시 확인: WIPS 서지 NAS 지속 보관 허용, 검색당 최대100건. [운영 실측](docs/39-mvp-archive-100-live-acceptance.md): 실제 WIPS 첫 페이지 83건, 운영 archive 83/83/1/83, 동일 응답 재실행 신규0, rank51~83 저장, 본문·벡터 6/10/417 불변, 운영 독립 backup/restore 및 ChatGPT 기존 조회 PASS. 별도 writer role LOGIN+secret0600, 불필요한 worker 0, 원본 응답 임시 파일 제거. 일반 WIPS 플러그인 전체 호출의 상시 자동 가로채기 미구현; 다음 P0. 계약 권리는 사용자 확인(독립 증빙 미검증), 원문/PDF 저장 아님.
+
+- 2026-11-20 [WIPS MCP 28개 도구·반환 데이터/구현 갭](docs/40-wips-mcp-capability-catalog.md) 문서화: 실제 WIPS 검색·상세설명·전체청구항·도면 경로 응답 확인과 나머지 도구 정의 확인 구분. 현재 MCP는 공보 PDF 다운로드 도구 및 청크/벡터 생성 기능 없음; NAS에 서지83건, 기존 문헌6건·원문섹션10개·로컬 E5 임베딩 청크417개, PDF0건. 통합 검색→자동 NAS 호출, 공보 PDF 수집, 선택 문헌 상세/임베딩 지속 적재, 전체 원문 열람 및 사용자 인수는 P0 잔여. 이 변경은 문서·할일만, 운영/실데이터 변경 없음.

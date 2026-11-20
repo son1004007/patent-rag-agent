@@ -17,6 +17,7 @@
 | [05 보안·배포](docs/05-deployment.md) | 운영자 — HTTPS·네트워크·복구 |
 | [06 연동 및 계약](docs/06-provider-policy.md) | 사업/개발자 — 비용·권한·MCP |
 | [07 테스트](docs/07-test-plan.md) | QA — 검증 기준 |
+| [40 WIPS MCP 제공 데이터·28개 도구·구현 현황](docs/40-wips-mcp-capability-catalog.md) | 사용자/개발자/AI — 28개 검색·명세서·권리 도구, 응답 구조, 공보 PDF/벡터 구분, 구현·미완료 목록 |
 | [39 검색당 100건 운영 실자료 저장 검증](docs/39-mvp-archive-100-live-acceptance.md) | 사용자/운영자 — WIPS 83건 운영 저장, 중복0, 백업 복원 및 자동 호출 연결 잔여 |
 | [38 운영 목록 스키마 적용 및 복구 검증](docs/38-mvp-archive-production-migration.md) | 운영자 — 실제 migration·권한·백업 복원·회귀, 자동 연결 잔여 |
 | [37 검색 목록 자동 보관 기반](docs/37-mvp-search-list-archive.md) | 개발자/운영자 — 별도 목록 schema, wrapper, 승인 경계, 실제 연계 및 DB 시험 상태 |

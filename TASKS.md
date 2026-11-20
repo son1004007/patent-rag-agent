@@ -36,6 +36,11 @@
 - [x] MVP-03 P0-1 사용자가 지속 서지 보관 **검색당 100건** 허용 확인(별도 계약 증빙 미확인), 운영 writer 활성 및 WIPS 실제 첫 페이지 83건 보관·동일 페이지 신규0·백업 복원·기존 MCP 읽기 회귀 PASS. [운영 실측](docs/39-mvp-archive-100-live-acceptance.md).
 - [ ] MVP-03 P0-1 임의 WIPS 검색이 별도 ChatGPT 오케스트레이션 없이도 자동 저장되는 상시 도구·연동 구현과 새 대화 실증. 기존 WIPS MCP 호출은 자동으로 NAS에 전달되지 않음. [잔여](docs/39-mvp-archive-100-live-acceptance.md).
 - [ ] MVP-03 추가 사용자 요구(P0) — WIPS 검색 결과 자동 NAS 보관, 승인 자료 원문/벡터 증분 적재, 전체 원문 조회 및 PDF·도면 제공 경로 확인. [요구사항](docs/36-mvp-automatic-archive.md). 상시 연결 및 실제 운영 E2E 대기. 원본 PDF 별도 수집은 KIPRIS Plus 국내 공보 API 우선 검증, EPO/WIPS 별도 경로 후속 검토. 텍스트 보관과 PDF 보관 상태 분리.
+- [x] WIPS MCP **28개 도구 전체 카탈로그**와 실제 검증/도구 정의 구분, PDF·벡터·NAS 구현 현황 기록 — [카탈로그](docs/40-wips-mcp-capability-catalog.md). 문서화만, 나머지 도구 전체 호출/운영 구현을 PASS로 취급하지 않음.
+- [ ] **P0-2: 특허 공보 PDF 수집 경로 확인** — 현재 WIPS MCP에는 PDF 다운로드 기능 없음. WIPS 별도 제공파일/다운로드 경로 확인 → 불가하면 KIPRIS Plus/EPO 등 공식 제공처 1건 다운로드, 문헌번호·종류·파일 hash·이용권한 검증 → 비공개 NAS 보관. [검증 범위](docs/40-wips-mcp-capability-catalog.md).
+- [ ] **P0-3: 권한 내 선택 문헌의 상세설명/청구항→NAS 청크·벡터 증분 적재** — 기존 83건 서지목록에서 원문/벡터/PDF 상태 분리, 중복·실패 복구. 서지 최대100건 허용을 본문/벡터 전수 수집 허가로 확장 금지. [검증 범위](docs/40-wips-mcp-capability-catalog.md).
+- [ ] **P0-4: 사람이 읽는 전체 명세서/공보 PDF 열람** — 현재 get_patent 제한 발췌와 구분, 인증된 페이지 조회 및 PDF 확보 후 열람. [검증 범위](docs/40-wips-mcp-capability-catalog.md).
+- [ ] **P0-5: 실제 통합 인수** — 검색/서지 저장/원문 상태/보류·중복/백업 복원 확인 및 MVP-06 사용자 평가 #31. [기준](docs/40-wips-mcp-capability-catalog.md).
 - [ ] MVP-06 사용자 직접 결과 평가/피드백 — [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 대기.
 
 **다음 실행 규칙:** MVP-01~05 범위 한정 인수 PASS, 사용자 승인 단건 실제 운영 쓰기 및 반복 재사용/ChatGPT 조회 완료 ([실측](docs/35-mvp03-actual-ingest-acceptance.md)). MVP-06 사용자 직접 평가(#31) 대기. 사용자 최신 피드백에 따라 자동 NAS 보관/원문 조회를 P0 잔여 우선 작업으로 진행([요구사항](docs/36-mvp-automatic-archive.md)); 서지 writer 운영 연결 및 실제83건 적재 완료, 원문/PDF 별도 권리 및 상시 검색 hook 미구현. 권리 및 실행 경계 유지. 추가 가상 시험 반복 및 P1/P2/P3 선행 금지. NAS/DB/relay/tunnel/기타 기존 서비스 재기동·자동 시작 및 기술사·기업 환경 변경은 별도 승인 전 금지. 신규 구매/대량 수집·재배포 권리 확대 금지.
