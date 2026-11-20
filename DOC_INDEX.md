@@ -13,6 +13,7 @@
 | [01 요구사항](docs/01-requirements.md) | 담당자/개발자 — 범위·인수 기준 |
 | [02 아키텍처](docs/02-architecture.md) | 개발자 — 구성·검색·적재 |
 | [03 데이터/API](docs/03-data-api.md) | 개발자 — DB·API |
+| [EVAL-01 WIPS AI 기술 설명 300자 A/B 실측](docs/evaluation/2026-11-20-eval01-wips-ai-300char-ab.md) | 사용자·AI — 10문항 단문 vs 300자+ KR AI 유사 검색, 0/1/2 자체채점·실용신안 노이즈·후속 규칙 |
 | [EVAL-01 AI 예비 관련성 채점 10문항](docs/evaluation/2026-11-20-eval01-ai-provisional-score.md) | 사용자·AI — WIPS/NAS 각30개 직접/간접/무관 예비 채점과 한계, 공식 정확도 미판정 |
 | [EVAL-01 10문항 실제 검색 기준선](docs/evaluation/2026-11-20-eval01-live-retrieval-baseline.md) | 사용자·AI — 공개 질문 10개 검색/중복/요약·발췌 실제 결과와 사람 라벨 미완료 범위 |
 | [04 품질 평가](docs/04-evaluation.md) | 연구/개발자 — 검색 정확도 검증 |

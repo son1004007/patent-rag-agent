@@ -107,3 +107,7 @@
 - 합성 테스트 경계: 반환0, 3미만, WIPS 제공자 실패, NAS 실패, 같은/다른 공보종류, 중복·ID_UNCLEAR, 출처별 순위, 근거0/불명, 근거 없는 HOLD/REVIEW. 무단 재시도/서버·DB 조작 금지.
 - 모델 자동 판정은 `PROVISIONAL_EVIDENCE_CHECK`까지만. **사람의 관련성 라벨이 없으면 P@3/Hit@3/GO 점수 계산 금지**. 기술 내용 존재 여부와 요구되는 실제 물성·유효성의 입증 여부를 구별한다.
 - WIPS provider와 NAS 응답이 허용된 다른 종류의 텍스트를 반환할 수 있으므로 evidence 상태는 `EXCERPT_PRESENT`(기계적), `CLAIM_MATCH_PRELIMINARY`(기계적), `HUMAN_VERIFIED`, `UNVERIFIED`로 분리한다. 단순 인용 존재를 인용 정확성 검증률로 보고하지 않는다.
+
+## 7. WIPS AI 장문 검색 기준 및 2026-11-20 실제 사전 결과
+
+사용자 요청에 따라 **AI 유사 검색** `get_patent_ai_search(keyword,ctry,targetCtry,size)`에서 기술 내용을 300자 이상으로 구체화하되, 키워드식 `get_patent_search_onlyengine`는 별도 엔진이다. 기술 설명에는 사용자에게 알려진 대상·문제·소재·공정·제외 조건만 사용하며 근거없는 물성·고객정보를 추가하지 않는다. 실제 [단문/장문 A/B](evaluation/2026-11-20-eval01-wips-ai-300char-ab.md)를 읽을 것. 10문항 KR-only Top3에서 AI 자체 채점 장문8/30 vs 단문6/30, 무관 U 0 vs13. 품질 차이는 AI 검색 모델, 설명 내용, 검색 국가, 후보 예산에 종속되며 300자 그 자체의 인과효과는 입증 안 됨. 최종 검증에 사람 0/1/2 gold label 및 출처·중복 점검 계속 필요.

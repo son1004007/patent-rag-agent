@@ -53,3 +53,6 @@ WIPS 검색 반환 서지정보를 개인 NAS에 지속 보관하는 것을 사�
 ## 2026-11-20 최신 평가 우선순위 및 다른 AI 진입점
 개인 특허 RAG MVP 1차 기능은 범위 한정 실증 완료했지만 WIPS 단독 대비 **실제 효용**은 미판정. 다음 우선작업은 [평가 인덱스](docs/evaluation/INDEX.md) → [DECISION-01 판단 기준](docs/44-mvp-evaluation-decision-criteria.md) → [EVAL-01 검색 품질 비교 계획](docs/45-search-quality-comparison-plan.md) → [EVAL-02 반복 재사용 가치 계획](docs/46-reuse-value-verification-plan.md). WIPS만/기존 NAS만/통합의 corpus·후보 예산·근거 차이를 구분하고 인간 근거 확인 및 실제 WIPS 호출 vs counterfactual 절감 수치를 분리한다. 실제 질문·특허ID·원문·SKEY/credential은 공개 repo에 저장 금지. **계획 문서 작성 = 실제 평가/배포 완료가 아니며 #31 사용자 평가 대기**. MyFolder HOLD, 재시작·신규 수집·비용 정책 변경 없음.
 
+
+## 2026-11-20 사용자 최신 WIPS AI 검색 조건 — 설명 300자 이상
+WIPS 일반 키워드/Boolean 검색식(`get_patent_search_onlyengine`)과 AI 유사 검색(`get_patent_ai_search`)을 구분한다. **AI 유사 검색**의 기술 입력은 사용자가 제공한 목적·배경·소재·공정·제외 조건을 구조화하여 **가능하면 300자 이상** 준비하고, 임의의 수치/기능/고객 비밀을 창작하거나 반복 문장으로 분량만 늘리지 않는다. 근거가 부족해 300자를 못 채우면 SHORT_INPUT으로 표시하고 필요한 내용을 확인한다. 출처가 없는 '300자 정확도 보장' 주장은 하지 않는다. EVAL-01 실제 A/B는 [장문 대 단문 비교](docs/evaluation/2026-11-20-eval01-wips-ai-300char-ab.md)에서 확인. 10문항 KR-only/Top3 AI 자체 채점: 6/30→8/30, U 노이즈13→0, 사람 판정은 미완료. 실문헌/고객 자료 공개 GitHub·무승인 원문 적재 금지. MyFolder HOLD 계속.

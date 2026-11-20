@@ -94,3 +94,9 @@
 
 - 사용자가 AI 자체 채점을 요청. 같은 질문·검색식을 연결된 WIPS/NAS read-only 도구로 다시 읽고, 요약/대표청구항 및 선정된 NAS `get_patent` 원문 일부를 확인해 0/1/2 등급 부여. **비식별 결과** [보고서](docs/evaluation/2026-11-20-eval01-ai-provisional-score.md): WIPS 직접 1/30, NAS 직접 5/30, IN 분야 편향/OUT 0/15, Q04 중복 계열 추정. 실제 문헌 ID·특허 원문·검색식은 공개 GitHub 저장하지 않음.
 - 사람의 gold-label 및 전체 원문 대조는 NOT RUN. 초기 vs 추가 읽기의 동일성 및 WIPS 검색식 순위 편향 미통제. 정확도 우위/GO 판정하지 않고 EVAL-01 `AI_PROVISIONAL_SCORED / OFFICIAL_INCONCLUSIVE`로 유지.
+
+
+## 2026-11-20 WIPS AI 검색 300자 이상 길이 A/B 실증
+
+- 사용자 300자 기술설명 반영. KR-only AI 유사특허 MCP(`get_patent_ai_search`) 10문항×짧은23~29자/긴413~520자, 각 top3 총60 후보 및 WIPS 상세 `get_patent_by_skey` 60회 읽기. [비식별 집계/채점·한계](docs/evaluation/2026-11-20-eval01-wips-ai-300char-ab.md).
+- AI 잠정 2점 직접관련 단문6/30, 장문8/30, 무관 U13→0. 장문이 항상 이기지는 않음(개선3·악화2·동일5). 이번 평가는 설명 길이뿐 아니라 구체성도 변했고 KR 단일 국가이므로 과거 다국가 검색의 인과 비교는 금지. 사용자 독립 검증 및 원문/특허법적 최종 판단 NOT_RUN, 운영 NAS/DB·서비스 변경 없음.

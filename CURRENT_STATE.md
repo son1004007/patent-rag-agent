@@ -112,3 +112,6 @@
 
 
 - 2026-11-20 **EVAL-01 사용자 요청 AI 예비 채점 10/10**: [집계](docs/evaluation/2026-11-20-eval01-ai-provisional-score.md) — 읽기-only 재조회 후 요약·대표청구항 및 일부 NAS 원문 발췌를 AI가 직접 판정. WIPS **1/30(3.3%)**, NAS **5/30(16.7%)** 직접관련 임시 등급. IN에서는 NAS5/15, WIPS1/15; OUT에서는 모두0/15. `AI_PROVISIONAL`이며 **공식 gold label·독립 평가·WIPS 검색식 동등성·발명 패밀리 중복 확인 불가, FORMAL_EVAL01=INCONCLUSIVE**. 신기능·저장/재기동/권한 변경 없음.
+
+
+- 2026-11-20 **WIPS AI 300자 이상 설명 A/B 실측**: [결과](docs/evaluation/2026-11-20-eval01-wips-ai-300char-ab.md). `get_patent_ai_search(KR,3)` 10문항 짧은 설명23~29자 / 장문413~520자 20검색 PASS, `get_patent_by_skey` 60/60. GPT-6 잠정 관련성 기준 짧은 입력6/30(20%), 장문8/30(26.7%); 무관 실용신안13→0. 장문 개선3/악화2/변화없음5, 300자 절대성능·정량 보장 없음. 이전 국가혼합 WIPS 키워드 3.3%와 직접 비교 금지. 고객 자료/원문 적재·서비스 변경 없음. `AI_PROVISIONAL`, 인간 gold `NOT_RUN`, 공식 EVAL-01 `INCONCLUSIVE` 유지.
