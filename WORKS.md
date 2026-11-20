@@ -66,3 +66,5 @@
 - 2026-11-20 사용자 명시 확인: WIPS 서지 NAS 지속 보관 허용, 검색당 최대100건. [운영 실측](docs/39-mvp-archive-100-live-acceptance.md): 실제 WIPS 첫 페이지 83건, 운영 archive 83/83/1/83, 동일 응답 재실행 신규0, rank51~83 저장, 본문·벡터 6/10/417 불변, 운영 독립 backup/restore 및 ChatGPT 기존 조회 PASS. 별도 writer role LOGIN+secret0600, 불필요한 worker 0, 원본 응답 임시 파일 제거. 일반 WIPS 플러그인 전체 호출의 상시 자동 가로채기 미구현; 다음 P0. 계약 권리는 사용자 확인(독립 증빙 미검증), 원문/PDF 저장 아님.
 
 - 2026-11-20 [WIPS MCP 28개 도구/구현 갭 카탈로그](docs/40-wips-mcp-capability-catalog.md) 작성: 연결된 모든 도구 이름 및 section/주요 데이터 확인, 검색·dtl_desc·all_claim·draw·indv_draw 실제 응답과 나머지 정의 확인 구분, 공보 PDF/청크·벡터 WIPS 비제공과 NAS 파생 임베딩 분리. 운영 서지83건/기존 본문6건·10섹션/청크417개/PDF0건, 미완료 P0-1~P0-5를 TASKS에 등록. 공개 민감 정보 없이 문서·목차·작업 상태만 갱신, WIPS 신규 수집/운영 실행·재시작/배포 없음. 독립 AI 검토 NOT_RUN_OPTIONAL.
+
+- 2026-11-20 [P0-1~P0-5 독립 구현 설계서+실행 계획서 10개](docs/mvp-implementation/INDEX.md) 문서화: 기존 WIPS/NAS 코드와 실제 DB 스키마/장애 사례, 제공자 공식 자료(KIPRIS Plus XML 공보 download path, EPO PDF/A REST fair use) 대조. 각 작업 단위 Mermaid·API/DB·기술 선택·필드 변환/권한·에러 사전 대응·단계별 운영 검증·rollback/완료 정의. DOC_INDEX/AGENTS/TASKS/CURRENT_STATE/AI_CONTEXT/README 및 전역 pointer 연결. 문서/계획만 변경, 실제 개발·배포·유료 호출·신규 적재/운영 테스트 NOT RUN. 독립 AI 리뷰 NOT_RUN_OPTIONAL.

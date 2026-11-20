@@ -34,6 +34,7 @@
 - [x] MVP-03 P0-1 운영 schema/NOLOGIN 역할 및 코드 배치, backup/rollback script archive 호환, 실제 운영 권한/트랜잭션/복원/ChatGPT 읽기 PASS. [실측](docs/38-mvp-archive-production-migration.md); 새 API rollback drill 실행 NOT RUN.
 - [x] MVP-03 P0-1 운영자 전용 목록 전송 경로 코드·NAS 배치 및 기본 비활성 차단 운영 실증. [실측](docs/38-mvp-archive-production-migration.md). 신규 transport 허용 worker 분기 미검증.
 - [x] MVP-03 P0-1 사용자가 지속 서지 보관 **검색당 100건** 허용 확인(별도 계약 증빙 미확인), 운영 writer 활성 및 WIPS 실제 첫 페이지 83건 보관·동일 페이지 신규0·백업 복원·기존 MCP 읽기 회귀 PASS. [운영 실측](docs/39-mvp-archive-100-live-acceptance.md).
+- [x] **P0-1~P0-5 작업별 설계서·실행 계획서 10개 및 실행 인덱스** 작성. [전체 진입점](docs/mvp-implementation/INDEX.md). 각 단위: 기능/기술/데이터흐름/API·DB/권한·사전 위험/단계별 변경·테스트/복구/완료 기준. **문서화 완료**이며 작업별 실제 신규 구현/운영 시험 완료와 다름.
 - [ ] MVP-03 P0-1 임의 WIPS 검색이 별도 ChatGPT 오케스트레이션 없이도 자동 저장되는 상시 도구·연동 구현과 새 대화 실증. 기존 WIPS MCP 호출은 자동으로 NAS에 전달되지 않음. [잔여](docs/39-mvp-archive-100-live-acceptance.md).
 - [ ] MVP-03 추가 사용자 요구(P0) — WIPS 검색 결과 자동 NAS 보관, 승인 자료 원문/벡터 증분 적재, 전체 원문 조회 및 PDF·도면 제공 경로 확인. [요구사항](docs/36-mvp-automatic-archive.md). 상시 연결 및 실제 운영 E2E 대기. 원본 PDF 별도 수집은 KIPRIS Plus 국내 공보 API 우선 검증, EPO/WIPS 별도 경로 후속 검토. 텍스트 보관과 PDF 보관 상태 분리.
 - [x] WIPS MCP **28개 도구 전체 카탈로그**와 실제 검증/도구 정의 구분, PDF·벡터·NAS 구현 현황 기록 — [카탈로그](docs/40-wips-mcp-capability-catalog.md). 문서화만, 나머지 도구 전체 호출/운영 구현을 PASS로 취급하지 않음.
@@ -42,6 +43,8 @@
 - [ ] **P0-4: 사람이 읽는 전체 명세서/공보 PDF 열람** — 현재 get_patent 제한 발췌와 구분, 인증된 페이지 조회 및 PDF 확보 후 열람. [검증 범위](docs/40-wips-mcp-capability-catalog.md).
 - [ ] **P0-5: 실제 통합 인수** — 검색/서지 저장/원문 상태/보류·중복/백업 복원 확인 및 MVP-06 사용자 평가 #31. [기준](docs/40-wips-mcp-capability-catalog.md).
 - [ ] MVP-06 사용자 직접 결과 평가/피드백 — [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 대기.
+
+**P0 구현 인계 규칙:** [P0-1~P0-5 상세 설계/실행 인덱스](docs/mvp-implementation/INDEX.md) → 해당 [설계서+계획서] 2종 → 기존 코드·운영 preflight → 최소 변경/운영 실측. P0-1 통합 도구 연결이 다음 구현 대상, P0-2 공식 공보 API 범위 사전 조사 병행 가능. P0-1 설계는 backend에서 다른 WIPS MCP를 직접 호출할 권한이 미검증임을 선행 차단. P0-3 서지7필드와 기존 원문 ingest7필드 계약이 다름을 선행 차단. 모든 권리·재시작·보안 제한 유지.
 
 **다음 실행 규칙:** MVP-01~05 범위 한정 인수 PASS, 사용자 승인 단건 실제 운영 쓰기 및 반복 재사용/ChatGPT 조회 완료 ([실측](docs/35-mvp03-actual-ingest-acceptance.md)). MVP-06 사용자 직접 평가(#31) 대기. 사용자 최신 피드백에 따라 자동 NAS 보관/원문 조회를 P0 잔여 우선 작업으로 진행([요구사항](docs/36-mvp-automatic-archive.md)); 서지 writer 운영 연결 및 실제83건 적재 완료, 원문/PDF 별도 권리 및 상시 검색 hook 미구현. 권리 및 실행 경계 유지. 추가 가상 시험 반복 및 P1/P2/P3 선행 금지. NAS/DB/relay/tunnel/기타 기존 서비스 재기동·자동 시작 및 기술사·기업 환경 변경은 별도 승인 전 금지. 신규 구매/대량 수집·재배포 권리 확대 금지.
 
