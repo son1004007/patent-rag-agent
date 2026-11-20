@@ -1,7 +1,7 @@
 # EVAL-01 실행 계획서 — WIPS vs NAS vs 통합 검색·근거 정확도 비교
 
 - 작업 ID: **EVAL-01**, 우선순위 **P0 / MVP 사용자 인수 검증**
-- 상태: **계획서 작성 완료 / 새 실험·정답 라벨링·운영 변경 NOT RUN**
+- 상태: **계획서 작성 완료 / [10문항 검색·검색근거 필드 실측](evaluation/2026-11-20-eval01-live-retrieval-baseline.md) PASS / 정답 라벨링·정식 정확도·운영 변경 NOT RUN**
 - 목적: WIPS 단독 검색보다 NAS RAG 또는 WIPS+NAS 통합이 **실제 사용자에게 유효한 추가 문헌과 근거**를 주는지 확인한다.
 - 선행: [판단 기준](44-mvp-evaluation-decision-criteria.md), [기존 검색·비교 근거](25-mvp04-candidate-comparison.md), [사용자 평가](31-mvp06-user-trial.md), [작업 인덱스](evaluation/INDEX.md).
 

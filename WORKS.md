@@ -82,3 +82,9 @@
 
 - 전역 registry의 `docs/evaluation/INDEX.md`를 단일 평가 진입점으로 확정하고 중복 `docs/validation/EV-01/02` 및 중복 판단 문서를 **Git history에 보존 후 main에서 정리**했다. EVAL-01은 각 source K=3, 통합 최대6, corpus in/out 5/5, 사람 라벨이 필요하며 P@5/20% 임의 게이트 사용 금지.
 - 결정 규칙 [DECISION-01](docs/44-mvp-evaluation-decision-criteria.md), [EVAL-01 계획](docs/45-search-quality-comparison-plan.md), [EVAL-02 계획](docs/46-reuse-value-verification-plan.md), [평가 인덱스](docs/evaluation/INDEX.md) 정본으로 일원화했다. 실험 측정 여부는 별도 실행 증거 기록에서 판단. 신규 원문/벡터 저장·운영 변경은 수행하지 않았다.
+
+
+## 2026-11-20 EVAL-01 읽기-only 10문항 초기 실측
+
+- [10문항 WIPS/NAS 반환 및 통합 후보 실측](docs/evaluation/2026-11-20-eval01-live-retrieval-baseline.md): 공개 기술 주제 5 IN / 5 OUT, WIPS 및 NAS 10/10 결과 top3, 실제 문헌 ID exact 중복2/고유58, WIPS 국문 요약/대표청구항 30/30·NAS excerpt 30/30, NAS get_patent 5/5 근거3개씩·hash 반환. WIPS 일시 실패3은 각1회 retry 성공, 과거 기동/restart 불필요. 신규 원문/PDF/벡터 적재 없음.
+- 사용자의 관련성 0/1/2 및 구체 특허·원문 대조는 수행/확정하지 않음. 따라서 P@3, 근거 정확도/오추천·투자 GO 판정은 **NOT RUN / INCONCLUSIVE**. 원문·실문헌 ID/실제 검색식/비밀은 공개 GitHub 미기록, 후속 사람 평가를 위해 비공개 자료 보관권리 확인 필요.

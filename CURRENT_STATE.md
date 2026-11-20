@@ -106,3 +106,6 @@
 
 
 - 2026-11-20 평가 문서 중복 통합: `docs/evaluation/INDEX.md` → `44-mvp-evaluation-decision-criteria.md` → `45-search-quality-comparison-plan.md` → `46-reuse-value-verification-plan.md`만 정본. 기존 validation/EV 변형은 Git history 보존, main에서 제거. 기존 83 서지·6원문·417청크 상태 변경 없음. **EVAL-01 사람의 gold label/최종 성능 지표는 미검증**(실제 호출 결과는 별도 기록 후 갱신).
+
+
+- 2026-11-20 **EVAL-01 10문항 읽기 전용 검색 실측**: [실행 결과](docs/evaluation/2026-11-20-eval01-live-retrieval-baseline.md). IN5/OUT5, 최종 WIPS/NAS 10/10 검색 성공(초기 WIPS 3 실패→각1회 재시도 정상), 두 도구 각각 총30 반환·ID exact 중복2→58 고유 후보, WIPS ABK/CLK 30/30·NAS excerpt 30/30. NAS 별도 get_patent 5/5·각 근거3·hash 존재 확인. **사람 실제 정답 라벨 0/10, 검색 정확도·인용 일치 검증·최종 GO/NO_GO INCONCLUSIVE**. 신규 원문/벡터·PDF/서지 쓰기·서비스 재시작·권한 변경 없음. 운영 DB 불변성 별도 직접 조회 NOT RUN.

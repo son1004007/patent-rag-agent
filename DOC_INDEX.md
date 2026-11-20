@@ -13,6 +13,7 @@
 | [01 요구사항](docs/01-requirements.md) | 담당자/개발자 — 범위·인수 기준 |
 | [02 아키텍처](docs/02-architecture.md) | 개발자 — 구성·검색·적재 |
 | [03 데이터/API](docs/03-data-api.md) | 개발자 — DB·API |
+| [EVAL-01 10문항 실제 검색 기준선](docs/evaluation/2026-11-20-eval01-live-retrieval-baseline.md) | 사용자·AI — 공개 질문 10개 검색/중복/요약·발췌 실제 결과와 사람 라벨 미완료 범위 |
 | [04 품질 평가](docs/04-evaluation.md) | 연구/개발자 — 검색 정확도 검증 |
 | [05 보안·배포](docs/05-deployment.md) | 운영자 — HTTPS·네트워크·복구 |
 | [06 연동 및 계약](docs/06-provider-policy.md) | 사업/개발자 — 비용·권한·MCP |

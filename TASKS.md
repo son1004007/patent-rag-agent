@@ -8,6 +8,7 @@
 
 - [x] **DECISION-01: MVP 1차 이후 WIPS MCP+NAS 유지/API 전환 판단 규칙 문서화** — 근거 정확성·직접 관련 추가 문헌·호출/시간/비용 절감·운영 복잡도·공보 PDF 필요성, 조건부 GO/LIMITED_GO/NO_GO/INCONCLUSIVE 초기 임계값. [문서](docs/44-mvp-evaluation-decision-criteria.md). **실측/최종 결론 NOT RUN**.
 - [x] **EVAL-01 실행 계획서 작성** — 동일 질문10개(기존 corpus 범위5+미보유 범위5), WIPS/NAS 각 top3, 통합 ≤6 고유 문헌, 사람 0/1/2 라벨·근거 검증/중복, corpus 공정성·권한/예산/복구. [계획](docs/45-search-quality-comparison-plan.md). **계획 문서 완료 / 실제 실험 NOT RUN**.
+- [x] **EVAL-01 첫 실제 검색 단계:** 10개 공개·일반 연구 질문을 IN5/OUT5로 정하고 WIPS/NAS top3 10/10, 통합 후보 고유58·중복2, ABK/CLK 30/30 및 NAS 발췌30/30 확인. WIPS 3개 초기 오류는 각 1회 재시도 후 성공. [실제 읽기 검증](docs/evaluation/2026-11-20-eval01-live-retrieval-baseline.md). **정식 정확도·사람 0/1/2 라벨·최종 결과는 NOT RUN/INCONCLUSIVE**.
 - [ ] **EVAL-01 실제 검색 정확도/근거 비교 실행** — 사용자 허용 질문·공급자 호출 범위에서 read-only WIPS/NAS 검색, 수작업 정답 라벨링, 직접 관련 추가 후보·근거 오류·사용자 #31 피드백. **완료 기준:** 10문항 실측/원시 분모/근거·판정과 출처·비용 범위 보고, corpus in/out 분리.
 - [x] **EVAL-02 실행 계획서 작성** — 동일 질문 cold/warm-NAS, 실제 WIPS 호출수·가상 회피 호출수·실제 지연/사용자 완료 품질·신선도 표시 및 안전 차단. [계획](docs/46-reuse-value-verification-plan.md). **계획 문서 완료 / 실제 실험 NOT RUN**.
 - [ ] **EVAL-02 실제 반복 재사용 가치 검증** — EVAL-01의 질문·라벨·snapshot 기준, 첫 조회 vs NAS-only 반복(질문마다 최소2회), 외부 재호출 절감 주장과 DB 중복0 명확히 구분. **완료 기준:** 실제/추정 호출·지연·품질 분리 보고, 권리·신선도 보류, 최종 유지/축소 판단.

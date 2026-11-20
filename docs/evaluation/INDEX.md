@@ -2,7 +2,7 @@
 
 - 인덱스 ID: PATENT-EVALUATION-INDEX
 - 기준일: 2026-11-20 / 목적: 다른 ChatGPT·Codex·개발자가 **MVP 이후 무슨 기능을 만들지** 동일 판단 기준에서 진행.
-- **실제 상태:** 검색·비교·선택 문헌 로컬 벡터화 등 **MVP 기본 기능 실증 완료**. 추가 품질/재사용 **평가 작업은 PLAN READY, 실제 평가 NOT RUN**. 사용자 실사용 인수 [중앙 #31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 대기.
+- **실제 상태:** 검색·비교·선택 문헌 로컬 벡터화 등 **MVP 기본 기능 실증 완료**. EVAL-01의 10문항 WIPS/NAS 검색·근거 반환 **실측 완료**. 사용자 관련성 라벨·정식 정확도 지표·EVAL-02 반복 절감은 **NOT RUN**. 사용자 실사용 인수 [중앙 #31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 대기.
 - 신규 문서는 **결정/실행 계획**이지 실행 결과 기록이 아니다. 결과는 기존 [CURRENT_STATE](../../CURRENT_STATE.md), [TASKS](../../TASKS.md), [WORKS](../../WORKS.md)가 정본.
 - **읽기 순서:** [전역 Control](https://github.com/son1004007/ai-agent-workflow-playbook/blob/main/CONTROL.md) → [repository AGENTS](../../AGENTS.md) → [CURRENT_STATE](../../CURRENT_STATE.md)/[TASKS](../../TASKS.md) → **이 인덱스** → 판단 기준 → EVAL-01 실행 계획 → EVAL-02 실행 계획 → 기존 도구/코드/실측.
 
@@ -11,7 +11,7 @@
 | ID | 우선순위 | 파일 | 현재 상태 / 목표 |
 |---|---|---|---|
 | DECISION-01 | **P0 의사결정 기준** | [MVP 유지·MCP/API·NAS 선택 기준](../44-mvp-evaluation-decision-criteria.md) | **문서 작성 완료**, 실측 판정 전. 관련성·근거 정확도 우선, 추가 후보, 호출비용/시간·복잡도·공보 PDF 필요성 순서 |
-| EVAL-01 | **P0 1순위** | [검색 정확도·근거 비교 실행 계획](../45-search-quality-comparison-plan.md) | **PLAN READY / NOT RUN**. WIPS 단독 / NAS 단독 / 양쪽 통합, 실제 연구질문 10개 목표(1차5+추가5), 사람 검증 라벨과 중복 후보 |
+| EVAL-01 | **P0 1순위** | [검색 정확도·근거 비교 실행 계획](../45-search-quality-comparison-plan.md) / [10문항 검색 실측](2026-11-20-eval01-live-retrieval-baseline.md) | **검색·통합 후보/근거 필드 10문항 실제 PASS / 사람 근거·정확도 라벨 0/10 → 최종 INCONCLUSIVE**. WIPS 단독 / NAS 단독 / 양쪽 통합, 실제 연구질문 10개 목표(1차5+추가5), 사람 검증 라벨과 중복 후보 |
 | EVAL-02 | **P0 2순위** | [저장 자료 재사용 가치 검증 실행 계획](../46-reuse-value-verification-plan.md) | **PLAN READY / NOT RUN**. 같은 질문 cold vs warm-NAS, 실제 WIPS 호출·시간/근거 차이, 반복 WIPS 호출 절감 추정과 실측 구분 |
 
 **전제 설명:** [MVP 완료 범위·API vs MCP 비교](../43-mvp-milestone-mcp-api-tradeoff.md), [기존 양 소스 후보 비교](../25-mvp04-candidate-comparison.md), [실제 본문 적재](../35-mvp03-actual-ingest-acceptance.md), [서지83건](../39-mvp-archive-100-live-acceptance.md), [실사용 시험](../31-mvp06-user-trial.md). P0-1~P0-5의 미구현 기능별 원래 상세 설계는 [기존 구현 인덱스](../mvp-implementation/INDEX.md)에서 찾는다.
@@ -54,3 +54,7 @@ flowchart TD
 ## 5. 중복 문서 통합(2026-11-20)
 
 동일한 평가를 별도 `EV-01/02`와 `EVAL-01/02`로 기록했던 중복을 제거했다. **이 `docs/evaluation/INDEX.md`와 DECISION-01/EVAL-01/EVAL-02가 유일한 정본**이다. 추가 설계·예외 체크리스트는 해당 EVAL 계획에 통합했으며 이전 문서는 Git history에서만 조회한다. 기준은 **각 source K=3**, 통합 후보 **최대6개**, corpus 내 5개/외 5개, 사용자 직접 라벨 필수다. 이전 EV 문서의 K=5 P@5 또는 20% 조건부 GO 기준은 **적용하지 않는다**. 이로써 인덱스·점수 기준 충돌을 방지한다.
+
+## 6. EVAL-01 첫 실제 검색·근거 필드 확인 (2026-11-20)
+
+[10개 비식별 문항 WIPS/NAS/통합 결과 및 실패 원장](2026-11-20-eval01-live-retrieval-baseline.md) — 두 소스 10/10, 3+3×10, 동일 문헌 중복2/통합 고유58, WIPS 요약·대표청구항 및 NAS 발췌30/30. **사용자 0/1/2 관련성 라벨이 없으므로 정식 검색 정확도 P@3·근거 정확도·사업 효용 및 사용자 #31 인수는 미판정.** 다른 AI는 이 보고서와 비공개 원응답 존재 범위를 먼저 확인하고 평가를 이어간다.
