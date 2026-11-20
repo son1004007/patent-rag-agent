@@ -70,3 +70,5 @@
 - 2026-11-20 [P0-1~P0-5 독립 구현 설계서+실행 계획서 10개](docs/mvp-implementation/INDEX.md) 문서화: 기존 WIPS/NAS 코드와 실제 DB 스키마/장애 사례, 제공자 공식 자료(KIPRIS Plus XML 공보 download path, EPO PDF/A REST fair use) 대조. 각 작업 단위 Mermaid·API/DB·기술 선택·필드 변환/권한·에러 사전 대응·단계별 운영 검증·rollback/완료 정의. DOC_INDEX/AGENTS/TASKS/CURRENT_STATE/AI_CONTEXT/README 및 전역 pointer 연결. 문서/계획만 변경, 실제 개발·배포·유료 호출·신규 적재/운영 테스트 NOT RUN. 독립 AI 리뷰 NOT_RUN_OPTIONAL.
 
 - 2026-11-20 [WIPS MyFolder MCP 조사](docs/41-wips-myfolder-mcp-assessment.md): WIPS 공식 발표와 공식 소개 및 외부 MCP 도구 카탈로그 확인. 읽기 전용 폴더명/건수 및 폴더 SKEY 페이지 조회를 기존 WIPS 검색 28도구·NAS writer와 분리. 현재 개인 설치 plugin wipsclip/NAS RAG 2개, MyFolder 도구 노출 없음. 외부 도구 세부 제한은 직접 실증 전 보수적으로 기록. DOC_INDEX/TASKS/P0-1/카탈로그에 P1 폴더 import 선택 경로만 표시. 새 플러그인 설치/인증·WIPS 실자료 호출·운영 변경 없음.
+
+- 2026-11-20 [WIPS MyFolder 실제 연결 후 read-only 비교](docs/41-wips-myfolder-mcp-assessment.md): 현재 MyFolder 2개 도구 노출 확인, `myfolder_list_folders({})` 공급자 인증/폴더 미생성 가능 오류로 실패, SKEY 조회 불가/NOT RUN. 기존 NAS RAG `search_patents(limit=1)` 검색 1건/근거 필드 정상 PASS. 별도 기능/인증 경계 확인, 사용자 비밀번호/폴더명/SKEY 미출력, GitHub 기록만 갱신.

@@ -53,3 +53,11 @@ flowchart LR
 3. MyFolder 도구 2개의 실제 호출이 확인되면 P1 선택 작업(큐레이션 폴더를 NAS에 import, 태그/폴더 멤버십 보존)으로 별도 계획. *WIPS 웹 MyFolder의 저장/폴더 쓰기를 MCP 기능으로 추정하지 않는다.*
 
 **검증 상태:** 공식 별도 서비스 존재 CONFIRMED; 외부 카탈로그 도구 설명 VERIFIED_AS_THIRD_PARTY_REFERENCE; 실제 MyFolder MCP tool availability/response E2E NOT RUN; 사용자 플러그인 신규 설치/인증/변경 NOT RUN; NAS·DB 운영 변경 NONE.
+
+## 4. 2026-11-20 실제 설치 후 검증 결과 (최신)
+- 사용자 WIPS MyFolder 플러그인 추가 이후 **현재 ChatGPT에서 실제 `mcp__WIPS_MyFolder__myfolder_list_folders`, `mcp__WIPS_MyFolder__myfolder_get_folder_skeys` 두 개의 도구 노출 확인**. 이 연결은 과거 섹션의 "미연결" 상태를 대체한다. 연결/도구 노출과 인증·실데이터 조회 성공은 구분한다.
+- `myfolder_list_folders({})` **실제 호출 실패**: 서버 반환 문구 "아이디/비밀번호를 확인해 주세요. 자격증명이 맞다면 마이폴더가 아직 생성되지 않은 계정일 수 있습니다." 따라서 자격증명 불일치 또는 폴더 미생성 가능성을 공급자 응답 수준에서만 확인. 어느 쪽인지 **미확정**. 비밀번호/토큰 조회·출력·공유 없음.
+- `myfolder_get_folder_skeys`는 유효한 실제 폴더명이 확인되지 않아 **미실행**. MyFolder의 실제 폴더/SKEY 수집 E2E는 **BLOCKED_AUTH_OR_EMPTY_FOLDER**, 저장/쓰기 수행 없음.
+- 기존 별도 NAS RAG `mcp__NAS_RAG__search_patents(query, limit=1)` 실제 호출 **1건 PASS**; 결과에 `document_id,publication,country,kind,title,source_sha256,excerpt,chunk_sha256,distance` 등의 근거 필드 존재. 식별자/실제 텍스트는 로그·공개 문서에 쓰지 않음.
+- 기능 차이 확인: MyFolder는 기존 폴더/목록/SKEY를 제공하는 **읽기 전용 2개 도구**, NAS RAG는 별도 **5개 도구**(`save_document,get_document,search_documents,search_patents,get_patent`). `save_document`는 승인된 **합성 테스트 fixture 전용**, 구매 특허 원문 운영 적재를 MyFolder나 이 도구가 수행한다고 오해하지 않는다. 기존 원문 운영 적재는 별도 승인 NAS writer 경로를 사용.
+- 다음 확인은 사용자가 윈텔립스 자격증명과 MyFolder 생성 상태를 본인 화면에서 점검한 후 `list_folders` 읽기 재시험 → 반환한 정확한 폴더명으로 `get_folder_skeys` 한 페이지 시험. 현재 WIPS 검색→NAS 자동 보관 P0-1의 선행조건으로 삼지 않는다.
