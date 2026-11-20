@@ -64,14 +64,14 @@ function safeResult(source,decision,local,calls,extra={}){
 // Local technical relevance assessment is explicitly supplied by ChatGPT.
 export async function runPatentRouter({
   caseId,group,query,wipsQuery,requiredFeatures=[],freshnessRequired=false,
-  searchNas,detailNas,reviewNas,searchWips
+  searchNas,detailNas,reviewNas,searchWips,onNasAccepted
 }={}){
   if(typeof wipsQuery!=='string'||!wipsQuery.trim()||wipsQuery.length>1000||
      typeof searchWips!=='function')throw Error('BAD_ROUTER_INPUT');
   const calls={wips:0};
   const local=await runNasReadOnlyReview({
     caseId,group,query,freshnessRequired,requiredFeatures,
-    search:searchNas,detail:detailNas,review:reviewNas
+    search:searchNas,detail:detailNas,review:reviewNas,onAccepted:onNasAccepted
   });
   if(local.decision===REASON.VALID)
     return safeResult('NAS_RAG',ROUTE.LOCAL,local,calls,{rank:local.rank,evidenceCitationMatched:true});

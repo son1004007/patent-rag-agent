@@ -40,9 +40,10 @@ function output(caseId,decision,calls,extra={}){
 // title/abstract/representative claim; similarity/distance must never be its label.
 // Expected: null (hold) or {rank:1..3,label:2,section,chunkSha256,quote,rationale}.
 // quote is verified against a returned evidence excerpt but is NEVER emitted.
-export async function runNasReadOnlyReview({caseId,group,query,freshnessRequired=false,requiredFeatures=[],search,detail,review}={}){
+export async function runNasReadOnlyReview({caseId,group,query,freshnessRequired=false,requiredFeatures=[],search,detail,review,onAccepted}={}){
   if(!/^Q\d{2}$/.test(caseId||'')||!['IN','OUT'].includes(group)||
     typeof query!=='string'||!query.trim()||query.length>2000||
+    (onAccepted!==undefined&&typeof onAccepted!=='function')||
     typeof freshnessRequired!=='boolean'||!Array.isArray(requiredFeatures)||requiredFeatures.length>5||
     !requiredFeatures.every(f=>typeof f==='string'&&/^[a-z][a-z0-9_]{1,39}$/.test(f))||
     new Set(requiredFeatures).size!==requiredFeatures.length||
@@ -102,6 +103,13 @@ export async function runNasReadOnlyReview({caseId,group,query,freshnessRequired
         typeof s.quote==='string'&&[...s.quote].length>=12&&[...s.quote].length<=120&&
         chosen.evidence.some(e=>e.section===s.section&&e.chunk_sha256===s.chunkSha256&&e.excerpt.includes(s.quote))))
       return output(caseId,REASON.GROUND,calls,{reviewedBy:'AI'});
+  }
+  // Expose only the verified selected record to an explicitly injected,
+  // same-process display callback. The default return remains metadata-only.
+  // The callback MUST NOT persist or forward purchased source content.
+  if(onAccepted){
+    try{await onAccepted({selected:chosen,rank:judgement.rank});}
+    catch{return output(caseId,REASON.GROUND,calls,{reviewedBy:'AI'});}
   }
   // Integrity/quote check establishes provenance, NOT independent technical truth.
   return output(caseId,REASON.VALID,calls,{reviewedBy:'AI',rank:judgement.rank,evidenceCitationMatched:true,
