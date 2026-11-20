@@ -77,3 +77,7 @@ flowchart TD
 ## 10. 실제 NAS Code Mode 어댑터 E2E (2026-11-20)
 
 [실측 보고](2026-11-20-eval02-live-read-adapter-acceptance.md) / [read-only 어댑터](../../poc/eval02_live_read_adapter.mjs) / [계약 테스트](../../poc/eval02_live_read_adapter.test.mjs): 동일 질문 검색2→상위3개 상세→AI 근거 callback→excerpt/hash/section 실제 대조→재사용/HOLD. 4문항(실제 Q01/Q04 REUSE·Q05/Q08 HOLD), freshness query0, Code Mode V8 합성39 PASS. **NAS 운영 MCP 서버 배포·전역 플러그인 자동 후킹 및 실제 비용·지연 차이 NOT RUN**. 사용자 별도 human-gold는 최신 지시대로 요구하지 않는다.
+
+## 11. EVAL-02 전10문항 NAS 실제 판정 및 다중 근거 보강 (2026-11-20)
+
+[10문항 read-only 검색/AI 근거 판단 결과](2026-11-20-eval02-full10-feature-grounding.md) / [라이브 어댑터](../../poc/eval02_live_read_adapter.mjs) / [계약 테스트](../../poc/eval02_live_read_adapter.test.mjs). 기존4+새6문항 합계 **재사용 Q01~Q04 4/10, Q05~Q10 근거부족 HOLD 6/10**. 새6문항 실제 Code Mode adapter NAS search12+get18/WIPS0, Q01 다중섹션 3필수 속성 인용 실제 PASS. 기존 정책16+adapter29 = Code Mode V8 **45 PASS**. **운영 NAS MCP 자동 라우팅·Node CI NOT RUN**, COLD 대비 실제 비용/시간 미측정, human-gold는 사용자 지시로 필수 아님. 결과·유료/권리·데이터는 비공개 경계 유지.

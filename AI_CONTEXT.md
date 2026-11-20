@@ -66,3 +66,6 @@
 
 
 - 2026-11-20 **EVAL-02 읽기 전용 통합 경로 구현/실행**: [`poc/eval02_live_read_adapter.mjs`](poc/eval02_live_read_adapter.mjs) → [실측](docs/evaluation/2026-11-20-eval02-live-read-adapter-acceptance.md). 실제 연결 NAS search2+detail3의 4 선별질문에서 AI 근거 Q01/Q04 REUSE, Q05/Q08 HOLD, freshness query0. Code Mode V8 합성 16+23=39 PASS. 기존 NAS MCP 서버/툴 자동 등록·배포는 NOT RUN. Code Mode는 ChatGPT가 별도 호출해야 실행됨. ROI 미측정.
+
+
+- 2026-11-20 EVAL-02 **10문항 실제 NAS 어댑터 판정 완료(기존4+신규6)**: [총괄](docs/evaluation/2026-11-20-eval02-full10-feature-grounding.md). Q01~Q04 REUSE, Q05~Q10 HOLD, 추가6문항 실도구 adapter 검색12+상세18/WIPS0, Q01 다중섹션(봉지/끝단/수분) 인용 검증3 PASS. 기존 정책16+신규어댑터29 = Code Mode V8 합성45 PASS. 자동 운영 도구배포는 NOT_RUN, WIPS 대비 비용·지연 ROI 미측정.

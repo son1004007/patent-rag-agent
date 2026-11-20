@@ -114,3 +114,10 @@
 - GitHub에 [fail-closed read-only 어댑터](poc/eval02_live_read_adapter.mjs), [23 테스트](poc/eval02_live_read_adapter.test.mjs) 작성. 기존 16+새23 합성 시나리오 Code Mode V8 **39/39 PASS**(Node CI NOT RUN).
 - 연결된 실제 `NAS_RAG.search_patents`+ `get_patent` 도구로 [선별 4문항 라이브](docs/evaluation/2026-11-20-eval02-live-read-adapter-acceptance.md) 실행. Q01/Q04는 청구항·요약 일부와 실제 chunk quote 일치한 AI 직접 관련 재사용, Q05/Q08은 보류. 최신성 요구=provider 호출0으로 차단. 5건 완료 실행 분모 search10/get15/WIPS0. 첫 Q01 false HOLD→요약+청구항 근거 검토 보정 후 성공. provider 오류/불일치 시 fail closed.
 - GitHub 문서만 추가, 기존 NAS API·컨테이너·권한·DB·WIPS 영속 자료/원문/벡터·PDF 변경 및 자동 플러그인 등록 **없음**. EVAL-02 실제 비용/시간 ROI, 10개 전 문항 live adapter 자동 라우팅은 미검증.
+
+
+## 2026-11-20 EVAL-02 전10문항 완주 / 복수 섹션 근거 게이트
+
+- 이전 EVAL02 실제 4문항에 이어 [나머지6문항(Q02,Q03,Q06,Q07,Q09,Q10)](docs/evaluation/2026-11-20-eval02-full10-feature-grounding.md) NAS MCP read-only `search2/detail3` 실제 어댑터 6회 수행: 12+18, WIPS0. Q02/Q03 REUSE, Q06/Q07/Q09/Q10 HOLD. 총10문항 Q01~04 REUSE4, Q05~10 HOLD6. 동일 질문 Top3 문헌·청크 순위 일치, 독립 fulltext hash 검산 미실시.
+- [라이브 어댑터](poc/eval02_live_read_adapter.mjs) `requiredFeatures`와 `featureEvidence`로 같은 문헌의 요약/대표청구항 근거를 섹션별로 여러 개 결속. Q01 기존 false HOLD에 대응해 봉지재·끝단·수분 차단 3특성의 출처 인용 검사 **실제 NAS search2+detail3 PASS**. 복수 요구 feature의 가짜 인용/누락/해시 불일치 차단 테스트6개 추가.
+- 기존16 + 신규 adapter29 = **V8 Code Mode 합성/계약 45 PASS**. Node/CI·운영 NAS MCP 서버/DB 변경, 권한 확대, 원문/PDF/벡터 신규 저장 미실행. 통제 WIPS COLD 비교·원가·end-to-end 지연 ROI는 INCONCLUSIVE.

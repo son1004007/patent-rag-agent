@@ -14,8 +14,9 @@
 | [02 아키텍처](docs/02-architecture.md) | 개발자 — 구성·검색·적재 |
 | [03 데이터/API](docs/03-data-api.md) | 개발자 — DB·API |
 | [EVAL-01 실패 4문항 300자+ 질의 A/B 보완](docs/evaluation/2026-11-20-eval01-targeted-query-rewrite.md) | AI — 형광/난연/저온접합/SiC 재검색 24개 후보 및 청구항 재판정(사후 튜닝) |
+| [EVAL-02 10문항 NAS live adapter 총괄·다중근거 개선](docs/evaluation/2026-11-20-eval02-full10-feature-grounding.md) | 개발자/AI — 전체10문항 AI 재사용4/HOLD6, 추가6문항 실도구 12검색·18상세, Q01 다중섹션 근거, V8 합성45 PASS |
 | [EVAL-02 실제 NAS read-only AI 인용 게이트 인수](docs/evaluation/2026-11-20-eval02-live-read-adapter-acceptance.md) | AI/개발자 — 실제 연결 NAS 4문항 검색·상세·인용 일치 E2E, HOLD/FRESHNESS 안전, 운영 변경 없음 |
-| [EVAL-02 NAS read-only 어댑터](poc/eval02_live_read_adapter.mjs) · [23개 합성 테스트](poc/eval02_live_read_adapter.test.mjs) | 개발자·AI — search2/detail3 + AI review + 기존 정책 판정기, fail-closed 전용 흐름 |
+| [EVAL-02 NAS read-only 어댑터](poc/eval02_live_read_adapter.mjs) · [29개 합성 테스트](poc/eval02_live_read_adapter.test.mjs) | 개발자·AI — search2/detail3 + AI review + 기존 정책 판정기, fail-closed 전용 흐름 |
 | [EVAL-02 NAS 10문항×2 반복 재사용 실측](docs/evaluation/2026-11-20-eval02-warm-nas-replay.md) | AI — NAS 28 reader 호출·WIPS0, 10/10 안정성, 4/10 AI 재사용·6 HOLD, 비용 미측정 |
 | [EVAL-02 순수 재사용 판단기/합성 테스트](poc/eval02_reuse_policy.mjs) · [테스트](poc/eval02_reuse_policy.test.mjs) | 개발자/AI — 민감 데이터를 반환하지 않는 검증기, Node 16 합성 시나리오 PASS |
 | [EVAL-01 WIPS AI 기술 설명 300자 A/B 실측](docs/evaluation/2026-11-20-eval01-wips-ai-300char-ab.md) | 사용자·AI — 10문항 단문 vs 300자+ KR AI 유사 검색, 0/1/2 자체채점·실용신안 노이즈·후속 규칙 |

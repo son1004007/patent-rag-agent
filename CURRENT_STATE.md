@@ -123,3 +123,6 @@
 
 
 - 2026-11-20 **EVAL-02 실제 NAS reader 연결 + AI 근거 인용 게이트 E2E**: [인수 결과](docs/evaluation/2026-11-20-eval02-live-read-adapter-acceptance.md), [코드](poc/eval02_live_read_adapter.mjs). 4문항 실제 read-only `search`+ `get_patent` 사용, Q01/Q04 REUSABLE, Q05/Q08 HOLD, freshness 지정 때 NAS/WIPS 0, 기존 Q01 최초 엄격 reviewer로 false HOLD 발생 후 요약+청구항 병행검증으로 정상 판정. 응답 확보 5 실호출에 NAS 검색10·상세15, WIPS0 (실패/진단 호출 제외). 기존 정책16 + 새 어댑터23 **Code Mode V8 합성 테스트39 PASS**; **운영 NAS MCP 서버 배포/자동 후킹·Node CI NOT RUN**. 보유 문헌/DB/서비스/권한 변화 없이 범위 한정 Code Mode 접속에서만 성공.
+
+
+- 2026-11-20 **EVAL-02 10문항 실제 NAS Code Mode 검증 종료**: [실측/다중근거 인수](docs/evaluation/2026-11-20-eval02-full10-feature-grounding.md), [판정 코드](poc/eval02_live_read_adapter.mjs). 전 차례4문항+이번6문항 합쳐 Q01~Q04 기존자료 REUSE **4/10**, Q05~Q10 필수 근거 부족 HOLD **6/10**. 이번 6문항 실제 adapter 호출 NAS 검색12+상세18/WIPS0 (별도 진단 조회12+상세18). Q01 재검증 multi `requiredFeatures` 3개 모두 동일특허 요약/청구항 인용 일치, NAS 검색2+상세3/WIPS0. V8 격리 테스트 **45/45 PASS (기존16+adapter29)**; Node CI/NAS 서버 런타임 변경 미실시. 비용/지연 절감·독립 human gold·공보 현재 권리 확인 없음. 관련 없는 분야 추천 자동 차단은 **Code Mode 명시 어댑터 범위**에서만 성립하며 서버 플러그인 전체의 기본 차단은 아직 아님.

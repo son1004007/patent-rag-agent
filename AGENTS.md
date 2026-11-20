@@ -62,3 +62,6 @@ WIPS 일반 키워드/Boolean 검색식(`get_patent_search_onlyengine`)과 AI �
 
 ## 2026-11-20 최신 EVAL-02 NAS 읽기-only 재사용 판정 적용
 [실제 Code Mode 검증](docs/evaluation/2026-11-20-eval02-live-read-adapter-acceptance.md): [`poc/eval02_live_read_adapter.mjs`](poc/eval02_live_read_adapter.mjs)이 기존 `eval02_reuse_policy.mjs`를 연결해 동일 질문 search2 → 상위 최대3 상세 근거 → ChatGPT AI review callback → 출처/인용 실제 일치 확인 뒤 REUSABLE/HOLD를 반환한다. 사용자 별도 채점 불필요. Q01/Q04 REUSE, Q05/Q08 HOLD, 최신성 플래그는 읽기0으로 차단; 합성39 PASS(Code Mode V8). 이 코드는 **이미 연결된 NAS 도구를 ChatGPT Code Mode에서 명시적으로 조합한 것**으로 NAS MCP 서비스 자동 배포·전역 플러그인 자동실행이 아니다. 고객 원문을 별도 AI에 넘기거나 WIPS·운영 DB 새 쓰기·재시작·권한 변경은 금지.
+
+## 2026-11-20 최신 EVAL-02 전체 10문항 AI 근거 재사용 완료
+[10문항 실경로 결과](docs/evaluation/2026-11-20-eval02-full10-feature-grounding.md): 기존4문항+새6문항의 실제 NAS read-only 검증으로 AI 관련 재사용 Q01~Q04 **4/10**, 필수 근거 미충족 Q05~Q10 **6/10 HOLD**. 기존 대표청구항만의 제한으로 Q01 false HOLD를 낸 것을 해결하기 위해 [live adapter](poc/eval02_live_read_adapter.mjs)에서 `requiredFeatures` 및 청구항/요약 **다중 인용 출처 필드**를 검증한다. 실제 Q01 3요구조건 재확인 PASS, 기존 테스트16+adapter29=**V8 격리계약45 PASS**. 모든 신규 코드/예비 평가의 자동 NAS 운영 서비스/플러그인 적용은 아직 미구현, 외부 human-gold는 사용자 최신 결정으로 필수 아님. 비용·권리·원문 재적재 관련 보안 조건 유지.
