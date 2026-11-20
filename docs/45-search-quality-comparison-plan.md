@@ -100,3 +100,10 @@
 - 코드 제안: `poc/eval_quality_score.py`, `poc/test_eval_quality_score.py` — 실제 구현 전 현재 repo tree 확인.
 - 사용자: 10개 질문의 결과 관련성·출처/근거·보류 적절성을 평가하고 [중앙 #31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31)에 본인 승인/수정 의견 남겨야 인수 완료.
 - **최종 종료 기준:** 실제 10문항(사람 평가 포함), 지표 계산 재현, 데이터/권한 변경 없음, 구분된 판정과 다음 실행 결정. 그 전에는 `PLAN_READY` 또는 `INCONCLUSIVE`이지 `EVAL_PASS`가 아니다.
+
+## 6. 실제 실행 확인용 데이터 계약·사전 실패 방어(중복 EV 설계 흡수)
+
+- 제안된 `poc/eval_quality_score.py`가 없더라도 표본 read-only 실험을 먼저 수행할 수 있다. 입력 schema: `run_id, question_id, corpus_scope(in/out), frozen_query_ref(private), wips_status, wips_total, wips_top3, nas_status, nas_top3, canonical_key, source, rank, evidence_state, human_relevance(0/1/2/UNKNOWN), labels_status, dedup_state, candidate_state, errors`. 실문헌 ID·질문·WIPS query 원문은 비공개 임시 컨텍스트만 사용한다.
+- 합성 테스트 경계: 반환0, 3미만, WIPS 제공자 실패, NAS 실패, 같은/다른 공보종류, 중복·ID_UNCLEAR, 출처별 순위, 근거0/불명, 근거 없는 HOLD/REVIEW. 무단 재시도/서버·DB 조작 금지.
+- 모델 자동 판정은 `PROVISIONAL_EVIDENCE_CHECK`까지만. **사람의 관련성 라벨이 없으면 P@3/Hit@3/GO 점수 계산 금지**. 기술 내용 존재 여부와 요구되는 실제 물성·유효성의 입증 여부를 구별한다.
+- WIPS provider와 NAS 응답이 허용된 다른 종류의 텍스트를 반환할 수 있으므로 evidence 상태는 `EXCERPT_PRESENT`(기계적), `CLAIM_MATCH_PRELIMINARY`(기계적), `HUMAN_VERIFIED`, `UNVERIFIED`로 분리한다. 단순 인용 존재를 인용 정확성 검증률로 보고하지 않는다.

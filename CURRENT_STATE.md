@@ -103,3 +103,6 @@
 - 2026-11-20 사용자 질의에 따른 [MVP 1차 핵심 기능/잔여 분류와 WIPS MCP↔API 비교](docs/43-mvp-milestone-mcp-api-tradeoff.md): 실제 WIPS 검색·기본 비교·승인 단건 본문→E5 384D·pgvector 검색 및 서지 83건 보관/지정 경로 연동은 기능 실증 PASS. 현재 원문6·섹션10·청크417·공보 PDF0, **추가 83건 본문/벡터 자동 적재 미구현·플랫폼 임의 WIPS 호출 후킹 미구현**; 사용자 직접 평가 #31 대기. MVP 1차는 기능 범위 한정 완료로 볼 수 있으나 최종 사용자 인수/공보 보존 기능 완료라고 주장하지 않음. KIPRIS Plus 공식 REST가 PDF 경로 및 XML 서지/초록/청구항 제공함을 확인하여 API vs MCP 대체가 아니라 용도별 병행 제안. 이번에는 문서/작업 분류만 갱신, NAS 운영/신규 적재/배포/정책 변경 없음.
 
 - 2026-11-20 **DECISION-01 및 EVAL-01/EVAL-02 계획 문서화**: [평가 인덱스](docs/evaluation/INDEX.md) → [기술 선택·수치 기준](docs/44-mvp-evaluation-decision-criteria.md) → [검색·근거 비교 계획](docs/45-search-quality-comparison-plan.md) → [반복 자료 재사용 계획](docs/46-reuse-value-verification-plan.md). WIPS/NAS 각3개, 통합 최대6개 고유 후보, corpus 범위5/미보유5로 비교 왜곡 방지. 데이터셋·사람 관련성0/1/2 라벨·실제 인용·call count·실제 지연/가상 호출 절감 분리, 보안/신선도/HOLD·GO 기준. **실험·새 검색·실자료 저장·운영 변경 NOT RUN, 계획서만 작성**. 사용자 #31 평가 대기 유지, 기존 기능 실증 완료와 제품 효과 검증 미완료 구분.
+
+
+- 2026-11-20 평가 문서 중복 통합: `docs/evaluation/INDEX.md` → `44-mvp-evaluation-decision-criteria.md` → `45-search-quality-comparison-plan.md` → `46-reuse-value-verification-plan.md`만 정본. 기존 validation/EV 변형은 Git history 보존, main에서 제거. 기존 83 서지·6원문·417청크 상태 변경 없음. **EVAL-01 사람의 gold label/최종 성능 지표는 미검증**(실제 호출 결과는 별도 기록 후 갱신).

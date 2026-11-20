@@ -50,3 +50,7 @@ flowchart TD
 ## 4. 다른 AI를 위한 최소 요청문
 
 "`son1004007/ai-agent-workflow-playbook/CONTROL.md`와 repository registry를 먼저 확인하고 `son1004007/patent-rag-agent/docs/evaluation/INDEX.md`를 읽으세요. `DECISION-01` 판단 규칙을 적용해 `EVAL-01`(근거 정확도 비교) → `EVAL-02`(반복 재사용 가치)를 순서대로 실행하세요. 사용자 데이터·권리·비용·운영 정책을 유지하고 실제 결과 PASS/FAIL/NOT_RUN을 기록하세요. MyFolder는 HOLD입니다."
+
+## 5. 중복 문서 통합(2026-11-20)
+
+동일한 평가를 별도 `EV-01/02`와 `EVAL-01/02`로 기록했던 중복을 제거했다. **이 `docs/evaluation/INDEX.md`와 DECISION-01/EVAL-01/EVAL-02가 유일한 정본**이다. 추가 설계·예외 체크리스트는 해당 EVAL 계획에 통합했으며 이전 문서는 Git history에서만 조회한다. 기준은 **각 source K=3**, 통합 후보 **최대6개**, corpus 내 5개/외 5개, 사용자 직접 라벨 필수다. 이전 EV 문서의 K=5 P@5 또는 20% 조건부 GO 기준은 **적용하지 않는다**. 이로써 인덱스·점수 기준 충돌을 방지한다.

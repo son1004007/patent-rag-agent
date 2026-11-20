@@ -76,3 +76,9 @@
 - 2026-11-20 [MVP41 P0-1 코드·NAS 실경로 통합](docs/42-mvp41-code-mode-gateway-archive.md): [mvp41_orchestrate.mjs](poc/mvp41_orchestrate.mjs), [test](poc/mvp41_orchestrate.test.mjs), [owner stdin wrapper](poc/mvp41_receive_and_archive.sh) 신규. Node v22 test 17/17, shell syntax PASS, NAS wrapper mode700 SHA256 pin PASS, Gateway stdin 15-byte canary PASS, invalid JSON 요청 exit1+no verified DB write PASS. WIPS 실제 83건/100 요청/첫1페이지 1회 → Gateway 고정 wrapper 2회 → REUSED_VERIFIED saved0/reused83 두 번, body_writes0; 실제 archive83/83/1/83, private_docs6/10/417, worker0 최종 조회. 83건 첫 INSERT는 과거 인수 [39](docs/39-mvp-archive-100-live-acceptance.md), 이번에 신규 INSERT 재실행 하지 않음. 신규 API/DB migration/컨테이너 재시작/상시 MCP server/브라우저 credential/원문PDF·벡터 수집 없음. 모든 WIPS 호출 후킹/새 대화 자동 도구 선택 실증 NOT RUN; 독립 AI 리뷰 NOT_RUN_OPTIONAL.
 
 - 2026-11-20 [MVP 유지/기술 선택 판단 기준과 두 검증 작업의 상세 실행 계획](docs/evaluation/INDEX.md) 작성: (1) [판단 기준](docs/44-mvp-evaluation-decision-criteria.md), (2) [EVAL-01 WIPS/NAS/통합 후보·근거 정확도](docs/45-search-quality-comparison-plan.md), (3) [EVAL-02 cold/warm WIPS 호출·실제 시간·품질/신선도](docs/46-reuse-value-verification-plan.md), (4) 평가 인덱스. 기존 6원문/417청크와 서지83의 차이, 사용자 정답라벨/평가자 편향, 결측·후보수 차이, 임계값·실측/가정 분리, 오류 대응·종료 증거 작성. AGENTS/DOC_INDEX/README/TASKS/AI_CONTEXT/CURRENT_STATE 및 전역 작업 포인터 연결. **GitHub 문서 only: 신규 WIPS 호출·라벨 생성·NAS 변경/배포·성능 실측 NOT RUN**. 독립 AI 리뷰 NOT_RUN_OPTIONAL.
+
+
+## 2026-11-20 EVAL-01 준비: 계획 중복 정리
+
+- 전역 registry의 `docs/evaluation/INDEX.md`를 단일 평가 진입점으로 확정하고 중복 `docs/validation/EV-01/02` 및 중복 판단 문서를 **Git history에 보존 후 main에서 정리**했다. EVAL-01은 각 source K=3, 통합 최대6, corpus in/out 5/5, 사람 라벨이 필요하며 P@5/20% 임의 게이트 사용 금지.
+- 결정 규칙 [DECISION-01](docs/44-mvp-evaluation-decision-criteria.md), [EVAL-01 계획](docs/45-search-quality-comparison-plan.md), [EVAL-02 계획](docs/46-reuse-value-verification-plan.md), [평가 인덱스](docs/evaluation/INDEX.md) 정본으로 일원화했다. 실험 측정 여부는 별도 실행 증거 기록에서 판단. 신규 원문/벡터 저장·운영 변경은 수행하지 않았다.

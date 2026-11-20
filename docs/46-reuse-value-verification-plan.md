@@ -118,3 +118,7 @@
 5. 개인정보·제공자 계약·보안 정책·WIPS 100건 서지 보관 범위를 유지. **MyFolder 작업 HOLD.**
 
 **진행 상태:** EVAL-02 실행/실측 NOT RUN, 계획 문서만 반영함. 실제 개발 시 [전역 Control](https://github.com/son1004007/ai-agent-workflow-playbook/blob/main/CONTROL.md) → [AGENTS](../AGENTS.md) → [TASKS](../TASKS.md) → [평가 인덱스](evaluation/INDEX.md) → 이 계획 → 해당 repo 최신 코드 → 비공개 run scope 순으로 진입한다.
+
+## 보충: 감도 및 실제 호출 검증(중복 EV 설계 흡수)
+
+보조 진단에서 절감률 0/10/20/30%의 감도표를 작성할 수 있지만, **정식 채택 게이트는 DECISION-01의 반복 효율 조건(50%)**이며 임의로 20%로 낮추지 않는다. `ANSWERABLE_CACHE_HIT`은 원문6건 중 질문의 필수 속성과 근거가 실제 존재하며 최신성 재조회가 불필요한 경우만 인정한다. 단순 서지83건 `METADATA_ONLY`, `FULLTEXT_MISS`, `FRESHNESS_REQUIRED`, `PROVIDER_FAIL` 분리. 실제 호출 절감과 WIPS를 호출했을 것이라는 반사실적 추정(causal counterfactual)은 서로 다른 수치로 표기한다.
