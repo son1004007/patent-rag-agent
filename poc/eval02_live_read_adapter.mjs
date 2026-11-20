@@ -40,10 +40,13 @@ function output(caseId,decision,calls,extra={}){
 // title/abstract/representative claim; similarity/distance must never be its label.
 // Expected: null (hold) or {rank:1..3,label:2,section,chunkSha256,quote,rationale}.
 // quote is verified against a returned evidence excerpt but is NEVER emitted.
-export async function runNasReadOnlyReview({caseId,group,query,freshnessRequired=false,search,detail,review}={}){
+export async function runNasReadOnlyReview({caseId,group,query,freshnessRequired=false,requiredFeatures=[],search,detail,review}={}){
   if(!/^Q\d{2}$/.test(caseId||'')||!['IN','OUT'].includes(group)||
     typeof query!=='string'||!query.trim()||query.length>2000||
-    typeof freshnessRequired!=='boolean'||typeof search!=='function'||typeof detail!=='function')
+    typeof freshnessRequired!=='boolean'||!Array.isArray(requiredFeatures)||requiredFeatures.length>5||
+    !requiredFeatures.every(f=>typeof f==='string'&&/^[a-z][a-z0-9_]{1,39}$/.test(f))||
+    new Set(requiredFeatures).size!==requiredFeatures.length||
+    typeof search!=='function'||typeof detail!=='function')
     throw Error('BAD_INPUT');
   const calls={search:0,detail:0};
   if(freshnessRequired)return output(caseId,REASON.FRESH,calls);
@@ -87,8 +90,22 @@ export async function runNasReadOnlyReview({caseId,group,query,freshnessRequired
   const chosen=details[judgement.rank-1],e=chosen.evidence.find(x=>
     x.section===judgement.section&&x.chunk_sha256===judgement.chunkSha256&&x.excerpt.includes(judgement.quote));
   if(!e)return output(caseId,REASON.GROUND,calls,{reviewedBy:'AI'});
+  // For multi-property questions, allow different facts to be grounded in
+  // independent excerpts of the SAME patent. This avoids requiring all terms
+  // to appear in one representative-claim chunk (Q01 false HOLD lesson).
+  if(requiredFeatures.length){
+    const support=judgement.featureEvidence;
+    if(!Array.isArray(support)||support.length!==requiredFeatures.length||
+      new Set(support.map(s=>s?.feature)).size!==requiredFeatures.length||
+      !requiredFeatures.every(f=>support.some(s=>s?.feature===f))||
+      !support.every(s=>typeof s.section==='string'&&SHA.test(s.chunkSha256||'')&&
+        typeof s.quote==='string'&&[...s.quote].length>=12&&[...s.quote].length<=120&&
+        chosen.evidence.some(e=>e.section===s.section&&e.chunk_sha256===s.chunkSha256&&e.excerpt.includes(s.quote))))
+      return output(caseId,REASON.GROUND,calls,{reviewedBy:'AI'});
+  }
   // Integrity/quote check establishes provenance, NOT independent technical truth.
   return output(caseId,REASON.VALID,calls,{reviewedBy:'AI',rank:judgement.rank,evidenceCitationMatched:true,
+    verifiedFeatureCount:requiredFeatures.length,
     limitations:['AI_NOT_HUMAN_GOLD','NO_FRESHNESS_OR_LEGAL_OPINION']});
 }
 export {REASON};

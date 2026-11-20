@@ -39,4 +39,46 @@ await check('bad query rejects',async()=>{try{await runNasReadOnlyReview(input({
 await check('malformed detail zero evidence blocks',async()=>{const a=await runNasReadOnlyReview(input({detail:async()=>({...doc,evidence:[]})}));return a.decision===REASON.BAD});
 await check('tool text wrapper accepted',async()=>{const a=await runNasReadOnlyReview(input({search:async()=>({text:JSON.stringify(searchResult([row]))}),detail:async()=>({text:JSON.stringify(doc)})}));return a.decision===REASON.VALID});
 await check('no network/token/write APIs embedded',async()=>{const a=await runNasReadOnlyReview(input());return a.calls.wips===0&&a.source==='NAS_LOCAL_READ_ONLY'});
+
+await check('multi excerpt requirements from same patent accepted',async()=>{
+ const req=['solar_target','water_protection'];
+ const e1={section:'abstract',start_offset:0,end_offset:48,chunk_sha256:A,excerpt:'Synthetic solar encapsulant blocks incoming moisture at the edge'};
+ const detailed={...doc,evidence:[ev,e1]};
+ const x=input({requiredFeatures:req,detail:async()=>detailed,review:async()=>({
+   rank:1,label:2,section:ev.section,chunkSha256:ev.chunk_sha256,quote:'Synthetic photovoltaic encapsulant',
+   rationale:'The claim and abstract support distinct aspects of this same synthetic construction.',
+   featureEvidence:[{feature:'solar_target',section:ev.section,chunkSha256:B,quote:'Synthetic photovoltaic encapsulant'},
+    {feature:'water_protection',section:'abstract',chunkSha256:A,quote:'encapsulant blocks incoming moisture'}]
+ })});
+ const r=await runNasReadOnlyReview(x);
+ return r.decision===REASON.VALID&&r.verifiedFeatureCount===2&&!JSON.stringify(r).includes('blocks incoming');
+});
+await check('multiple features missing one source blocked',async()=>{
+ const r=await runNasReadOnlyReview(input({requiredFeatures:['target','mechanism']}));
+ return r.decision===REASON.GROUND;
+});
+await check('duplicate feature evidence blocked',async()=>{
+ const r=await runNasReadOnlyReview(input({requiredFeatures:['target','mechanism'],review:async()=>({
+ rank:1,label:2,section:ev.section,chunkSha256:B,quote:'Synthetic photovoltaic encapsulant',
+ rationale:'Evidence is not enough to demonstrate two distinct technical requirements.',
+ featureEvidence:[{feature:'target',section:ev.section,chunkSha256:B,quote:'Synthetic photovoltaic encapsulant'},
+ {feature:'target',section:ev.section,chunkSha256:B,quote:'Synthetic photovoltaic encapsulant'}]
+ })}));
+ return r.decision===REASON.GROUND;
+});
+await check('invalid extra features rejected before NAS',async()=>{
+ try{await runNasReadOnlyReview(input({requiredFeatures:['target','target']}));return false}catch{return true}
+});
+await check('invalid feature identifier rejected',async()=>{
+ try{await runNasReadOnlyReview(input({requiredFeatures:['__proto__']}));return false}catch{return true}
+});
+await check('feature evidence from a different chunk blocked',async()=>{
+ const r=await runNasReadOnlyReview(input({requiredFeatures:['target'],review:async()=>({
+ rank:1,label:2,section:ev.section,chunkSha256:B,quote:'Synthetic photovoltaic encapsulant',
+ rationale:'This evidence has a fabricated feature citation and must not be accepted.',
+ featureEvidence:[{feature:'target',section:ev.section,chunkSha256:A,quote:'Synthetic photovoltaic encapsulant'}]
+ })}));
+ return r.decision===REASON.GROUND;
+});
+
 console.log('EVAL02_LIVE_ADAPTER_PASS',n);
