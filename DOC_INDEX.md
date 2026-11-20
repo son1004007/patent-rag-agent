@@ -28,6 +28,7 @@
 | [P0-4 전체 원문·공보 PDF 열람 — 실행 계획](docs/mvp-implementation/P0-4-plan.md) | 구현 AI/운영자 — 선행 점검·단계별 코드·시험·배포·인수 |
 | [P0-5 실사용 종단간 인수·복구 — 설계서](docs/mvp-implementation/P0-5-design.md) | 구현 AI — 기술 구성·API/DB 계약·위험·권한·오류 대응 |
 | [P0-5 실사용 종단간 인수·복구 — 실행 계획](docs/mvp-implementation/P0-5-plan.md) | 구현 AI/운영자 — 선행 점검·단계별 코드·시험·배포·인수 |
+| [41 WIPS MyFolder MCP 별도 기능·연결/자동저장 판단](docs/41-wips-myfolder-mcp-assessment.md) | 사용자/개발자/AI — 읽기 전용 폴더/SKEY 조회, 기존 WIPS와 차이, 현재 플러그인 상태 및 NAS 적용 범위 |
 | [40 WIPS MCP 제공 데이터·28개 도구·구현 현황](docs/40-wips-mcp-capability-catalog.md) | 사용자/개발자/AI — 28개 검색·명세서·권리 도구, 응답 구조, 공보 PDF/벡터 구분, 구현·미완료 목록 |
 | [39 검색당 100건 운영 실자료 저장 검증](docs/39-mvp-archive-100-live-acceptance.md) | 사용자/운영자 — WIPS 83건 운영 저장, 중복0, 백업 복원 및 자동 호출 연결 잔여 |
 | [38 운영 목록 스키마 적용 및 복구 검증](docs/38-mvp-archive-production-migration.md) | 운영자 — 실제 migration·권한·백업 복원·회귀, 자동 연결 잔여 |

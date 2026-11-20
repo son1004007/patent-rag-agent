@@ -35,6 +35,8 @@
 - [x] MVP-03 P0-1 운영자 전용 목록 전송 경로 코드·NAS 배치 및 기본 비활성 차단 운영 실증. [실측](docs/38-mvp-archive-production-migration.md). 신규 transport 허용 worker 분기 미검증.
 - [x] MVP-03 P0-1 사용자가 지속 서지 보관 **검색당 100건** 허용 확인(별도 계약 증빙 미확인), 운영 writer 활성 및 WIPS 실제 첫 페이지 83건 보관·동일 페이지 신규0·백업 복원·기존 MCP 읽기 회귀 PASS. [운영 실측](docs/39-mvp-archive-100-live-acceptance.md).
 - [x] **P0-1~P0-5 작업별 설계서·실행 계획서 10개 및 실행 인덱스** 작성. [전체 진입점](docs/mvp-implementation/INDEX.md). 각 단위: 기능/기술/데이터흐름/API·DB/권한·사전 위험/단계별 변경·테스트/복구/완료 기준. **문서화 완료**이며 작업별 실제 신규 구현/운영 시험 완료와 다름.
+- [x] **WIPS MyFolder MCP 별도 서비스 조사**: WIPS 공식 2026-10-12 발표, 별도 MyFolder 폴더 이름/건수·SKEY 페이지 조회 **읽기 전용** 기능(도구명/제한은 제3자 카탈로그 근거·미실측). 현재 사용자 개인 연결 도구에는 MyFolder 없음, 기존 WIPS 검색 MCP와 구분. [조사결과](docs/41-wips-myfolder-mcp-assessment.md). 추가 설치/서버 변경 없음.
+- [ ] **P1 선택 — WIPS MyFolder에 사용자가 이미 모아 둔 특허를 NAS로 가져오기**: MyFolder MCP 별도 발급 키/권한 연결 후 실제 `myfolder_list_folders`·`myfolder_get_folder_skeys` 조회, SKEY→WIPS 검색 서지→NAS 승인된 최대100 적재·중복0. **P0-1 자동 검색 저장의 대체/필수 전제 아님.** [설계 검토](docs/41-wips-myfolder-mcp-assessment.md).
 - [ ] MVP-03 P0-1 임의 WIPS 검색이 별도 ChatGPT 오케스트레이션 없이도 자동 저장되는 상시 도구·연동 구현과 새 대화 실증. 기존 WIPS MCP 호출은 자동으로 NAS에 전달되지 않음. [잔여](docs/39-mvp-archive-100-live-acceptance.md).
 - [ ] MVP-03 추가 사용자 요구(P0) — WIPS 검색 결과 자동 NAS 보관, 승인 자료 원문/벡터 증분 적재, 전체 원문 조회 및 PDF·도면 제공 경로 확인. [요구사항](docs/36-mvp-automatic-archive.md). 상시 연결 및 실제 운영 E2E 대기. 원본 PDF 별도 수집은 KIPRIS Plus 국내 공보 API 우선 검증, EPO/WIPS 별도 경로 후속 검토. 텍스트 보관과 PDF 보관 상태 분리.
 - [x] WIPS MCP **28개 도구 전체 카탈로그**와 실제 검증/도구 정의 구분, PDF·벡터·NAS 구현 현황 기록 — [카탈로그](docs/40-wips-mcp-capability-catalog.md). 문서화만, 나머지 도구 전체 호출/운영 구현을 PASS로 취급하지 않음.

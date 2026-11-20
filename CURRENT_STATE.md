@@ -93,3 +93,5 @@
 - 2026-11-20 [WIPS MCP 28개 도구·반환 데이터/구현 갭](docs/40-wips-mcp-capability-catalog.md) 문서화: 실제 WIPS 검색·상세설명·전체청구항·도면 경로 응답 확인과 나머지 도구 정의 확인 구분. 현재 MCP는 공보 PDF 다운로드 도구 및 청크/벡터 생성 기능 없음; NAS에 서지83건, 기존 문헌6건·원문섹션10개·로컬 E5 임베딩 청크417개, PDF0건. 통합 검색→자동 NAS 호출, 공보 PDF 수집, 선택 문헌 상세/임베딩 지속 적재, 전체 원문 열람 및 사용자 인수는 P0 잔여. 이 변경은 문서·할일만, 운영/실데이터 변경 없음.
 
 - 2026-11-20 [P0-1~P0-5 **작업별 기술 설계서+실행 계획서 10개/통합 인덱스**](docs/mvp-implementation/INDEX.md) 작성. 설계별 실제 코드·응답 형식·신규 모듈 제안/API·DB 계약·작동 흐름·사전 차단·보안·장애 대응·세부 테스트·운영 적용/복구·완료 기준 정리. GitHub 기준 기존 증거 보존: 서지83건, 기존 본문6건/10섹션/417청크, 공보PDF0. WIPS backend 직접 호출 자격, PDF 공식 API/자격, 본문 ingest 필드 ABK/CLK 불일치 등을 선행 게이트로 구분. **문서/할일 목차만 갱신, 새 구현·NAS 운영 변경·PDF/원문 수집·배포·시험 수행하지 않음**. 독립 AI 검토 NOT_RUN_OPTIONAL.
+
+- 2026-11-20 [WIPS MyFolder MCP 별도 서비스 조사](docs/41-wips-myfolder-mcp-assessment.md): WIPS 공식 2026-10-12 베타 발표. 기존 검색 MCP와 달리 윈텔립스 MyFolder 기존 폴더/특허 식별자 조회용. 제3자 카탈로그는 읽기 전용 도구 `myfolder_list_folders`, `myfolder_get_folder_skeys` 명시(직접 호출/실제 응답 NOT RUN). 현재 소유 개인 플러그인 목록 wipsclip/NAS RAG, MyFolder 별도 연결/도구 미확인. 서지 신규 검색→NAS 자동 저장/공보 PDF 다운로드를 단독 해결하지 않음. P1 선택적 폴더 SKEY import 등록, 기존 P0-1 우선 그대로 유지. GitHub 문서 변경만, 플러그인 연결/운영 DB 변경 없음.

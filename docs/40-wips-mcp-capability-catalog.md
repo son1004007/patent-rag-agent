@@ -158,3 +158,6 @@
 - 참고 문서: [자동 보관/원문 PDF 요구사항](36-mvp-automatic-archive.md), [실제 83건 운영 적재](39-mvp-archive-100-live-acceptance.md), [MVP 전체 작업](../TASKS.md), [제공자·권리 정책](06-provider-policy.md).
 
 **이번 작업은 카탈로그/작업 목록 문서화만 수행하며 WIPS 재수집, 신규 본문·PDF 저장, 서버 변경, 신규 플러그인 등록 및 운영 배포는 수행하지 않는다.**
+
+## 별도 서비스: WIPS MyFolder MCP (기존 검색 28도구에 포함되지 않음)
+2026-11-20 WIPS 공식 발표 확인: [WIPS MyFolder MCP 조사/접속 가능성 및 NAS 통합 한계](41-wips-myfolder-mcp-assessment.md). 윈텔립스 MyFolder의 기존 폴더/SKEY 목록을 가져오는 별도의 읽기 전용 서비스로 안내되며, 공개 도구명 `myfolder_list_folders`, `myfolder_get_folder_skeys`는 제3자 카탈로그 기준(실사용 미검증). **WIPS 검색 결과를 MyFolder에 쓰거나 NAS에 자동 저장하는 기능, 공보 PDF 다운로드 기능을 의미하지 않는다.** 현재 도구/개인 플러그인에 MyFolder 연결 확인되지 않았고, 위 28개는 기존 WIPS 검색 MCP만의 카탈로그다.
