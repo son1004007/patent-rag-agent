@@ -28,6 +28,10 @@
 | [P0-4 전체 원문·공보 PDF 열람 — 실행 계획](docs/mvp-implementation/P0-4-plan.md) | 구현 AI/운영자 — 선행 점검·단계별 코드·시험·배포·인수 |
 | [P0-5 실사용 종단간 인수·복구 — 설계서](docs/mvp-implementation/P0-5-design.md) | 구현 AI — 기술 구성·API/DB 계약·위험·권한·오류 대응 |
 | [P0-5 실사용 종단간 인수·복구 — 실행 계획](docs/mvp-implementation/P0-5-plan.md) | 구현 AI/운영자 — 선행 점검·단계별 코드·시험·배포·인수 |
+| [평가·의사결정 통합 인덱스](docs/evaluation/INDEX.md) | 모든 사용자·AI — MVP 실증 후 두 가지 검증 작업, 실행·인수 순서 및 판단 기준 탐색 |
+| [44 MVP 가치·MCP/API/NAS 판단 기준](docs/44-mvp-evaluation-decision-criteria.md) | 사용자·개발자 — 근거 신뢰·추가 후보·반복 사용 효용·안전·GO/NO-GO 규칙 |
+| [45 EVAL-01 검색·근거 품질 비교 계획](docs/45-search-quality-comparison-plan.md) | 개발자·AI — WIPS 단독/NAS 단독/통합, 10문항·사람 라벨·동일 K·평가 기준·실행 절차 |
+| [46 EVAL-02 저장 자료 재사용 가치 계획](docs/46-reuse-value-verification-plan.md) | 개발자·AI — cold/warm, 실제 호출·추정 절감 분리, 비용/시간·품질 저하·신선도 통제 |
 | [43 MVP 진행·잔여 기능 구분 및 MCP/API 선택](docs/43-mvp-milestone-mcp-api-tradeoff.md) | 사용자·AI/개발자 — 1차 핵심 기능 실증 범위, 정식 인수/자동화 미완료, MCP·API·공보 PDF 권고 및 품질 평가 기준 |
 | [42 P0-1 ChatGPT WIPS→NAS Code Mode 연동 운영 인수](docs/42-mvp41-code-mode-gateway-archive.md) | ChatGPT/다른 AI/운영자 — 기존 WIPS 인증 재사용, 고정 Gateway 입력, 첫100건 저장, 83건 재사용, 17/17 테스트 및 잔여 제한 |
 | [41 WIPS MyFolder MCP 별도 기능·연결/자동저장 판단](docs/41-wips-myfolder-mcp-assessment.md) | 사용자/개발자/AI — 읽기 전용 폴더/SKEY 조회, 기존 WIPS와 차이, 현재 플러그인 상태 및 NAS 적용 범위 |

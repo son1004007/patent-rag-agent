@@ -2,6 +2,17 @@
 
 > 2026-11-19 최신 사용자 결정: 기업용 구축 등 확장 기능은 MVP 이후 백로그로 이동한다. 지금은 개인 ChatGPT + WIPS + NAS RAG 조합에서 실제 연구 질문을 끝까지 처리하는 최소 기능을 우선 완성한다. 이 파일이 실행 순서의 정본이다. [현재 검증 상태](CURRENT_STATE.md), [실측 이력](WORKS.md), [변경 전 계획](https://github.com/son1004007/patent-rag-agent/blob/5822b64649a867340d84fc321900fcec93c3a6ba/TASKS.md).
 
+## 2026-11-20 다음 실행 — 검색 품질·반복 재사용 가치 평가 (계획 완료, 실험 NOT RUN)
+
+[**평가 계획 통합 진입점**](docs/evaluation/INDEX.md) → [**의사결정 판단 기준**](docs/44-mvp-evaluation-decision-criteria.md) → 아래 EVAL-01/EVAL-02 계획을 순서대로 읽는다. 방금 문서화한 지표의 **정량 결과는 아직 측정되지 않았다**. 사용자의 실제 검토 [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31)과 별개로 임의 완료/긍정 평가 금지.
+
+- [x] **DECISION-01: MVP 1차 이후 WIPS MCP+NAS 유지/API 전환 판단 규칙 문서화** — 근거 정확성·직접 관련 추가 문헌·호출/시간/비용 절감·운영 복잡도·공보 PDF 필요성, 조건부 GO/LIMITED_GO/NO_GO/INCONCLUSIVE 초기 임계값. [문서](docs/44-mvp-evaluation-decision-criteria.md). **실측/최종 결론 NOT RUN**.
+- [x] **EVAL-01 실행 계획서 작성** — 동일 질문10개(기존 corpus 범위5+미보유 범위5), WIPS/NAS 각 top3, 통합 ≤6 고유 문헌, 사람 0/1/2 라벨·근거 검증/중복, corpus 공정성·권한/예산/복구. [계획](docs/45-search-quality-comparison-plan.md). **계획 문서 완료 / 실제 실험 NOT RUN**.
+- [ ] **EVAL-01 실제 검색 정확도/근거 비교 실행** — 사용자 허용 질문·공급자 호출 범위에서 read-only WIPS/NAS 검색, 수작업 정답 라벨링, 직접 관련 추가 후보·근거 오류·사용자 #31 피드백. **완료 기준:** 10문항 실측/원시 분모/근거·판정과 출처·비용 범위 보고, corpus in/out 분리.
+- [x] **EVAL-02 실행 계획서 작성** — 동일 질문 cold/warm-NAS, 실제 WIPS 호출수·가상 회피 호출수·실제 지연/사용자 완료 품질·신선도 표시 및 안전 차단. [계획](docs/46-reuse-value-verification-plan.md). **계획 문서 완료 / 실제 실험 NOT RUN**.
+- [ ] **EVAL-02 실제 반복 재사용 가치 검증** — EVAL-01의 질문·라벨·snapshot 기준, 첫 조회 vs NAS-only 반복(질문마다 최소2회), 외부 재호출 절감 주장과 DB 중복0 명확히 구분. **완료 기준:** 실제/추정 호출·지연·품질 분리 보고, 권리·신선도 보류, 최종 유지/축소 판단.
+- [ ] **평가 결과 기반 후속 개발 결정** — GO(품질/후보 이득)·LIMITED_GO(재사용 이득)·NO_GO·INCONCLUSIVE 가운데 실측·사용자 평가로 판정. 판단 전 API 전면 전환/신규 공보 PDF/대규모 RAG 추가 개발을 **자동 착수하지 않는다**. 사용자 지시가 새로 바뀌면 우선한다.
+
 ## 2026-11-20 MVP 핵심 기능 재분류 — 진행한 것 / 진행할 것
 
 [1차 핵심 기능 실증 현황·MCP vs API 비교 및 권고](docs/43-mvp-milestone-mcp-api-tradeoff.md)를 먼저 확인한다.
