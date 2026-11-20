@@ -2,6 +2,8 @@
 
 > **신규 MVP 실효성 검증 진입점:** [평가·의사결정 문서 인덱스](docs/evaluation/INDEX.md) → [판단 기준](docs/44-mvp-evaluation-decision-criteria.md) → [EVAL-01 품질](docs/45-search-quality-comparison-plan.md) → [EVAL-02 재사용](docs/46-reuse-value-verification-plan.md). 문서만 완료, 실험은 미실행.
 
+> **2026-11-20 다음 단계:** [MCP/API·NAS RAG 개발 투자 판단 기준](docs/44-mcp-rag-investment-decision.md) → [EV-01 정확도 / EV-02 반복 효익 설계·계획 인덱스](docs/validation/INDEX.md). 코드·실험은 아직 수행하지 않았으며 최신 순서는 [TASKS](TASKS.md)에 있습니다.
+
 > **2026-11-20 MVP 현황·기술 선택:** [진행한 기능 / 남은 기능 / WIPS MCP vs API](docs/43-mvp-milestone-mcp-api-tradeoff.md). 핵심 검색·비교·선택 문헌 RAG 실증 완료, 사용자 인수/추가 자동화·공보 PDF 보존은 별도.
 
 > **다른 채팅·AI가 이어서 구현할 때:** [MVP41 실제 WIPS 검색→NAS 저장 통합 사용법](docs/42-mvp41-code-mode-gateway-archive.md) · [P0 작업별 상세 설계서·실행 계획서 (P0-1~P0-5)](docs/mvp-implementation/INDEX.md) → [전체 문서 목차](DOC_INDEX.md) → [최신 작업 목록](TASKS.md). 설계 문서상의 신규 모듈은 실제 구현 완료가 아닙니다.

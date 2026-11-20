@@ -1,5 +1,7 @@
 # 개인 특허 RAG — 작업 단위 설계서·실행 계획서 인덱스
 
+> **2026-11-20 최신 순서:** 아래 P0-1~5는 기존 잔여 구현 설계로 보존한다. 지금 즉시 착수할 작업은 [DEC-RAG-01](../44-mcp-rag-investment-decision.md) → [EV-01·EV-02](../validation/INDEX.md) 가치 검증이다. 기존 아래 '다음에 착수' 설명은 과거 계획이며 EV 결과와 사용자 별도 필수 요구가 없으면 신규 확장을 우선하지 않는다.
+
 - 문서 ID: `MVP-IMPLEMENTATION-INDEX` / 작성·확인일: 2026-11-20
 - 대상: ChatGPT, Codex, 다른 repository-capable AI, 개발자·운영자
 - **이 문서를 작업 진입점으로 사용:** [전역 Control](https://github.com/son1004007/ai-agent-workflow-playbook/blob/main/CONTROL.md) → [저장소 AGENTS](../../AGENTS.md) → [CURRENT_STATE](../../CURRENT_STATE.md) / [TASKS](../../TASKS.md) → 이 인덱스 → 해당 작업 **설계서 → 실행 계획서 → 기존 코드/런타임 증거**.

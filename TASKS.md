@@ -13,6 +13,13 @@
 - [ ] **EVAL-02 실제 반복 재사용 가치 검증** — EVAL-01의 질문·라벨·snapshot 기준, 첫 조회 vs NAS-only 반복(질문마다 최소2회), 외부 재호출 절감 주장과 DB 중복0 명확히 구분. **완료 기준:** 실제/추정 호출·지연·품질 분리 보고, 권리·신선도 보류, 최종 유지/축소 판단.
 - [ ] **평가 결과 기반 후속 개발 결정** — GO(품질/후보 이득)·LIMITED_GO(재사용 이득)·NO_GO·INCONCLUSIVE 가운데 실측·사용자 평가로 판정. 판단 전 API 전면 전환/신규 공보 PDF/대규모 RAG 추가 개발을 **자동 착수하지 않는다**. 사용자 지시가 새로 바뀌면 우선한다.
 
+## 2026-11-20 최신 실행 우선순위 — EV-01/EV-02 투자 검증 먼저
+
+- **결정 기준:** [DEC-RAG-01](docs/44-mcp-rag-investment-decision.md) → [두 작업 설계·계획 인덱스](docs/validation/INDEX.md). 기존 P0-1~5 기능 확장 설계는 보존하되 아래 효용 검증 결과 이전에는 자동 확장하지 않는다.
+- [ ] **P0 EV-01:** WIPS 단독/NAS 단독/통합 검색의 5~10질문 품질·근거·보류·오추천 실측. [설계](docs/validation/EV-01-design.md) / [실행 계획](docs/validation/EV-01-plan.md). **문서 작성 완료, 실측 NOT RUN**.
+- [ ] **P0 EV-02:** cold/warm 반복 시 WIPS 호출/상세, 검토시간·근거·품질·비용 비교. [설계](docs/validation/EV-02-design.md) / [실행 계획](docs/validation/EV-02-plan.md). 20% 감소는 측정값 아닌 **사전 가설**. **문서 작성 완료, 실측 NOT RUN**.
+- [ ] **판단/인수:** 결과와 [사용자 평가 #31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 종합해 GO/HOLD/STOP/INCONCLUSIVE 기록. GO일 때만 승인된 신규 본문 자동적재와 공보 보존 우선순위 재평가. MyFolder는 중지 유지.
+
 ## 2026-11-20 MVP 핵심 기능 재분류 — 진행한 것 / 진행할 것
 
 [1차 핵심 기능 실증 현황·MCP vs API 비교 및 권고](docs/43-mvp-milestone-mcp-api-tradeoff.md)를 먼저 확인한다.

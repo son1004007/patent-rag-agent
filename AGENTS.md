@@ -52,3 +52,6 @@ WIPS 검색 반환 서지정보를 개인 NAS에 지속 보관하는 것을 사�
 
 ## 2026-11-20 최신 평가 우선순위 및 다른 AI 진입점
 개인 특허 RAG MVP 1차 기능은 범위 한정 실증 완료했지만 WIPS 단독 대비 **실제 효용**은 미판정. 다음 우선작업은 [평가 인덱스](docs/evaluation/INDEX.md) → [DECISION-01 판단 기준](docs/44-mvp-evaluation-decision-criteria.md) → [EVAL-01 검색 품질 비교 계획](docs/45-search-quality-comparison-plan.md) → [EVAL-02 반복 재사용 가치 계획](docs/46-reuse-value-verification-plan.md). WIPS만/기존 NAS만/통합의 corpus·후보 예산·근거 차이를 구분하고 인간 근거 확인 및 실제 WIPS 호출 vs counterfactual 절감 수치를 분리한다. 실제 질문·특허ID·원문·SKEY/credential은 공개 repo에 저장 금지. **계획 문서 작성 = 실제 평가/배포 완료가 아니며 #31 사용자 평가 대기**. MyFolder HOLD, 재시작·신규 수집·비용 정책 변경 없음.
+
+## 2026-11-20 최신 우선순위 — 효용 검증 먼저
+다음 작업은 [DEC-RAG-01](docs/44-mcp-rag-investment-decision.md) → [EV-01/EV-02 상세 설계·실행](docs/validation/INDEX.md) → TASKS. 기존 P0-1~5 문서는 유지하되 신규 전건 적재·PDF·통합 MCP 개발보다 검색 정확도/반복 사용 가치 판단을 먼저 실측한다. 서지83, 원문6/10, 청크417, PDF0 구분. 결과 없는 절감·정확도 주장을 하지 않으며 MyFolder HOLD 및 기존 권리·재시작·보안 경계 유지.

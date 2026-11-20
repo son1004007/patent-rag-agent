@@ -32,6 +32,12 @@
 | [44 MVP 가치·MCP/API/NAS 판단 기준](docs/44-mvp-evaluation-decision-criteria.md) | 사용자·개발자 — 근거 신뢰·추가 후보·반복 사용 효용·안전·GO/NO-GO 규칙 |
 | [45 EVAL-01 검색·근거 품질 비교 계획](docs/45-search-quality-comparison-plan.md) | 개발자·AI — WIPS 단독/NAS 단독/통합, 10문항·사람 라벨·동일 K·평가 기준·실행 절차 |
 | [46 EVAL-02 저장 자료 재사용 가치 계획](docs/46-reuse-value-verification-plan.md) | 개발자·AI — cold/warm, 실제 호출·추정 절감 분리, 비용/시간·품질 저하·신선도 통제 |
+| [44 MCP/API·NAS RAG 투자 판단 기준](docs/44-mcp-rag-investment-decision.md) | 사용자·AI — 품질·반복 효익에 따른 GO/HOLD/STOP 기준 |
+| [EV-01/EV-02 설계·실행 인덱스](docs/validation/INDEX.md) | 모든 AI — 다음 검증 작업, 진입 규칙, 의존관계 |
+| [EV-01 검색 품질 설계](docs/validation/EV-01-design.md) | 개발 AI — 3모드·평가 데이터·정확도·근거·오류 설계 |
+| [EV-01 검색 품질 실행 계획](docs/validation/EV-01-plan.md) | 개발 AI — 5~10질문·합성 시험·실제 시험·판정 절차 |
+| [EV-02 반복 가치 설계](docs/validation/EV-02-design.md) | 개발 AI — cold/warm, verified hit, 호출·검토시간·비용 설계 |
+| [EV-02 반복 가치 실행 계획](docs/validation/EV-02-plan.md) | 개발 AI — 재사용 효익 실측·오류·감도·후속 판단 절차 |
 | [43 MVP 진행·잔여 기능 구분 및 MCP/API 선택](docs/43-mvp-milestone-mcp-api-tradeoff.md) | 사용자·AI/개발자 — 1차 핵심 기능 실증 범위, 정식 인수/자동화 미완료, MCP·API·공보 PDF 권고 및 품질 평가 기준 |
 | [42 P0-1 ChatGPT WIPS→NAS Code Mode 연동 운영 인수](docs/42-mvp41-code-mode-gateway-archive.md) | ChatGPT/다른 AI/운영자 — 기존 WIPS 인증 재사용, 고정 Gateway 입력, 첫100건 저장, 83건 재사용, 17/17 테스트 및 잔여 제한 |
 | [41 WIPS MyFolder MCP 별도 기능·연결/자동저장 판단](docs/41-wips-myfolder-mcp-assessment.md) | 사용자/개발자/AI — 읽기 전용 폴더/SKEY 조회, 기존 WIPS와 차이, 현재 플러그인 상태 및 NAS 적용 범위 |
