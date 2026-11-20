@@ -126,3 +126,6 @@
 
 
 - 2026-11-20 **EVAL-02 10문항 실제 NAS Code Mode 검증 종료**: [실측/다중근거 인수](docs/evaluation/2026-11-20-eval02-full10-feature-grounding.md), [판정 코드](poc/eval02_live_read_adapter.mjs). 전 차례4문항+이번6문항 합쳐 Q01~Q04 기존자료 REUSE **4/10**, Q05~Q10 필수 근거 부족 HOLD **6/10**. 이번 6문항 실제 adapter 호출 NAS 검색12+상세18/WIPS0 (별도 진단 조회12+상세18). Q01 재검증 multi `requiredFeatures` 3개 모두 동일특허 요약/청구항 인용 일치, NAS 검색2+상세3/WIPS0. V8 격리 테스트 **45/45 PASS (기존16+adapter29)**; Node CI/NAS 서버 런타임 변경 미실시. 비용/지연 절감·독립 human gold·공보 현재 권리 확인 없음. 관련 없는 분야 추천 자동 차단은 **Code Mode 명시 어댑터 범위**에서만 성립하며 서버 플러그인 전체의 기본 차단은 아직 아님.
+
+
+- 2026-11-20 **WIPS MCP 최신 읽기 재확인**: [외부 설명용 익명 실측](docs/evaluation/2026-11-20-wips-mcp-read-smoke.md) — 현재 연결된 개인 ChatGPT WIPS MCP `get_patent_search_onlyengine` Boolean top2 2/2(제목·요약·대표청구항), `get_patent_ai_search` 388자 일반 기술 설명 KR top2 2/2, `get_patent_by_skey` 상세1/1 모두 `success=true`. **실제 고객사 계정/환경·서비스 통합 확인 NOT RUN**. 영속 저장/원문/PDF/DB·서비스/권한 변경 없음. 개인 PoC와 고객 프로젝트 완료 상태 혼동 금지.

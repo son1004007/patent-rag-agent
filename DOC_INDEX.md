@@ -14,6 +14,7 @@
 | [02 아키텍처](docs/02-architecture.md) | 개발자 — 구성·검색·적재 |
 | [03 데이터/API](docs/03-data-api.md) | 개발자 — DB·API |
 | [EVAL-01 실패 4문항 300자+ 질의 A/B 보완](docs/evaluation/2026-11-20-eval01-targeted-query-rewrite.md) | AI — 형광/난연/저온접합/SiC 재검색 24개 후보 및 청구항 재판정(사후 튜닝) |
+| [WIPS MCP 최신 개인 환경 읽기 3종 확인/외부 기술상태](docs/evaluation/2026-11-20-wips-mcp-read-smoke.md) | 외부 이해관계자/개발자 — Boolean 2, AI 2, 상세1 실측 PASS; 고객사 연동 미확인 및 PDF·권한 한계 |
 | [EVAL-02 10문항 NAS live adapter 총괄·다중근거 개선](docs/evaluation/2026-11-20-eval02-full10-feature-grounding.md) | 개발자/AI — 전체10문항 AI 재사용4/HOLD6, 추가6문항 실도구 12검색·18상세, Q01 다중섹션 근거, V8 합성45 PASS |
 | [EVAL-02 실제 NAS read-only AI 인용 게이트 인수](docs/evaluation/2026-11-20-eval02-live-read-adapter-acceptance.md) | AI/개발자 — 실제 연결 NAS 4문항 검색·상세·인용 일치 E2E, HOLD/FRESHNESS 안전, 운영 변경 없음 |
 | [EVAL-02 NAS read-only 어댑터](poc/eval02_live_read_adapter.mjs) · [29개 합성 테스트](poc/eval02_live_read_adapter.test.mjs) | 개발자·AI — search2/detail3 + AI review + 기존 정책 판정기, fail-closed 전용 흐름 |

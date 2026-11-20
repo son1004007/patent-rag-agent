@@ -150,3 +150,6 @@
 
 
 - [x] **EVAL-02 NAS live adapter 남은6문항 전부 실행 및 Q01 multi-evidence 개선** — [실측](docs/evaluation/2026-11-20-eval02-full10-feature-grounding.md), [코드](poc/eval02_live_read_adapter.mjs), [29 테스트](poc/eval02_live_read_adapter.test.mjs). 총10문항 관련자료4/근거부족6, 새6문항 search12/detail18·WIPS0, Q01 feature3 실제 PASS, 전체 V8 contract45 PASS. 다만 Node/운영 NAS 서버 배포·자동 전체 대화 적용은 아직 아님.
+
+
+- [x] **WIPS MCP 외부 현황 설명에 필요한 읽기 경로 3종 최신 확인** — [실측](docs/evaluation/2026-11-20-wips-mcp-read-smoke.md), 검색식2/2·AI 자연어388자 top2 2/2·상세조회1/1 `success=true`. 개인 연결 테스트 기준이며 고객 조직 환경 연동·실제 서비스 설치/권한·PDF/전체 기능 검증은 NOT RUN. 고객 전달 시 '기본 기능 시험 PASS, 실제 적용 별도 검증'으로 범위 제한.

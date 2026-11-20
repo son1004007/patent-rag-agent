@@ -121,3 +121,9 @@
 - 이전 EVAL02 실제 4문항에 이어 [나머지6문항(Q02,Q03,Q06,Q07,Q09,Q10)](docs/evaluation/2026-11-20-eval02-full10-feature-grounding.md) NAS MCP read-only `search2/detail3` 실제 어댑터 6회 수행: 12+18, WIPS0. Q02/Q03 REUSE, Q06/Q07/Q09/Q10 HOLD. 총10문항 Q01~04 REUSE4, Q05~10 HOLD6. 동일 질문 Top3 문헌·청크 순위 일치, 독립 fulltext hash 검산 미실시.
 - [라이브 어댑터](poc/eval02_live_read_adapter.mjs) `requiredFeatures`와 `featureEvidence`로 같은 문헌의 요약/대표청구항 근거를 섹션별로 여러 개 결속. Q01 기존 false HOLD에 대응해 봉지재·끝단·수분 차단 3특성의 출처 인용 검사 **실제 NAS search2+detail3 PASS**. 복수 요구 feature의 가짜 인용/누락/해시 불일치 차단 테스트6개 추가.
 - 기존16 + 신규 adapter29 = **V8 Code Mode 합성/계약 45 PASS**. Node/CI·운영 NAS MCP 서버/DB 변경, 권한 확대, 원문/PDF/벡터 신규 저장 미실행. 통제 WIPS COLD 비교·원가·end-to-end 지연 ROI는 INCONCLUSIVE.
+
+
+## 2026-11-20 WIPS MCP 개인 테스트 계정 read-only smoke 검증
+
+- [실제 3개 MCP 읽기 확인](docs/evaluation/2026-11-20-wips-mcp-read-smoke.md): 검색식2건 PASS, 388자 KR AI 검색2건 PASS, WIPS 반환 문헌 상세 제목/요약/청구항 1건 PASS. 호출 수3, 오류0. 실제 원 응답·문헌ID/초록/청구항·고객 정보는 공개 git에 보관하지 않음.
+- 기술상 결론: **개인 환경에서 WIPS MCP 기본 검색·조회 사용 가능**. 고객 계정 권한/망/서비스 백엔드 연동, 공급사 PDF 원본·신규 영속 저장 및 상용 운영 인수 미확인. 별도 NAS RAG 실증을 고객사 연동 완료로 주장하지 않는다.
