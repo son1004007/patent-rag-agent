@@ -150,3 +150,9 @@
 - [기록](docs/evaluation/2026-11-21-eval03-p0-1-wips-search-result-display.md).
 
 - **실제 후속 두 분기 연동**: 수정 Code Mode 소스·현 NAS_RAG/WIPS 실도구로 Q01 로컬 검색2·상세3·WIPS0, Q06 로컬 검색2·상세3·WIPS1 및 후보3건 네 필드·절단 메타데이터 반환 PASS. 공급자 원문/내부 식별자 로그 공개 안 함. Code Mode 요청시만 동작하며 별도 운영 서버 배포 아님.
+
+## 2026-11-21 EVAL-03 화면 P0-2 실연동
+
+- [선택 문헌 WIPS 상세 조회](poc/eval03_wips_detail.mjs): P0-1 출력 `country/publicationNumber/documentKind`를 이용, `get_patent_spec_text` 상세설명 및 청구항 원문 2회 읽기, 일치 문헌 검사 후 텍스트만 페이지 단위 반환.
+- V8 contract 기존70 + 신규18=**88/88 PASS**. 실제 WIPS 공개 기술 주제 검색 top1 선택; 실제 상세설명/전체 청구항 조회 2회, 연속 다음 페이지 2회 추가. 정제 텍스트27923자, 청구항8개, 1800자 2페이지 인접 offset 정상. WIPS SKEY 및 원문은 GitHub에 기록/저장 안 함.
+- 운영/배포: **읽기 전용 Code Mode 실증**, Node CI·서버 단일 MCP 도구 설치·NAS/DB·고객환경 변경 NOT RUN. 사용자 제안 95% 임계값 미적용, MyFolder HOLD 유지. [세부 보고](docs/evaluation/2026-11-21-eval03-p0-2-selected-wips-detail.md).

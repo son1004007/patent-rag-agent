@@ -136,3 +136,5 @@
 - 2026-11-21 **EVAL-03 화면 P0-1 WIPS 후보 표시**: [구현 및 테스트](docs/evaluation/2026-11-21-eval03-p0-1-wips-search-result-display.md). fallback top3 결과의 문헌번호·명칭·요약·대표청구항을 길이 제한/누락·절단 표기와 함께 반환. 공급자 SKEY·NAS 원문/ID 미노출. 기존 AI 근거 분기 불변, 95% 유사도 기준 미적용. V8 합성 총 70 PASS, Node CI/신규 코드 운영 서비스 배포 미실행.
 
 - 2026-11-21 **화면 P0-1 수정 라우터 실제 양 소스 E2E PASS(추가 검증)**: 실제 Q01 NAS search2/detail3→NAS-only/WIPS0; Q06 NAS search2/detail3→WIPS1, 특허후보3건의 문헌번호·명칭·요약·대표청구항/절단 상태 실제 반환 확인, SKEY 미출력. [근거](docs/evaluation/2026-11-21-eval03-p0-1-wips-search-result-display.md). Code Mode 70/70 V8 계약+실제 두 분기, Node CI/단일 서비스 전역 설치 NOT RUN. 모든 운영 변경 없음.
+
+- 2026-11-21 **EVAL-03 화면 P0-2 선택 WIPS 문헌 상세/전체 청구항 실제 조회 PASS**: [코드](poc/eval03_wips_detail.mjs), [실측 보고](docs/evaluation/2026-11-21-eval03-p0-2-selected-wips-detail.md). 공개 문헌번호 기반 `get_patent_spec_text` 상세설명+전체 청구항 읽기 2종, 반환 문헌번호·국가 일치, HTML 제거·offset 페이지, 실제 한 문헌 정제 상세27923자/청구항8개, 2페이지 연속조회 정상. 기존 테스트70+신규18=Code Mode V8 88 PASS, Node CI NOT RUN. 종전 화면 P0-1 유지. 본 단계는 **화면 P0-2**(이전 PDF 수집 P0-2 별개). 새 상시 MCP/서버 배포·DB/권한/벡터/공보 PDF/요금/95% 기준 변경 없음.

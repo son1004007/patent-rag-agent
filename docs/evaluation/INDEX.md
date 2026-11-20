@@ -85,3 +85,7 @@ flowchart TD
 ## 12. EVAL-03 ChatGPT 요청형 두 MCP 실제 분기 연결 (2026-11-20)
 
 [라이브 NAS 우선/근거 없을 때 WIPS 보완 검색](2026-11-20-eval03-on-demand-nas-wips-router.md) / [Code Mode 라우터](../../poc/eval03_patent_router.mjs) / [14 테스트](../../poc/eval03_patent_router.test.mjs). Q01 NAS 근거 승인→WIPS0, Q06 NAS 근거 보류→WIPS1 top3. 기존 정책16+gate29+router14=V8 **59 PASS**. NAS 오류는 '없음'으로 처리하지 않음. **전체 문헌 DB 정확 보유 여부 확인이나 상시 서버 라우터 자동 설치가 아닌 현재 ChatGPT on-demand 명시 경로 검증**. 신규 쓰기·원문/공보·권한·운영 서비스 변경 없음.
+
+## 2026-11-21 EVAL-03 화면 P0-2 — 선택 문헌 WIPS 상세 조회
+
+[실제 시험 및 실행 방법](2026-11-21-eval03-p0-2-selected-wips-detail.md), [코드](../../poc/eval03_wips_detail.mjs). 검색 결과에서 공개 문헌번호 선택→WIPS `dtl_desc` 및 `all_claim` 읽기·페이지 분할. 실제 WIPS 청구항8개, 상세설명 정제27923자, 이어 읽기 PASS; 이전까지 Code Mode V8 회귀 총88 PASS. 저장·서비스 재시작·전체 자동 MCP 설치 없음. 기존 PDF P0-2 별개 미완료.

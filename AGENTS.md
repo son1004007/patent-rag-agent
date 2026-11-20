@@ -68,3 +68,7 @@ WIPS 일반 키워드/Boolean 검색식(`get_patent_search_onlyengine`)과 AI �
 
 ## 2026-11-20 EVAL-03 ChatGPT 내 NAS 우선/WIPS 보완 라우터
 [실제 두 경로 인수](docs/evaluation/2026-11-20-eval03-on-demand-nas-wips-router.md) 및 [Code Mode 라우터](poc/eval03_patent_router.mjs). Q01은 NAS 재사용(검색2·상세3/WIPS0), Q06은 NAS 직접 근거 부족 시 WIPS 검색(검색2·상세3/WIPS1). 기존 16+29+새14=**V8 계약59 PASS**. WIPS 키 이동·서비스 권한·원문/PDF/벡터/서지 쓰기·재시작 없이 기존 두 MCP를 ChatGPT에서 명시적 조합. NAS 벡터 top3는 **정확한 전체 문헌 보유 여부 증거 아님**; `INSUFFICIENT_DIRECT_EVIDENCE`에서만 WIPS 전환, 읽기 오류/불안정/인용 불일치는 HOLD. 서버 상시 단일 MCP 자동 등록은 **NOT RUN/NOT IMPLEMENTED**. 사용자에게 다른 채팅 전역 동작이나 고객사 연동 완료라고 주장하지 않는다.
+
+## 2026-11-21 EVAL-03 화면 P0-2 선택 WIPS 특허 상세 조회
+
+[읽기 전용 상세 조회 구현](poc/eval03_wips_detail.mjs) / [실제 시험](docs/evaluation/2026-11-21-eval03-p0-2-selected-wips-detail.md). 공개 문헌번호·국가·문헌종류로 `get_patent_spec_text(dtl_desc/all_claim)` 2회 호출, 동일 문헌 검증, 최대4000자 평문 페이지·nextOffset·전체 청구항 번호 조회. 코드 V8 88/88 계약 PASS, WIPS 실제 8개 청구항·상세설명 27923자·2페이지 조회 PASS. 기존 NAS/WIPS AI 분기 불변, 95% 미적용. 이것은 이전 대화의 **화면 P0-2**이며 전역 기존 P0-2인 공보 PDF 수집은 미완료. 새 MCP 도구 등록·NAS 운영 적용·원문 저장/청킹·고객사 배포 없음.

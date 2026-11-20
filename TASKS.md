@@ -161,3 +161,6 @@
 - [x] **EVAL-03 화면 P0-1 — WIPS 검색 결과 표시**: [검증](docs/evaluation/2026-11-21-eval03-p0-1-wips-search-result-display.md). WIPS top3 문헌번호·명칭·요약·대표청구항 표시, 누락/절단 상태 및 미승인 필드 분리. 기존 서지 NAS 자동 저장 P0-1과 구별. Code Mode V8 70 PASS, 95% 미적용, NAS 운영 불변.
 
 - [x] **화면 P0-1 수정 라우터 실제 연결 재검증** — Q01 NAS-only(WIPS0), Q06 WIPS fallback 1회/특허3건 4필드/절단 메타데이터 실제 반환 PASS. [기록](docs/evaluation/2026-11-21-eval03-p0-1-wips-search-result-display.md). 전역 MCP 배포 및 PDF·원문/벡터 자동 적재는 별도.
+
+- [x] **EVAL-03 화면 P0-2 — 선택한 WIPS 특허의 상세설명과 전체 청구항 페이지 조회** (2026-11-21): [구현](poc/eval03_wips_detail.mjs), [실측](docs/evaluation/2026-11-21-eval03-p0-2-selected-wips-detail.md). 공개 문헌번호·국가·종류로 WIPS spec_text 2섹션, 페이지 커서/청구항 번호/실제 언어·문헌 대조. 실제 본문27923자·청구항8건·연속2페이지 PASS, V8 88/88. 기존 PDF 확보 작업 P0-2는 **미완료** 유지, 서버 신규 MCP 등록/고객배포 없음, 95% 미적용.
+- [ ] **EVAL-03 화면 P0-3 — NAS RAG 성공 분기와 WIPS 상세 반환의 사용자용 동일 구조·최종 상세조회 인수**: 현재 NAS 성공 분기는 판정만 출력하고 선택 문헌·인용을 반환하지 않음. NAS 구매원문 외부 제공 한도(3건×300자) 유지하며 결과 통합·보류/오류·이름/번호/근거 등 표시 양식·실사용 재현 시험; 전역 MCP 등록 또는 DB 변경은 별도 승인/보안검증 필요.
