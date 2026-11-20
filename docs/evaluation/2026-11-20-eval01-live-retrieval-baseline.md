@@ -61,3 +61,8 @@
 5. 실제 WIPS 3개 초기 실패는 재현 원인을 확인하지 못함. 자동 무한 재시도 금지, 운영 검색 실패율/재호출 정책은 별도 지표로 추적.
 
 **최종 판정:** `RETRIEVAL_AND_EXCERPT_AVAILABILITY=PASS`, `HUMAN_RELEVANCE_AND_CITATION_ACCURACY=NOT_RUN`, `EVAL01_FINAL=INCONCLUSIVE`. 기존 기술사의 데이터·공용 서비스 변경 없음.
+
+
+## 후속 AI 예비 채점
+
+같은 날짜 사용자 지시에 따라 WIPS/NAS 읽기 도구로 자료를 다시 확인하고 별도 [AI 예비 채점 보고서](2026-11-20-eval01-ai-provisional-score.md)를 작성했다. 초기 검색 원응답과 byte-level 일치는 검증하지 못했으므로 원래의 '사람 라벨 0/10'은 변경하지 않는다. 공식 품질 판정은 계속 INCONCLUSIVE이다.

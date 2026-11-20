@@ -109,3 +109,6 @@
 
 
 - 2026-11-20 **EVAL-01 10문항 읽기 전용 검색 실측**: [실행 결과](docs/evaluation/2026-11-20-eval01-live-retrieval-baseline.md). IN5/OUT5, 최종 WIPS/NAS 10/10 검색 성공(초기 WIPS 3 실패→각1회 재시도 정상), 두 도구 각각 총30 반환·ID exact 중복2→58 고유 후보, WIPS ABK/CLK 30/30·NAS excerpt 30/30. NAS 별도 get_patent 5/5·각 근거3·hash 존재 확인. **사람 실제 정답 라벨 0/10, 검색 정확도·인용 일치 검증·최종 GO/NO_GO INCONCLUSIVE**. 신규 원문/벡터·PDF/서지 쓰기·서비스 재시작·권한 변경 없음. 운영 DB 불변성 별도 직접 조회 NOT RUN.
+
+
+- 2026-11-20 **EVAL-01 사용자 요청 AI 예비 채점 10/10**: [집계](docs/evaluation/2026-11-20-eval01-ai-provisional-score.md) — 읽기-only 재조회 후 요약·대표청구항 및 일부 NAS 원문 발췌를 AI가 직접 판정. WIPS **1/30(3.3%)**, NAS **5/30(16.7%)** 직접관련 임시 등급. IN에서는 NAS5/15, WIPS1/15; OUT에서는 모두0/15. `AI_PROVISIONAL`이며 **공식 gold label·독립 평가·WIPS 검색식 동등성·발명 패밀리 중복 확인 불가, FORMAL_EVAL01=INCONCLUSIVE**. 신기능·저장/재기동/권한 변경 없음.

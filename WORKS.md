@@ -88,3 +88,9 @@
 
 - [10문항 WIPS/NAS 반환 및 통합 후보 실측](docs/evaluation/2026-11-20-eval01-live-retrieval-baseline.md): 공개 기술 주제 5 IN / 5 OUT, WIPS 및 NAS 10/10 결과 top3, 실제 문헌 ID exact 중복2/고유58, WIPS 국문 요약/대표청구항 30/30·NAS excerpt 30/30, NAS get_patent 5/5 근거3개씩·hash 반환. WIPS 일시 실패3은 각1회 retry 성공, 과거 기동/restart 불필요. 신규 원문/PDF/벡터 적재 없음.
 - 사용자의 관련성 0/1/2 및 구체 특허·원문 대조는 수행/확정하지 않음. 따라서 P@3, 근거 정확도/오추천·투자 GO 판정은 **NOT RUN / INCONCLUSIVE**. 원문·실문헌 ID/실제 검색식/비밀은 공개 GitHub 미기록, 후속 사람 평가를 위해 비공개 자료 보관권리 확인 필요.
+
+
+## 2026-11-20 EVAL-01 AI 후보 관련성 직접 채점
+
+- 사용자가 AI 자체 채점을 요청. 같은 질문·검색식을 연결된 WIPS/NAS read-only 도구로 다시 읽고, 요약/대표청구항 및 선정된 NAS `get_patent` 원문 일부를 확인해 0/1/2 등급 부여. **비식별 결과** [보고서](docs/evaluation/2026-11-20-eval01-ai-provisional-score.md): WIPS 직접 1/30, NAS 직접 5/30, IN 분야 편향/OUT 0/15, Q04 중복 계열 추정. 실제 문헌 ID·특허 원문·검색식은 공개 GitHub 저장하지 않음.
+- 사람의 gold-label 및 전체 원문 대조는 NOT RUN. 초기 vs 추가 읽기의 동일성 및 WIPS 검색식 순위 편향 미통제. 정확도 우위/GO 판정하지 않고 EVAL-01 `AI_PROVISIONAL_SCORED / OFFICIAL_INCONCLUSIVE`로 유지.

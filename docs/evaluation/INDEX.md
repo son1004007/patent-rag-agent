@@ -11,7 +11,7 @@
 | ID | 우선순위 | 파일 | 현재 상태 / 목표 |
 |---|---|---|---|
 | DECISION-01 | **P0 의사결정 기준** | [MVP 유지·MCP/API·NAS 선택 기준](../44-mvp-evaluation-decision-criteria.md) | **문서 작성 완료**, 실측 판정 전. 관련성·근거 정확도 우선, 추가 후보, 호출비용/시간·복잡도·공보 PDF 필요성 순서 |
-| EVAL-01 | **P0 1순위** | [검색 정확도·근거 비교 실행 계획](../45-search-quality-comparison-plan.md) / [10문항 검색 실측](2026-11-20-eval01-live-retrieval-baseline.md) | **검색·통합 후보/근거 필드 10문항 실제 PASS / 사람 근거·정확도 라벨 0/10 → 최종 INCONCLUSIVE**. WIPS 단독 / NAS 단독 / 양쪽 통합, 실제 연구질문 10개 목표(1차5+추가5), 사람 검증 라벨과 중복 후보 |
+| EVAL-01 | **P0 1순위** | [검색 정확도·근거 비교 실행 계획](../45-search-quality-comparison-plan.md) / [10문항 검색 실측](2026-11-20-eval01-live-retrieval-baseline.md) | **검색 실측10/10 PASS · [AI 예비 채점10/10](2026-11-20-eval01-ai-provisional-score.md) · 공식 gold-label 0/10, 최종 INCONCLUSIVE**. WIPS 단독 / NAS 단독 / 양쪽 통합, 실제 연구질문 10개 목표(1차5+추가5), 사람 검증 라벨과 중복 후보 |
 | EVAL-02 | **P0 2순위** | [저장 자료 재사용 가치 검증 실행 계획](../46-reuse-value-verification-plan.md) | **PLAN READY / NOT RUN**. 같은 질문 cold vs warm-NAS, 실제 WIPS 호출·시간/근거 차이, 반복 WIPS 호출 절감 추정과 실측 구분 |
 
 **전제 설명:** [MVP 완료 범위·API vs MCP 비교](../43-mvp-milestone-mcp-api-tradeoff.md), [기존 양 소스 후보 비교](../25-mvp04-candidate-comparison.md), [실제 본문 적재](../35-mvp03-actual-ingest-acceptance.md), [서지83건](../39-mvp-archive-100-live-acceptance.md), [실사용 시험](../31-mvp06-user-trial.md). P0-1~P0-5의 미구현 기능별 원래 상세 설계는 [기존 구현 인덱스](../mvp-implementation/INDEX.md)에서 찾는다.
@@ -58,3 +58,7 @@ flowchart TD
 ## 6. EVAL-01 첫 실제 검색·근거 필드 확인 (2026-11-20)
 
 [10개 비식별 문항 WIPS/NAS/통합 결과 및 실패 원장](2026-11-20-eval01-live-retrieval-baseline.md) — 두 소스 10/10, 3+3×10, 동일 문헌 중복2/통합 고유58, WIPS 요약·대표청구항 및 NAS 발췌30/30. **사용자 0/1/2 관련성 라벨이 없으므로 정식 검색 정확도 P@3·근거 정확도·사업 효용 및 사용자 #31 인수는 미판정.** 다른 AI는 이 보고서와 비공개 원응답 존재 범위를 먼저 확인하고 평가를 이어간다.
+
+## 7. 2026-11-20 AI 직접 채점(사람 정답과 구분)
+
+[AI 예비 채점 결과](2026-11-20-eval01-ai-provisional-score.md): 총 WIPS 1/30(3.3%), NAS 5/30(16.7%)의 직접 관련 판정. 두 출처 Top3 검색식 및 corpus가 동등하지 않고 IN 분야에 NAS가 편향되어 있으며 일부 같은 발명 패밀리가 중복될 가능성이 있으므로 이 수치를 업체 또는 제품의 공인 성능으로 인용하지 않는다. `AI_PRELIMINARY`는 사용자/전문가 0/1/2 gold-label을 대체하지 못하며 실측 최종 GO/NO-GO는 INCONCLUSIVE.
