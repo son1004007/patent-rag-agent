@@ -89,3 +89,7 @@ flowchart TD
 ## 2026-11-21 EVAL-03 화면 P0-2 — 선택 문헌 WIPS 상세 조회
 
 [실제 시험 및 실행 방법](2026-11-21-eval03-p0-2-selected-wips-detail.md), [코드](../../poc/eval03_wips_detail.mjs). 검색 결과에서 공개 문헌번호 선택→WIPS `dtl_desc` 및 `all_claim` 읽기·페이지 분할. 실제 WIPS 청구항8개, 상세설명 정제27923자, 이어 읽기 PASS; 이전까지 Code Mode V8 회귀 총88 PASS. 저장·서비스 재시작·전체 자동 MCP 설치 없음. 기존 PDF P0-2 별개 미완료.
+
+## 2026-11-21 EVAL-03 화면 P0-3 — 두 MCP 공통 검색/상세 표시
+
+[실제 양 경로 인수 및 테스트](2026-11-21-eval03-p0-3-unified-user-lookup.md) / [공통 조회 코드](../../poc/eval03_unified_display.mjs) / [18 신규 테스트](../../poc/eval03_unified_display.test.mjs). NAS AI 검증 후보1/발췌3, WIPS 후보3/선택 문헌 상세·청구항/다음 페이지 PASS. V8 기존88+신규18=**106 PASS**. 운영 NAS 권한·DB 및 상시 MCP 설치 변경 없음. **기존 P0-3 원문/벡터 자동 증분 적재 미완료**.

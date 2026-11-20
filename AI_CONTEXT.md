@@ -76,3 +76,5 @@
 - 2026-11-21 **EVAL-03 화면 P0-1 WIPS 후보 표시**: [구현 및 테스트](docs/evaluation/2026-11-21-eval03-p0-1-wips-search-result-display.md). fallback top3 결과의 문헌번호·명칭·요약·대표청구항을 길이 제한/누락·절단 표기와 함께 반환. 공급자 SKEY·NAS 원문/ID 미노출. 기존 AI 근거 분기 불변, 95% 유사도 기준 미적용. V8 합성 총 70 PASS, Node CI/신규 코드 운영 서비스 배포 미실행.
 
 - 2026-11-21 **EVAL-03 화면 P0-2** [실증](docs/evaluation/2026-11-21-eval03-p0-2-selected-wips-detail.md). WIPS 표시 후보 공개 번호/국가/종류 선택→`get_patent_spec_text(dtl_desc,all_claim)` 순차 페이지 읽기(코드 Promise.all 2 read). 원문번호/국가 검증, 단일 페이지 기본3000·최대4000자, 청구항 번호 유지. 실제 WIPS 설명 정제 텍스트27923자/청구항8개/연속2페이지 PASS. Code Mode V8 총88/88. **서버/고객사 미배포**, NAS 저장 없음, 별개 기존 PDF P0-2 미완료.
+
+- 2026-11-21 **EVAL-03 화면 P0-3 공통 결과/선택 상세**: [실연동](docs/evaluation/2026-11-21-eval03-p0-3-unified-user-lookup.md), [코드](poc/eval03_unified_display.mjs). NAS ground truth 아님/AI self-review로 검증된 **선택1건 발췌3**와 WIPS fallback 후보3을 `rank/source/country/publicationNumber/documentKind/title/abstract/representativeClaim/evidence/detailLevel/truncated` 공통 필드로 반환. Q01 NAS2+detail3/WIPS0; Q06 NAS2+detail3/WIPS search1+spec2, 이어서 spec2 추가해 페이지 연속 PASS. V8 106 계약 PASS, Node CI/상시 MCP 신규 도구 미실행, 기존 PDF/벡터 P0-3 미구현·운영 불변.

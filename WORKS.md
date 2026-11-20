@@ -156,3 +156,9 @@
 - [선택 문헌 WIPS 상세 조회](poc/eval03_wips_detail.mjs): P0-1 출력 `country/publicationNumber/documentKind`를 이용, `get_patent_spec_text` 상세설명 및 청구항 원문 2회 읽기, 일치 문헌 검사 후 텍스트만 페이지 단위 반환.
 - V8 contract 기존70 + 신규18=**88/88 PASS**. 실제 WIPS 공개 기술 주제 검색 top1 선택; 실제 상세설명/전체 청구항 조회 2회, 연속 다음 페이지 2회 추가. 정제 텍스트27923자, 청구항8개, 1800자 2페이지 인접 offset 정상. WIPS SKEY 및 원문은 GitHub에 기록/저장 안 함.
 - 운영/배포: **읽기 전용 Code Mode 실증**, Node CI·서버 단일 MCP 도구 설치·NAS/DB·고객환경 변경 NOT RUN. 사용자 제안 95% 임계값 미적용, MyFolder HOLD 유지. [세부 보고](docs/evaluation/2026-11-21-eval03-p0-2-selected-wips-detail.md).
+
+## 2026-11-21 EVAL-03 화면 P0-3 공통 조회 실제 인수
+
+- [구현](poc/eval03_unified_display.mjs)에서 NAS 리뷰 근거 승인 시 동일 프로세스 선택 콜백으로 문헌1건/최대3개 발췌만 공통 출력; WIPS fallback top3 동일 반환, 선택 문헌만 기존 P0-2 읽기로 상세설명·전체 청구항 페이지 연결.
+- [실측](docs/evaluation/2026-11-21-eval03-p0-3-unified-user-lookup.md): NAS 양성 Q01 search2/detail3/WIPS0, 로컬 발췌3 검증, 상세 EXCERPT_ONLY. NAS 직접관련 부족 Q06 search2/detail3/WIPS search1/spec2, WIPS 후보3/상세27923코드포인트/청구항8. 선택 문헌 2페이지 연속 검증은 같은 WIPS 검색1회 결과에서 추가 spec2 호출. 오류/무결성 장애 실제 주입 없으며 계약 테스트 106/106 V8 PASS.
+- 변경 영향: adapter의 명시적 onAccepted 선택 callback만 추가, 기본 반환 메타데이터와 fail-closed 유지; 기존 AI 관련성·95% 미적용·공식 PDF/원문/벡터/DB/인증/터널/타서비스 변경 없음. Node CI/서버 상시 MCP 등록 미실행.

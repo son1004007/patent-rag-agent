@@ -14,6 +14,8 @@
 | [02 아키텍처](docs/02-architecture.md) | 개발자 — 구성·검색·적재 |
 | [03 데이터/API](docs/03-data-api.md) | 개발자 — DB·API |
 | [EVAL-01 실패 4문항 300자+ 질의 A/B 보완](docs/evaluation/2026-11-20-eval01-targeted-query-rewrite.md) | AI — 형광/난연/저온접합/SiC 재검색 24개 후보 및 청구항 재판정(사후 튜닝) |
+| [EVAL-03 화면 P0-3 NAS/WIPS 통합 검색·선택 상세 실증](docs/evaluation/2026-11-21-eval03-p0-3-unified-user-lookup.md) | AI/개발자 — NAS 근거3개와 WIPS top3 공통 필드, 실제 두 소스+상세 페이지 E2E, Code Mode V8 106 PASS |
+| [EVAL-03 화면 P0-3 통합 결과 코드](poc/eval03_unified_display.mjs) · [18개 테스트](poc/eval03_unified_display.test.mjs) | AI/개발자 — `lookupPatentForUser`, `getUnifiedPatentDetail`, 기존 라우터/reader 연결 |
 | [EVAL-03 화면 P0-2 WIPS 선택 문헌 상세/전체 청구항 페이지 조회](docs/evaluation/2026-11-21-eval03-p0-2-selected-wips-detail.md) | AI/개발자 — 문헌번호 선택, 실제 두 섹션 조회, 페이지/청구항/언어, V8 88 테스트 및 실도구 PASS |
 | [EVAL-03 화면 P0-2 코드](poc/eval03_wips_detail.mjs) · [18개 테스트](poc/eval03_wips_detail.test.mjs) | AI/개발자 — `getSelectedWipsPatentDetail` 공개 식별자/동일문헌 검사·평문페이지, 별도 MCP 설치 없음 |
 | [EVAL-03 화면 P0-1 WIPS 후보 4필드 반환](docs/evaluation/2026-11-21-eval03-p0-1-wips-search-result-display.md) | AI/개발자 — 검색 결과 표시 필드, 민감 필드 차단, V8 70 테스트 |

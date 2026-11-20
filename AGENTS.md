@@ -72,3 +72,7 @@ WIPS 일반 키워드/Boolean 검색식(`get_patent_search_onlyengine`)과 AI �
 ## 2026-11-21 EVAL-03 화면 P0-2 선택 WIPS 특허 상세 조회
 
 [읽기 전용 상세 조회 구현](poc/eval03_wips_detail.mjs) / [실제 시험](docs/evaluation/2026-11-21-eval03-p0-2-selected-wips-detail.md). 공개 문헌번호·국가·문헌종류로 `get_patent_spec_text(dtl_desc/all_claim)` 2회 호출, 동일 문헌 검증, 최대4000자 평문 페이지·nextOffset·전체 청구항 번호 조회. 코드 V8 88/88 계약 PASS, WIPS 실제 8개 청구항·상세설명 27923자·2페이지 조회 PASS. 기존 NAS/WIPS AI 분기 불변, 95% 미적용. 이것은 이전 대화의 **화면 P0-2**이며 전역 기존 P0-2인 공보 PDF 수집은 미완료. 새 MCP 도구 등록·NAS 운영 적용·원문 저장/청킹·고객사 배포 없음.
+
+## 2026-11-21 EVAL-03 화면 P0-3 통합 검색·상세 결과 실검증
+
+[공통 read-only 표시 구현](poc/eval03_unified_display.mjs)·[실제 NAS/WIPS 인수](docs/evaluation/2026-11-21-eval03-p0-3-unified-user-lookup.md). NAS 직접 근거가 충족되면 기존 구매코퍼스의 **검증한 문헌1건/최대3개 300자 발췌**만 공통 결과 형식으로 반환; WIPS 후보 top3도 같은 필드로 표시하고 선택 문헌은 기존 P0-2 spec-text 페이지로 상세조회. 실제 Q01 NAS search2/get3/WIPS0 및 Q06 NAS search2/get3/WIPS search1+spec2, WIPS 2페이지 이어 읽기 PASS. 기존16+29+25+18+신규18=**V8 106/106 PASS**, Node CI/운영 NAS·상시 MCP 배포 미실행. **화면 P0-3과 기존 P0-3 원문·벡터 자동 증분 적재는 별개**이고 후자는 미완료. AI 분기/95% 미적용/MyFolder HOLD/권한·서버·DB 불변.
