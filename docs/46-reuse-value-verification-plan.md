@@ -1,7 +1,7 @@
 # EVAL-02 실행 계획서 — NAS 보관 자료 반복 사용의 시간·호출·품질 가치 검증
 
 - 작업 ID: **EVAL-02**, 우선순위 **P0 / 의사결정 검증**(EVAL-01 질문·라벨 스키마 재사용)
-- 상태: **계획서 작성 완료 / 반복 실험·비용 실측·운영 변경 NOT RUN**
+- 상태: **warm NAS 10문항×2 및 AI 근거 확인 실측 PASS / 동일조건 COLD·실제 비용·운영 변경 NOT RUN**
 - 목적: 이미 보관한 특허를 재사용했을 때 WIPS MCP **추가 호출을 줄이고**, 사용자에게 충분한 근거를 더 빨리 제공하는지 확인한다. 비용 절감은 **직접 관측값과 counterfactual 추정**으로 나누어 기록한다.
 - 선행: [판단 기준](44-mvp-evaluation-decision-criteria.md), [품질 비교 계획](45-search-quality-comparison-plan.md), [실제 서지 보관](39-mvp-archive-100-live-acceptance.md), [선택문헌 원문 적재](35-mvp03-actual-ingest-acceptance.md), [MVP41 검색→서지 보관](42-mvp41-code-mode-gateway-archive.md), [평가 인덱스](evaluation/INDEX.md).
 
@@ -48,7 +48,7 @@
     "nas_search_calls_actual": 1,
     "nas_get_patent_calls_actual": 3,
     "elapsed_ms_measured": 850,
-    "relevant_evidence_count_human_verified": 2,
+    "relevant_evidence_count_ai_reviewed": 2,
     "unsupported_recommendations": 0,
     "cache_read_success": true,
     "freshness_status": "HISTORICAL_SCOPE"
@@ -75,7 +75,7 @@
 | R4. 안전한 실증 | 재사용 결과가 없거나 근거가 부족한 질문은 `NEEDS_WIPS`/`INSUFFICIENT_EVIDENCE`, 권리·최신성 요구는 `STALE_OR_FRESHNESS_UNVERIFIED`. 무리하게 NAS로만 답하지 않음 | 허위 완전성 주장0, 근거 없는 추천0, 보류율/누락 건수 |
 | R5. 선택적 WIPS 재검증 | 필요한 경우 선택된 **최대2문항**만 새 실조회(권한/비용 확인), cold snapshot과 번호·날짜·종류 비교 | 실제 검색 사용량을 따로 기록하고 freshness drift 여부만 측정. **권리·예산 미확인 시 NOT RUN** |
 | R6. 차이 분석 | `actual_wips_calls` vs 명시된 `counterfactual_est`, 품질 non-inferiority, 사용자가 판정할 때까지 걸린 시간, 검색·LLM·CPU 비용 가시성 | in/out-corpus 별도 수치/분모, 관측/추정 분리 |
-| R7. 최종 결정 | [판정 기준](44-mvp-evaluation-decision-criteria.md) 적용, 사용자 #31 평가와 동일 기록으로 연계 | `LIMITED_GO/GO/NO_GO/INCONCLUSIVE` 및 다음 기능 개발 범위 확정 |
+| R7. 최종 결정 | [판정 기준](44-mvp-evaluation-decision-criteria.md) 적용, AI 자체 평가 원장과 동일 기록으로 연계(사용자 #31은 최신 지시로 취소) | `LIMITED_GO/GO/NO_GO/INCONCLUSIVE` 및 다음 기능 개발 범위 확정 |
 
 **재작성 필요 없는 기존 자산:** [서지 아카이브](../poc/mvp37_archive.py), [원문 검색 reader](../poc/private_patent_reader.py), [WIPS/NAS 비교](../poc/mvp04_candidate_compare.mjs). 본 계획은 **관측/평가용 코드와 데이터 계약만** 신규 제안한다.
 
@@ -85,7 +85,7 @@
 |---|---|---|
 | `actual_wips_calls` | 실험 호출 로그의 **실제 WIPS search/detail 호출 합계** | WARM-NAS에 0이어야 "직접 WIPS 없이 재사용" 성공 |
 | `estimated_avoided_wips_calls` | cold workflow에 필요했던 반복 검색 호출의 **가정상 횟수** − warm 실제 호출 | 추정임을 명확히; **절감 실제 청구액이 아님** |
-| 재사용 커버리지 | 사용자 질문 중 NAS가 **사람이 검증 가능한 최소 1개 관련 근거를 제공**한 질문 수 / 전체 질문 수 | in-corpus 5개와 out-of-corpus 5개 별도, 전체 10만으로 합치지 않음 |
+| 재사용 커버리지 | 사용자 질문 중 NAS가 **AI가 요약·청구항/출처로 확인한 최소 1개 직접 관련 근거를 제공**한 질문 수 / 전체 질문 수 | in-corpus 5개와 out-of-corpus 5개 별도, 전체 10만으로 합치지 않음 |
 | 품질 비열화 | WARM-NAS의 직접 관련 문헌/근거 검증 결과가 COLD/WIPS baseline보다 줄었는지 | **직접 관련 필수 근거 누락 0건**을 희망, 누락 시 제한 범위만 재사용 |
 | 지연 절감 | `(median_cold_ms−median_warm_ms)/median_cold_ms`, 둘 다 실제 동일 계측 범위일 때만 | 초기 목표 **≥20%**. 측정 환경/질문 차이 크면 단정 금지 |
 | 외부 호출 절감 | `1−actual_warm_wips_calls/estimated_repeat_baseline_calls`, 분모 및 가정 명시 | 초기 목표 **≥50%**, 품질 유지 전제 |
@@ -113,11 +113,11 @@
 
 1. **계약 테스트(향후 구현):** 0건·없는 문헌·출처 미확인·provider 실패·NAS 실패·metadata-only·freshness-sensitive·도메인 out-of-corpus를 입력하면 저장 성공/품질 성공으로 오판하지 않아야 한다.
 2. 실제 NAS 검색은 **읽기 전용**, 원문6·청크417 등 기존 baseline과 컨테이너 변경 전후 보존. 새로운 유료 API·PDF·별도 URL·새 writer 권한 추가하지 않는다.
-3. 질문 10개에 대해 cold baseline, warm-only 2회 이상, 최소 사람 판단 근거/직접관련 정보, 실제/가정 호출수 분리, latency 실제 계측/미측정 표시.
-4. 실측 결과를 [`docs/evaluation/results/EVAL-02-summary.md`](evaluation/INDEX.md) **신규 예정**에 집계만 작성하고, EVAL-01과 합쳐 [판정 규칙](44-mvp-evaluation-decision-criteria.md)에 따라 GO/LIMITED_GO/NO_GO/INCONCLUSIVE 결정. **사람 사용자 #31 평가 없으면 인수 완료 선언 금지.**
+3. 질문 10개에 대해 cold baseline, warm-only 2회 이상, 최소 AI 직접 관련 근거/출처 검토 정보, 실제/가정 호출수 분리, latency 실제 계측/미측정 표시.
+4. 실측 결과를 [EVAL-02 실제 warm 재사용 보고서](evaluation/2026-11-20-eval02-warm-nas-replay.md)에 집계만 작성하고, EVAL-01과 합쳐 [판정 규칙](44-mvp-evaluation-decision-criteria.md)에 따라 GO/LIMITED_GO/NO_GO/INCONCLUSIVE 결정. **AI 자체 평가임을 명시하며 사용자 채점 게이트를 만들지 않는다.**
 5. 개인정보·제공자 계약·보안 정책·WIPS 100건 서지 보관 범위를 유지. **MyFolder 작업 HOLD.**
 
-**진행 상태:** EVAL-02 실행/실측 NOT RUN, 계획 문서만 반영함. 실제 개발 시 [전역 Control](https://github.com/son1004007/ai-agent-workflow-playbook/blob/main/CONTROL.md) → [AGENTS](../AGENTS.md) → [TASKS](../TASKS.md) → [평가 인덱스](evaluation/INDEX.md) → 이 계획 → 해당 repo 최신 코드 → 비공개 run scope 순으로 진입한다.
+**진행 상태:** 2026-11-20 NAS warm 실제 리플레이 수행·AI 근거 재사용 4/10 확인. 동일 조건 COLD·사용자 완료시간·요금 ROI는 아직 NOT RUN. 아래 최신 결과를 확인할 것. 실제 개발 시 [전역 Control](https://github.com/son1004007/ai-agent-workflow-playbook/blob/main/CONTROL.md) → [AGENTS](../AGENTS.md) → [TASKS](../TASKS.md) → [평가 인덱스](evaluation/INDEX.md) → 이 계획 → 해당 repo 최신 코드 → 비공개 run scope 순으로 진입한다.
 
 ## 보충: 감도 및 실제 호출 검증(중복 EV 설계 흡수)
 

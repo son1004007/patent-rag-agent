@@ -51,7 +51,7 @@ WIPS 검색 반환 서지정보를 개인 NAS에 지속 보관하는 것을 사�
 사용자가 이 특허 RAG 맥락에서 WIPS 특허 검색·서지 자동 저장을 요청하면 [MVP41 ChatGPT Code Mode→NAS 안전한 단일 실행 경로](docs/42-mvp41-code-mode-gateway-archive.md)와 [P0-1 설계·계획](docs/mvp-implementation/INDEX.md)을 확인한다. 현재 WIPS plugin + Gateway 승인 owner-local stdin wrapper로 WIPS 첫 페이지 최대100건을 검색해 NAS 보관하고, 검색 성공과 보관 verified 결과를 별도로 확인한다. 임의의 독립 WIPS MCP 호출을 자동 가로채는 플랫폼 hook은 미구현. WIPS 키/원문/공보 PDF/벡터 수집·새 외부 서버/리더 권한 확대 금지, 예상 실패 시 우회나 조용한 새 provider 검색 재시도 금지. **WIPS MyFolder 플러그인·폴더 연동 개발만** 사용자 재요청 전 중지한다. 기존 WIPS 검색 MCP와 NAS RAG의 승인된 P0 후속 개발은 계속 진행한다.
 
 ## 2026-11-20 최신 평가 우선순위 및 다른 AI 진입점
-개인 특허 RAG MVP 1차 기능은 범위 한정 실증 완료했지만 WIPS 단독 대비 **실제 효용**은 미판정. 다음 우선작업은 [평가 인덱스](docs/evaluation/INDEX.md) → [DECISION-01 판단 기준](docs/44-mvp-evaluation-decision-criteria.md) → [EVAL-01 검색 품질 비교 계획](docs/45-search-quality-comparison-plan.md) → [EVAL-02 반복 재사용 가치 계획](docs/46-reuse-value-verification-plan.md). WIPS만/기존 NAS만/통합의 corpus·후보 예산·근거 차이를 구분하고 인간 근거 확인 및 실제 WIPS 호출 vs counterfactual 절감 수치를 분리한다. 실제 질문·특허ID·원문·SKEY/credential은 공개 repo에 저장 금지. **계획 문서 작성 = 실제 평가/배포 완료가 아니며 #31 사용자 평가 대기**. MyFolder HOLD, 재시작·신규 수집·비용 정책 변경 없음.
+개인 특허 RAG MVP 1차 기능은 범위 한정 실증 완료했지만 WIPS 단독 대비 **실제 효용**은 미판정. 다음 우선작업은 [평가 인덱스](docs/evaluation/INDEX.md) → [DECISION-01 판단 기준](docs/44-mvp-evaluation-decision-criteria.md) → [EVAL-01 검색 품질 비교 계획](docs/45-search-quality-comparison-plan.md) → [EVAL-02 반복 재사용 가치 계획](docs/46-reuse-value-verification-plan.md). WIPS만/기존 NAS만/통합의 corpus·후보 예산·근거 차이를 구분하고 ChatGPT AI 근거 판정(독립 사람 판정 아님) 및 실제 WIPS 호출 vs counterfactual 절감 수치를 분리한다. 실제 질문·특허ID·원문·SKEY/credential은 공개 repo에 저장 금지. **후속 AI 평가·EVAL-02 warm 리플레이 실제 수행, 사용자 #31 평가는 최신 지시로 취소됨.** MyFolder HOLD, 재시작·신규 수집·비용 정책 변경 없음.
 
 
 ## 2026-11-20 사용자 최신 WIPS AI 검색 조건 — 설명 300자 이상

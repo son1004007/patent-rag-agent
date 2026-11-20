@@ -7,14 +7,14 @@
 [**평가 계획 통합 진입점**](docs/evaluation/INDEX.md) → [**의사결정 판단 기준**](docs/44-mvp-evaluation-decision-criteria.md) → 아래 EVAL-01/EVAL-02 계획을 순서대로 읽는다. EVAL-01 AI 채점/질의 개선 및 EVAL-02 NAS 재조회 실측을 수행했다. **최신 사용자 결정: 사람 채점·#31 실사용 피드백을 필수 검증으로 요구하지 않는다.** AI 판정과 독립 인간 평가를 구분하고 미측정 ROI/권리/운영 상태를 PASS로 위장하지 않는다.
 
 - [x] **DECISION-01: MVP 1차 이후 WIPS MCP+NAS 유지/API 전환 판단 규칙 문서화** — 근거 정확성·직접 관련 추가 문헌·호출/시간/비용 절감·운영 복잡도·공보 PDF 필요성, 조건부 GO/LIMITED_GO/NO_GO/INCONCLUSIVE 초기 임계값. [문서](docs/44-mvp-evaluation-decision-criteria.md). **실측/최종 결론 NOT RUN**.
-- [x] **EVAL-01 실행 계획서 작성** — 동일 질문10개(기존 corpus 범위5+미보유 범위5), WIPS/NAS 각 top3, 통합 ≤6 고유 문헌, 사람 0/1/2 라벨·근거 검증/중복, corpus 공정성·권한/예산/복구. [계획](docs/45-search-quality-comparison-plan.md). **계획 문서 완료 / 실제 실험 NOT RUN**.
+- [x] **EVAL-01 실행 계획서 작성** — 동일 질문10개(기존 corpus 범위5+미보유 범위5), WIPS/NAS 각 top3, 통합 ≤6 고유 문헌, AI 0/1/2 라벨·근거 검증/중복, corpus 공정성·권한/예산/복구. [계획](docs/45-search-quality-comparison-plan.md). **계획서 작성 이후 EVAL-01/02 실측 수행 — 개별 결과 링크 참고**.
 - [x] **EVAL-01 첫 실제 검색 단계:** 10개 공개·일반 연구 질문을 IN5/OUT5로 정하고 WIPS/NAS top3 10/10, 통합 후보 고유58·중복2, ABK/CLK 30/30 및 NAS 발췌30/30 확인. WIPS 3개 초기 오류는 각 1회 재시도 후 성공. [실제 읽기 검증](docs/evaluation/2026-11-20-eval01-live-retrieval-baseline.md). **정식 정확도·사람 0/1/2 라벨·최종 결과는 NOT RUN/INCONCLUSIVE**.
 - [x] **EVAL-01 AI 1차 관련성 채점:** 10문항 총 WIPS 1/30·NAS 5/30 직접 관련 (AI P@3=3.3%/16.7%). IN 5문항 NAS 5/15, OUT 5문항 양쪽 0/15, Q04 공개/등록 중복 가능성. [익명 결과](docs/evaluation/2026-11-20-eval01-ai-provisional-score.md). **사람 gold label 0/10, 검색 조건/정렬 편향 및 최종 GO 판정 미검증.**
 - [x] **EVAL-01 WIPS AI 설명길이 A/B 실험:** 사용자 지시 반영, 10문항 동일 `get_patent_ai_search` KR top3, 단문23~29자 vs 장문413~520자, 상세 `get_patent_by_skey` 60/60, AI 직접관련 **6/30(20.0%) vs 8/30(26.7%)**. 동떨어진 U 노이즈13→0, 장문 개선3/악화2/동일5. [실측](docs/evaluation/2026-11-20-eval01-wips-ai-300char-ab.md). **300자 보장/인과 주장 금지, 사람 평가 미완료.**
 - [x] **EVAL-01 실패 문항 검색식 개선 실측:** Q04/Q05/Q06/Q08에서 각 300자 이상 A/B 검색×2 및 근거·청구항 AI 재판정. 기존 4문항 직접관련 1/12, 개선 A 5/12(**사후 튜닝이라 holdout 아님**), Q05 여전히0. [결과](docs/evaluation/2026-11-20-eval01-targeted-query-rewrite.md).
 - [x] **EVAL-01 AI 직접 채점 실행:** 질문10개에서 ChatGPT가 요약·대표청구항·NAS 근거를 평가. 사람 라벨 필수 아님(2026-11-20 사용자 결정). [초기 채점](docs/evaluation/2026-11-20-eval01-ai-provisional-score.md), [WIPS AI A/B](docs/evaluation/2026-11-20-eval01-wips-ai-300char-ab.md), [실패 개선](docs/evaluation/2026-11-20-eval01-targeted-query-rewrite.md). 정식 외부 검증/검색식 홀드아웃/법적 의견은 별도 미수행. 
 - [ ] **EVAL-01 실제 검색 정확도/근거 비교 실행** — 사용자 허용 질문·공급자 호출 범위에서 read-only WIPS/NAS 검색, AI 기반 0/1/2 판정, 직접 관련 추가 후보·근거 오류·동일 입력 재현성. **완료 기준:** 10문항 실측/원시 분모/근거·판정과 출처·비용 범위 보고, corpus in/out 분리.
-- [x] **EVAL-02 실행 계획서 작성** — 남은 단계는 동일 조건 통제 COLD/WIPS 대조의 실제 시간·금액 비교와 holdout 재검증(가능한 권리·예산 범위). WARM 및 AI 근거 재사용 검증은 완료. 사용자 채점은 요구하지 않음. [계획](docs/46-reuse-value-verification-plan.md). **계획 문서 완료 / 실제 실험 NOT RUN**.
+- [x] **EVAL-02 실행 계획서 작성** — 남은 단계는 동일 조건 통제 COLD/WIPS 대조의 실제 시간·금액 비교와 holdout 재검증(가능한 권리·예산 범위). WARM 및 AI 근거 재사용 검증은 완료. 사용자 채점은 요구하지 않음. [계획](docs/46-reuse-value-verification-plan.md). **계획서 작성 이후 EVAL-01/02 실측 수행 — 개별 결과 링크 참고**.
 - [x] **EVAL-02 NAS warm replay + AI 근거 판단:** 10문항 동일 질문 두 차례, NAS search20/20 PASS, 검색 문헌·청크 완전 동일10/10, 근거60/60, 개별 `get_patent` 4/4 검증. WARM 단계 NAS reader 총28/WIPS0, 직접 근거 재사용 IN4/5·OUT0/5. [실측](docs/evaluation/2026-11-20-eval02-warm-nas-replay.md), [합성 코드+테스트](poc/eval02_reuse_policy.test.mjs) 16 PASS. ROI·COLD 지연 **미측정**.
 - [ ] **EVAL-02 실제 반복 재사용 가치 검증** — EVAL-01의 질문·라벨·snapshot 기준, 첫 조회 vs NAS-only 반복(질문마다 최소2회), 외부 재호출 절감 주장과 DB 중복0 명확히 구분. **완료 기준:** 실제/추정 호출·지연·품질 분리 보고, 권리·신선도 보류, 최종 유지/축소 판단.
 - [ ] **평가 결과 기반 후속 개발 결정** — GO(품질/후보 이득)·LIMITED_GO(재사용 이득)·NO_GO·INCONCLUSIVE 가운데 실측·사용자 평가로 판정. 판단 전 API 전면 전환/신규 공보 PDF/대규모 RAG 추가 개발을 **자동 착수하지 않는다**. 사용자 지시가 새로 바뀌면 우선한다.
@@ -24,7 +24,7 @@
 [1차 핵심 기능 실증 현황·MCP vs API 비교 및 권고](docs/43-mvp-milestone-mcp-api-tradeoff.md)를 먼저 확인한다.
 
 - **진행한 것(실증 완료):** WIPS 검색, WIPS+NAS 기본 근거 비교, 승인된 실제 문헌 단건의 상세설명/청구항→로컬 E5 청크·벡터 증분 적재, NAS RAG 근거 조회, 서지 83건 보관(첫 페이지 최대100), 승인된 ChatGPT→Gateway→NAS 지정 경로, DB 백업·복원. 현재 DB **서지83건 / 원문 문헌6건·섹션10 / 벡터417청크 / 공식 공보 PDF0건**. 서지83건 전체 임베딩된 것은 아님.
-- **진행할 것(인수):** 사용자 직접 평가 [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31), 같은 연구 질문에서 WIPS 단독 vs NAS 단독 vs 양쪽 비교의 근거·정확도/재사용 효용 측정. 기능 실증 PASS를 사용자 정식 인수 PASS로 확대 금지.
+- **진행할 것(인수):** AI 자체 평가로 대체되어 종료된 [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31), 같은 연구 질문에서 WIPS 단독 vs NAS 단독 vs 양쪽 비교의 근거·정확도/재사용 효용 측정. 기능 실증 PASS를 사용자 정식 인수 PASS로 확대 금지.
 - **진행할 것(선택 개선):** 허용된 신규 본문 자동 증분 적재, 공식 공보 PDF 원본 파일 보관, 사람용 전체 명세서·PDF 열람, 서버 독립 단일 도구/모든 WIPS 호출 자동 후킹. **PDF는 기본 대화형 검색·비교·RAG 기능 실증의 필수 게이트가 아님**. 다만 공보 보존이 사용자 필수 업무 요구라면 별도 미완료로 추적한다.
 - **기술 선택:** 현재 개인 ChatGPT 연구에는 **WIPS MCP + NAS pgvector** 유지, 필요 시 **공보 PDF 파일만 공식 API로 보완**. MCP도 로컬 청킹/임베딩은 필요. API가 XML/JSON 원문을 제공한다면 PDF 파싱이 필수는 아님. 백엔드 반복 대량 수집 요구가 생길 때 API 중심으로 재평가.
 - 기존 P0-1~P0-5의 세부 작업·설계와 상태는 유지하되, **핵심 기능 실증 완료 vs 미완료 확장/사용자 인수**를 혼동하지 않는다. MyFolder는 사용자 지시 HOLD.
@@ -40,7 +40,7 @@
 | MVP-03 | 자연어 연구 질문 → 검색 계획 → NAS/WIPS 호출 | 운영 단건 실제 적재·재사용·ChatGPT 읽기 PASS ([실측](docs/35-mvp03-actual-ingest-acceptance.md)); 상시 자동 쓰기 연계 미구현 ([adapter](docs/26-mvp03-approved-ingest-adapter.md)) ([실측](docs/23-mvp03-research-flow.md)) | ChatGPT가 질문에 따라 검색어 확장, 검색 범위 결정, 두 소스 구분, 권한 내 신규 자료만 수집 및 적재 재사용; 자유로운 대량 수집 없이 제한된 on-demand batch |
 | MVP-04 | 기본 검색·중복 제거·근거 기반 후보 비교/추천 | PASS — 참조 모듈 및 실제 두 소스 한정 시험, 27/27; 6→5, HOLD 3/EXCLUDE 2/후보 0 ([실측](docs/25-mvp04-candidate-comparison.md)) | NAS 벡터 결과와 WIPS 키워드 검색을 출처별로 수집 후 문헌번호/종류 단위 중복 제거; 근거 위치·문헌 출처·불확실성 표시, 무관하거나 근거 부족 시 추천 보류. 고급 Hybrid/RRF·reranker는 P1 |
 | MVP-05 | 최소 안전·복구·종단간 인수 시험 | 실제 복원 PASS, 격리 rollback 96/96 및 범위 한정 인수 5/5 PASS ([신규 운영 실측](docs/35-mvp03-actual-ingest-acceptance.md)) ([rollback/인수](docs/28-mvp05-rollback-acceptance.md)) ([실측](docs/27-mvp05-private-backup-restore.md)) | 실제 자료별 백업 복원/ACL/무결성, 인증/권한/실패 시 차단, 회귀 및 rollback, 최소 5개 질의(정상·반복 재사용·신규 적재·근거 부족·실패/거부)의 기대 결과/실측 기록, 개인 ChatGPT의 실제 end-to-end 증거 |
-| MVP-06 | 최소 사용자 확인 및 사용법 | 설명서 작성·실제 읽기 시험 PASS; 사용자 직접 평가 대기 [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) ([실측](docs/31-mvp06-user-trial.md)) | ChatGPT에서 실제 연구 질문 한 건으로 사용자가 결과 평가 가능; 짧은 사용법·제약·운영/복구 런북 제공 |
+| MVP-06 | 최소 사용자 확인 및 사용법 | 설명서 작성·실제 읽기 시험 PASS; 사용자 직접 평가는 최신 결정으로 불필요·[이슈 #31 종료](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31), AI 자체 근거 검토 진행 ([실측](docs/31-mvp06-user-trial.md)) | ChatGPT에서 실제 연구 질문 한 건으로 사용자가 결과 평가 가능; 짧은 사용법·제약·운영/복구 런북 제공 |
 
 - [x] MVP-01 승인된 기존 API만 재시작 및 통합 MCP 운영 배포, 회귀 56/56, DB 및 기타 서비스 불변 ([실측](docs/24-mvp01-production-cutover.md)).
 - [x] MVP-01 사용자 Refresh·권한 추가 및 새 채팅 신규 search_patents/get_patent 실제 읽기 E2E PASS — 실제 3건 검색/조회, 9개 근거, 반복·미존재·기존 읽기 회귀 ([실측](docs/24-mvp01-production-cutover.md)). 실제 rollback 검증은 아래 MVP-05 잔여 항목.
@@ -72,14 +72,14 @@
 - [ ] **P0-2: 특허 공보 PDF 수집 경로 확인** — 현재 WIPS MCP에는 PDF 다운로드 기능 없음. WIPS 별도 제공파일/다운로드 경로 확인 → 불가하면 KIPRIS Plus/EPO 등 공식 제공처 1건 다운로드, 문헌번호·종류·파일 hash·이용권한 검증 → 비공개 NAS 보관. [검증 범위](docs/40-wips-mcp-capability-catalog.md).
 - [ ] **P0-3: 권한 내 선택 문헌의 상세설명/청구항→NAS 청크·벡터 증분 적재** — 기존 83건 서지목록에서 원문/벡터/PDF 상태 분리, 중복·실패 복구. 서지 최대100건 허용을 본문/벡터 전수 수집 허가로 확장 금지. [검증 범위](docs/40-wips-mcp-capability-catalog.md).
 - [ ] **P0-4: 사람이 읽는 전체 명세서/공보 PDF 열람** — 현재 get_patent 제한 발췌와 구분, 인증된 페이지 조회 및 PDF 확보 후 열람. [검증 범위](docs/40-wips-mcp-capability-catalog.md).
-- [ ] **P0-5: 실제 통합 인수** — 검색/서지 저장/원문 상태/보류·중복/백업 복원 확인 및 MVP-06 사용자 평가 #31. [기준](docs/40-wips-mcp-capability-catalog.md).
-- [ ] MVP-06 사용자 직접 결과 평가/피드백 — [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) 대기.
+- [ ] **P0-5: 실제 통합 인수** — 검색/서지 저장/원문 상태/보류·중복/백업 복원 확인 및 MVP-06 AI 자체 근거 검증(#31 사용자 조치 취소). [기준](docs/40-wips-mcp-capability-catalog.md).
+- [x] MVP-06 사용자 직접 결과 평가 요청은 최신 결정으로 취소 — [#31](https://github.com/son1004007/ai-agent-workflow-playbook/issues/31) not_planned 종료. AI 자체 연구 적합성 검증은 [EVAL-01](docs/evaluation/2026-11-20-eval01-ai-provisional-score.md), [EVAL-02](docs/evaluation/2026-11-20-eval02-warm-nas-replay.md)에서 계속.
 
 **P0-1 A안 실사용 진입점:** [실제 ChatGPT 검색→NAS 재사용 운영 인수](docs/42-mvp41-code-mode-gateway-archive.md). Code Mode에서 WIPS/Gateway를 한 흐름으로 직접 호출하는 경로는 PASS, 모든 독립 WIPS 호출의 자동 저장 및 자체 MCP 서비스 등록은 미구현. 사용자 MyFolder 작업은 별도 재요청 전 HOLD. 
 
 **P0 구현 인계 규칙:** [P0-1~P0-5 상세 설계/실행 인덱스](docs/mvp-implementation/INDEX.md) → 해당 [설계서+계획서] 2종 → 기존 코드·운영 preflight → 최소 변경/운영 실측. P0-1 통합 도구 연결이 다음 구현 대상, P0-2 공식 공보 API 범위 사전 조사 병행 가능. P0-1 설계는 backend에서 다른 WIPS MCP를 직접 호출할 권한이 미검증임을 선행 차단. P0-3 서지7필드와 기존 원문 ingest7필드 계약이 다름을 선행 차단. 모든 권리·재시작·보안 제한 유지.
 
-**다음 실행 규칙:** MVP-01~05 범위 한정 인수 PASS, 사용자 승인 단건 실제 운영 쓰기 및 반복 재사용/ChatGPT 조회 완료 ([실측](docs/35-mvp03-actual-ingest-acceptance.md)). MVP-06 사용자 직접 평가(#31) 대기. 사용자 최신 피드백에 따라 자동 NAS 보관/원문 조회를 P0 잔여 우선 작업으로 진행([요구사항](docs/36-mvp-automatic-archive.md)); 서지 writer 운영 연결 및 실제83건 적재 완료, 원문/PDF 별도 권리 및 상시 검색 hook 미구현. 권리 및 실행 경계 유지. 추가 가상 시험 반복 및 P1/P2/P3 선행 금지. NAS/DB/relay/tunnel/기타 기존 서비스 재기동·자동 시작 및 기술사·기업 환경 변경은 별도 승인 전 금지. 신규 구매/대량 수집·재배포 권리 확대 금지.
+**다음 실행 규칙:** MVP-01~05 범위 한정 인수 PASS, 사용자 승인 단건 실제 운영 쓰기 및 반복 재사용/ChatGPT 조회 완료 ([실측](docs/35-mvp03-actual-ingest-acceptance.md)). MVP-06 사용자 직접 평가(#31) 취소·AI 자체 근거 검증으로 전환. 사용자 최신 피드백에 따라 자동 NAS 보관/원문 조회를 P0 잔여 우선 작업으로 진행([요구사항](docs/36-mvp-automatic-archive.md)); 서지 writer 운영 연결 및 실제83건 적재 완료, 원문/PDF 별도 권리 및 상시 검색 hook 미구현. 권리 및 실행 경계 유지. 추가 가상 시험 반복 및 P1/P2/P3 선행 금지. NAS/DB/relay/tunnel/기타 기존 서비스 재기동·자동 시작 및 기술사·기업 환경 변경은 별도 승인 전 금지. 신규 구매/대량 수집·재배포 권리 확대 금지.
 
 ## P1 — MVP 사용 피드백 이후 품질 고도화 (BACKLOG)
 
